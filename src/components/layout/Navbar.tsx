@@ -25,7 +25,7 @@ export function Navbar() {
               <Github className="h-5 w-5" />
             </a>
           </Button>
-          <Button size="sm" variant="secondary" className="hidden sm:flex">New Session</Button>
+          <Button size="sm" variant="secondary" className="hidden sm:flex transition-all active:scale-95" onClick={() => console.log("New session started")}>New Session</Button>
         </div>
       </div>
     </header>

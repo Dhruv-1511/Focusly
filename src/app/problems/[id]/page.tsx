@@ -38,10 +38,10 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
           <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-foreground">{problem.title}</h1>
         </div>
         <div className="flex gap-4">
-          <Button variant="outline" className="gap-2 font-bold px-6">
+          <Button variant="outline" className="gap-2 font-bold px-6" onClick={() => console.log("Problem saved for later")}>
             <Save className="h-4 w-4" /> Save for later
           </Button>
-          <Button className="gap-2 font-bold px-6">
+          <Button className="gap-2 font-bold px-6" onClick={() => console.log("Opening share dialog")}>
             <Share2 className="h-4 w-4" /> Share
           </Button>
         </div>
@@ -81,8 +81,13 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
                   </motion.div>
                 ))}
              </div>
-              <Button size="xl" variant="secondary" className="w-full mt-12 shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all">
-                Mark Problem as Solved ✅
+              <Button 
+                size="xl" 
+                variant="secondary" 
+                className="w-full mt-12 shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all"
+                onClick={() => alert("Great job! Problem marked as solved. +50 XP earned.")}
+              >
+                 Mark Problem as Solved ✅
               </Button>
           </section>
 

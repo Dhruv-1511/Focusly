@@ -57,7 +57,12 @@ export default function CommunityPage() {
           <h1 className="text-4xl font-bold mb-2">Student Collective</h1>
           <p className="text-muted-foreground">Collaborate with the collective student brain. Ask anything.</p>
         </div>
-        <Button size="xl" variant="secondary" className="shadow-xl shadow-secondary/20 gap-2">
+        <Button 
+          size="xl" 
+          variant="secondary" 
+          className="shadow-xl shadow-secondary/20 gap-2 scale-100 hover:scale-[1.02] transition-all"
+          onClick={() => console.log("Opening ask question modal")}
+        >
            <Plus className="h-6 w-6" /> Ask a Question
         </Button>
       </header>
@@ -69,10 +74,15 @@ export default function CommunityPage() {
            <input 
               type="text"
               placeholder="Search community questions..."
-              className="w-full h-14 pl-14 pr-4 rounded-xl border bg-card text-lg focus:ring-2 focus:ring-primary outline-none font-medium"
+              className="w-full h-14 pl-14 pr-4 rounded-xl border bg-card text-lg focus:ring-2 focus:ring-primary outline-none font-medium transition-all"
            />
         </div>
-        <Button variant="outline" size="xl" className="gap-2 font-bold">
+        <Button 
+          variant="outline" 
+          size="xl" 
+          className="gap-2 font-bold px-8 shadow-sm"
+          onClick={() => console.log("Opening filters")}
+        >
            <Filter className="h-5 w-5" /> Filter by Subject
         </Button>
       </div>
@@ -85,7 +95,7 @@ export default function CommunityPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-card p-8 rounded-2xl border hover:border-primary transition-all group shadow-sm"
+                className="bg-card p-8 rounded-2xl border hover:border-primary transition-all group shadow-sm cursor-pointer"
              >
                 <div className="flex items-center gap-2 mb-4">
                    {q.tags.map(tag => (
@@ -95,7 +105,7 @@ export default function CommunityPage() {
                    ))}
                    <span className="text-[10px] font-bold text-muted-foreground ml-auto">{q.date}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors cursor-pointer">{q.title}</h3>
+                <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors">{q.title}</h3>
                 <div className="flex items-center justify-between pt-6 border-t font-bold text-sm">
                    <div className="flex items-center gap-2">
                       <div className="h-8 w-8 rounded-full bg-secondary text-white flex items-center justify-center text-xs">{q.user[0]}</div>
@@ -124,7 +134,11 @@ export default function CommunityPage() {
               </h3>
               <div className="space-y-4">
                  {studyGroups.map(group => (
-                   <div key={group.name} className="p-4 rounded-xl bg-muted/30 border border-transparent hover:border-border cursor-pointer group">
+                   <div 
+                    key={group.name} 
+                    className="p-4 rounded-xl bg-muted/30 border border-transparent hover:border-border cursor-pointer group transition-all"
+                    onClick={() => console.log(`Joining group: ${group.name}`)}
+                   >
                       <div className="flex items-center justify-between mb-2">
                         <div className="font-bold text-sm group-hover:text-primary transition-colors">{group.name}</div>
                         {group.active && <div className="h-2 w-2 rounded-full bg-secondary animate-pulse" />}
@@ -132,23 +146,23 @@ export default function CommunityPage() {
                       <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{group.members} Members</div>
                    </div>
                  ))}
-                 <Button variant="link" className="w-full text-primary font-bold">Discover more groups</Button>
+                 <Button variant="link" className="w-full text-primary font-bold" onClick={() => console.log("Discovering more groups")}>Discover more groups</Button>
               </div>
            </div>
 
            {/* Guidelines */}
-           <div className="p-8 bg-black text-white rounded-3xl relative overflow-hidden">
+           <div className="p-8 bg-foreground text-background rounded-3xl relative overflow-hidden shadow-xl">
               <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
                  <HelpCircle className="h-5 w-5 text-secondary" /> Support Rules
               </h3>
-              <ul className="space-y-4 text-xs font-medium text-gray-400">
-                 <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> No judgment. Every struggle is valid.</li>
-                 <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Explain your thought process, don't just ask for answers.</li>
-                 <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Earn 50 XP for every helpful answer you give.</li>
+              <ul className="space-y-4 text-xs font-medium text-muted-foreground">
+                 <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> No judgment. Every struggle is valid.</li>
+                 <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Explain your thought process, don't just ask for answers.</li>
+                 <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Earn 50 XP for every helpful answer you give.</li>
               </ul>
-              <div className="mt-8 p-4 bg-white/10 rounded-2xl border border-white/10">
-                 <div className="text-[10px] font-bold uppercase tracking-widest mb-1 text-secondary">Community Reward</div>
-                 <div className="text-xs font-bold font-italic">Top contributor this month gets <span className="text-white">Premium Planner</span> for free.</div>
+              <div className="mt-8 p-5 bg-white/5 rounded-2xl border border-white/10">
+                 <div className="text-[10px] font-bold uppercase tracking-widest mb-2 text-secondary">Community Reward</div>
+                 <div className="text-xs font-bold leading-relaxed">Top contributor this month gets <span className="text-white">Premium Planner</span> for free.</div>
               </div>
            </div>
         </div>
@@ -156,6 +170,7 @@ export default function CommunityPage() {
     </div>
   );
 }
+
 
 
 

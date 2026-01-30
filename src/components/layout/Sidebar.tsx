@@ -14,7 +14,9 @@ import {
   Settings,
   LayoutDashboard
 } from"lucide-react";
-import { cn } from"@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
 
 const menuItems = [
   { name:"Home", icon: Home, href:"/" },
@@ -64,15 +66,17 @@ export function Sidebar() {
       </nav>
 
       <div className="p-4 border-t mt-auto">
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-muted/50">
-          <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center text-white font-bold">
+        <div className="flex items-center gap-3 p-3 rounded-2xl bg-muted/50 border border-transparent">
+          <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center text-white font-bold shadow-sm">
             AR
           </div>
           <div className="flex-1 overflow-hidden">
             <div className="text-sm font-bold truncate">Alex Rodriguez</div>
             <div className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Level 15 Pro</div>
           </div>
-          <Settings className="h-4 w-4 text-muted-foreground cursor-pointer hover:rotate-90 transition-transform" />
+          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:rotate-90 transition-transform">
+            <Settings className="h-4 w-4" />
+          </Button>
         </div>
       </div>
     </aside>

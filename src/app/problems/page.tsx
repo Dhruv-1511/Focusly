@@ -72,11 +72,18 @@ export default function ProblemsPage() {
               ))}
             </AnimatePresence>
             {filtered.length === 0 && (
-              <div className="col-span-full p-12 text-center bg-muted/30 rounded-2xl border border-dashed">
+              <div className="col-span-full p-12 text-center bg-muted/30 rounded-3xl border border-dashed flex flex-col items-center">
                  <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                 <h3 className="text-xl font-bold">Problem not found?</h3>
-                 <p className="text-muted-foreground mb-6">Our AI is learning. Tell us what's wrong and we'll generate a solution.</p>
-                 <Button variant="secondary" size="lg">Submit New Problem</Button>
+                 <h3 className="text-xl font-bold mb-2">Problem not found?</h3>
+                 <p className="text-muted-foreground mb-8 max-w-sm">Our AI is learning. Tell us what's wrong and we'll generate a custom 5-step fix for you.</p>
+                 <Button 
+                   variant="secondary" 
+                   size="lg" 
+                   className="font-bold px-8"
+                   onClick={() => console.log("Submitting new problem report")}
+                 >
+                   Submit New Problem
+                 </Button>
               </div>
             )}
           </div>
