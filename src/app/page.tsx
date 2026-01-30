@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from"framer-motion";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
 import { 
   Search, 
   Calendar, 
@@ -97,30 +99,32 @@ export default function Home() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <Button className="absolute right-2 top-2 h-10 px-6 rounded-xl">
+                <Button size="default" className="absolute right-2 top-2 rounded-xl">
                   Solve It
                 </Button>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
                 <span className="text-sm text-muted-foreground mr-2">Popular:</span>
                 {problems.map((p) => (
-                  <button 
+                  <Button 
                     key={p}
+                    variant="outline"
+                    size="sm"
                     onClick={() => setSearchQuery(p)}
-                    className="text-xs px-3 py-1 rounded-full border bg-muted/50 hover:bg-primary hover:text-white transition-all"
+                    className="h-8 px-3 rounded-full bg-muted/50 border-none hover:bg-primary transition-all"
                   >
                     {p}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="h-14 px-8 text-lg font-semibold bg-secondary hover:bg-secondary/90 text-white">
-                Create Study Plan
+              <Button size="xl" variant="secondary" asChild>
+                <Link href="/planner">Create Study Plan</Link>
               </Button>
-              <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-semibold">
-                Explore Tools
+              <Button size="xl" variant="outline" asChild>
+                <Link href="/tools">Explore Tools</Link>
               </Button>
             </div>
           </motion.div>
@@ -148,8 +152,10 @@ export default function Home() {
                 <p className="text-muted-foreground mr-4">Try the Active Recall method today. Spend 5 minutes explaining what you just learned to an imaginary friend.</p>
              </div>
              <div className="flex items-center gap-3">
-                <Button variant="outline">Learn More</Button>
-                <Button className="bg-secondary hover:bg-secondary/90 text-white">Mark as Solved ✅</Button>
+                <Button variant="outline" asChild>
+                  <a href="/tools">Learn More</a>
+                </Button>
+                <Button variant="secondary">Mark as Solved ✅</Button>
              </div>
           </div>
         </div>
@@ -181,7 +187,7 @@ export default function Home() {
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   {feature.description}
                 </p>
-                <div className="flex items-center text-sm font-bold text-primary">
+                <div className="flex items-center text-sm font-bold text-primary group-hover:gap-2 transition-all">
                   Launch {feature.title} <ArrowRight className="ml-1 h-4 w-4" />
                 </div>
               </motion.div>
@@ -203,8 +209,8 @@ export default function Home() {
                     25:00
                   </div>
                   <div className="flex justify-center gap-4">
-                    <Button size="lg" className="h-16 px-12 text-xl font-bold bg-primary hover:bg-primary/90">Start Focus Session</Button>
-                    <Button size="lg" variant="outline" className="h-16 w-16 p-0 rounded-full border-2"><HeartPulse className="h-8 w-8" /></Button>
+                    <Button size="xl" className="shadow-xl shadow-primary/20">Start Focus Session</Button>
+                    <Button size="icon" variant="outline" className="rounded-full border-2"><HeartPulse className="h-6 w-6 text-red-500" /></Button>
                   </div>
               </div>
               <p className="text-muted-foreground text-lg">
@@ -259,7 +265,7 @@ export default function Home() {
                           <span className="flex items-center gap-1 text-sm"><Zap className="h-4 w-4" /> AI Answer ready</span>
                        </div>
                     </div>
-                    <Button size="lg" variant="secondary" className="font-bold h-14 px-10">Ask Your Question Now</Button>
+                    <Button size="xl" variant="secondary" className="shadow-lg shadow-black/10">Ask Your Question Now</Button>
                  </div>
                  <Users className="absolute bottom-[-20px] right-[-20px] h-64 w-64 text-white/5 -rotate-12" />
               </div>
@@ -320,7 +326,7 @@ export default function Home() {
             Join the hub where problems meet solutions and students become top achievers.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-             <Button size="lg" className="h-16 px-12 text-xl font-bold bg-primary hover:bg-primary/90 text-white">Get Started for Free</Button>
+             <Button size="xl" variant="secondary" className="text-primary font-bold shadow-2xl shadow-primary/40 bg-white hover:bg-white/90">Get Started for Free</Button>
              <span className="text-sm text-background/50 font-medium">No credit card required. PWA installable.</span>
           </div>
         </div>

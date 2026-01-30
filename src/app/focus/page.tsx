@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from"react";
-import { motion } from"framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { 
   Play, 
   Pause, 
@@ -13,8 +13,8 @@ import {
   Coffee,
   BellOff,
   Moon
-} from"lucide-react";
-import { Button } from"@/components/ui/button";
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function FocusPage() {
   const [minutes, setMinutes] = useState(25);
@@ -68,27 +68,27 @@ export default function FocusPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 flex-1">
         <div className="lg:col-span-2 flex flex-col">
-          <section className="bg-card rounded-3xl border-4 border-primary/10 p-12 md:p-20 flex-1 flex flex-col items-center justify-center relative shadow-2xl overflow-hidden group">
+          <section className="bg-card rounded-3xl border p-12 md:p-20 flex-1 flex flex-col items-center justify-center relative shadow-xl overflow-hidden group">
              {/* Background Pulse */}
              {isActive && (
                <motion.div 
                  initial={{ opacity: 0, scale: 0.8 }}
                  animate={{ opacity: 1, scale: 1.2 }}
-                 transition={{ repeat: Infinity, duration: 4, repeatType:"reverse" }}
+                 transition={{ repeat: Infinity, duration: 4, repeatType: "reverse" }}
                  className="absolute inset-0 bg-primary/5 rounded-full pointer-events-none" 
                />
              )}
 
              <div className="flex gap-4 mb-12 relative z-10">
                 <Button 
-                   variant={mode ==="Focus" ?"secondary" :"ghost"}
+                   variant={mode === "Focus" ? "secondary" : "ghost"}
                    onClick={() => setTimerMode("Focus", 25)}
                    className="rounded-full px-6 font-bold"
                 >
                    Deep Work
                 </Button>
                 <Button 
-                   variant={mode ==="Break" ?"secondary" :"ghost"}
+                   variant={mode === "Break" ? "secondary" : "ghost"}
                    onClick={() => setTimerMode("Break", 5)}
                    className="rounded-full px-6 font-bold"
                 >
@@ -103,29 +103,30 @@ export default function FocusPage() {
              <div className="flex gap-6 relative z-10">
                 <Button 
                    onClick={toggleTimer}
-                   size="lg"
-                   className="h-20 px-12 rounded-2xl bg-primary text-white text-2xl font-bold  shadow-xl hover:shadow-primary/20 scale-100 hover:scale-[1.05] transition-all flex gap-3 items-center"
+                   size="xl"
+                   variant="secondary"
+                   className="shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.05] transition-all flex gap-3 items-center"
                 >
-                   {isActive ? <Pause className="h-8 w-8 fill-white" /> : <Play className="h-8 w-8 fill-white" />}
-                   {isActive ?"Pause" :"Start Focus"}
+                   {isActive ? <Pause className="h-6 w-6 fill-primary" /> : <Play className="h-6 w-6 fill-primary" />}
+                   {isActive ? "Pause Session" : "Start Focus Session"}
                 </Button>
                 <Button 
                    onClick={resetTimer}
-                   size="lg"
+                   size="xl"
                    variant="outline"
-                   className="h-20 w-20 rounded-2xl border-2"
+                   className="w-14 h-14 p-0 rounded-xl border-2"
                 >
-                   <RotateCcw className="h-8 w-8" />
+                   <RotateCcw className="h-6 w-6" />
                 </Button>
              </div>
 
              <div className="mt-16 flex items-center gap-6 text-sm font-bold uppercase tracking-[0.2em] text-muted-foreground relative z-10">
                 <div className="flex items-center gap-2">
-                  <BellOff className="h-4 w-4" /> Notifications Off
+                   <BellOff className="h-4 w-4" /> Notifications Off
                 </div>
                 <div className="h-1 w-1 rounded-full bg-muted-foreground" />
                 <div className="flex items-center gap-2">
-                  <ShieldAlert className="h-4 w-4 text-orange-500" /> Site Blocker Active
+                   <ShieldAlert className="h-4 w-4 text-orange-500" /> Site Blocker Active
                 </div>
              </div>
           </section>
@@ -133,8 +134,8 @@ export default function FocusPage() {
 
         <div className="space-y-8">
            {/* Ambient Station */}
-           <div className="bg-card rounded-3xl border p-8 shadow-sm">
-              <h3 className="text-xl font-bold mb-6  flex items-center gap-2">
+           <div className="bg-card rounded-2xl border p-8 shadow-sm">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                  <Music className="h-5 w-5 text-primary" /> Ambient Sound
               </h3>
               <div className="space-y-3">
@@ -155,26 +156,26 @@ export default function FocusPage() {
            </div>
 
            {/* Stats Widget */}
-           <div className="bg-black text-white rounded-3xl p-8 relative overflow-hidden">
+           <div className="bg-primary rounded-2xl p-8 text-primary-foreground relative overflow-hidden">
               <div className="relative z-10">
                 <h3 className="text-xl font-bold mb-6">Session Stats</h3>
                 <div className="space-y-6">
                    <div className="flex justify-between items-end">
-                      <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Focus Level</div>
-                      <div className="text-2xl font-bold  text-secondary">High</div>
+                      <div className="text-xs font-bold text-primary-foreground/50 uppercase tracking-widest">Focus Level</div>
+                      <div className="text-2xl font-bold text-white">High</div>
                    </div>
                    <div className="flex justify-between items-end">
-                      <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Est. XP Reward</div>
-                      <div className="text-2xl font-bold">+250 XP</div>
+                      <div className="text-xs font-bold text-primary-foreground/50 uppercase tracking-widest">Est. XP Reward</div>
+                      <div className="text-2xl font-bold text-white">+250 XP</div>
                    </div>
                 </div>
                 <div className="mt-10 h-32 flex items-end gap-2">
                    {[40, 70, 45, 90, 65, 80, 50, 95].map((h, i) => (
-                     <div key={i} className="flex-1 bg-primary/30 rounded-t-md relative group">
+                     <div key={i} className="flex-1 bg-white/20 rounded-t-md relative group">
                         <motion.div 
                           initial={{ height: 0 }}
                           animate={{ height: `${h}%` }}
-                          className="absolute bottom-0 inset-x-0 bg-primary rounded-t-md"
+                          className="absolute bottom-0 inset-x-0 bg-white rounded-t-md"
                         />
                      </div>
                    ))}
@@ -189,15 +190,29 @@ export default function FocusPage() {
 
 function AmbientTrack({ icon: Icon, name, active = false }: any) {
   return (
-    <button className={`w-full flex items-center gap-4 p-4 rounded-3xl border transition-all ${active ? 'bg-primary/10 border-primary text-primary' : 'bg-muted/30 border-transparent hover:bg-muted/50'}`}>
-       <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${active ? 'bg-primary text-white' : 'bg-card border shadow-sm text-muted-foreground'}`}>
+    <Button 
+      variant={active ? "secondary" : "ghost"}
+      className={cn(
+        "w-full flex items-center justify-start gap-4 p-4 h-auto rounded-xl border transition-all",
+        active ? "border-primary bg-primary/10" : "bg-muted/30 border-transparent"
+      )}
+    >
+       <div className={cn(
+         "h-10 w-10 rounded-lg flex items-center justify-center",
+         active ? "bg-primary text-white" : "bg-card border shadow-sm text-muted-foreground"
+       )}>
           <Icon className="h-5 w-5" />
        </div>
        <span className="font-bold text-sm">{name}</span>
-       {active && <div className="ml-auto h-2 w-2 rounded-full bg-primary animate-ping" />}
-    </button>
+       {active && <div className="ml-auto h-2 w-2 rounded-full bg-primary animate-pulse" />}
+    </Button>
   );
 }
+
+function cn(...classes: any[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 
 
 

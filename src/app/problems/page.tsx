@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from"react";
-import { PROBLEMS } from"@/data/mock";
-import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle } from"lucide-react";
-import { Button } from"@/components/ui/button";
-import Link from"next/link";
-import { motion, AnimatePresence } from"framer-motion";
+import { useState } from "react";
+import { PROBLEMS } from "@/data/mock";
+import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProblemsPage() {
   const [search, setSearch] = useState("");
@@ -29,7 +29,7 @@ export default function ProblemsPage() {
           <input 
             type="text"
             placeholder="Search your problem (e.g. 'can't focus', 'late for exam')"
-            className="w-full h-16 pl-16 pr-6 rounded-[24px] border-2 bg-card text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-sm font-medium"
+            className="w-full h-16 pl-16 pr-6 rounded-2xl border bg-card text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-sm font-medium"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -53,17 +53,17 @@ export default function ProblemsPage() {
                   transition={{ duration: 0.2 }}
                 >
                   <Link href={`/problems/${problem.id}`}>
-                    <div className="group h-full p-8 bg-card rounded-2xl border-2 border-transparent hover:border-primary transition-all duration-300 shadow-sm hover:shadow-xl cursor-pointer flex flex-col justify-between">
+                    <div className="group h-full p-8 bg-card rounded-2xl border hover:border-primary transition-all duration-300 shadow-sm hover:shadow-xl cursor-pointer flex flex-col justify-between">
                       <div>
                         <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-6">
                            <Zap className="h-7 w-7" />
                         </div>
-                        <h3 className="text-2xl font-bold mb-3  group-hover:text-primary transition-colors">{problem.title}</h3>
+                        <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{problem.title}</h3>
                         <p className="text-muted-foreground text-sm line-clamp-2 font-medium mb-6">
                           {problem.why}
                         </p>
                       </div>
-                      <div className="flex items-center text-sm font-bold text-primary">
+                      <div className="flex items-center text-sm font-bold text-primary group-hover:gap-1 transition-all">
                         Get 5-Step Solution <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </div>
                     </div>
@@ -72,11 +72,11 @@ export default function ProblemsPage() {
               ))}
             </AnimatePresence>
             {filtered.length === 0 && (
-              <div className="col-span-full p-12 text-center bg-muted/30 rounded-2xl border-2 border-dashed">
+              <div className="col-span-full p-12 text-center bg-muted/30 rounded-2xl border border-dashed">
                  <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                  <h3 className="text-xl font-bold">Problem not found?</h3>
                  <p className="text-muted-foreground mb-6">Our AI is learning. Tell us what's wrong and we'll generate a solution.</p>
-                 <Button>Submit New Problem</Button>
+                 <Button variant="secondary" size="lg">Submit New Problem</Button>
               </div>
             )}
           </div>
@@ -89,12 +89,10 @@ export default function ProblemsPage() {
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-4">
                   <FlameIcon /> Problem of the Day
                 </div>
-                <h3 className="text-2xl font-bold mb-6   leading-tight text-white">"Studying but not remembering anything?"</h3>
-                <Link href="/problems/memory">
-                  <Button className="w-full h-12 bg-white text-black hover:bg-white/90 font-bold  rounded-2xl">
-                    Solve Today
-                  </Button>
-                </Link>
+                <h3 className="text-2xl font-bold mb-6 leading-tight text-white">"Studying but not remembering anything?"</h3>
+                <Button size="xl" variant="secondary" className="w-full bg-white text-primary hover:bg-white/90" asChild>
+                  <Link href="/problems/memory">Solve Today</Link>
+                </Button>
               </div>
               <div className="absolute bottom-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <BookOpen className="h-24 w-24" />
@@ -140,6 +138,7 @@ function Tip({ title, desc }: any) {
     </div>
   );
 }
+
 
 
 

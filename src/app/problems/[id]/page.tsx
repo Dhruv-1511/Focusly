@@ -38,10 +38,10 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
           <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-foreground">{problem.title}</h1>
         </div>
         <div className="flex gap-4">
-          <Button variant="outline" className="rounded-2xl h-12 gap-2 font-bold px-6">
+          <Button variant="outline" className="gap-2 font-bold px-6">
             <Save className="h-4 w-4" /> Save for later
           </Button>
-          <Button className="rounded-2xl h-12 gap-2 bg-primary text-white font-bold px-6">
+          <Button className="gap-2 font-bold px-6">
             <Share2 className="h-4 w-4" /> Share
           </Button>
         </div>
@@ -81,7 +81,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
                   </motion.div>
                 ))}
              </div>
-              <Button className="w-full mt-12 h-16 bg-secondary text-white font-bold text-xl rounded-3xl shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all">
+              <Button size="xl" variant="secondary" className="w-full mt-12 shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all">
                 Mark Problem as Solved ✅
               </Button>
           </section>

@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from"framer-motion";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
 import { 
   BarChart3, 
   Clock, 
@@ -88,7 +90,7 @@ export default function Dashboard() {
               ))}
             </div>
             
-            <Button className="w-full mt-8 h-12 bg-secondary text-white font-bold text-lg rounded-2xl">
+            <Button variant="secondary" size="xl" className="w-full mt-8">
               Start Focused Work Session
             </Button>
           </section>
@@ -108,9 +110,9 @@ export default function Dashboard() {
               <p className="text-sm text-primary-foreground/80 mb-6 font-medium leading-relaxed">How are you feeling today? We adjust your plan based on your energy levels.</p>
               <div className="flex gap-2 mb-8">
                  {['😊', '😐', '😔', '🤯'].map(emoji => (
-                   <button key={emoji} className="flex-1 h-12 rounded-xl bg-white/10 hover:bg-white/20 text-2xl transition-all shadow-inner">
+                   <Button key={emoji} variant="ghost" className="flex-1 h-12 bg-white/10 hover:bg-white/20 text-2xl transition-all shadow-inner border-none">
                      {emoji}
-                   </button>
+                   </Button>
                  ))}
               </div>
               <div className="p-4 bg-white/10 rounded-2xl border border-white/10">
@@ -134,7 +136,9 @@ export default function Dashboard() {
                    </div>
                  ))}
               </div>
-              <Button variant="link" className="p-0 mt-6 h-auto text-primary font-bold">View full profile</Button>
+              <Button variant="link" className="p-0 mt-6 h-auto text-primary font-bold" asChild>
+                <Link href="/rewards">View full profile</Link>
+              </Button>
            </div>
         </div>
       </div>

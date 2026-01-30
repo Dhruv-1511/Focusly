@@ -17,13 +17,15 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-4 ml-auto">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-orange-600 font-bold text-xs uppercase">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-orange-600 font-bold text-[10px] uppercase tracking-wider">
             🔥 12 Day Streak
           </div>
-          <Button variant="ghost" size="icon" className="relative">
-            <Github className="h-5 w-5" />
+          <Button variant="ghost" size="icon" className="relative" asChild>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <Github className="h-5 w-5" />
+            </a>
           </Button>
-          <Button size="sm" className="hidden sm:flex">New Session</Button>
+          <Button size="sm" variant="secondary" className="hidden sm:flex">New Session</Button>
         </div>
       </div>
     </header>
