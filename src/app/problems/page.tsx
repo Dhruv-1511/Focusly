@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { PROBLEMS } from "@/data/mock";
-import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from"react";
+import { PROBLEMS } from"@/data/mock";
+import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle } from"lucide-react";
+import { Button } from"@/components/ui/button";
+import Link from"next/link";
+import { motion, AnimatePresence } from"framer-motion";
 
 export default function ProblemsPage() {
   const [search, setSearch] = useState("");
@@ -18,7 +18,7 @@ export default function ProblemsPage() {
   return (
     <div className="p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-black mb-2 italic">Problem Solver System</h1>
+        <h1 className="text-4xl font-bold mb-2">Problem Solver System</h1>
         <p className="text-muted-foreground">Pick a struggle, get a 5-step solution immediately.</p>
       </header>
 
@@ -38,7 +38,7 @@ export default function ProblemsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2">
-          <h2 className="text-xl font-black mb-6 uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+          <h2 className="text-xl font-bold mb-6 uppercase tracking-widest text-muted-foreground flex items-center gap-2">
             <Target className="h-5 w-5" /> Active Solutions
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -53,17 +53,17 @@ export default function ProblemsPage() {
                   transition={{ duration: 0.2 }}
                 >
                   <Link href={`/problems/${problem.id}`}>
-                    <div className="group h-full p-8 bg-card rounded-[32px] border-2 border-transparent hover:border-primary transition-all duration-300 shadow-sm hover:shadow-xl cursor-pointer flex flex-col justify-between">
+                    <div className="group h-full p-8 bg-card rounded-2xl border-2 border-transparent hover:border-primary transition-all duration-300 shadow-sm hover:shadow-xl cursor-pointer flex flex-col justify-between">
                       <div>
                         <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-6">
                            <Zap className="h-7 w-7" />
                         </div>
-                        <h3 className="text-2xl font-black mb-3 italic group-hover:text-primary transition-colors">{problem.title}</h3>
+                        <h3 className="text-2xl font-bold mb-3  group-hover:text-primary transition-colors">{problem.title}</h3>
                         <p className="text-muted-foreground text-sm line-clamp-2 font-medium mb-6">
                           {problem.why}
                         </p>
                       </div>
-                      <div className="flex items-center text-sm font-bold text-primary italic">
+                      <div className="flex items-center text-sm font-bold text-primary">
                         Get 5-Step Solution <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </div>
                     </div>
@@ -72,9 +72,9 @@ export default function ProblemsPage() {
               ))}
             </AnimatePresence>
             {filtered.length === 0 && (
-              <div className="col-span-full p-12 text-center bg-muted/30 rounded-[32px] border-2 border-dashed">
+              <div className="col-span-full p-12 text-center bg-muted/30 rounded-2xl border-2 border-dashed">
                  <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                 <h3 className="text-xl font-bold italic">Problem not found?</h3>
+                 <h3 className="text-xl font-bold">Problem not found?</h3>
                  <p className="text-muted-foreground mb-6">Our AI is learning. Tell us what's wrong and we'll generate a solution.</p>
                  <Button>Submit New Problem</Button>
               </div>
@@ -84,14 +84,14 @@ export default function ProblemsPage() {
 
         <div className="space-y-8">
            {/* Problem of the Day */}
-           <div className="bg-foreground text-background rounded-[40px] p-8 shadow-2xl relative overflow-hidden group">
+           <div className="bg-foreground text-background rounded-3xl p-8 shadow-2xl relative overflow-hidden group">
               <div className="relative z-10">
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary mb-4">
+                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-4">
                   <FlameIcon /> Problem of the Day
                 </div>
-                <h3 className="text-2xl font-black mb-6 italic italic leading-tight text-white">"Studying but not remembering anything?"</h3>
+                <h3 className="text-2xl font-bold mb-6   leading-tight text-white">"Studying but not remembering anything?"</h3>
                 <Link href="/problems/memory">
-                  <Button className="w-full h-12 bg-white text-black hover:bg-white/90 font-black italic rounded-2xl">
+                  <Button className="w-full h-12 bg-white text-black hover:bg-white/90 font-bold  rounded-2xl">
                     Solve Today
                   </Button>
                 </Link>
@@ -102,8 +102,8 @@ export default function ProblemsPage() {
            </div>
 
            {/* Quick Tips */}
-           <div className="bg-card rounded-[32px] border p-8">
-              <h3 className="text-xl font-bold mb-6 italic">Quick Action Tips</h3>
+           <div className="bg-card rounded-2xl border p-8">
+              <h3 className="text-xl font-bold mb-6">Quick Action Tips</h3>
               <div className="space-y-6">
                  <Tip 
                     title="The 10m Rule" 
@@ -134,9 +134,12 @@ function Tip({ title, desc }: any) {
     <div className="flex gap-4">
        <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0" />
        <div>
-          <div className="text-sm font-bold italic">{title}</div>
+          <div className="text-sm font-bold">{title}</div>
           <div className="text-xs text-muted-foreground">{desc}</div>
        </div>
     </div>
   );
 }
+
+
+

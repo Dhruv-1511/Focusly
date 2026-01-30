@@ -35,7 +35,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
           <div className="text-secondary font-black uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
             <Zap className="h-4 w-4" /> Direct Solution
           </div>
-          <h1 className="text-5xl md:text-6xl font-black italic tracking-tighter text-foreground">{problem.title}</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-foreground">{problem.title}</h1>
         </div>
         <div className="flex gap-4">
           <Button variant="outline" className="rounded-2xl h-12 gap-2 font-bold px-6">
@@ -51,7 +51,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
         <div className="lg:col-span-2 space-y-12">
           {/* Why it happens */}
           <section>
-            <h2 className="text-xl font-bold flex items-center gap-2 mb-6 italic">
+            <h2 className="text-xl font-bold flex items-center gap-2 mb-6">
               <AlertCircle className="h-5 w-5 text-orange-500" /> Why it happens
             </h2>
             <p className="text-xl text-muted-foreground leading-relaxed font-medium p-8 bg-muted/20 rounded-[32px] border">
@@ -64,7 +64,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-black uppercase tracking-widest px-6 py-2 rounded-full shadow-lg">
                 The Battle Plan
              </div>
-             <h2 className="text-3xl font-black mb-10 text-center italic">The 5-Step Rapid Fix</h2>
+             <h2 className="text-3xl font-bold mb-10 text-center">The 5-Step Rapid Fix</h2>
              <div className="space-y-8">
                 {problem.fiveStepFix.map((step, i) => (
                   <motion.div 
@@ -81,15 +81,15 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
                   </motion.div>
                 ))}
              </div>
-             <Button className="w-full mt-12 h-16 bg-secondary text-white font-black text-xl italic rounded-[24px] shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all">
+              <Button className="w-full mt-12 h-16 bg-secondary text-white font-bold text-xl rounded-3xl shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all">
                 Mark Problem as Solved ✅
-             </Button>
+              </Button>
           </section>
 
           {/* Quick Action */}
           <section className="bg-orange-500 text-white p-8 md:p-12 rounded-[40px] shadow-lg">
              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-4">5-Minute Quick Action</h3>
-             <p className="text-2xl font-black italic mb-2 leading-tight">
+             <p className="text-2xl font-bold mb-2 leading-tight">
                "{problem.quickAction}"
              </p>
              <p className="text-orange-100 text-sm font-bold">Small actions destroy big fears.</p>
@@ -99,7 +99,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
         <div className="space-y-8">
            {/* Tools */}
            <div className="bg-card rounded-[32px] border p-8">
-              <h3 className="text-xl font-bold mb-6 italic flex items-center gap-2">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                  <Wrench className="h-5 w-5 text-primary" /> Recommended Tools
               </h3>
               <div className="space-y-4">
@@ -114,7 +114,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
 
            {/* Mistakes to avoid */}
            <div className="bg-red-50 rounded-[32px] border border-red-100 p-8">
-              <h3 className="text-xl font-bold mb-6 italic flex items-center gap-2 text-red-600">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-red-600">
                  <XCircle className="h-5 w-5" /> Mistakes to avoid
               </h3>
               <div className="space-y-4">

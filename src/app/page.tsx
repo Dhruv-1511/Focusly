@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from"framer-motion";
 import { 
   Search, 
   Calendar, 
@@ -16,48 +16,48 @@ import {
   Shield,
   Sparkles,
   BarChart3
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+} from"lucide-react";
+import { Button } from"@/components/ui/button";
+import { useState } from"react";
+import { cn } from"@/lib/utils";
 
 const problems = [
-  "I can't focus",
-  "I forget what I study",
-  "Exam stress",
-  "Procrastination",
-  "Low marks",
-  "No motivation"
+"I can't focus",
+"I forget what I study",
+"Exam stress",
+"Procrastination",
+"Low marks",
+"No motivation"
 ];
 
 const features = [
   {
-    title: "Problem Solver System",
-    description: "Search your struggle and get a 5-step fix instantly.",
+    title:"Problem Solver System",
+    description:"Search your struggle and get a 5-step fix instantly.",
     icon: Search,
-    color: "bg-blue-500",
-    id: "problem-solver"
+    color:"bg-blue-500",
+    id:"problem-solver"
   },
   {
-    title: "Smart Study Planner",
-    description: "AI-generated schedules based on your exam dates and weak topics.",
+    title:"Smart Study Planner",
+    description:"AI-generated schedules based on your exam dates and weak topics.",
     icon: Calendar,
-    color: "bg-green-500",
-    id: "planner"
+    color:"bg-green-500",
+    id:"planner"
   },
   {
-    title: "Memory Engines",
-    description: "Spaced repetition and AI-powered flashcards from your notes.",
+    title:"Memory Engines",
+    description:"Spaced repetition and AI-powered flashcards from your notes.",
     icon: Brain,
-    color: "bg-purple-500",
-    id: "tools"
+    color:"bg-purple-500",
+    id:"tools"
   },
   {
-    title: "Habit & Streak Tracker",
-    description: "Gamify your growth with XP, levels, and daily streaks.",
+    title:"Habit & Streak Tracker",
+    description:"Gamify your growth with XP, levels, and daily streaks.",
     icon: Trophy,
-    color: "bg-yellow-500",
-    id: "habits"
+    color:"bg-yellow-500",
+    id:"habits"
   }
 ];
 
@@ -77,9 +77,9 @@ export default function Home() {
             <span className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
               Solve 90% of student daily problems
             </span>
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-foreground">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-foreground">
               Master Your Studies, <br />
-              <span className="text-primary italic">Solve Your Struggles.</span>
+              <span className="text-primary">Solve Your Struggles.</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
               The ultimate student-focused platform for guidance, structure, and progress tracking. 
@@ -144,7 +144,7 @@ export default function Home() {
                 <h3 className="text-sm font-bold text-primary mb-2 flex items-center gap-2">
                   <Clock className="h-4 w-4" /> PROBLEM OF THE DAY
                 </h3>
-                <h4 className="text-2xl font-bold mb-3 italic">"Studying but not remembering anything?"</h4>
+                <h4 className="text-2xl font-bold mb-3">"Studying but not remembering anything?"</h4>
                 <p className="text-muted-foreground mr-4">Try the Active Recall method today. Spend 5 minutes explaining what you just learned to an imaginary friend.</p>
              </div>
              <div className="flex items-center gap-3">
@@ -197,8 +197,8 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-100 text-red-600 font-bold text-sm mb-6">
                 <Zap className="h-4 w-4" /> 2,450 students are focusing right now
               </div>
-              <h2 className="text-4xl md:text-6xl font-black mb-8 italic">Enter the Flow Zone</h2>
-              <div className="p-12 mb-8 bg-background rounded-[40px] border shadow-2xl relative">
+              <h2 className="text-4xl md:text-6xl font-bold mb-8">Enter the Flow Zone</h2>
+              <div className="p-12 mb-8 bg-background rounded-3xl border shadow-2xl relative">
                   <div className="text-8xl md:text-9xl font-mono font-bold tracking-tighter mb-8 text-foreground leading-none">
                     25:00
                   </div>
@@ -225,10 +225,10 @@ export default function Home() {
                  </h3>
                  <div className="space-y-4">
                     {[
-                      { name: "Alex R.", streak: "42 days", xp: "12,450" },
-                      { name: "Sarah M.", streak: "38 days", xp: "11,200" },
-                      { name: "Kevin L.", streak: "35 days", xp: "9,800" },
-                      { name: "Emily W.", streak: "31 days", xp: "8,900" },
+                      { name:"Alex R.", streak:"42 days", xp:"12,450" },
+                      { name:"Sarah M.", streak:"38 days", xp:"11,200" },
+                      { name:"Kevin L.", streak:"35 days", xp:"9,800" },
+                      { name:"Emily W.", streak:"31 days", xp:"8,900" },
                     ].map((user, i) => (
                       <div key={user.name} className="flex items-center justify-between p-3 rounded-xl bg-muted/50">
                         <div className="flex items-center gap-3">
@@ -252,7 +252,7 @@ export default function Home() {
                     <h3 className="text-3xl font-bold mb-4 drop-shadow-md">Ask the Community</h3>
                     <p className="text-primary-foreground/80 mb-8 text-lg underline">Stuck on a concept? Need advice? The collective student brain is here to help.</p>
                     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 mb-8">
-                       <h4 className="font-bold text-xl mb-2 italic">Latest Question:</h4>
+                       <h4 className="font-bold text-xl mb-2">Latest Question:</h4>
                        <p className="mb-4">"How do you guys stop procrastinating on big projects like theses? I feel so overwhelmed!"</p>
                        <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1 text-sm"><Users className="h-4 w-4" /> 24 Answers</span>
@@ -273,17 +273,17 @@ export default function Home() {
             <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
                <div className="w-full md:w-1/2">
                   <div className="inline-block px-4 py-2 rounded-full bg-blue-100 text-blue-600 font-bold mb-6">Mental Health Check</div>
-                  <h2 className="text-4xl font-bold mb-6 italic">Burnout is real. We've got your back.</h2>
+                  <h2 className="text-4xl font-bold mb-6">Burnout is real. We've got your back.</h2>
                   <p className="text-lg text-muted-foreground mb-8">
                     Our system monitors your study patterns. If you're overworking, we'll suggest a break, 
                     a lighter plan, or connect you with stress relief exercises.
                   </p>
                   <div className="space-y-4">
                      {[
-                       "Weekly mood tracking",
-                       "Guided breathing & meditation",
-                       "Burnout alert system",
-                       "Positive affirmations"
+                   "Weekly mood tracking",
+                   "Guided breathing & meditation",
+                   "Burnout alert system",
+                   "Positive affirmations"
                      ].map(item => (
                        <div key={item} className="flex items-center gap-3 font-semibold">
                           <CheckCircle2 className="h-5 w-5 text-secondary" /> {item}
@@ -291,13 +291,13 @@ export default function Home() {
                      ))}
                   </div>
                </div>
-               <div className="w-full md:w-1/2 p-12 bg-muted rounded-[60px] border relative">
+               <div className="w-full md:w-1/2 p-12 bg-muted rounded-3xl border relative">
                   <div className="bg-card p-6 rounded-3xl shadow-xl border mb-6 rotate-2 transition-transform hover:rotate-0">
                      <div className="flex items-center gap-4 mb-4">
                         <HeartPulse className="h-8 w-8 text-red-500" />
                         <div>
                            <div className="font-bold">Burnout Alert</div>
-                           <div className="text-xs text-muted-foreground italic">System Alert</div>
+                           <div className="text-xs text-muted-foreground">System Alert</div>
                         </div>
                      </div>
                      <p className="text-sm font-medium">"Hey Alex, you've studied for 6 hours straight without a proper break. Your focus score is dropping. How about a 15-minute walk?"</p>
@@ -306,7 +306,7 @@ export default function Home() {
                         <Button size="sm" variant="ghost">Ignore</Button>
                      </div>
                   </div>
-                  <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-black">AI COACH</div>
+                  <div className="absolute top-4 right-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-xs font-bold">AI COACH</div>
                </div>
             </div>
          </div>
@@ -315,7 +315,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 bg-foreground text-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-6xl font-black mb-8 italic">Ready to transform your student life?</h2>
+          <h2 className="text-4xl md:text-6xl font-bold mb-8">Ready to transform your student life?</h2>
           <p className="text-xl text-background/70 mb-12 max-w-2xl mx-auto">
             Join the hub where problems meet solutions and students become top achievers.
           </p>
@@ -336,3 +336,5 @@ export default function Home() {
     </div>
   );
 }
+
+

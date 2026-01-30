@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import Link from"next/link";
+import { Button } from"@/components/ui/button";
+import { Github } from"lucide-react";
 
 export function Navbar() {
   return (
@@ -12,7 +12,7 @@ export function Navbar() {
           </Link>
         </div>
         
-        <div className="hidden lg:flex items-center gap-2 text-sm font-medium text-muted-foreground italic">
+        <div className="hidden lg:flex items-center gap-2 text-sm font-medium text-muted-foreground">
           Welcome back, Alex. Let's conquer today's goals.
         </div>
 
@@ -29,3 +29,4 @@ export function Navbar() {
     </header>
   );
 }
+

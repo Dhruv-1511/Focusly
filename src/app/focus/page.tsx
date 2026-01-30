@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from"react";
+import { motion } from"framer-motion";
 import { 
   Play, 
   Pause, 
@@ -13,8 +13,8 @@ import {
   Coffee,
   BellOff,
   Moon
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+} from"lucide-react";
+import { Button } from"@/components/ui/button";
 
 export default function FocusPage() {
   const [minutes, setMinutes] = useState(25);
@@ -62,41 +62,41 @@ export default function FocusPage() {
   return (
     <div className="p-8 lg:p-12 max-w-7xl mx-auto flex flex-col min-h-[calc(100vh-64px)]">
       <header className="mb-12">
-        <h1 className="text-4xl font-black mb-2 italic">Focus Zone</h1>
+        <h1 className="text-4xl font-bold mb-2">Focus Zone</h1>
         <p className="text-muted-foreground">Destroy distractions. Enter deep work mode.</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 flex-1">
         <div className="lg:col-span-2 flex flex-col">
-          <section className="bg-card rounded-[60px] border-4 border-primary/10 p-12 md:p-20 flex-1 flex flex-col items-center justify-center relative shadow-2xl overflow-hidden group">
+          <section className="bg-card rounded-3xl border-4 border-primary/10 p-12 md:p-20 flex-1 flex flex-col items-center justify-center relative shadow-2xl overflow-hidden group">
              {/* Background Pulse */}
              {isActive && (
                <motion.div 
                  initial={{ opacity: 0, scale: 0.8 }}
                  animate={{ opacity: 1, scale: 1.2 }}
-                 transition={{ repeat: Infinity, duration: 4, repeatType: "reverse" }}
+                 transition={{ repeat: Infinity, duration: 4, repeatType:"reverse" }}
                  className="absolute inset-0 bg-primary/5 rounded-full pointer-events-none" 
                />
              )}
 
              <div className="flex gap-4 mb-12 relative z-10">
                 <Button 
-                   variant={mode === "Focus" ? "secondary" : "ghost"}
+                   variant={mode ==="Focus" ?"secondary" :"ghost"}
                    onClick={() => setTimerMode("Focus", 25)}
-                   className="rounded-full px-6 font-black italic"
+                   className="rounded-full px-6 font-bold"
                 >
                    Deep Work
                 </Button>
                 <Button 
-                   variant={mode === "Break" ? "secondary" : "ghost"}
+                   variant={mode ==="Break" ?"secondary" :"ghost"}
                    onClick={() => setTimerMode("Break", 5)}
-                   className="rounded-full px-6 font-black italic"
+                   className="rounded-full px-6 font-bold"
                 >
                    Short Break
                 </Button>
              </div>
 
-             <div className="text-9xl md:text-[12rem] font-black tracking-tighter tabular-nums mb-12 relative z-10 text-foreground flex items-baseline">
+             <div className="text-9xl md:text-[12rem] font-bold tracking-tighter tabular-nums mb-12 relative z-10 text-foreground flex items-baseline">
                 {String(minutes).padStart(2, '0')}<span className="text-primary">:</span>{String(seconds).padStart(2, '0')}
              </div>
 
@@ -104,22 +104,22 @@ export default function FocusPage() {
                 <Button 
                    onClick={toggleTimer}
                    size="lg"
-                   className="h-20 px-12 rounded-[32px] bg-primary text-white text-2xl font-black italic shadow-xl hover:shadow-primary/20 scale-100 hover:scale-[1.05] transition-all flex gap-3 items-center"
+                   className="h-20 px-12 rounded-2xl bg-primary text-white text-2xl font-bold  shadow-xl hover:shadow-primary/20 scale-100 hover:scale-[1.05] transition-all flex gap-3 items-center"
                 >
                    {isActive ? <Pause className="h-8 w-8 fill-white" /> : <Play className="h-8 w-8 fill-white" />}
-                   {isActive ? "Pause" : "Start Focus"}
+                   {isActive ?"Pause" :"Start Focus"}
                 </Button>
                 <Button 
                    onClick={resetTimer}
                    size="lg"
                    variant="outline"
-                   className="h-20 w-20 rounded-[32px] border-2"
+                   className="h-20 w-20 rounded-2xl border-2"
                 >
                    <RotateCcw className="h-8 w-8" />
                 </Button>
              </div>
 
-             <div className="mt-16 flex items-center gap-6 text-sm font-black uppercase tracking-[0.2em] text-muted-foreground relative z-10">
+             <div className="mt-16 flex items-center gap-6 text-sm font-bold uppercase tracking-[0.2em] text-muted-foreground relative z-10">
                 <div className="flex items-center gap-2">
                   <BellOff className="h-4 w-4" /> Notifications Off
                 </div>
@@ -133,8 +133,8 @@ export default function FocusPage() {
 
         <div className="space-y-8">
            {/* Ambient Station */}
-           <div className="bg-card rounded-[40px] border p-8 shadow-sm">
-              <h3 className="text-xl font-bold mb-6 italic flex items-center gap-2">
+           <div className="bg-card rounded-3xl border p-8 shadow-sm">
+              <h3 className="text-xl font-bold mb-6  flex items-center gap-2">
                  <Music className="h-5 w-5 text-primary" /> Ambient Sound
               </h3>
               <div className="space-y-3">
@@ -155,17 +155,17 @@ export default function FocusPage() {
            </div>
 
            {/* Stats Widget */}
-           <div className="bg-black text-white rounded-[40px] p-8 relative overflow-hidden">
+           <div className="bg-black text-white rounded-3xl p-8 relative overflow-hidden">
               <div className="relative z-10">
-                <h3 className="text-xl font-bold mb-6 italic">Session Stats</h3>
+                <h3 className="text-xl font-bold mb-6">Session Stats</h3>
                 <div className="space-y-6">
                    <div className="flex justify-between items-end">
                       <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Focus Level</div>
-                      <div className="text-2xl font-black italic text-secondary">High</div>
+                      <div className="text-2xl font-bold  text-secondary">High</div>
                    </div>
                    <div className="flex justify-between items-end">
                       <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Est. XP Reward</div>
-                      <div className="text-2xl font-black italic">+250 XP</div>
+                      <div className="text-2xl font-bold">+250 XP</div>
                    </div>
                 </div>
                 <div className="mt-10 h-32 flex items-end gap-2">
@@ -193,8 +193,11 @@ function AmbientTrack({ icon: Icon, name, active = false }: any) {
        <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${active ? 'bg-primary text-white' : 'bg-card border shadow-sm text-muted-foreground'}`}>
           <Icon className="h-5 w-5" />
        </div>
-       <span className="font-bold text-sm italic">{name}</span>
+       <span className="font-bold text-sm">{name}</span>
        {active && <div className="ml-auto h-2 w-2 rounded-full bg-primary animate-ping" />}
     </button>
   );
 }
+
+
+

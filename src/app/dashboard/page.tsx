@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from"framer-motion";
 import { 
   BarChart3, 
   Clock, 
@@ -12,15 +12,15 @@ import {
   Brain,
   Zap,
   CheckCircle2
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { MOCK_STUDY_PLAN } from "@/data/mock";
+} from"lucide-react";
+import { Button } from"@/components/ui/button";
+import { MOCK_STUDY_PLAN } from"@/data/mock";
 
 export default function Dashboard() {
   return (
     <div className="p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-black mb-2 italic">Student Dashboard</h1>
+        <h1 className="text-4xl font-bold mb-2">Student Dashboard</h1>
         <p className="text-muted-foreground">Your growth tracked, your problems solved.</p>
       </header>
 
@@ -59,9 +59,9 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Schedule */}
         <div className="lg:col-span-2 space-y-8">
-          <section className="bg-card rounded-[32px] border p-8 shadow-sm">
+          <section className="bg-card rounded-2xl border p-8 shadow-sm">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl font-bold flex items-center gap-2 italic">
+              <h2 className="text-2xl font-bold flex items-center gap-2">
                 <Brain className="h-6 w-6 text-primary" /> Today's Focus Plan
               </h2>
               <Button size="sm" variant="outline" className="gap-2">
@@ -76,9 +76,9 @@ export default function Dashboard() {
                   <div className="flex-1">
                     <div className="font-bold flex items-center gap-2">
                        {task.task}
-                       {i === 0 && <span className="text-[10px] bg-secondary/10 text-secondary px-2 py-0.5 rounded-full uppercase tracking-widest font-black">Success</span>}
+                       {i === 0 && <span className="text-[10px] bg-secondary/10 text-secondary px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">Success</span>}
                     </div>
-                    <div className="text-xs text-muted-foreground uppercase font-black tracking-widest">Type: {task.type}</div>
+                    <div className="text-xs text-muted-foreground uppercase font-bold tracking-widest">Type: {task.type}</div>
                   </div>
                   <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button size="icon" variant="ghost" className="h-8 w-8 text-secondary"><CheckCircle2 className="h-4 w-4" /></Button>
@@ -103,8 +103,8 @@ export default function Dashboard() {
         {/* Sidebar widgets */}
         <div className="space-y-8">
            {/* Mental Health Widget */}
-           <div className="bg-primary rounded-[32px] p-8 text-primary-foreground relative overflow-hidden">
-              <h3 className="text-xl font-bold mb-4 italic">Mood System</h3>
+           <div className="bg-primary rounded-2xl p-8 text-primary-foreground relative overflow-hidden">
+              <h3 className="text-xl font-bold mb-4">Mood System</h3>
               <p className="text-sm text-primary-foreground/80 mb-6 font-medium leading-relaxed">How are you feeling today? We adjust your plan based on your energy levels.</p>
               <div className="flex gap-2 mb-8">
                  {['😊', '😐', '😔', '🤯'].map(emoji => (
@@ -114,14 +114,14 @@ export default function Dashboard() {
                  ))}
               </div>
               <div className="p-4 bg-white/10 rounded-2xl border border-white/10">
-                 <div className="text-[10px] uppercase font-black tracking-widest mb-1">AI Recommendation</div>
-                 <div className="text-sm font-bold italic">"You seem consistent. Today is a high-load day. Keep water nearby!"</div>
+                 <div className="text-[10px] uppercase font-bold tracking-widest mb-1">AI Recommendation</div>
+                 <div className="text-sm font-bold">"You seem consistent. Today is a high-load day. Keep water nearby!"</div>
               </div>
            </div>
 
            {/* Badges / Rewards */}
-           <div className="bg-card rounded-[32px] border p-8">
-              <h3 className="text-xl font-bold mb-6 italic">Recent Rewards</h3>
+           <div className="bg-card rounded-2xl border p-8">
+              <h3 className="text-xl font-bold mb-6">Recent Rewards</h3>
               <div className="flex flex-wrap gap-4">
                  {MOCK_STUDY_PLAN.stats.badges.map(badge => (
                    <div key={badge} className="group relative">
@@ -146,14 +146,14 @@ function StatCard({ icon: Icon, label, value, sub, color }: any) {
   return (
     <motion.div 
       whileHover={{ y: -5 }}
-      className="bg-card p-6 rounded-[32px] border shadow-sm flex flex-col justify-between"
+      className="bg-card p-6 rounded-2xl border shadow-sm flex flex-col justify-between"
     >
       <div className={`${color} bg-current/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-4`}>
         <Icon className="h-6 w-6" />
       </div>
       <div>
-        <div className="text-xs text-muted-foreground font-black uppercase tracking-widest mb-1">{label}</div>
-        <div className="text-2xl font-black italic">{value}</div>
+        <div className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-1">{label}</div>
+        <div className="text-2xl font-bold">{value}</div>
         <div className="text-[10px] text-muted-foreground mt-1 font-bold">{sub}</div>
       </div>
     </motion.div>
@@ -162,14 +162,17 @@ function StatCard({ icon: Icon, label, value, sub, color }: any) {
 
 function ToolCard({ title, desc, icon: Icon, color }: any) {
   return (
-    <div className="bg-card border p-6 rounded-[32px] flex items-center gap-4 hover:shadow-md transition-all cursor-pointer group">
+    <div className="bg-card border p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all cursor-pointer group">
       <div className={`${color} h-12 w-12 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
         <Icon className="h-6 w-6" />
       </div>
       <div>
-        <div className="text-sm font-bold italic">{title}</div>
+        <div className="text-sm font-bold">{title}</div>
         <div className="text-xs text-muted-foreground">{desc}</div>
       </div>
     </div>
   );
 }
+
+
+

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from"react";
+import { motion, AnimatePresence } from"framer-motion";
 import { 
   Calendar, 
   Plus, 
@@ -12,12 +12,12 @@ import {
   CalendarDays,
   CheckCircle2,
   RefreshCw
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+} from"lucide-react";
+import { Button } from"@/components/ui/button";
 
 export default function PlannerPage() {
   const [step, setStep] = useState(1);
-  const [subjects, setSubjects] = useState(["Mathematics", "Physics"]);
+  const [subjects, setSubjects] = useState(["Mathematics","Physics"]);
   const [loading, setLoading] = useState(false);
   const [showPlan, setShowPlan] = useState(false);
 
@@ -33,11 +33,11 @@ export default function PlannerPage() {
   return (
     <div className="p-8 lg:p-12 max-w-5xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-black mb-2 italic">AI Study Planner</h1>
+        <h1 className="text-4xl font-bold mb-2">AI Study Planner</h1>
         <p className="text-muted-foreground">Stop worrying about 'what' to study. Just follow the plan.</p>
       </header>
 
-      <div className="bg-card rounded-[40px] border shadow-sm p-8 md:p-12">
+      <div className="bg-card rounded-3xl border shadow-sm p-8 md:p-12">
         <AnimatePresence mode="wait">
           {step === 1 && (
             <motion.div 
@@ -46,7 +46,7 @@ export default function PlannerPage() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
             >
-              <h2 className="text-2xl font-black mb-8 italic flex items-center gap-3">
+              <h2 className="text-2xl font-bold mb-8  flex items-center gap-3">
                  <span className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">1</span>
                  What subjects are you focusing on?
               </h2>
@@ -60,7 +60,7 @@ export default function PlannerPage() {
                   </div>
                 ))}
                 <button 
-                  onClick={() => setSubjects([...subjects, "New Subject"])}
+                  onClick={() => setSubjects([...subjects,"New Subject"])}
                   className="flex items-center justify-center gap-2 p-4 rounded-2xl border-2 border-dashed border-muted text-muted-foreground hover:border-primary hover:text-primary transition-all font-bold text-sm"
                 >
                   <Plus className="h-4 w-4" /> Add Subject
@@ -79,18 +79,18 @@ export default function PlannerPage() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
             >
-               <h2 className="text-2xl font-black mb-8 italic flex items-center gap-3">
+               <h2 className="text-2xl font-bold mb-8  flex items-center gap-3">
                  <span className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">2</span>
                  Exam details & Time availability
               </h2>
               <div className="space-y-6 mb-12">
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                       <label className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-2 block">Exam Date</label>
+                       <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Exam Date</label>
                        <input type="date" className="w-full h-14 px-4 rounded-2xl border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold" defaultValue="2026-06-15" />
                     </div>
                     <div>
-                       <label className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-2 block">Daily Study Hours</label>
+                       <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Daily Study Hours</label>
                        <select className="w-full h-14 px-4 rounded-2xl border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold">
                           <option>2 Hours</option>
                           <option selected>4 Hours</option>
@@ -100,7 +100,7 @@ export default function PlannerPage() {
                     </div>
                  </div>
                  <div>
-                    <label className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-2 block">Weak Topics (One per line)</label>
+                    <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Weak Topics (One per line)</label>
                     <textarea 
                       placeholder="Calculus (Derivatives)&#10;Quantum Physics&#10;Organic Chemistry"
                       className="w-full h-32 p-4 rounded-2xl border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold resize-none"
@@ -109,9 +109,9 @@ export default function PlannerPage() {
               </div>
               <div className="flex gap-4">
                  <Button variant="ghost" onClick={() => setStep(1)} className="h-14 px-8 font-bold">Back</Button>
-                 <Button onClick={generatePlan} disabled={loading} className="flex-1 h-14 bg-secondary text-white font-black text-xl italic rounded-2xl flex items-center justify-center gap-3">
+                 <Button onClick={generatePlan} disabled={loading} className="flex-1 h-14 bg-secondary text-white font-bold text-xl  rounded-2xl flex items-center justify-center gap-3">
                     {loading ? <RefreshCw className="h-6 w-6 animate-spin" /> : <Sparkles className="h-6 w-6 fill-white" />}
-                    {loading ? "Analyzing Syllabus..." : "Generate My Plan"}
+                    {loading ?"Analyzing Syllabus..." :"Generate My Plan"}
                  </Button>
               </div>
             </motion.div>
@@ -125,8 +125,8 @@ export default function PlannerPage() {
             >
                <div className="flex items-center justify-between mb-8 border-b pb-6">
                   <div>
-                    <div className="text-secondary font-black text-xs uppercase tracking-[0.2em] mb-1">Status: Optimized</div>
-                    <h2 className="text-3xl font-black italic">Your Dynamic Plan</h2>
+                    <div className="text-secondary font-bold text-xs uppercase tracking-[0.2em] mb-1">Status: Optimized</div>
+                    <h2 className="text-3xl font-bold">Your Dynamic Plan</h2>
                   </div>
                   <Button variant="outline" onClick={() => setStep(1)} className="h-10 rounded-xl gap-2 font-bold mb-auto">
                     <RefreshCw className="h-4 w-4" /> Reset
@@ -135,7 +135,7 @@ export default function PlannerPage() {
                
                <div className="space-y-8">
                   <section>
-                    <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
                        <Clock className="h-4 w-4 text-primary" /> Daily Schedule (Next 24h)
                     </h3>
                     <div className="space-y-3">
@@ -148,7 +148,7 @@ export default function PlannerPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6 border-t">
                      <section>
-                       <h3 className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
+                       <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
                           <CalendarDays className="h-4 w-4 text-purple-600" /> Key Milestones
                        </h3>
                        <div className="space-y-4">
@@ -158,14 +158,14 @@ export default function PlannerPage() {
                        </div>
                      </section>
                      <div className="p-6 bg-primary rounded-3xl text-primary-foreground">
-                        <h4 className="font-bold mb-2 flex items-center gap-2 italic">
+                        <h4 className="font-bold mb-2 flex items-center gap-2">
                            <Sparkles className="h-4 w-4" /> AI Strategy Tips
                         </h4>
-                        <ul className="text-sm space-y-3 text-primary-foreground/90 font-medium italic">
+                        <ul className="text-sm space-y-3 text-primary-foreground/90 font-medium">
                            <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" /> Focus on Calculus early morning when brain power is max.</li>
                            <li className="flex gap-2"><CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" /> Your Physics retention is 20% higher in the evening.</li>
                         </ul>
-                        <Button className="w-full mt-6 bg-white text-primary font-black italic">Save Plan to Calendar</Button>
+                        <Button className="w-full mt-6 bg-white text-primary font-bold">Save Plan to Calendar</Button>
                      </div>
                   </div>
                </div>
@@ -180,7 +180,7 @@ export default function PlannerPage() {
 function PlanItem({ time, task, color }: any) {
   return (
     <div className="flex items-center gap-4 p-4 rounded-2xl bg-muted/30 border border-transparent hover:border-border transition-all group">
-       <div className="text-xs font-black text-muted-foreground w-16">{time}</div>
+       <div className="text-xs font-bold text-muted-foreground w-16">{time}</div>
        <div className={`h-2 w-2 rounded-full ${color}`} />
        <div className="font-bold flex-1">{task}</div>
        <Button size="icon" variant="ghost" className="h-8 w-8 opacity-0 group-hover:opacity-100"><Plus className="h-4 w-4" /></Button>
@@ -192,10 +192,13 @@ function Milestone({ label, date, type }: any) {
   return (
     <div className="flex items-center justify-between p-3 border-b last:border-0 border-dashed">
        <div>
-          <div className="text-sm font-black italic">{label}</div>
-          <div className="text-[10px] text-muted-foreground uppercase font-black tracking-widest">{type}</div>
+          <div className="text-sm font-bold">{label}</div>
+          <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest">{type}</div>
        </div>
        <div className="text-sm font-bold text-primary">{date}</div>
     </div>
   );
 }
+
+
+
