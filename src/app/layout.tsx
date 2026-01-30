@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
+import { Sidebar } from "@/components/layout/Sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next Starter | Premium Next.js Template",
-  description: "A professional starter template for Next.js with Tailwind CSS, TypeScript, and modern design.",
+  title: "StudyHub | Solve, Plan & Excel",
+  description: "The ultimate student-focused platform for guidance, structure, and progress tracking.",
 };
 
 export default function RootLayout({
@@ -26,11 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground flex`}
       >
-        <Navbar />
-        <main>{children}</main>
-        {/* Footer could go here */}
+        <Sidebar />
+        <div className="flex-1 flex flex-col min-h-screen lg:pl-64">
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </div>
       </body>
     </html>
   );

@@ -4,32 +4,26 @@ import { Github } from "lucide-react";
 
 export function Navbar() {
   return (
-    <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2">
+    <header className="sticky top-0 w-full border-b bg-background/80 backdrop-blur-md z-40">
+      <div className="flex h-16 items-center justify-between px-4 sm:px-8">
+        <div className="flex items-center gap-2 lg:hidden">
           <Link href="/" className="text-xl font-bold tracking-tight">
-            Next<span className="text-primary">Starter</span>
+            Study<span className="text-primary">Hub</span>
           </Link>
         </div>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="#features" className="text-sm font-medium hover:text-primary transition-colors">
-            Features
-          </Link>
-          <Link href="#templates" className="text-sm font-medium hover:text-primary transition-colors">
-            Templates
-          </Link>
-          <Link href="#docs" className="text-sm font-medium hover:text-primary transition-colors">
-            Docs
-          </Link>
-        </nav>
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" asChild>
-            <a href="https://github.com" target="_blank" rel="noreferrer">
-              <Github className="h-5 w-5" />
-              <span className="sr-only">GitHub</span>
-            </a>
+        
+        <div className="hidden lg:flex items-center gap-2 text-sm font-medium text-muted-foreground italic">
+          Welcome back, Alex. Let's conquer today's goals.
+        </div>
+
+        <div className="flex items-center gap-4 ml-auto">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 text-orange-600 font-bold text-xs uppercase">
+            🔥 12 Day Streak
+          </div>
+          <Button variant="ghost" size="icon" className="relative">
+            <Github className="h-5 w-5" />
           </Button>
-          <Button>Get Started</Button>
+          <Button size="sm" className="hidden sm:flex">New Session</Button>
         </div>
       </div>
     </header>

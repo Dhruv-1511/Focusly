@@ -1,6 +1,6 @@
-# Next Starter Project
+# StudyHub Project
 
-A premium Next.js 15 starter template with Tailwind CSS 4, TypeScript, and Framer Motion.
+A premium student-focused platform designed to solve 90% of student daily problems.
 
 ## Build Commands
 
@@ -9,18 +9,25 @@ A premium Next.js 15 starter template with Tailwind CSS 4, TypeScript, and Frame
 - `npm run start`: Start production server
 - `npm run lint`: Run ESLint
 
-## Code Style Guidelines
-
-- **Framework**: Next.js 15 (App Router)
-- **Styling**: Tailwind CSS 4, Lucide React icons
-- **Utilities**: `clsx` and `tailwind-merge` for class management (see `src/lib/utils.ts`)
-- **Components**: Reusable UI components in `src/components/ui/`
-- **TypeScript**: Use strict typing where possible
-
 ## Project Structure
 
-- `src/app/`: App router pages and layouts
-- `src/components/`: React components
-- `src/lib/`: Utility functions and shared logic
-- `src/hooks/`: Custom React hooks
-- `public/`: Static assets
+- `src/app/`: StudyHub Core (Page-based sections)
+  - `dashboard/`: Student overview and stats
+  - `problems/`: Problem Solver System (with `[id]` dynamic solutions)
+  - `planner/`: AI Study Plan generation
+  - `focus/`: Pomodoro and deep work zone
+  - `tools/`: Learning/Memory tools (Revision, AI Notes)
+  - `community/`: Student Q&A and groups
+  - `mental-health/`: Wellness, Mood, and Burnout alerts
+  - `rewards/`: Gamification system (XP, Badges)
+- `src/data/`: Centralized mock data (`mock.ts`)
+- `src/components/`: Reusable fragments (Sidebar, Navbar, etc.)
+- `src/lib/`: Logic and utility functions
+
+## Design Guidelines
+
+- **Color Palette**: Calm Blue (#2563EB), Growth Green (#22C55E), Deep Navy, Light Blue Accent.
+- **Typography**: Heavily italicized, black-weight headers for a premium, academic-sport look.
+- **UX**: Use card-based layouts, high backdrop blur (glassmorphism), and Framer Motion for all transitions.
+- **Components**: Reusable UI components in `src/components/ui/`
+- **TypeScript**: Use strict typing where possible
