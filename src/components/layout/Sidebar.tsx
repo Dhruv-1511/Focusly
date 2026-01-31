@@ -1,7 +1,7 @@
 "use client";
 
-import Link from"next/link";
-import { usePathname } from"next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { 
   Home, 
   Search, 
@@ -12,22 +12,24 @@ import {
   HeartPulse, 
   Trophy, 
   Settings,
-  LayoutDashboard
-} from"lucide-react";
+  LayoutDashboard,
+  Zap,
+  LogOut
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
+import { motion } from "framer-motion";
 
 const menuItems = [
-  { name:"Home", icon: Home, href:"/" },
-  { name:"Dashboard", icon: LayoutDashboard, href:"/dashboard" },
-  { name:"Problems", icon: Search, href:"/problems" },
-  { name:"Planner", icon: Calendar, href:"/planner" },
-  { name:"Focus Mode", icon: Timer, href:"/focus" },
-  { name:"Learning Tools", icon: BookOpen, href:"/tools" },
-  { name:"Community", icon: Users, href:"/community" },
-  { name:"Mental Health", icon: HeartPulse, href:"/mental-health" },
-  { name:"Rewards", icon: Trophy, href:"/rewards" },
+  { name: "Home", icon: Home, href: "/" },
+  { name: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
+  { name: "Problems", icon: Search, href: "/problems" },
+  { name: "Planner", icon: Calendar, href: "/planner" },
+  { name: "Focus Mode", icon: Timer, href: "/focus" },
+  { name: "Learning Tools", icon: BookOpen, href: "/tools" },
+  { name: "Community", icon: Users, href: "/community" },
+  { name: "Mental Health", icon: HeartPulse, href: "/mental-health" },
+  { name: "Rewards", icon: Trophy, href: "/rewards" },
 ];
 
 export function Sidebar() {
@@ -35,29 +37,41 @@ export function Sidebar() {
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-64 border-r bg-card hidden lg:flex flex-col z-50">
-      <div className="p-6">
-        <Link href="/" className="text-2xl font-bold tracking-tight">
-          Study<span className="text-primary">Hub</span>
+      <div className="p-8">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300">
+            <Zap className="h-5 w-5 text-white fill-current" />
+          </div>
+          <span className="text-xl font-black tracking-tighter">
+            STUDY<span className="text-primary">HUB</span>
+          </span>
         </Link>
       </div>
       
-      <nav className="flex-1 px-4 space-y-1 overflow-y-auto pt-4">
+      <nav className="flex-1 px-4 space-y-1.5 overflow-y-auto pt-4 custom-scrollbar">
         {menuItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !=="/" && pathname.startsWith(item.href));
+          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           return (
             <Link
               key={item.name}
               href={item.href}
               className={cn(
-            "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 group",
+                "flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all duration-300 group relative overflow-hidden",
                 isActive 
-                  ?"bg-primary text-primary-foreground shadow-md" 
-                  :"text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "text-primary bg-primary/5 shadow-sm" 
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               )}
             >
+              {isActive && (
+                <motion.div
+                  layoutId="sidebar-active"
+                  className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-full"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
               <item.icon className={cn(
-            "h-5 w-5",
-                isActive ?"text-primary-foreground" :"text-muted-foreground group-hover:text-primary"
+                "h-5 w-5 transition-transform duration-300 group-hover:scale-110",
+                isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
               )} />
               {item.name}
             </Link>
@@ -65,22 +79,37 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t mt-auto">
-        <div className="flex items-center gap-3 p-3 rounded-2xl bg-muted/50 border border-transparent">
-          <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center text-white font-bold shadow-sm">
-            AR
+      <div className="p-6 mt-auto space-y-4">
+        <div className="p-4 rounded-3xl bg-muted/30 border border-border/50 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-full -mr-8 -mt-8" />
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-10 w-10 rounded-2xl bg-secondary text-white flex items-center justify-center font-black shadow-lg shadow-secondary/20 border-2 border-white">
+              AR
+            </div>
+            <div className="flex-1 overflow-hidden">
+              <div className="text-sm font-black truncate leading-tight">Alex Rodriguez</div>
+              <div className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">Level 15 Pro</div>
+            </div>
           </div>
-          <div className="flex-1 overflow-hidden">
-            <div className="text-sm font-bold truncate">Alex Rodriguez</div>
-            <div className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Level 15 Pro</div>
+          <div className="w-full bg-muted h-1.5 rounded-full overflow-hidden mb-2">
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: "65%" }}
+              className="bg-primary h-full rounded-full"
+            />
           </div>
-          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:rotate-90 transition-transform">
-            <Settings className="h-4 w-4" />
+          <div className="text-[9px] text-muted-foreground font-black uppercase tracking-widest text-right">650 / 1000 XP</div>
+        </div>
+        
+        <div className="flex items-center gap-2">
+          <Button variant="ghost" className="flex-1 justify-start gap-3 rounded-2xl font-black text-xs uppercase tracking-widest text-muted-foreground hover:text-destructive hover:bg-destructive/5 transition-all">
+            <LogOut className="h-4 w-4" /> Sign Out
+          </Button>
+          <Button variant="ghost" size="icon" className="h-10 w-10 rounded-2xl text-muted-foreground hover:rotate-90 transition-transform">
+            <Settings className="h-5 w-5" />
           </Button>
         </div>
       </div>
     </aside>
   );
 }
-
-
