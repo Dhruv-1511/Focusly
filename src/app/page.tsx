@@ -85,7 +85,7 @@ export default function Home() {
             >
               Solve 90% of student daily problems
             </motion.span>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 text-foreground leading-[0.9]">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-8 text-foreground leading-[0.9]">
               Master Your Studies,<br />
               <span className="text-gradient">Solve Your Struggles.</span>
             </h1>
@@ -107,19 +107,26 @@ export default function Home() {
                   <Search className="ml-6 h-6 w-6 text-muted-foreground group-focus-within:text-primary transition-colors" />
                   <input 
                     type="text"
-                    placeholder="What are you struggling with today? (e.g. 'can't focus')"
-                    className="w-full h-20 pl-4 pr-32 bg-transparent text-foreground focus:outline-none transition-all font-bold text-lg"
+                    placeholder="What are you struggling with today?"
+                    className="w-full h-16 sm:h-20 pl-4 pr-4 sm:pr-32 bg-transparent text-foreground focus:outline-none transition-all font-bold text-base sm:text-lg"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                   <Button 
                     size="lg" 
-                    className="absolute right-3 top-3 bottom-3 rounded-lg px-8 font-black shadow-xl hover:scale-105 active:scale-95 transition-all"
+                    className="hidden sm:flex absolute right-3 top-3 bottom-3 rounded-lg px-8 font-black shadow-xl hover:scale-105 active:scale-95 transition-all"
                     onClick={() => console.log(`Searching for: ${searchQuery}`)}
                   >
                     SOLVE IT
                   </Button>
                 </div>
+                <Button 
+                  size="lg" 
+                  className="w-full mt-4 sm:hidden font-black shadow-xl"
+                  onClick={() => console.log(`Searching for: ${searchQuery}`)}
+                >
+                  SOLVE IT
+                </Button>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
                 <span className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] mr-2">Quick Access:</span>
@@ -247,7 +254,7 @@ export default function Home() {
                 className="p-16 md:p-24 mb-16 bg-background rounded-lg border-8 border-muted shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] relative group overflow-hidden"
               >
                   <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                  <div className="text-9xl md:text-[12rem] font-mono font-black tracking-tighter mb-12 text-foreground leading-none relative z-10 tabular-nums">
+                  <div className="text-6xl sm:text-9xl md:text-[12rem] font-mono font-black tracking-tighter mb-12 text-foreground leading-none relative z-10 tabular-nums">
                     25:00
                   </div>
                   <div className="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
@@ -424,13 +431,13 @@ export default function Home() {
               Join 50,000+ students where problems meet solutions and focus becomes a superpower.
             </p>
             <div className="flex flex-col items-center gap-12">
-               <Button 
-                size="xl" 
-                className="h-24 px-16 text-2xl font-black rounded-lg shadow-[0_40px_80px_-15px_rgba(255,255,255,0.2)] bg-white text-primary hover:bg-white/95 scale-100 hover:scale-105 active:scale-95 transition-all"
-                onClick={() => console.log("Starting onboarding flow")}
-               >
-                 GET STARTED FOR FREE
-               </Button>
+                <Button 
+                 size="xl" 
+                 className="h-20 sm:h-24 px-8 sm:px-16 text-xl sm:text-2xl font-black rounded-lg shadow-[0_40px_80px_-15px_rgba(255,255,255,0.2)] bg-white text-primary hover:bg-white/95 scale-100 hover:scale-105 active:scale-95 transition-all"
+                 onClick={() => console.log("Starting onboarding flow")}
+                >
+                  GET STARTED FOR FREE
+                </Button>
                <div className="flex flex-col sm:flex-row items-center gap-8 text-[10px] text-background/40 font-black uppercase tracking-[0.3em]">
                  <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> No credit card required</span>
                  <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> Unlimited free sessions</span>

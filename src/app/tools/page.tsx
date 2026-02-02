@@ -35,7 +35,7 @@ export default function ToolsPage() {
   };
 
   return (
-    <div className="p-8 lg:p-12 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-4xl font-bold mb-2">Learning Tools</h1>
@@ -78,11 +78,11 @@ export default function ToolsPage() {
                        </h2>
                        <div className="space-y-4">
                           {revisionTopics.map((topic, i) => (
-                             <div key={i} className="flex items-center gap-6 p-6 rounded-lg bg-muted/20 border border-transparent hover:border-border transition-all group">
-                                <div className="h-14 w-14 rounded-lg bg-card border shadow-sm flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                             <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-6 rounded-lg bg-muted/20 border border-transparent hover:border-border transition-all group">
+                                <div className="h-14 w-14 rounded-lg bg-card border shadow-sm flex items-center justify-center text-primary group-hover:scale-110 transition-transform shrink-0">
                                    <BookOpen className="h-7 w-7" />
                                 </div>
-                                <div className="flex-1">
+                                <div className="flex-1 text-center sm:text-left">
                                    <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">{topic.subject}</div>
                                    <div className="text-lg font-bold">{topic.name}</div>
                                    <div className={`text-xs font-bold mt-1 ${topic.status === 'Urgent' ? 'text-destructive' : 'text-primary'}`}>{topic.interval}</div>
@@ -90,7 +90,7 @@ export default function ToolsPage() {
                                 <Button 
                                   variant={topic.status === 'Urgent' ? 'accent' : 'secondary'}
                                   size="lg"
-                                  className="px-8 font-bold"
+                                  className="w-full sm:w-auto px-8 font-bold"
                                   onClick={() => console.log(`Starting revision for ${topic.name}`)}
                                 >
                                    Revise Now

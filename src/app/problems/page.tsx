@@ -16,9 +16,9 @@ export default function ProblemsPage() {
   );
 
   return (
-    <div className="p-8 lg:p-12 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2">Problem Solver System</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">Problem Solver System</h1>
         <p className="text-muted-foreground">Pick a struggle, get a 5-step solution immediately.</p>
       </header>
 
@@ -28,8 +28,8 @@ export default function ProblemsPage() {
           <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground group-focus-within:text-primary transition-colors" />
           <input 
             type="text"
-            placeholder="Search your problem (e.g. 'can't focus', 'late for exam')"
-            className="w-full h-16 pl-16 pr-6 rounded-lg border bg-card text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-sm font-medium"
+            placeholder="Search your problem"
+            className="w-full h-16 pl-16 pr-6 rounded-lg border bg-card text-base sm:text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-sm font-medium"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

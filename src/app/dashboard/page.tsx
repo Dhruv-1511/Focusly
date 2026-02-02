@@ -20,14 +20,14 @@ import { MOCK_STUDY_PLAN } from"@/data/mock";
 
 export default function Dashboard() {
   return (
-    <div className="p-8 lg:p-12 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12">
         <h1 className="text-4xl font-bold mb-2">Student Dashboard</h1>
         <p className="text-muted-foreground">Your growth tracked, your problems solved.</p>
       </header>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
         <StatCard 
           icon={Clock} 
           label="Total Study Time" 
@@ -73,8 +73,8 @@ export default function Dashboard() {
             
             <div className="space-y-4">
               {MOCK_STUDY_PLAN.daily.map((task, i) => (
-                <div key={i} className="group flex items-center gap-6 p-4 rounded-lg hover:bg-muted/50 transition-colors border border-transparent hover:border-border">
-                  <div className="text-sm font-bold text-muted-foreground w-20">{task.time}</div>
+                <div key={i} className="group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-muted/50 transition-colors border border-transparent hover:border-border">
+                  <div className="text-sm font-bold text-muted-foreground sm:w-20">{task.time}</div>
                   <div className="flex-1">
                     <div className="font-bold flex items-center gap-2">
                        {task.task}
@@ -108,9 +108,9 @@ export default function Dashboard() {
            <div className="bg-primary rounded-lg p-8 text-primary-foreground relative overflow-hidden">
               <h3 className="text-xl font-bold mb-4">Mood System</h3>
               <p className="text-sm text-primary-foreground/80 mb-6 font-medium leading-relaxed">How are you feeling today? We adjust your plan based on your energy levels.</p>
-              <div className="flex gap-2 mb-8">
+              <div className="flex gap-2 mb-8 flex-wrap">
                  {['😊', '😐', '😔', '🤯'].map(emoji => (
-                   <Button key={emoji} variant="ghost" className="flex-1 h-12 bg-white/10 hover:bg-white/20 text-2xl transition-all shadow-inner border-none">
+                   <Button key={emoji} variant="ghost" className="flex-1 min-w-[60px] h-12 bg-white/10 hover:bg-white/20 text-2xl transition-all shadow-inner border-none">
                      {emoji}
                    </Button>
                  ))}

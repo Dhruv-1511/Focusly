@@ -18,7 +18,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 const menuItems = [
   { name: "Home", icon: Home, href: "/" },
@@ -32,21 +33,46 @@ const menuItems = [
   { name: "Rewards", icon: Trophy, href: "/rewards" },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 border-r bg-card hidden lg:flex flex-col z-50">
-      <div className="p-8">
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300">
-            <Zap className="h-5 w-5 text-white fill-current" />
-          </div>
-          <span className="text-xl font-black tracking-tighter">
-            STUDY<span className="text-primary">HUB</span>
-          </span>
-        </Link>
-      </div>
+    <>
+      {/* Mobile Backdrop */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 lg:hidden"
+          />
+        )}
+      </AnimatePresence>
+
+      <aside className={cn(
+        "fixed left-0 top-0 h-screen w-64 border-r bg-card flex flex-col z-50 transition-transform duration-300 lg:translate-x-0",
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      )}>
+        <div className="p-8 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 group" onClick={onClose}>
+            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300">
+              <Zap className="h-5 w-5 text-white fill-current" />
+            </div>
+            <span className="text-xl font-black tracking-tighter">
+              STUDY<span className="text-primary">HUB</span>
+            </span>
+          </Link>
+          <Button variant="ghost" size="icon" className="lg:hidden" onClick={onClose}>
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
       
       <nav className="flex-1 px-4 space-y-1.5 overflow-y-auto pt-4 custom-scrollbar">
         {menuItems.map((item) => {
@@ -55,6 +81,7 @@ export function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={onClose}
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-lg text-xs font-black uppercase tracking-widest transition-all duration-300 group relative overflow-hidden",
                 isActive 
@@ -110,7 +137,8 @@ export function Sidebar() {
           </Button>
         </div>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 }
 

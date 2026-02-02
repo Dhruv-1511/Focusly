@@ -32,22 +32,22 @@ export default function RewardsPage() {
   };
 
   return (
-    <div className="p-8 lg:p-12 max-w-7xl mx-auto">
+    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2 text-primary">Hall of Achievement</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-primary">Hall of Achievement</h1>
         <p className="text-muted-foreground">Gamify your education. Earn XP, rank up, and unlock your potential.</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-12">
            {/* Progress Section */}
-           <section className="bg-card rounded-lg border shadow-sm p-8 md:p-12 relative overflow-hidden">
+           <section className="bg-card rounded-lg border shadow-sm p-6 sm:p-12 relative overflow-hidden">
               <div className="flex flex-col md:flex-row justify-between md:items-end gap-8 mb-12">
                  <div>
                     <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Current Progress</div>
-                    <div className="flex items-baseline gap-2">
-                       <span className="text-7xl font-bold tracking-tighter">Level 15</span>
-                       <span className="text-xl font-bold text-primary">Professional Student</span>
+                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
+                       <span className="text-5xl sm:text-7xl font-bold tracking-tighter">Level 15</span>
+                       <span className="text-lg sm:text-xl font-bold text-primary">Professional Student</span>
                     </div>
                  </div>
                  <div className="text-right">

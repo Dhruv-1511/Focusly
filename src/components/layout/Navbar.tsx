@@ -7,7 +7,11 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+interface NavbarProps {
+  onToggleSidebar?: () => void;
+}
+
+export function Navbar({ onToggleSidebar }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
 
   const [isDark, setIsDark] = useState(false);
@@ -106,7 +110,7 @@ export function Navbar() {
             NEW SESSION
           </Button>
           
-          <Button variant="ghost" size="icon" className="md:hidden">
+          <Button variant="ghost" size="icon" className="lg:hidden" onClick={onToggleSidebar}>
             <Menu className="h-6 w-6" />
           </Button>
         </div>
