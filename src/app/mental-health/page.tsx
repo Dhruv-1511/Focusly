@@ -30,7 +30,7 @@ export default function MentalHealthPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-1.5 mb-8 text-xs font-black tracking-[0.2em] text-blue-600 uppercase bg-blue-50 rounded-full border border-blue-100">
+            <span className="inline-block px-4 py-1.5 mb-8 text-xs font-black tracking-[0.2em] text-blue-600 uppercase bg-blue-50 rounded-lg border border-blue-100">
               Wellness & Balance
             </span>
             <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 text-foreground leading-[0.9]">
@@ -52,7 +52,7 @@ export default function MentalHealthPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="glass rounded-[48px] p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center"
+              className="glass rounded-lg p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center"
             >
                <div className="flex-1">
                   <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight">Weekly Mood Check</h2>
@@ -67,9 +67,9 @@ export default function MentalHealthPage() {
                      <MoodButton emoji="🤯" label="Burned Out" color="text-red-500" />
                   </div>
                </div>
-               <div className="w-full md:w-64 aspect-square bg-muted/30 rounded-[32px] border flex flex-col items-center justify-center p-8 text-center shadow-inner relative overflow-hidden group">
+               <div className="w-full md:w-64 aspect-square bg-muted/30 rounded-lg border flex flex-col items-center justify-center p-8 text-center shadow-inner relative overflow-hidden group">
                   <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="h-24 w-24 rounded-full bg-secondary text-white flex items-center justify-center text-4xl mb-6 shadow-2xl shadow-secondary/30 border-8 border-white group-hover:scale-110 transition-transform duration-500">
+                  <div className="h-24 w-24 rounded-lg bg-secondary text-white flex items-center justify-center text-4xl mb-6 shadow-2xl shadow-secondary/30 border-8 border-white group-hover:scale-110 transition-transform duration-500">
                      😊
                   </div>
                   <div className="text-xs font-black mb-1 uppercase tracking-[0.2em] text-primary relative z-10">Current State</div>
@@ -82,10 +82,10 @@ export default function MentalHealthPage() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-destructive text-destructive-foreground rounded-[48px] p-12 md:p-16 shadow-[0_40px_80px_-15px_rgba(239,68,68,0.3)] relative overflow-hidden group"
+              className="bg-destructive text-destructive-foreground rounded-lg p-12 md:p-16 shadow-[0_40px_80px_-15px_rgba(239,68,68,0.3)] relative overflow-hidden group"
             >
                <div className="relative z-10 flex flex-col lg:flex-row gap-10 items-center">
-                  <div className="h-28 w-28 rounded-[32px] bg-white/10 backdrop-blur-md flex items-center justify-center flex-shrink-0 animate-pulse border border-white/20">
+                  <div className="h-28 w-28 rounded-lg bg-white/10 backdrop-blur-md flex items-center justify-center flex-shrink-0 animate-pulse border border-white/20">
                      <AlertTriangle className="h-14 w-14" />
                   </div>
                   <div className="flex-1 text-center lg:text-left">
@@ -96,10 +96,10 @@ export default function MentalHealthPage() {
                         We recommend a 24h digital detox to restore your mental clarity.
                      </p>
                      <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
-                        <Button size="xl" className="h-16 px-10 bg-white text-destructive hover:bg-white/95 font-black text-lg rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95" onClick={() => console.log("Light plan activated")}>
+                        <Button size="xl" className="h-16 px-10 bg-white text-destructive hover:bg-white/95 font-black text-lg rounded-lg shadow-2xl transition-all hover:scale-105 active:scale-95" onClick={() => console.log("Light plan activated")}>
                           ACTIVATE LIGHT PLAN 🍃
                         </Button>
-                        <Button size="xl" variant="ghost" className="text-white hover:bg-white/10 font-black tracking-widest text-xs uppercase rounded-2xl" onClick={() => console.log("Burnout alert dismissed")}>
+                        <Button size="xl" variant="ghost" className="text-white hover:bg-white/10 font-black tracking-widest text-xs uppercase rounded-lg" onClick={() => console.log("Burnout alert dismissed")}>
                           Dismiss Alert
                         </Button>
                      </div>
@@ -131,14 +131,14 @@ export default function MentalHealthPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="glass rounded-[40px] p-10 shadow-2xl relative overflow-hidden group"
+              className="glass rounded-lg p-10 shadow-2xl relative overflow-hidden group"
             >
-               <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
+               <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-lg -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
                <h3 className="text-2xl font-black mb-6 flex items-center gap-3 relative z-10">
                   <Sparkles className="h-6 w-6 text-orange-500" /> Anxiety SOS
                </h3>
                <p className="text-muted-foreground text-lg font-medium mb-10 leading-relaxed relative z-10">Feeling overwhelmed? Push for a 2-minute science-backed calm-down sequence.</p>
-               <Button size="xl" className="w-full h-20 bg-orange-500 text-white hover:bg-orange-600 rounded-3xl shadow-2xl shadow-orange-500/30 group relative z-10 font-black text-xl" onClick={handleSOS}>
+               <Button size="xl" className="w-full h-20 bg-orange-500 text-white hover:bg-orange-600 rounded-lg shadow-2xl shadow-orange-500/30 group relative z-10 font-black text-xl" onClick={handleSOS}>
                   LAUNCH SOS MODE <Zap className="ml-3 h-6 w-6 group-hover:fill-white transition-all animate-pulse" />
                </Button>
             </motion.div>
@@ -149,7 +149,7 @@ export default function MentalHealthPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-foreground text-background rounded-[40px] p-12 relative overflow-hidden group cursor-pointer shadow-2xl" 
+              className="bg-foreground text-background rounded-lg p-12 relative overflow-hidden group cursor-pointer shadow-2xl" 
               onClick={() => console.log("New affirmation generated")}
             >
                <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
@@ -169,9 +169,9 @@ export default function MentalHealthPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="glass rounded-[40px] p-12 border-dashed border-4 flex flex-col items-center text-center group"
+              className="glass rounded-lg p-12 border-dashed border-4 flex flex-col items-center text-center group"
             >
-               <div className="h-20 w-20 rounded-full bg-muted flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-inner">
+               <div className="h-20 w-20 rounded-lg bg-muted flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-inner">
                  <Moon className="h-10 w-10 text-muted-foreground" />
                </div>
                <div className="text-2xl font-black mb-2 tracking-tight">Sleep Tracking</div>
@@ -188,10 +188,10 @@ function MoodButton({ emoji, label, color }: { emoji: string; label: string; col
   return (
     <Button 
       variant="ghost" 
-      className="flex flex-col items-center gap-4 h-auto p-4 group hover:bg-white rounded-[24px] transition-all shadow-none hover:shadow-xl"
+      className="flex flex-col items-center gap-4 h-auto p-4 group hover:bg-white rounded-lg transition-all shadow-none hover:shadow-xl"
       onClick={() => console.log(`Mood selected: ${label}`)}
     >
-       <div className="h-20 w-20 rounded-[20px] bg-muted/30 border border-transparent group-hover:border-border flex items-center justify-center text-4xl group-hover:scale-110 group-hover:bg-white transition-all shadow-sm">
+       <div className="h-20 w-20 rounded-lg bg-muted/30 border border-transparent group-hover:border-border flex items-center justify-center text-4xl group-hover:scale-110 group-hover:bg-white transition-all shadow-sm">
           {emoji}
        </div>
        <span className={cn("text-[10px] uppercase font-black tracking-[0.2em] transition-colors", color)}>{label}</span>
@@ -203,11 +203,11 @@ function RelaxationCard({ icon: Icon, title, desc, color }: any) {
   return (
     <motion.div 
       whileHover={{ y: -10 }}
-      className="glass p-12 rounded-[48px] border-2 shadow-sm hover:border-primary transition-all cursor-pointer group hover:shadow-2xl relative overflow-hidden"
+      className="glass p-12 rounded-lg border-2 shadow-sm hover:border-primary transition-all cursor-pointer group hover:shadow-2xl relative overflow-hidden"
       onClick={() => console.log(`Opening guide: ${title}`)}
     >
-       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-       <div className={`${color} h-16 w-16 rounded-[20px] flex items-center justify-center text-white mb-10 group-hover:scale-110 transition-transform shadow-2xl relative z-10`}>
+       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-lg -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
+       <div className={`${color} h-16 w-16 rounded-lg flex items-center justify-center text-white mb-10 group-hover:scale-110 transition-transform shadow-2xl relative z-10`}>
           <Icon className="h-8 w-8" />
        </div>
        <h3 className="text-3xl font-black mb-4 tracking-tight relative z-10">{title}</h3>
@@ -218,3 +218,6 @@ function RelaxationCard({ icon: Icon, title, desc, color }: any) {
     </motion.div>
   );
 }
+
+
+

@@ -41,7 +41,7 @@ export default function ToolsPage() {
           <h1 className="text-4xl font-bold mb-2">Learning Tools</h1>
           <p className="text-muted-foreground">Supercharge your memory and organize your knowledge.</p>
         </div>
-        <div className="flex bg-muted/50 p-1.5 rounded-2xl border gap-2 self-start">
+        <div className="flex bg-muted/50 p-1.5 rounded-lg border gap-2 self-start">
            <Button 
              variant={toolMode === "revision" ? "secondary" : "ghost"}
              size="sm"
@@ -72,14 +72,14 @@ export default function ToolsPage() {
                     exit={{ opacity: 0, x: 20 }}
                     className="space-y-8"
                  >
-                    <div className="bg-card rounded-3xl border shadow-sm p-8 md:p-12">
+                    <div className="bg-card rounded-lg border shadow-sm p-8 md:p-12">
                        <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
                           <Clock className="h-6 w-6 text-primary" /> Spaced Repetition Queue
                        </h2>
                        <div className="space-y-4">
                           {revisionTopics.map((topic, i) => (
-                             <div key={i} className="flex items-center gap-6 p-6 rounded-2xl bg-muted/20 border border-transparent hover:border-border transition-all group">
-                                <div className="h-14 w-14 rounded-xl bg-card border shadow-sm flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                             <div key={i} className="flex items-center gap-6 p-6 rounded-lg bg-muted/20 border border-transparent hover:border-border transition-all group">
+                                <div className="h-14 w-14 rounded-lg bg-card border shadow-sm flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                    <BookOpen className="h-7 w-7" />
                                 </div>
                                 <div className="flex-1">
@@ -123,8 +123,8 @@ export default function ToolsPage() {
                   exit={{ opacity: 0, x: -20 }}
                   className="space-y-8"
                 >
-                   <div className="bg-card rounded-3xl border-2 border-dashed border-primary/20 p-12 md:p-20 flex flex-col items-center justify-center text-center shadow-inner">
-                      <div className="h-24 w-24 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-8 animate-bounce">
+                   <div className="bg-card rounded-lg border-2 border-dashed border-primary/20 p-12 md:p-20 flex flex-col items-center justify-center text-center shadow-inner">
+                      <div className="h-24 w-24 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-8 animate-bounce">
                          <Upload className="h-10 w-10" />
                       </div>
                       <h2 className="text-3xl font-bold mb-4">AI Note Transformer</h2>
@@ -142,7 +142,7 @@ export default function ToolsPage() {
                               <span>PROCESSING QUANTUM_PHYSICS.PDF</span>
                               <span>75%</span>
                            </div>
-                           <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                           <div className="h-2 w-full bg-muted rounded-lg overflow-hidden">
                               <motion.div initial={{ width: 0 }} animate={{ width: "75%" }} className="h-full bg-primary" />
                            </div>
                         </div>
@@ -161,7 +161,7 @@ export default function ToolsPage() {
 
         <div className="space-y-8">
            {/* Progress Widget */}
-           <div className="bg-primary rounded-3xl p-8 shadow-xl text-primary-foreground relative overflow-hidden">
+           <div className="bg-primary rounded-lg p-8 shadow-xl text-primary-foreground relative overflow-hidden">
               <h3 className="text-xl font-bold mb-6">Memory Strength</h3>
               <div className="flex items-center gap-6 mb-8">
                  <div className="text-6xl font-bold tracking-tighter">84%</div>
@@ -172,7 +172,7 @@ export default function ToolsPage() {
                     <span>Active Topics</span>
                     <span>12</span>
                  </div>
-                 <div className="h-2 w-full bg-white/20 rounded-full overflow-hidden">
+                 <div className="h-2 w-full bg-white/20 rounded-lg overflow-hidden">
                     <div className="h-full bg-white w-3/4" />
                  </div>
               </div>
@@ -183,7 +183,7 @@ export default function ToolsPage() {
            </div>
 
            {/* Tip Card */}
-           <div className="bg-card rounded-2xl border p-8 shadow-sm">
+           <div className="bg-card rounded-lg border p-8 shadow-sm">
               <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Scientific Fact</h3>
               <p className="text-lg font-bold leading-tight mb-4">"Recalling information from memory is 3x more effective than re-reading it."</p>
               <p className="text-xs text-muted-foreground">— The Power of Retrieval Practice</p>
@@ -196,8 +196,8 @@ export default function ToolsPage() {
 
 function ToolFeatureCard({ icon: Icon, title, desc, color }: any) {
   return (
-    <div className="bg-card p-8 rounded-2xl border shadow-sm hover:border-primary transition-all group">
-       <div className={`${color} h-12 w-12 rounded-2xl mb-6 bg-current/10 flex items-center justify-center group-hover:scale-110 transition-transform`}>
+    <div className="bg-card p-8 rounded-lg border shadow-sm hover:border-primary transition-all group">
+       <div className={`${color} h-12 w-12 rounded-lg mb-6 bg-current/10 flex items-center justify-center group-hover:scale-110 transition-transform`}>
           <Icon className="h-6 w-6" />
        </div>
        <h3 className="text-xl font-bold mb-3">{title}</h3>
@@ -209,16 +209,19 @@ function ToolFeatureCard({ icon: Icon, title, desc, color }: any) {
 function NoteConvertCard({ icon: Icon, title }: any) {
   return (
     <div 
-      className="bg-card border p-6 rounded-2xl text-center hover:border-primary transition-all cursor-pointer group shadow-sm hover:shadow-lg"
+      className="bg-card border p-6 rounded-lg text-center hover:border-primary transition-all cursor-pointer group shadow-sm hover:shadow-lg"
       onClick={() => console.log(`Triggering ${title}`)}
     >
-       <div className="h-12 w-12 rounded-xl bg-muted mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+       <div className="h-12 w-12 rounded-lg bg-muted mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/10 group-hover:text-primary transition-colors">
           <Icon className="h-6 w-6" />
        </div>
        <div className="text-sm font-bold">{title}</div>
     </div>
   );
 }
+
+
+
 
 
 

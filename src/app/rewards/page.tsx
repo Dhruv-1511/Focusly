@@ -41,7 +41,7 @@ export default function RewardsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-12">
            {/* Progress Section */}
-           <section className="bg-card rounded-3xl border shadow-sm p-8 md:p-12 relative overflow-hidden">
+           <section className="bg-card rounded-lg border shadow-sm p-8 md:p-12 relative overflow-hidden">
               <div className="flex flex-col md:flex-row justify-between md:items-end gap-8 mb-12">
                  <div>
                     <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Current Progress</div>
@@ -55,11 +55,11 @@ export default function RewardsPage() {
                     <div className="text-2xl font-bold text-primary">450 / 3000 XP</div>
                  </div>
               </div>
-              <div className="h-4 w-full bg-muted rounded-full relative mb-12 overflow-hidden shadow-inner">
+              <div className="h-4 w-full bg-muted rounded-lg relative mb-12 overflow-hidden shadow-inner">
                  <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: "15%" }}
-                    className="absolute inset-y-0 left-0 bg-primary shadow-lg shadow-primary/40 rounded-full" 
+                    className="absolute inset-y-0 left-0 bg-primary shadow-lg shadow-primary/40 rounded-lg" 
                  />
               </div>
 
@@ -78,7 +78,7 @@ export default function RewardsPage() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                  {badges.map((badge, i) => (
-                   <div key={i} className={`p-8 rounded-2xl border transition-all group relative overflow-hidden ${badge.locked ? 'bg-muted/30 grayscale opacity-60' : 'bg-card hover:shadow-xl hover:border-primary cursor-pointer'}`}>
+                   <div key={i} className={`p-8 rounded-lg border transition-all group relative overflow-hidden ${badge.locked ? 'bg-muted/30 grayscale opacity-60' : 'bg-card hover:shadow-xl hover:border-primary cursor-pointer'}`}>
                       <div className="text-5xl mb-6 relative z-10 transition-transform group-hover:scale-110">{badge.icon}</div>
                       <h3 className="text-lg font-bold mb-2 relative z-10">{badge.name}</h3>
                       <p className="text-xs text-muted-foreground font-medium relative z-10">{badge.desc}</p>
@@ -88,7 +88,7 @@ export default function RewardsPage() {
                         </div>
                       )}
                       {!badge.locked && (
-                         <div className="absolute -bottom-8 -right-8 h-24 w-24 bg-primary/5 rounded-full group-hover:scale-150 transition-transform" />
+                         <div className="absolute -bottom-8 -right-8 h-24 w-24 bg-primary/5 rounded-lg group-hover:scale-150 transition-transform" />
                       )}
                    </div>
                  ))}
@@ -98,7 +98,7 @@ export default function RewardsPage() {
 
         <div className="space-y-8">
            {/* Daily Challenges */}
-           <div className="bg-foreground text-background rounded-3xl p-8 shadow-xl">
+           <div className="bg-foreground text-background rounded-lg p-8 shadow-xl">
               <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
                  <Star className="h-5 w-5 text-yellow-400" /> Daily Challenges
               </h3>
@@ -118,21 +118,21 @@ export default function RewardsPage() {
            </div>
 
            {/* Leaderboard Snippet */}
-           <div className="bg-card rounded-2xl border p-8 shadow-sm">
+           <div className="bg-card rounded-lg border p-8 shadow-sm">
               <h3 className="text-xl font-bold mb-6">Top Academy Rank</h3>
               <div className="space-y-4 mb-6">
                  <LeaderItem rank={1} name="Kevin S." xp="125,450" />
                  <LeaderItem rank={2} name="Sarah L." xp="98,200" />
                  <LeaderItem rank={3} name="YOU" xp="2,450" active />
               </div>
-              <Button variant="outline" className="w-full rounded-xl flex items-center gap-2 font-bold" onClick={() => console.log("Opening full leaderboard")}>
+              <Button variant="outline" className="w-full rounded-lg flex items-center gap-2 font-bold" onClick={() => console.log("Opening full leaderboard")}>
                  View Full Leaderboard <ArrowRight className="h-4 w-4" />
               </Button>
            </div>
 
            {/* Prize Box */}
            <div 
-             className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl p-8 text-white relative overflow-hidden group cursor-pointer"
+             className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg p-8 text-white relative overflow-hidden group cursor-pointer"
              onClick={() => alert("Keep solving problems to reach Level 20!")}
            >
               <Crown className="h-10 w-10 mb-4" />
@@ -162,15 +162,15 @@ function StatItem({ label, value, icon: Icon, color }: any) {
 
 function Challenge({ title, xp, progress, completed }: any) {
   return (
-    <div className="p-4 bg-white/5 rounded-2xl border border-white/10 group hover:border-white/30 transition-all">
+    <div className="p-4 bg-white/5 rounded-lg border border-white/10 group hover:border-white/30 transition-all">
        <div className="flex justify-between items-center mb-2">
           <div className="text-sm font-bold flex items-center gap-2">
-             {completed ? <CheckCircle2 className="h-4 w-4 text-secondary" /> : <div className="h-4 w-4 rounded-full border border-white/20" />}
+             {completed ? <CheckCircle2 className="h-4 w-4 text-secondary" /> : <div className="h-4 w-4 rounded-lg border border-white/20" />}
              {title}
           </div>
           <div className="text-xs font-bold text-primary">{xp} XP</div>
        </div>
-       <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+       <div className="h-1.5 w-full bg-white/10 rounded-lg overflow-hidden">
           <div className={`h-full bg-primary transition-all duration-1000`} style={{ width: `${progress}%` }} />
        </div>
     </div>
@@ -179,7 +179,7 @@ function Challenge({ title, xp, progress, completed }: any) {
 
 function LeaderItem({ rank, name, xp, active }: any) {
   return (
-    <div className={`flex items-center justify-between p-3 rounded-xl border transition-all ${active ? 'bg-primary/10 border-primary text-primary shadow-sm' : 'bg-muted/30 border-transparent'}`}>
+    <div className={`flex items-center justify-between p-3 rounded-lg border transition-all ${active ? 'bg-primary/10 border-primary text-primary shadow-sm' : 'bg-muted/30 border-transparent'}`}>
        <div className="flex items-center gap-3">
           <span className="text-xs font-bold text-muted-foreground w-4">{rank}</span>
           <span className="text-sm font-bold">{name}</span>
@@ -188,6 +188,9 @@ function LeaderItem({ rank, name, xp, active }: any) {
     </div>
   );
 }
+
+
+
 
 
 

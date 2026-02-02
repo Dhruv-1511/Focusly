@@ -68,14 +68,14 @@ export default function FocusPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 flex-1">
         <div className="lg:col-span-2 flex flex-col">
-          <section className="bg-card rounded-3xl border p-12 md:p-20 flex-1 flex flex-col items-center justify-center relative shadow-xl overflow-hidden group">
+          <section className="bg-card rounded-lg border p-12 md:p-20 flex-1 flex flex-col items-center justify-center relative shadow-xl overflow-hidden group">
              {/* Background Pulse */}
              {isActive && (
                <motion.div 
                  initial={{ opacity: 0, scale: 0.8 }}
                  animate={{ opacity: 1, scale: 1.2 }}
                  transition={{ repeat: Infinity, duration: 4, repeatType: "reverse" }}
-                 className="absolute inset-0 bg-primary/5 rounded-full pointer-events-none" 
+                 className="absolute inset-0 bg-primary/5 rounded-lg pointer-events-none" 
                />
              )}
 
@@ -83,14 +83,14 @@ export default function FocusPage() {
                 <Button 
                    variant={mode === "Focus" ? "secondary" : "ghost"}
                    onClick={() => setTimerMode("Focus", 25)}
-                   className="rounded-full px-6 font-bold"
+                   className="rounded-lg px-6 font-bold"
                 >
                    Deep Work
                 </Button>
                 <Button 
                    variant={mode === "Break" ? "secondary" : "ghost"}
                    onClick={() => setTimerMode("Break", 5)}
-                   className="rounded-full px-6 font-bold"
+                   className="rounded-lg px-6 font-bold"
                 >
                    Short Break
                 </Button>
@@ -114,7 +114,7 @@ export default function FocusPage() {
                    onClick={resetTimer}
                    size="xl"
                    variant="outline"
-                   className="w-14 h-14 p-0 rounded-xl border-2"
+                   className="w-14 h-14 p-0 rounded-lg border-2"
                 >
                    <RotateCcw className="h-6 w-6" />
                 </Button>
@@ -124,7 +124,7 @@ export default function FocusPage() {
                 <div className="flex items-center gap-2">
                    <BellOff className="h-4 w-4" /> Notifications Off
                 </div>
-                <div className="h-1 w-1 rounded-full bg-muted-foreground" />
+                <div className="h-1 w-1 rounded-lg bg-muted-foreground" />
                 <div className="flex items-center gap-2">
                    <ShieldAlert className="h-4 w-4 text-orange-500" /> Site Blocker Active
                 </div>
@@ -134,7 +134,7 @@ export default function FocusPage() {
 
         <div className="space-y-8">
            {/* Ambient Station */}
-           <div className="bg-card rounded-2xl border p-8 shadow-sm">
+           <div className="bg-card rounded-lg border p-8 shadow-sm">
               <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                  <Music className="h-5 w-5 text-primary" /> Ambient Sound
               </h3>
@@ -149,14 +149,14 @@ export default function FocusPage() {
                     <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Volume</span>
                     <span className="text-xs font-bold">45%</span>
                  </div>
-                 <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+                 <div className="h-2 w-full bg-muted rounded-lg overflow-hidden">
                     <div className="h-full bg-primary w-[45%]" />
                  </div>
               </div>
            </div>
 
            {/* Stats Widget */}
-           <div className="bg-primary rounded-2xl p-8 text-primary-foreground relative overflow-hidden">
+           <div className="bg-primary rounded-lg p-8 text-primary-foreground relative overflow-hidden">
               <div className="relative z-10">
                 <h3 className="text-xl font-bold mb-6">Session Stats</h3>
                 <div className="space-y-6">
@@ -193,7 +193,7 @@ function AmbientTrack({ icon: Icon, name, active = false }: any) {
     <Button 
       variant={active ? "secondary" : "ghost"}
       className={cn(
-        "w-full flex items-center justify-start gap-4 p-4 h-auto rounded-xl border transition-all",
+        "w-full flex items-center justify-start gap-4 p-4 h-auto rounded-lg border transition-all",
         active ? "border-primary bg-primary/10" : "bg-muted/30 border-transparent"
       )}
     >
@@ -204,7 +204,7 @@ function AmbientTrack({ icon: Icon, name, active = false }: any) {
           <Icon className="h-5 w-5" />
        </div>
        <span className="font-bold text-sm">{name}</span>
-       {active && <div className="ml-auto h-2 w-2 rounded-full bg-primary animate-pulse" />}
+       {active && <div className="ml-auto h-2 w-2 rounded-lg bg-primary animate-pulse" />}
     </Button>
   );
 }
@@ -212,6 +212,9 @@ function AmbientTrack({ icon: Icon, name, active = false }: any) {
 function cn(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+
+
 
 
 

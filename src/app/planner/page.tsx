@@ -37,7 +37,7 @@ export default function PlannerPage() {
         <p className="text-muted-foreground">Stop worrying about 'what' to study. Just follow the plan.</p>
       </header>
 
-      <div className="bg-card rounded-3xl border shadow-sm p-8 md:p-12">
+      <div className="bg-card rounded-lg border shadow-sm p-8 md:p-12">
         <AnimatePresence mode="wait">
           {step === 1 && (
             <motion.div 
@@ -47,12 +47,12 @@ export default function PlannerPage() {
               exit={{ opacity: 0, scale: 0.95 }}
             >
               <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
-                 <span className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">1</span>
+                 <span className="h-8 w-8 rounded-lg bg-primary text-white flex items-center justify-center text-sm">1</span>
                  What subjects are you focusing on?
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 {subjects.map((sub, i) => (
-                  <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-muted/50 border group">
+                  <div key={i} className="flex items-center gap-3 p-4 rounded-lg bg-muted/50 border group">
                     <span className="font-bold flex-1">{sub}</span>
                     <Button 
                       variant="ghost" 
@@ -67,7 +67,7 @@ export default function PlannerPage() {
                 <Button 
                   variant="outline"
                   onClick={() => setSubjects([...subjects, "New Subject"])}
-                  className="h-auto py-4 rounded-xl border-2 border-dashed border-muted text-muted-foreground hover:border-primary hover:text-primary transition-all font-bold text-sm bg-transparent"
+                  className="h-auto py-4 rounded-lg border-2 border-dashed border-muted text-muted-foreground hover:border-primary hover:text-primary transition-all font-bold text-sm bg-transparent"
                 >
                   <Plus className="h-4 w-4" /> Add Subject
                 </Button>
@@ -86,18 +86,18 @@ export default function PlannerPage() {
               exit={{ opacity: 0, scale: 0.95 }}
             >
                <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
-                 <span className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center text-sm">2</span>
+                 <span className="h-8 w-8 rounded-lg bg-primary text-white flex items-center justify-center text-sm">2</span>
                  Exam details & Time availability
               </h2>
               <div className="space-y-6 mb-12">
                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                        <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Exam Date</label>
-                       <input type="date" className="w-full h-14 px-4 rounded-xl border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold" defaultValue="2026-06-15" />
+                       <input type="date" className="w-full h-14 px-4 rounded-lg border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold" defaultValue="2026-06-15" />
                     </div>
                     <div>
                        <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Daily Study Hours</label>
-                       <select className="w-full h-14 px-4 rounded-xl border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold">
+                       <select className="w-full h-14 px-4 rounded-lg border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold">
                           <option>2 Hours</option>
                           <option selected>4 Hours</option>
                           <option>6 Hours</option>
@@ -109,7 +109,7 @@ export default function PlannerPage() {
                     <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 block">Weak Topics (One per line)</label>
                     <textarea 
                       placeholder="Calculus (Derivatives)&#10;Quantum Physics&#10;Organic Chemistry"
-                      className="w-full h-32 p-4 rounded-xl border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold resize-none"
+                      className="w-full h-32 p-4 rounded-lg border bg-muted/20 outline-none focus:ring-2 focus:ring-primary font-bold resize-none"
                     ></textarea>
                  </div>
               </div>
@@ -163,7 +163,7 @@ export default function PlannerPage() {
                           <Milestone label="EXAM DAY" date="June 15th" type="Event" />
                        </div>
                      </section>
-                     <div className="p-8 bg-primary rounded-2xl text-primary-foreground">
+                     <div className="p-8 bg-primary rounded-lg text-primary-foreground">
                         <h4 className="font-bold mb-4 flex items-center gap-2">
                            <Sparkles className="h-5 w-5" /> AI Strategy Tips
                         </h4>
@@ -185,9 +185,9 @@ export default function PlannerPage() {
 
 function PlanItem({ time, task, color }: any) {
   return (
-    <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/30 border border-transparent hover:border-border transition-all group">
+    <div className="flex items-center gap-4 p-4 rounded-lg bg-muted/30 border border-transparent hover:border-border transition-all group">
        <div className="text-xs font-bold text-muted-foreground w-16">{time}</div>
-       <div className={`h-2 w-2 rounded-full ${color}`} />
+       <div className={`h-2 w-2 rounded-lg ${color}`} />
        <div className="font-bold flex-1">{task}</div>
        <Button size="icon" variant="ghost" className="h-8 w-8 opacity-0 group-hover:opacity-100"><Plus className="h-4 w-4" /></Button>
     </div>
@@ -205,4 +205,7 @@ function Milestone({ label, date, type }: any) {
     </div>
   );
 }
+
+
+
 

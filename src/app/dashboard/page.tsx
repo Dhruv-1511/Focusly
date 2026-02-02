@@ -61,7 +61,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Schedule */}
         <div className="lg:col-span-2 space-y-8">
-          <section className="bg-card rounded-2xl border p-8 shadow-sm">
+          <section className="bg-card rounded-lg border p-8 shadow-sm">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-bold flex items-center gap-2">
                 <Brain className="h-6 w-6 text-primary" /> Today's Focus Plan
@@ -73,12 +73,12 @@ export default function Dashboard() {
             
             <div className="space-y-4">
               {MOCK_STUDY_PLAN.daily.map((task, i) => (
-                <div key={i} className="group flex items-center gap-6 p-4 rounded-2xl hover:bg-muted/50 transition-colors border border-transparent hover:border-border">
+                <div key={i} className="group flex items-center gap-6 p-4 rounded-lg hover:bg-muted/50 transition-colors border border-transparent hover:border-border">
                   <div className="text-sm font-bold text-muted-foreground w-20">{task.time}</div>
                   <div className="flex-1">
                     <div className="font-bold flex items-center gap-2">
                        {task.task}
-                       {i === 0 && <span className="text-[10px] bg-secondary/10 text-secondary px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">Success</span>}
+                       {i === 0 && <span className="text-[10px] bg-secondary/10 text-secondary px-2 py-0.5 rounded-lg uppercase tracking-widest font-bold">Success</span>}
                     </div>
                     <div className="text-xs text-muted-foreground uppercase font-bold tracking-widest">Type: {task.type}</div>
                   </div>
@@ -105,7 +105,7 @@ export default function Dashboard() {
         {/* Sidebar widgets */}
         <div className="space-y-8">
            {/* Mental Health Widget */}
-           <div className="bg-primary rounded-2xl p-8 text-primary-foreground relative overflow-hidden">
+           <div className="bg-primary rounded-lg p-8 text-primary-foreground relative overflow-hidden">
               <h3 className="text-xl font-bold mb-4">Mood System</h3>
               <p className="text-sm text-primary-foreground/80 mb-6 font-medium leading-relaxed">How are you feeling today? We adjust your plan based on your energy levels.</p>
               <div className="flex gap-2 mb-8">
@@ -115,19 +115,19 @@ export default function Dashboard() {
                    </Button>
                  ))}
               </div>
-              <div className="p-4 bg-white/10 rounded-2xl border border-white/10">
+              <div className="p-4 bg-white/10 rounded-lg border border-white/10">
                  <div className="text-[10px] uppercase font-bold tracking-widest mb-1">AI Recommendation</div>
                  <div className="text-sm font-bold">"You seem consistent. Today is a high-load day. Keep water nearby!"</div>
               </div>
            </div>
 
            {/* Badges / Rewards */}
-           <div className="bg-card rounded-2xl border p-8">
+           <div className="bg-card rounded-lg border p-8">
               <h3 className="text-xl font-bold mb-6">Recent Rewards</h3>
               <div className="flex flex-wrap gap-4">
                  {MOCK_STUDY_PLAN.stats.badges.map(badge => (
                    <div key={badge} className="group relative">
-                      <div className="h-14 w-14 rounded-full bg-muted flex items-center justify-center text-2xl grayscale group-hover:grayscale-0 transition-all cursor-help border shadow-sm">
+                      <div className="h-14 w-14 rounded-lg bg-muted flex items-center justify-center text-2xl grayscale group-hover:grayscale-0 transition-all cursor-help border shadow-sm">
                         🏅
                       </div>
                       <div className="absolute top-16 left-1/2 -translate-x-1/2 bg-foreground text-background text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap font-bold transition-opacity">
@@ -150,9 +150,9 @@ function StatCard({ icon: Icon, label, value, sub, color }: any) {
   return (
     <motion.div 
       whileHover={{ y: -5 }}
-      className="bg-card p-6 rounded-2xl border shadow-sm flex flex-col justify-between"
+      className="bg-card p-6 rounded-lg border shadow-sm flex flex-col justify-between"
     >
-      <div className={`${color} bg-current/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-4`}>
+      <div className={`${color} bg-current/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
         <Icon className="h-6 w-6" />
       </div>
       <div>
@@ -166,8 +166,8 @@ function StatCard({ icon: Icon, label, value, sub, color }: any) {
 
 function ToolCard({ title, desc, icon: Icon, color }: any) {
   return (
-    <div className="bg-card border p-6 rounded-2xl flex items-center gap-4 hover:shadow-md transition-all cursor-pointer group">
-      <div className={`${color} h-12 w-12 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
+    <div className="bg-card border p-6 rounded-lg flex items-center gap-4 hover:shadow-md transition-all cursor-pointer group">
+      <div className={`${color} h-12 w-12 rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
         <Icon className="h-6 w-6" />
       </div>
       <div>
@@ -177,6 +177,9 @@ function ToolCard({ title, desc, icon: Icon, color }: any) {
     </div>
   );
 }
+
+
+
 
 
 

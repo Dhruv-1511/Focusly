@@ -36,9 +36,9 @@
   --card-foreground: #020617;
   --popover: #FFFFFF;
   --popover-foreground: #020617;
-  --primary: #2563EB;
+  --primary: #1E40AF;
   --primary-foreground: #FFFFFF;
-  --secondary: #10B981;
+  --secondary: #059669;
   --secondary-foreground: #FFFFFF;
   --muted: #F1F5F9;
   --muted-foreground: #64748B;
@@ -49,7 +49,7 @@
   --border: #E2E8F0;
   --input: #E2E8F0;
   --ring: #2563EB;
-  --radius: 0.6rem;
+  --radius: 0.5rem;
 }
 
 .dark {
@@ -87,7 +87,7 @@
 
 @layer utilities {
   .glass {
-    @apply bg-background/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)];
+    @apply bg-background/80 backdrop-blur-md border border-white/20 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)];
   }
   
   .glass-dark {

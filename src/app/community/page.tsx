@@ -74,7 +74,7 @@ export default function CommunityPage() {
            <input 
               type="text"
               placeholder="Search community questions..."
-              className="w-full h-14 pl-14 pr-4 rounded-xl border bg-card text-lg focus:ring-2 focus:ring-primary outline-none font-medium transition-all"
+              className="w-full h-14 pl-14 pr-4 rounded-lg border bg-card text-lg focus:ring-2 focus:ring-primary outline-none font-medium transition-all"
            />
         </div>
         <Button 
@@ -95,11 +95,11 @@ export default function CommunityPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-card p-8 rounded-2xl border hover:border-primary transition-all group shadow-sm cursor-pointer"
+                className="bg-card p-8 rounded-lg border hover:border-primary transition-all group shadow-sm cursor-pointer"
              >
                 <div className="flex items-center gap-2 mb-4">
                    {q.tags.map(tag => (
-                      <span key={tag} className="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-muted rounded-full">
+                      <span key={tag} className="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-muted rounded-lg">
                          {tag}
                       </span>
                    ))}
@@ -108,7 +108,7 @@ export default function CommunityPage() {
                 <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors">{q.title}</h3>
                 <div className="flex items-center justify-between pt-6 border-t font-bold text-sm">
                    <div className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-full bg-secondary text-white flex items-center justify-center text-xs">{q.user[0]}</div>
+                      <div className="h-8 w-8 rounded-lg bg-secondary text-white flex items-center justify-center text-xs">{q.user[0]}</div>
                       <span className="text-muted-foreground">{q.user}</span>
                    </div>
                    <div className="flex items-center gap-4">
@@ -128,7 +128,7 @@ export default function CommunityPage() {
 
         <div className="space-y-8">
            {/* Study Groups */}
-           <div className="bg-card rounded-2xl border p-8 shadow-sm">
+           <div className="bg-card rounded-lg border p-8 shadow-sm">
               <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                  <Users className="h-5 w-5 text-primary" /> Study Groups
               </h3>
@@ -136,12 +136,12 @@ export default function CommunityPage() {
                  {studyGroups.map(group => (
                    <div 
                     key={group.name} 
-                    className="p-4 rounded-xl bg-muted/30 border border-transparent hover:border-border cursor-pointer group transition-all"
+                    className="p-4 rounded-lg bg-muted/30 border border-transparent hover:border-border cursor-pointer group transition-all"
                     onClick={() => console.log(`Joining group: ${group.name}`)}
                    >
                       <div className="flex items-center justify-between mb-2">
                         <div className="font-bold text-sm group-hover:text-primary transition-colors">{group.name}</div>
-                        {group.active && <div className="h-2 w-2 rounded-full bg-secondary animate-pulse" />}
+                        {group.active && <div className="h-2 w-2 rounded-lg bg-secondary animate-pulse" />}
                       </div>
                       <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{group.members} Members</div>
                    </div>
@@ -151,7 +151,7 @@ export default function CommunityPage() {
            </div>
 
            {/* Guidelines */}
-           <div className="p-8 bg-foreground text-background rounded-3xl relative overflow-hidden shadow-xl">
+           <div className="p-8 bg-foreground text-background rounded-lg relative overflow-hidden shadow-xl">
               <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
                  <HelpCircle className="h-5 w-5 text-secondary" /> Support Rules
               </h3>
@@ -160,7 +160,7 @@ export default function CommunityPage() {
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Explain your thought process, don't just ask for answers.</li>
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Earn 50 XP for every helpful answer you give.</li>
               </ul>
-              <div className="mt-8 p-5 bg-white/5 rounded-2xl border border-white/10">
+              <div className="mt-8 p-5 bg-white/5 rounded-lg border border-white/10">
                  <div className="text-[10px] font-bold uppercase tracking-widest mb-2 text-secondary">Community Reward</div>
                  <div className="text-xs font-bold leading-relaxed">Top contributor this month gets <span className="text-white">Premium Planner</span> for free.</div>
               </div>
@@ -170,6 +170,9 @@ export default function CommunityPage() {
     </div>
   );
 }
+
+
+
 
 
 

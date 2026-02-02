@@ -56,7 +56,7 @@ export function Sidebar() {
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all duration-300 group relative overflow-hidden",
+                "flex items-center gap-3 px-4 py-3 rounded-lg text-xs font-black uppercase tracking-widest transition-all duration-300 group relative overflow-hidden",
                 isActive 
                   ? "text-primary bg-primary/5 shadow-sm" 
                   : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
@@ -65,7 +65,7 @@ export function Sidebar() {
               {isActive && (
                 <motion.div
                   layoutId="sidebar-active"
-                  className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-full"
+                  className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-lg"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
@@ -80,10 +80,10 @@ export function Sidebar() {
       </nav>
 
       <div className="p-6 mt-auto space-y-4">
-        <div className="p-4 rounded-3xl bg-muted/30 border border-border/50 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-full -mr-8 -mt-8" />
+        <div className="p-4 rounded-lg bg-muted/30 border border-border/50 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-lg -mr-8 -mt-8" />
           <div className="flex items-center gap-3 mb-4">
-            <div className="h-10 w-10 rounded-2xl bg-secondary text-white flex items-center justify-center font-black shadow-lg shadow-secondary/20 border-2 border-white">
+            <div className="h-10 w-10 rounded-lg bg-secondary text-white flex items-center justify-center font-black shadow-lg shadow-secondary/20 border-2 border-white">
               AR
             </div>
             <div className="flex-1 overflow-hidden">
@@ -91,21 +91,21 @@ export function Sidebar() {
               <div className="text-[10px] text-muted-foreground font-black uppercase tracking-widest">Level 15 Pro</div>
             </div>
           </div>
-          <div className="w-full bg-muted h-1.5 rounded-full overflow-hidden mb-2">
+          <div className="w-full bg-muted h-1.5 rounded-lg overflow-hidden mb-2">
             <motion.div 
               initial={{ width: 0 }}
               animate={{ width: "65%" }}
-              className="bg-primary h-full rounded-full"
+              className="bg-primary h-full rounded-lg"
             />
           </div>
           <div className="text-[9px] text-muted-foreground font-black uppercase tracking-widest text-right">650 / 1000 XP</div>
         </div>
         
         <div className="flex items-center gap-2">
-          <Button variant="ghost" className="flex-1 justify-start gap-3 rounded-2xl font-black text-xs uppercase tracking-widest text-muted-foreground hover:text-destructive hover:bg-destructive/5 transition-all">
+          <Button variant="ghost" className="flex-1 justify-start gap-3 rounded-lg font-black text-xs uppercase tracking-widest text-muted-foreground hover:text-destructive hover:bg-destructive/5 transition-all">
             <LogOut className="h-4 w-4" /> Sign Out
           </Button>
-          <Button variant="ghost" size="icon" className="h-10 w-10 rounded-2xl text-muted-foreground hover:rotate-90 transition-transform">
+          <Button variant="ghost" size="icon" className="h-10 w-10 rounded-lg text-muted-foreground hover:rotate-90 transition-transform">
             <Settings className="h-5 w-5" />
           </Button>
         </div>
@@ -113,3 +113,6 @@ export function Sidebar() {
     </aside>
   );
 }
+
+
+

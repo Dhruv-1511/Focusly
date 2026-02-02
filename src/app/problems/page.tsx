@@ -29,7 +29,7 @@ export default function ProblemsPage() {
           <input 
             type="text"
             placeholder="Search your problem (e.g. 'can't focus', 'late for exam')"
-            className="w-full h-16 pl-16 pr-6 rounded-2xl border bg-card text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-sm font-medium"
+            className="w-full h-16 pl-16 pr-6 rounded-lg border bg-card text-lg focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-sm font-medium"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -53,9 +53,9 @@ export default function ProblemsPage() {
                   transition={{ duration: 0.2 }}
                 >
                   <Link href={`/problems/${problem.id}`}>
-                    <div className="group h-full p-8 bg-card rounded-2xl border hover:border-primary transition-all duration-300 shadow-sm hover:shadow-xl cursor-pointer flex flex-col justify-between">
+                    <div className="group h-full p-8 bg-card rounded-lg border hover:border-primary transition-all duration-300 shadow-sm hover:shadow-xl cursor-pointer flex flex-col justify-between">
                       <div>
-                        <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-6">
+                        <div className="h-14 w-14 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-6">
                            <Zap className="h-7 w-7" />
                         </div>
                         <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{problem.title}</h3>
@@ -72,7 +72,7 @@ export default function ProblemsPage() {
               ))}
             </AnimatePresence>
             {filtered.length === 0 && (
-              <div className="col-span-full p-12 text-center bg-muted/30 rounded-3xl border border-dashed flex flex-col items-center">
+              <div className="col-span-full p-12 text-center bg-muted/30 rounded-lg border border-dashed flex flex-col items-center">
                  <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                  <h3 className="text-xl font-bold mb-2">Problem not found?</h3>
                  <p className="text-muted-foreground mb-8 max-w-sm">Our AI is learning. Tell us what's wrong and we'll generate a custom 5-step fix for you.</p>
@@ -91,7 +91,7 @@ export default function ProblemsPage() {
 
         <div className="space-y-8">
            {/* Problem of the Day */}
-           <div className="bg-foreground text-background rounded-3xl p-8 shadow-2xl relative overflow-hidden group">
+           <div className="bg-foreground text-background rounded-lg p-8 shadow-2xl relative overflow-hidden group">
               <div className="relative z-10">
                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-4">
                   <FlameIcon /> Problem of the Day
@@ -107,7 +107,7 @@ export default function ProblemsPage() {
            </div>
 
            {/* Quick Tips */}
-           <div className="bg-card rounded-2xl border p-8">
+           <div className="bg-card rounded-lg border p-8">
               <h3 className="text-xl font-bold mb-6">Quick Action Tips</h3>
               <div className="space-y-6">
                  <Tip 
@@ -137,7 +137,7 @@ function FlameIcon() {
 function Tip({ title, desc }: any) {
   return (
     <div className="flex gap-4">
-       <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+       <div className="h-2 w-2 rounded-lg bg-primary mt-2 flex-shrink-0" />
        <div>
           <div className="text-sm font-bold">{title}</div>
           <div className="text-xs text-muted-foreground">{desc}</div>
@@ -145,6 +145,9 @@ function Tip({ title, desc }: any) {
     </div>
   );
 }
+
+
+
 
 
 
