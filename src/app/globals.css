@@ -4,7 +4,6 @@
   --font-sans: var(--font-montserrat);
   --font-mono: var(--font-montserrat);
 
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
@@ -24,109 +23,149 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-}
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
 
-:root {
-  --background: #FFFFFF;
-  --foreground: #020617;
-  --card: #FFFFFF;
-  --card-foreground: #020617;
-  --popover: #FFFFFF;
-  --popover-foreground: #020617;
-  --primary: #1E40AF;
-  --primary-foreground: #FFFFFF;
-  --secondary: #059669;
-  --secondary-foreground: #FFFFFF;
-  --muted: #F1F5F9;
-  --muted-foreground: #64748B;
-  --accent: #F1F5F9;
-  --accent-foreground: #0F172A;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #2563EB;
-  --radius: 0.5rem;
-}
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
 
-.dark {
-  --background: #0F172A;
-  --foreground: #F8FAFC;
-  --card: #1E293B;
-  --card-foreground: #F8FAFC;
-  --popover: #1E293B;
-  --popover-foreground: #F8FAFC;
-  --primary: #38BDF8;
-  --primary-foreground: #0F172A;
-  --secondary: #22C55E;
-  --secondary-foreground: #0F172A;
-  --muted: #334155;
-  --muted-foreground: #94A3B8;
-  --accent: #2563EB;
-  --accent-foreground: #FFFFFF;
-  --border: #334155;
-  --input: #334155;
-  --ring: #38BDF8;
-}
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/20;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
-  }
-}
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.5rem;
 
-@layer utilities {
-  .glass {
-    @apply bg-background/80 backdrop-blur-md border border-white/20 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)];
-  }
-  
-  .glass-dark {
-    @apply bg-slate-950/40 backdrop-blur-xl border border-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
-  }
-
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-secondary to-primary bg-[length:200%_auto];
-    animation: gradient 8s linear infinite;
-  }
-
-  .animate-gradient {
-    animation: gradient 8s linear infinite;
-  }
+  --animate-gradient: gradient 8s linear infinite;
 
   @keyframes gradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
+}
 
-  .blur-load {
-    filter: blur(20px);
-    transition: filter 0.5s ease;
+:root {
+  /* Enforce Dark Theme as the only theme */
+  --background: #020203;
+  --foreground: #ffffff;
+  --card: #0a0a0b;
+  --card-foreground: #ffffff;
+  --popover: #0a0a0b;
+  --popover-foreground: #ffffff;
+  --primary: #818cf8;
+  --primary-foreground: #020203;
+  --secondary: #34d399;
+  --secondary-foreground: #020203;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --accent: #18181b;
+  --accent-foreground: #ffffff;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #ffffff;
+  --border: #1a1a1c;
+  --input: #1a1a1c;
+  --ring: #818cf8;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark; /* Force browser elements to dark */
+    background: var(--background);
   }
-
-  .blur-load.loaded {
-    filter: blur(0);
+  * {
+    @apply border-border outline-ring/50 transition-colors duration-200;
+    letter-spacing: normal !important;
   }
-
-  .hero-mesh {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary-foreground font-sans;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
     background-image: 
-      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+      radial-gradient(circle at 50% -20%, var(--primary) / 0.15, transparent 70%),
+      radial-gradient(circle at 0% 100%, var(--secondary) / 0.05, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-black text-white;
+    letter-spacing: normal !important;
+  }
+
+  button, [role="button"], a {
+    @apply cursor-pointer;
   }
 }
 
-.dark .glass {
-  @apply bg-slate-950/60 border-white/5;
-}
+@layer utilities {
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.05;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
 
+  .glow-border {
+    position: relative;
+    z-index: 0;
+  }
+  
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--primary));
+    background-size: 200% 200%;
+    animation: gradient 5s linear infinite;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0.2;
+  }
+
+  .glass {
+    @apply bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-secondary to-primary bg-size-[200%_auto] animate-gradient;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    grid-auto-rows: minmax(180px, auto);
+  }
+
+  .bento-item-large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  @media (max-width: 768px) {
+    .bento-item-large {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+  }
+
+  .mask-radial {
+    mask-image: radial-gradient(circle, black, transparent);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+}

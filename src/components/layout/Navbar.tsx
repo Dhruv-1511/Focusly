@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Github, Zap, Menu, Bell, Sun, Moon } from "lucide-react";
+import { Zap, Menu, Bell, Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -13,25 +13,7 @@ interface NavbarProps {
 
 export function Navbar({ onToggleSidebar }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
-
-  const [isDark, setIsDark] = useState(false);
   
-  useEffect(() => {
-    // Check initial theme
-    const isDarkTheme = document.documentElement.classList.contains("dark");
-    setIsDark(isDarkTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    const newDark = !isDark;
-    setIsDark(newDark);
-    if (newDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -45,79 +27,84 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={cn(
-        "sticky top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "py-3 bg-background/70 backdrop-blur-xl border-b shadow-sm" : "py-5 bg-transparent"
+        "sticky top-6 z-40 transition-all duration-500 w-full px-4 mb-[-64px]",
+        scrolled ? "top-4" : "top-6"
       )}
     >
-      <div className="container mx-auto px-4 sm:px-8 flex h-14 items-center justify-between">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 group">
-            <motion.div 
-              whileHover={{ rotate: 15 }}
-              className="h-10 w-10 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform duration-300"
-            >
-              <Zap className="h-6 w-6 text-white fill-current" />
-            </motion.div>
-            <span className="text-2xl font-black tracking-tighter hover:text-primary transition-colors">
-              STUDY<span className="text-primary">HUB</span>
-            </span>
+      <div className={cn(
+        "glass rounded-2xl px-6 py-3 flex items-center justify-between overflow-hidden relative mx-auto max-w-7xl",
+        scrolled && "bg-white/20"
+      )}>
+        {/* Animated Background Accent */}
+        <motion.div 
+          animate={{ 
+            x: [0, 100, 0],
+            opacity: [0.05, 0.1, 0.05]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-linear-to-r from-primary/10 via-transparent to-secondary/10 -z-10"
+        />
+
+        <div className="flex items-center gap-10">
+          <Link href="/" className="flex lg:hidden items-center gap-3 active:scale-95 transition-transform">
+            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/40">
+              <Zap className="h-5 w-5 text-white fill-current" />
+            </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm font-bold uppercase tracking-widest text-muted-foreground">
-            <Link href="/problems" className="hover:text-primary transition-colors">Problems</Link>
-            <Link href="/planner" className="hover:text-primary transition-colors">Planner</Link>
-            <Link href="/tools" className="hover:text-primary transition-colors">Tools</Link>
+          <nav className="hidden lg:flex items-center gap-8 text-white">
+            {["Problems", "Planner", "Tools", "Community"].map((item) => (
+              <Link 
+                key={item}
+                href={`/${item.toLowerCase()}`} 
+                className="text-xs font-black uppercase text-muted-foreground hover:text-white transition-colors relative group"
+              >
+                {item}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+              </Link>
+            ))}
           </nav>
         </div>
 
         <div className="flex items-center gap-3">
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-orange-500/10 text-orange-600 border border-orange-200 font-black text-[10px] uppercase tracking-wider"
-          >
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
+          <div className="hidden md:flex items-center bg-white/5 rounded-xl px-3 py-1.5 border border-white/10 group focus-within:border-primary/50 transition-all">
+            <Search className="h-3.5 w-3.5 text-muted-foreground group-focus-within:text-primary" />
+            <input 
+              type="text" 
+              placeholder="Quick search..." 
+              className="bg-transparent border-none outline-none text-[10px] font-black uppercase px-2 w-24 focus:w-40 transition-all text-white placeholder:text-muted-foreground/50"
+            />
+            <span className="text-[9px] font-black opacity-30 px-1.5 py-0.5 rounded border border-white/10 text-white">⌘K</span>
+          </div>
+
+          <div className="flex items-center gap-1">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-9 w-9 rounded-xl hover:bg-white/5 text-white"
             >
-              🔥
-            </motion.span> 
-            12 Day Streak
-          </motion.div>
+              <Bell className="h-4 w-4" />
+              <span className="absolute top-2.5 right-2.5 h-1.5 w-1.5 bg-primary rounded-full shadow-[0_0_8px_var(--primary)]" />
+            </Button>
+          </div>
+
+          <Button 
+            size="sm" 
+            className="hidden sm:flex h-9 px-5 font-black text-[10px] uppercase rounded-xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all bg-primary text-white hover:bg-primary/90"
+          >
+            GET STARTED
+          </Button>
           
           <Button 
             variant="ghost" 
             size="icon" 
-            className="rounded-lg hover:bg-primary/10 hover:text-primary transition-colors"
-            onClick={toggleTheme}
+            className="lg:hidden rounded-xl h-9 w-9 text-white" 
+            onClick={onToggleSidebar}
           >
-            {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-
-          <Button variant="ghost" size="icon" className="rounded-lg hover:bg-primary/10 hover:text-primary transition-colors">
-            <Bell className="h-5 w-5" />
-          </Button>
-
-          <Button variant="ghost" size="icon" className="rounded-lg hover:bg-slate-900 hover:text-white transition-colors" asChild>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-              <Github className="h-5 w-5" />
-            </a>
-          </Button>
-
-          <div className="h-8 w-px bg-border mx-2 hidden sm:block" />
-
-          <Button size="sm" className="hidden sm:flex font-black rounded-lg shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
-            NEW SESSION
-          </Button>
-          
-          <Button variant="ghost" size="icon" className="lg:hidden" onClick={onToggleSidebar}>
-            <Menu className="h-6 w-6" />
+            <Menu className="h-5 w-5" />
           </Button>
         </div>
       </div>
     </motion.header>
   );
 }
-
-
-
