@@ -15,6 +15,8 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 const revisionTopics = [
   { name: "Newton's Laws", subject: "Physics", interval: "Due in 2h", status: "Urgent" },
@@ -25,12 +27,23 @@ const revisionTopics = [
 export default function ToolsPage() {
   const [isUploading, setIsUploading] = useState(false);
   const [toolMode, setToolMode] = useState("revision"); // revision, notes
+  const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
+    open: false,
+    title: "",
+    message: "",
+    type: "info"
+  });
 
   const handleUpload = () => {
     setIsUploading(true);
     setTimeout(() => {
       setIsUploading(false);
-      alert("Note processing complete! AI Summaries and Flashcards generated.");
+      setModal({
+        open: true,
+        title: "Processing Complete",
+        message: "Note processing complete! AI Summaries and Flashcards have been generated for your study session.",
+        type: "success"
+      });
     }, 3000);
   };
 
@@ -38,8 +51,8 @@ export default function ToolsPage() {
     <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-bold mb-2">Learning Tools</h1>
-          <p className="text-muted-foreground">Supercharge your memory and organize your knowledge.</p>
+          <h1 className="text-4xl font-black mb-2 uppercase italic tracking-tight">Focusly Tools</h1>
+          <p className="text-muted-foreground font-medium uppercase text-[10px] tracking-widest">Supercharge your memory and organize your knowledge.</p>
         </div>
         <div className="flex bg-muted/50 p-1.5 rounded-lg border gap-2 self-start">
            <Button 
@@ -87,14 +100,19 @@ export default function ToolsPage() {
                                    <div className="text-lg font-bold">{topic.name}</div>
                                    <div className={`text-xs font-bold mt-1 ${topic.status === 'Urgent' ? 'text-destructive' : 'text-primary'}`}>{topic.interval}</div>
                                 </div>
-                                <Button 
-                                  variant={topic.status === 'Urgent' ? 'accent' : 'secondary'}
-                                  size="lg"
-                                  className="w-full sm:w-auto px-8 font-bold"
-                                  onClick={() => console.log(`Starting revision for ${topic.name}`)}
-                                >
-                                   Revise Now
-                                </Button>
+                                 <Button 
+                                   variant={topic.status === 'Urgent' ? 'accent' : 'secondary'}
+                                   size="lg"
+                                   className="w-full sm:w-auto px-8 font-black uppercase text-[10px] tracking-widest"
+                                   onClick={() => setModal({
+                                     open: true,
+                                     title: "Revision Started",
+                                     message: `Loading spaced-repetition session for "${topic.name}". Get ready to engage active recall!`,
+                                     type: "info"
+                                   })}
+                                 >
+                                    Revise Now
+                                 </Button>
                              </div>
                           ))}
                        </div>
@@ -123,18 +141,30 @@ export default function ToolsPage() {
                   exit={{ opacity: 0, x: -20 }}
                   className="space-y-8"
                 >
-                   <div className="bg-card rounded-lg border-2 border-dashed border-primary/20 p-12 md:p-20 flex flex-col items-center justify-center text-center shadow-inner">
-                      <div className="h-24 w-24 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-8 animate-bounce">
-                         <Upload className="h-10 w-10" />
-                      </div>
+                    <div className="bg-card rounded-lg border-2 border-dashed border-primary/20 p-12 md:p-20 flex flex-col items-center justify-center text-center shadow-inner relative overflow-hidden">
+                       <div className="flex items-center justify-center mb-8 animate-pulse">
+                          <Image 
+                            src="/logo.png" 
+                            alt="Focusly AI Logo" 
+                            width={128}
+                            height={128}
+                            priority
+                            className="object-contain drop-shadow-[0_0_15px_rgba(129,140,248,0.5)]"
+                          />
+                       </div>
                       <h2 className="text-3xl font-bold mb-4">AI Note Transformer</h2>
                       <p className="text-muted-foreground text-lg mb-10 max-w-md mx-auto">Upload your PDFs or raw notes. Our AI will automatically generate summaries, flashcards, and quizzes.</p>
                       
                       <div className="flex flex-col sm:flex-row gap-4 w-full max-w-lg">
-                         <Button onClick={handleUpload} disabled={isUploading} size="xl" className="flex-1 shadow-lg shadow-primary/20">
-                            {isUploading ? "Reading Text..." : "Choose File"}
-                         </Button>
-                         <Button variant="outline" size="xl" className="px-8 font-bold" onClick={() => console.log("Paste content triggered")}>Paste Content</Button>
+                          <Button onClick={handleUpload} disabled={isUploading} size="xl" className="flex-1 shadow-lg shadow-primary/20 font-black">
+                             {isUploading ? "Reading Text..." : "Choose File"}
+                          </Button>
+                          <Button variant="outline" size="xl" className="px-8 font-black uppercase text-[10px] tracking-widest" onClick={() => setModal({
+                            open: true,
+                            title: "Input Ready",
+                            message: "Paste your content here to let Focusly AI summarize and analyze it immediately.",
+                            type: "info"
+                          })}>Paste Content</Button>
                       </div>
                       {isUploading && (
                         <div className="mt-12 w-full max-w-md">
@@ -150,9 +180,9 @@ export default function ToolsPage() {
                    </div>
 
                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                      <NoteConvertCard icon={Eye} title="AI Summary" />
-                      <NoteConvertCard icon={Sparkles} title="Auto Flashcards" />
-                      <NoteConvertCard icon={Settings2} title="Quiz Generator" />
+                      <NoteConvertCard icon={Eye} title="AI Summary" setModal={setModal} />
+                      <NoteConvertCard icon={Sparkles} title="Auto Flashcards" setModal={setModal} />
+                      <NoteConvertCard icon={Settings2} title="Quiz Generator" setModal={setModal} />
                    </div>
                 </motion.section>
               )}
@@ -190,6 +220,13 @@ export default function ToolsPage() {
            </div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }
@@ -206,11 +243,16 @@ function ToolFeatureCard({ icon: Icon, title, desc, color }: any) {
   );
 }
 
-function NoteConvertCard({ icon: Icon, title }: any) {
+function NoteConvertCard({ icon: Icon, title, setModal }: any) {
   return (
     <div 
       className="bg-card border p-6 rounded-lg text-center hover:border-primary transition-all cursor-pointer group shadow-sm hover:shadow-lg"
-      onClick={() => console.log(`Triggering ${title}`)}
+      onClick={() => setModal({
+        open: true,
+        title: `${title} Engine`,
+        message: `Activating ${title} mode. Focusly will now process your active documents.`,
+        type: "info"
+      })}
     >
        <div className="h-12 w-12 rounded-lg bg-muted mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/10 group-hover:text-primary transition-colors">
           <Icon className="h-6 w-6" />

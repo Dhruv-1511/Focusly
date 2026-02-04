@@ -6,6 +6,7 @@ import { Zap, Menu, Bell, Search } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface NavbarProps {
   onToggleSidebar?: () => void;
@@ -47,8 +48,15 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
 
         <div className="flex items-center gap-10">
           <Link href="/" className="flex lg:hidden items-center gap-3 active:scale-95 transition-transform">
-            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/40">
-              <Zap className="h-5 w-5 text-white fill-current" />
+            <div className="flex items-center justify-center">
+              <Image 
+                src="/logo.png" 
+                alt="Focusly Logo" 
+                width={40}
+                height={40}
+                priority
+                className="object-contain drop-shadow-[0_0_8px_rgba(129,140,248,0.5)]"
+              />
             </div>
           </Link>
 

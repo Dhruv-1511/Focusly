@@ -1,6 +1,6 @@
-# StudyHub Project Documentation
+# Focusly Project Documentation
 
-Welcome to StudyHub, the OS for high-performance students. This document outlines the core functionality of each page in the application.
+Welcome to Focusly, the OS for high-performance students. This document outlines the core functionality of each page in the application.
 
 ## 🚀 Navigation & Page Roles
 

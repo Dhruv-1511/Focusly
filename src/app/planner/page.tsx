@@ -33,8 +33,8 @@ export default function PlannerPage() {
   return (
     <div className="p-4 sm:p-8 lg:p-12 max-w-5xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2">AI Study Planner</h1>
-        <p className="text-muted-foreground">Stop worrying about 'what' to study. Just follow the plan.</p>
+        <h1 className="text-4xl font-black mb-2 uppercase italic tracking-tight">Focusly Planner</h1>
+        <p className="text-muted-foreground font-medium uppercase text-[10px] tracking-widest">Stop worrying about 'what' to study. Just follow the plan.</p>
       </header>
 
       <div className="bg-card rounded-lg border shadow-sm p-6 sm:p-12">

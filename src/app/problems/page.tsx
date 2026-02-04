@@ -7,8 +7,16 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
+
 export default function ProblemsPage() {
   const [search, setSearch] = useState("");
+  const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
+    open: false,
+    title: "",
+    message: "",
+    type: "info"
+  });
 
   const filtered = PROBLEMS.filter(p => 
     p.title.toLowerCase().includes(search.toLowerCase()) || 
@@ -80,7 +88,12 @@ export default function ProblemsPage() {
                    variant="secondary" 
                    size="lg" 
                    className="font-bold px-8"
-                   onClick={() => console.log("Submitting new problem report")}
+                   onClick={() => setModal({
+                      open: true,
+                      title: "Report Submitted",
+                      message: "Our AI team has been notified. We'll generate a custom 5-step fix for this problem soon!",
+                      type: "success"
+                    })}
                  >
                    Submit New Problem
                  </Button>
@@ -91,13 +104,13 @@ export default function ProblemsPage() {
 
         <div className="space-y-8">
            {/* Problem of the Day */}
-           <div className="bg-foreground text-background rounded-lg p-8 shadow-2xl relative overflow-hidden group">
+           <div className="bg-white rounded-lg p-8 shadow-2xl relative overflow-hidden group border border-slate-200">
               <div className="relative z-10">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-4">
+                <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mb-4">
                   <FlameIcon /> Problem of the Day
                 </div>
-                <h3 className="text-2xl font-bold mb-6 leading-tight text-white">"Studying but not remembering anything?"</h3>
-                <Button size="xl" variant="secondary" className="w-full bg-white text-primary hover:bg-white/90" asChild>
+                <h3 className="text-2xl font-black mb-6 leading-tight text-slate-900 tracking-tight">"Studying but not remembering anything?"</h3>
+                <Button size="xl" className="w-full bg-slate-900 text-white hover:bg-slate-800" asChild>
                   <Link href="/problems/memory">Solve Today</Link>
                 </Button>
               </div>
@@ -126,6 +139,13 @@ export default function ProblemsPage() {
            </div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }

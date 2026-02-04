@@ -15,6 +15,8 @@ import {
   Filter
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 const questions = [
   { 
@@ -50,12 +52,19 @@ const studyGroups = [
 ];
 
 export default function CommunityPage() {
+  const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
+    open: false,
+    title: "",
+    message: "",
+    type: "info"
+  });
+
   return (
     <div className="p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-bold mb-2">Student Collective</h1>
-          <p className="text-muted-foreground">Collaborate with the collective student brain. Ask anything.</p>
+          <h1 className="text-4xl font-black mb-2 tracking-tight text-white uppercase italic">Focusly Collective</h1>
+          <p className="text-muted-foreground font-medium">Collaborate with the collective student brain. Ask anything.</p>
         </div>
         <Button 
           size="xl" 
@@ -136,8 +145,13 @@ export default function CommunityPage() {
                  {studyGroups.map(group => (
                    <div 
                     key={group.name} 
-                    className="p-4 rounded-lg bg-muted/30 border border-transparent hover:border-border cursor-pointer group transition-all"
-                    onClick={() => console.log(`Joining group: ${group.name}`)}
+                    className="p-4 rounded-lg bg-muted/30 border border-transparent hover:border-primary cursor-pointer group transition-all"
+                    onClick={() => setModal({
+                      open: true,
+                      title: "Group Joined",
+                      message: `You've joined ${group.name}. Start collaborating with your peers!`,
+                      type: "success"
+                    })}
                    >
                       <div className="flex items-center justify-between mb-2">
                         <div className="font-bold text-sm group-hover:text-primary transition-colors">{group.name}</div>
@@ -146,27 +160,39 @@ export default function CommunityPage() {
                       <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{group.members} Members</div>
                    </div>
                  ))}
-                 <Button variant="link" className="w-full text-primary font-bold" onClick={() => console.log("Discovering more groups")}>Discover more groups</Button>
+                  <Button variant="link" className="w-full text-primary font-black uppercase text-[10px] tracking-widest" onClick={() => setModal({
+                    open: true,
+                    title: "Coming Soon",
+                    message: "We're launching subject-specific hubs very soon. Stay tuned!",
+                    type: "info"
+                  })}>Discover more groups</Button>
               </div>
            </div>
 
            {/* Guidelines */}
-           <div className="p-8 bg-foreground text-background rounded-lg relative overflow-hidden shadow-xl">
-              <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
-                 <HelpCircle className="h-5 w-5 text-secondary" /> Support Rules
+           <div className="p-8 bg-card border rounded-lg relative overflow-hidden shadow-xl">
+              <h3 className="text-lg font-black mb-6 flex items-center gap-2 uppercase tracking-tight">
+                 <HelpCircle className="h-5 w-5 text-primary" /> Support Rules
               </h3>
-              <ul className="space-y-4 text-xs font-medium text-background/80">
+              <ul className="space-y-4 text-xs font-bold text-slate-600">
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> No judgment. Every struggle is valid.</li>
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Explain your thought process, don't just ask for answers.</li>
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Earn 50 XP for every helpful answer you give.</li>
               </ul>
-              <div className="mt-8 p-5 bg-background/5 rounded-lg border border-background/10">
-                 <div className="text-[10px] font-bold uppercase tracking-widest mb-2 text-secondary">Community Reward</div>
-                 <div className="text-xs font-bold leading-relaxed text-background">Top contributor this month gets <span className="text-primary font-black">Premium Planner</span> for free.</div>
+              <div className="mt-8 p-5 bg-slate-50 rounded-lg border border-slate-100">
+                 <div className="text-[10px] font-black uppercase tracking-widest mb-2 text-primary">Community Reward</div>
+                 <div className="text-xs font-black leading-relaxed text-slate-900">Top contributor this month gets <span className="text-primary italic">Premium Planner</span> for free.</div>
               </div>
            </div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }

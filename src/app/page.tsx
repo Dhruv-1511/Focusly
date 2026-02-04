@@ -19,11 +19,14 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
+import Image from "next/image";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 const PROBLEM_CHIPS = ["Focus Issues", "Memory Loss", "Procrastination", "Exam Anxiety", "Time Management"];
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -92,9 +95,9 @@ export default function Home() {
                 />
                 <Button 
                   className="absolute right-2 h-14 px-8 rounded-xl font-black shadow-xl bg-primary hover:bg-primary/90"
-                  asChild
+                  onClick={() => setModalOpen(true)}
                 >
-                  <Link href="/problems">SOLVE</Link>
+                  SOLVE
                 </Button>
               </div>
             </div>
@@ -105,10 +108,10 @@ export default function Home() {
       {/* Bento Showcase Section */}
       <section className="py-40 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="mb-24 text-center">
-            <h2 className="text-5xl md:text-7xl font-black mb-8">
-              THE <span className="text-primary italic">OS</span> FOR GENIUSES
+            <h2 className="text-5xl md:text-7xl font-black mb-8 uppercase italic tracking-tighter">
+              THE <span className="text-primary italic">OS</span> FOR FOCUS
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Modular systems that turn your workspace into a powerhouse.</p>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-medium">Focusly helps you turn your workspace into a high-performance powerhouse.</p>
         </div>
 
         <div className="bento-grid">
@@ -120,8 +123,15 @@ export default function Home() {
                <Brain className="h-96 w-96 text-primary" />
             </div>
             <div>
-               <div className="h-14 w-14 rounded-2xl bg-primary/20 border border-primary/20 flex items-center justify-center text-primary mb-10 shadow-[0_0_20px_rgba(var(--primary),0.2)]">
-                 <Zap className="h-7 w-7 fill-current" />
+               <div className="flex items-center justify-center mb-10">
+                  <Image 
+                    src="/logo.png" 
+                    alt="Focusly Logo" 
+                    width={80}
+                    height={80}
+                    priority
+                    className="object-contain drop-shadow-[0_0_15px_rgba(129,140,248,0.5)]"
+                  />
                </div>
                <h3 className="text-4xl md:text-6xl font-black mb-6 leading-tight text-white">Neural<br />Recall 3.0</h3>
                <p className="text-lg text-muted-foreground max-w-md">Scientifically proven intervals to lock knowledge into your long-term memory permanently.</p>
@@ -202,6 +212,13 @@ export default function Home() {
             </div>
          </motion.div>
       </section>
+      <FocuslyModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)}
+        title="AI Engine Ready"
+        message={`Searching for solutions to: "${searchQuery || "Focus Issues"}". Focusly is ready to solve your study obstacles.`}
+        type="info"
+      />
     </div>
   );
 }

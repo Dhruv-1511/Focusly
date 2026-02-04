@@ -62,8 +62,8 @@ export default function FocusPage() {
   return (
     <div className="p-8 lg:p-12 max-w-7xl mx-auto flex flex-col min-h-[calc(100vh-64px)]">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2">Focus Zone</h1>
-        <p className="text-muted-foreground">Destroy distractions. Enter deep work mode.</p>
+        <h1 className="text-4xl font-black mb-2 uppercase italic tracking-tight">Focusly Zone</h1>
+        <p className="text-muted-foreground font-medium uppercase text-[10px] tracking-widest">Destroy distractions. Enter deep work mode with Focusly.</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 flex-1">

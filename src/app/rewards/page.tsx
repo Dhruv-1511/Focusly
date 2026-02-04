@@ -15,6 +15,8 @@ import {
   CheckCircle2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 const badges = [
   { name: "Early Bird", desc: "Start 5 focus sessions before 8 AM", icon: "🌅", locked: false },
@@ -26,16 +28,27 @@ const badges = [
 ];
 
 export default function RewardsPage() {
+  const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
+    open: false,
+    title: "",
+    message: "",
+    type: "info"
+  });
+
   const handleResetChallenge = () => {
-    console.log("Challenges reset requested");
-    alert("New daily challenges will be available in 4h 22m!");
+    setModal({
+      open: true,
+      title: "Challenges Reset",
+      message: "New daily challenges will be available in 4h 22m! Keep pushing your limits.",
+      type: "info"
+    });
   };
 
   return (
     <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-primary">Hall of Achievement</h1>
-        <p className="text-muted-foreground">Gamify your education. Earn XP, rank up, and unlock your potential.</p>
+        <h1 className="text-4xl font-black mb-2 text-white italic uppercase tracking-tight">Focusly Achievements</h1>
+        <p className="text-muted-foreground font-medium uppercase text-[10px] tracking-widest">Gamify your education. Earn XP, rank up, and unlock your potential.</p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -97,53 +110,69 @@ export default function RewardsPage() {
         </div>
 
         <div className="space-y-8">
-           {/* Daily Challenges */}
-           <div className="bg-foreground text-background rounded-lg p-8 shadow-xl">
-              <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
-                 <Star className="h-5 w-5 text-yellow-400" /> Daily Challenges
-              </h3>
-              <div className="space-y-4">
-                 <Challenge title="Deep Diver" xp="+250" progress={75} />
-                 <Challenge title="Focus Master" xp="+150" progress={100} completed />
-                 <Challenge title="Late Night Revision" xp="+300" progress={0} />
-              </div>
-              <Button 
-                variant="secondary"
-                size="lg"
-                className="w-full mt-8 bg-white/10 hover:bg-white/20 text-white border border-white/10" 
-                onClick={handleResetChallenge}
-              >
-                 Reset in 4h 22m
-              </Button>
-           </div>
+            {/* Daily Challenges */}
+            <div className="bg-white border border-slate-200 text-slate-900 rounded-lg p-8 shadow-xl">
+               <h3 className="text-xl font-black mb-6 text-slate-900 flex items-center gap-2 uppercase tracking-tight">
+                  <Star className="h-5 w-5 text-yellow-500 fill-yellow-500" /> Daily Challenges
+               </h3>
+               <div className="space-y-4">
+                  <Challenge title="Deep Diver" xp="+250" progress={75} isLight />
+                  <Challenge title="Focus Master" xp="+150" progress={100} completed isLight />
+                  <Challenge title="Late Night Revision" xp="+300" progress={0} isLight />
+               </div>
+               <Button 
+                 size="lg"
+                 className="w-full mt-8 bg-slate-900 text-white hover:bg-slate-800 rounded-xl font-black" 
+                 onClick={handleResetChallenge}
+               >
+                  Reset in 4h 22m
+               </Button>
+            </div>
 
            {/* Leaderboard Snippet */}
-           <div className="bg-card rounded-lg border p-8 shadow-sm">
-              <h3 className="text-xl font-bold mb-6">Top Academy Rank</h3>
-              <div className="space-y-4 mb-6">
-                 <LeaderItem rank={1} name="Kevin S." xp="125,450" />
-                 <LeaderItem rank={2} name="Sarah L." xp="98,200" />
-                 <LeaderItem rank={3} name="YOU" xp="2,450" active />
-              </div>
-              <Button variant="outline" className="w-full rounded-lg flex items-center gap-2 font-bold" onClick={() => console.log("Opening full leaderboard")}>
-                 View Full Leaderboard <ArrowRight className="h-4 w-4" />
-              </Button>
-           </div>
+            <div className="bg-card rounded-lg border p-8 shadow-sm">
+               <h3 className="text-xl font-black mb-6 uppercase tracking-tight">Top Academy Rank</h3>
+               <div className="space-y-4 mb-6">
+                  <LeaderItem rank={1} name="Kevin S." xp="125,450" />
+                  <LeaderItem rank={2} name="Sarah L." xp="98,200" />
+                  <LeaderItem rank={3} name="YOU" xp="2,450" active />
+               </div>
+               <Button variant="outline" className="w-full rounded-xl flex items-center gap-2 font-black text-[10px] uppercase tracking-widest" onClick={() => setModal({
+                 open: true,
+                 title: "Full Leaderboard",
+                 message: "The global leaderboard is updating. You are currently in the top 5% of active students!",
+                 type: "info"
+               })}>
+                  View Full Leaderboard <ArrowRight className="h-4 w-4" />
+               </Button>
+            </div>
 
            {/* Prize Box */}
-           <div 
-             className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg p-8 text-white relative overflow-hidden group cursor-pointer"
-             onClick={() => alert("Keep solving problems to reach Level 20!")}
-           >
-              <Crown className="h-10 w-10 mb-4" />
-              <h3 className="text-xl font-bold mb-2">Mystery Reward Box</h3>
-              <p className="text-xs font-bold text-white/80">Available at Level 20</p>
-              <div className="absolute bottom-[-10px] right-[-10px] opacity-20 group-hover:scale-125 transition-transform">
-                 <Lock className="h-32 w-32" />
-              </div>
-           </div>
+            <div 
+              className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg p-8 text-white relative overflow-hidden group cursor-pointer shadow-xl shadow-orange-500/20"
+              onClick={() => setModal({
+                open: true,
+                title: "Locked Achievement",
+                message: "Mystery Reward Box unlocks at Level 20. Keep solving problems and maintaining your streak to claim it!",
+                type: "warning"
+              })}
+            >
+               <Crown className="h-10 w-10 mb-4 text-white fill-white" />
+               <h3 className="text-xl font-black mb-2 uppercase tracking-tight">Mystery Reward Box</h3>
+               <p className="text-xs font-black text-white/80 uppercase tracking-widest">Available at Level 20</p>
+               <div className="absolute bottom-[-10px] right-[-10px] opacity-20 group-hover:scale-125 transition-transform">
+                  <Lock className="h-32 w-32" />
+               </div>
+            </div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }
@@ -160,17 +189,17 @@ function StatItem({ label, value, icon: Icon, color }: any) {
   );
 }
 
-function Challenge({ title, xp, progress, completed }: any) {
+function Challenge({ title, xp, progress, completed, isLight }: any) {
   return (
-    <div className="p-4 bg-white/5 rounded-lg border border-white/10 group hover:border-white/30 transition-all">
+    <div className={`p-4 rounded-lg border transition-all ${isLight ? 'bg-slate-50 border-slate-100 group-hover:border-primary/30' : 'bg-white/5 border-white/10 group-hover:border-white/30'}`}>
        <div className="flex justify-between items-center mb-2">
-          <div className="text-sm font-bold flex items-center gap-2">
-             {completed ? <CheckCircle2 className="h-4 w-4 text-secondary" /> : <div className="h-4 w-4 rounded-lg border border-white/20" />}
+          <div className="text-sm font-black flex items-center gap-2">
+             {completed ? <CheckCircle2 className="h-4 w-4 text-secondary" /> : <div className={`h-4 w-4 rounded-lg border ${isLight ? 'border-slate-200' : 'border-white/20'}`} />}
              {title}
           </div>
-          <div className="text-xs font-bold text-primary">{xp} XP</div>
+          <div className="text-[10px] font-black text-primary uppercase tracking-widest">{xp} XP</div>
        </div>
-       <div className="h-1.5 w-full bg-white/10 rounded-lg overflow-hidden">
+       <div className={`h-1.5 w-full rounded-lg overflow-hidden ${isLight ? 'bg-slate-200/50' : 'bg-white/10'}`}>
           <div className={`h-full bg-primary transition-all duration-1000`} style={{ width: `${progress}%` }} />
        </div>
     </div>

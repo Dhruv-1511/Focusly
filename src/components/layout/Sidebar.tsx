@@ -21,6 +21,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { FocuslyModal } from "../ui/FocuslyModal";
+import { useState } from "react";
+import Image from "next/image";
 
 const menuItems = [
   { name: "Home", icon: Home, href: "/" },
@@ -41,6 +44,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
@@ -57,16 +61,23 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       </AnimatePresence>
 
       <aside className={cn(
-        "fixed left-6 top-6 bottom-6 w-[240px] glass rounded-[2rem] flex flex-col z-50 transition-all duration-500 lg:translate-x-0 border-white/20",
-        isOpen ? "translate-x-0" : "-translate-x-[200%] lg:translate-x-0"
+        "fixed left-6 top-6 bottom-6 w-[240px] glass rounded-[2rem] flex flex-col z-[70] transition-all duration-500 lg:translate-x-0 border-white/20",
+        isOpen ? "translate-x-0" : "-translate-x-[120%] lg:translate-x-0"
       )}>
         <div className="p-7 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group active:scale-95 transition-all" onClick={onClose}>
-            <div className="h-8 w-8 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(var(--primary),0.4)]">
-              <Zap className="h-4 w-4 text-white fill-current" />
+            <div className="flex items-center justify-center bg-transparent">
+              <Image 
+                src="/logo.png" 
+                alt="Focusly Logo" 
+                width={40}
+                height={40}
+                priority
+                className="object-cover bg-transparent"
+              />
             </div>
-            <span className="text-lg font-black text-white">
-              STUDY<span className="text-primary italic">HUB</span>
+            <span className="text-xl font-black text-white tracking-tighter">
+              FOCUS<span className="text-primary italic">LY</span>
             </span>
           </Link>
           <Button variant="ghost" size="icon" className="lg:hidden rounded-xl h-8 w-8 text-muted-foreground hover:text-white" onClick={onClose}>
@@ -106,7 +117,11 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       <div className="p-5 mt-auto space-y-4">
         <div className="flex items-center gap-2">
-          <Button variant="ghost" className="flex-1 h-9 justify-start gap-2.5 rounded-xl font-black text-[9px] uppercase text-muted-foreground hover:text-destructive hover:bg-destructive/10">
+          <Button 
+            variant="ghost" 
+            className="flex-1 h-9 justify-start gap-2.5 rounded-xl font-black text-[9px] uppercase text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+            onClick={() => setModalOpen(true)}
+          >
             <LogOut className="h-3.5 w-3.5" /> Sign Out
           </Button>
           <Button 
@@ -119,6 +134,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
       </div>
       </aside>
+
+      <FocuslyModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)}
+        title="Signing Out?"
+        message="Are you sure you want to end your focus session? Your progress is saved."
+        type="warning"
+      />
     </>
   );
 }

@@ -16,14 +16,23 @@ import {
   CheckCircle2
 } from"lucide-react";
 import { Button } from"@/components/ui/button";
+import { useState } from "react";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 import { MOCK_STUDY_PLAN } from"@/data/mock";
 
 export default function Dashboard() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
+  const handleMoodSelect = (emoji: string) => {
+    setModalMessage(`We've noted that you're feeling ${emoji} today. Focusly is adjusting your focus sessions to match your current energy levels.`);
+    setModalOpen(true);
+  };
   return (
     <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2">Student Dashboard</h1>
-        <p className="text-muted-foreground">Your growth tracked, your problems solved.</p>
+        <h1 className="text-4xl font-black mb-2 uppercase italic tracking-tight">Focusly Dashboard</h1>
+        <p className="text-muted-foreground font-medium uppercase text-[10px] tracking-widest">Your growth tracked, your problems solved.</p>
       </header>
 
       {/* Stats Grid */}
@@ -110,7 +119,12 @@ export default function Dashboard() {
               <p className="text-sm text-primary-foreground/80 mb-6 font-medium leading-relaxed">How are you feeling today? We adjust your plan based on your energy levels.</p>
               <div className="flex gap-2 mb-8 flex-wrap">
                  {['😊', '😐', '😔', '🤯'].map(emoji => (
-                   <Button key={emoji} variant="ghost" className="flex-1 min-w-[60px] h-12 bg-white/10 hover:bg-white/20 text-2xl transition-all shadow-inner border-none">
+                   <Button 
+                    key={emoji} 
+                    variant="ghost" 
+                    className="flex-1 min-w-[60px] h-12 bg-white/10 hover:bg-white/20 text-2xl transition-all shadow-inner border-none"
+                    onClick={() => handleMoodSelect(emoji)}
+                   >
                      {emoji}
                    </Button>
                  ))}
@@ -142,6 +156,13 @@ export default function Dashboard() {
            </div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)}
+        title="Mood Logged"
+        message={modalMessage}
+        type="info"
+      />
     </div>
   );
 }

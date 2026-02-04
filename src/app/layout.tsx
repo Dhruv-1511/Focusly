@@ -9,7 +9,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "StudyHub | Solve, Plan & Excel",
+  title: "Focusly | Solve, Plan & Excel",
   description: "The ultimate student-focused platform for guidance, structure, and progress tracking.",
 };
 
