@@ -155,14 +155,14 @@ export default function CommunityPage() {
               <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
                  <HelpCircle className="h-5 w-5 text-secondary" /> Support Rules
               </h3>
-              <ul className="space-y-4 text-xs font-medium text-muted-foreground">
+              <ul className="space-y-4 text-xs font-medium text-background/80">
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> No judgment. Every struggle is valid.</li>
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Explain your thought process, don't just ask for answers.</li>
                  <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Earn 50 XP for every helpful answer you give.</li>
               </ul>
-              <div className="mt-8 p-5 bg-white/5 rounded-lg border border-white/10">
+              <div className="mt-8 p-5 bg-background/5 rounded-lg border border-background/10">
                  <div className="text-[10px] font-bold uppercase tracking-widest mb-2 text-secondary">Community Reward</div>
-                 <div className="text-xs font-bold leading-relaxed">Top contributor this month gets <span className="text-white">Premium Planner</span> for free.</div>
+                 <div className="text-xs font-bold leading-relaxed text-background">Top contributor this month gets <span className="text-primary font-black">Premium Planner</span> for free.</div>
               </div>
            </div>
         </div>

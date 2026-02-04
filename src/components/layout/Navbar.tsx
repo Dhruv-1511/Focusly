@@ -27,7 +27,7 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={cn(
-        "sticky top-6 z-40 transition-all duration-500 w-full px-4 mb-[-64px]",
+        "sticky top-6 z-40 transition-all duration-500 w-full px-4",
         scrolled ? "top-4" : "top-6"
       )}
     >
@@ -81,18 +81,19 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="h-9 w-9 rounded-xl hover:bg-white/5 text-white"
+              className="h-9 w-9 rounded-xl hover:bg-white/5 text-white relative"
             >
               <Bell className="h-4 w-4" />
-              <span className="absolute top-2.5 right-2.5 h-1.5 w-1.5 bg-primary rounded-full shadow-[0_0_8px_var(--primary)]" />
+              <span className="absolute top-2 right-2 h-1.5 w-1.5 bg-primary rounded-full shadow-[0_0_8px_var(--primary)]" />
             </Button>
           </div>
 
           <Button 
             size="sm" 
+            asChild
             className="hidden sm:flex h-9 px-5 font-black text-[10px] uppercase rounded-xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all bg-primary text-white hover:bg-primary/90"
           >
-            GET STARTED
+            <Link href="/dashboard">GET STARTED</Link>
           </Button>
           
           <Button 

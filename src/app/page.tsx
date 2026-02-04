@@ -64,11 +64,11 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-24">
-            <Button size="xl" className="h-16 px-10 text-lg font-black rounded-2xl bg-white text-black hover:scale-105 active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.1)]">
-              GET STARTED NOW <ChevronRight className="ml-2 h-5 w-5" />
+            <Button size="xl" asChild className="h-16 px-10 text-lg font-black rounded-2xl bg-white text-black hover:scale-105 active:scale-95 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.1)]">
+              <Link href="/dashboard">GET STARTED NOW <ChevronRight className="ml-2 h-5 w-5" /></Link>
             </Button>
-            <Button size="xl" variant="outline" className="h-16 px-10 text-lg font-black rounded-2xl border-white/10 hover:bg-white/5 hover:scale-105 transition-all">
-              VIEW DEMO
+            <Button size="xl" variant="outline" asChild className="h-16 px-10 text-lg font-black rounded-2xl border-white/10 hover:bg-white/5 hover:scale-105 transition-all">
+              <Link href="/tools">VIEW DEMO</Link>
             </Button>
           </div>
 
@@ -92,9 +92,9 @@ export default function Home() {
                 />
                 <Button 
                   className="absolute right-2 h-14 px-8 rounded-xl font-black shadow-xl bg-primary hover:bg-primary/90"
-                  onClick={() => console.log("Searching...")}
+                  asChild
                 >
-                  SOLVE
+                  <Link href="/problems">SOLVE</Link>
                 </Button>
               </div>
             </div>
@@ -127,7 +127,9 @@ export default function Home() {
                <p className="text-lg text-muted-foreground max-w-md">Scientifically proven intervals to lock knowledge into your long-term memory permanently.</p>
             </div>
             <div className="flex items-center gap-4 mt-12 relative z-10">
-               <Button className="rounded-xl h-12 px-8 font-black text-sm bg-primary hover:bg-primary/90">LAUNCH ENGINE</Button>
+               <Button asChild className="rounded-xl h-12 px-8 font-black text-sm bg-primary hover:bg-primary/90">
+                 <Link href="/tools">LAUNCH ENGINE</Link>
+               </Button>
                <div className="flex -space-x-2">
                  {[1,2,3].map(i => (
                    <div key={i} className="h-8 w-8 rounded-full bg-muted border-2 border-background flex items-center justify-center font-black text-[8px] text-primary">HUB</div>
@@ -168,8 +170,8 @@ export default function Home() {
              <div className="h-10 w-10 rounded-xl bg-black/10 flex items-center justify-center">
                <Shield className="h-5 w-5" />
              </div>
-             <h3 className="text-2xl font-black mt-8 mb-4 tracking-tight">Focus Lock</h3>
-             <p className="text-xs font-medium opacity-60">Complete digital isolation for deep work sessions.</p>
+             <h3 className="text-2xl font-black mt-8 mb-4 tracking-tight text-black">Focus Lock</h3>
+             <p className="text-xs font-medium text-black/60">Complete digital isolation for deep work sessions.</p>
              <Link href="/focus" className="mt-8 h-12 w-full rounded-xl bg-black text-white flex items-center justify-center hover:scale-105 transition-all">
                 <ArrowRight className="h-5 w-5" />
              </Link>
@@ -188,8 +190,8 @@ export default function Home() {
             <h2 className="text-7xl md:text-[10rem] font-black leading-none mb-20 opacity-10 select-none">LIMITLESS.</h2>
             <div className="relative inline-block group">
                <div className="absolute -inset-4 bg-primary rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity" />
-               <Button size="xl" className="relative h-20 px-16 text-2xl font-black rounded-2xl shadow-2xl bg-primary text-white hover:scale-105 transition-all">
-                 JOIN 50K+ STUDENTS
+               <Button size="xl" asChild className="relative h-20 px-16 text-2xl font-black rounded-2xl shadow-2xl bg-primary text-white hover:scale-105 transition-all">
+                 <Link href="/dashboard">JOIN 50K+ STUDENTS</Link>
                </Button>
             </div>
             <div className="mt-20 flex items-center justify-center gap-10 opacity-20 grayscale hover:grayscale-0 transition-opacity">
