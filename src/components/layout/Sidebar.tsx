@@ -87,7 +87,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       
       <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto custom-scrollbar">
         {menuItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+          const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
           return (
             <Link
               key={item.name}

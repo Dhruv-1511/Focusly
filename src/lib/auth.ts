@@ -1,5 +1,5 @@
 import { NextAuthOptions } from "next-auth";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/lib/mongodb";
 import dbConnect from "@/lib/db";
@@ -27,10 +27,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("User not found");
         }
 
-        const isPasswordCorrect = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
+        const isPasswordCorrect = credentials.password === user.password;
 
         if (!isPasswordCorrect) {
           throw new Error("Invalid password");
