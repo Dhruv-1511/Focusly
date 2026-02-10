@@ -16,13 +16,33 @@ import {
   CheckCircle2
 } from"lucide-react";
 import { Button } from"@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
 import { MOCK_STUDY_PLAN } from"@/data/mock";
+import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
+  const { data: session } = useSession();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [studyPlan, setStudyPlan] = useState<any>(MOCK_STUDY_PLAN);
+
+  useEffect(() => {
+    async function fetchPlan() {
+      if (session) {
+        try {
+          const res = await fetch("/api/study-plan");
+          const data = await res.json();
+          if (data.success && data.data.length > 0) {
+            setStudyPlan(data.data[0]);
+          }
+        } catch (error) {
+          console.error("Failed to fetch study plan:", error);
+        }
+      }
+    }
+    fetchPlan();
+  }, [session]);
 
   const handleMoodSelect = (emoji: string) => {
     setModalMessage(`We've noted that you're feeling ${emoji} today. Focusly is adjusting your focus sessions to match your current energy levels.`);
@@ -40,21 +60,21 @@ export default function Dashboard() {
         <StatCard 
           icon={Clock} 
           label="Total Study Time" 
-          value={`${MOCK_STUDY_PLAN.stats.hoursStudied}h`} 
+          value={`${studyPlan.stats.hoursStudied}h`} 
           sub="+12% from last week"
           color="text-blue-500"
         />
         <StatCard 
           icon={Flame} 
           label="Current Streak" 
-          value={`${MOCK_STUDY_PLAN.stats.focusStreak} Days`} 
+          value={`${studyPlan.stats.focusStreak} Days`} 
           sub="Personal Best: 24"
           color="text-orange-500"
         />
         <StatCard 
           icon={Trophy} 
           label="Experience Points" 
-          value={`${MOCK_STUDY_PLAN.stats.xp} XP`} 
+          value={`${studyPlan.stats.xp} XP`} 
           sub="Level 15 (Pro)"
           color="text-primary"
         />
@@ -81,7 +101,7 @@ export default function Dashboard() {
             </div>
             
             <div className="space-y-4">
-              {MOCK_STUDY_PLAN.daily.map((task, i) => (
+              {studyPlan.daily.map((task: any, i: number) => (
                 <div key={i} className="group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-4 rounded-lg hover:bg-muted/50 transition-colors border border-transparent hover:border-border">
                   <div className="text-sm font-bold text-muted-foreground sm:w-20">{task.time}</div>
                   <div className="flex-1">
@@ -139,7 +159,7 @@ export default function Dashboard() {
            <div className="bg-card rounded-lg border p-8">
               <h3 className="text-xl font-bold mb-6">Recent Rewards</h3>
               <div className="flex flex-wrap gap-4">
-                 {MOCK_STUDY_PLAN.stats.badges.map(badge => (
+                 {studyPlan.stats.badges.map((badge: string) => (
                    <div key={badge} className="group relative">
                       <div className="h-14 w-14 rounded-lg bg-muted flex items-center justify-center text-2xl grayscale group-hover:grayscale-0 transition-all cursor-help border shadow-sm">
                         🏅

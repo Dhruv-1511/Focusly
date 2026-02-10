@@ -12,9 +12,19 @@ interface FocuslyModalProps {
   title: string;
   message: string;
   type?: ModalType;
+  onConfirm?: () => void;
+  confirmLabel?: string;
 }
 
-export function FocuslyModal({ isOpen, onClose, title, message, type = "info" }: FocuslyModalProps) {
+export function FocuslyModal({ 
+  isOpen, 
+  onClose, 
+  title, 
+  message, 
+  type = "info",
+  onConfirm,
+  confirmLabel = "GOT IT"
+}: FocuslyModalProps) {
   const getIcon = () => {
     switch (type) {
       case "success": return <CheckCircle2 className="h-10 w-10 text-secondary" />;
@@ -59,12 +69,26 @@ export function FocuslyModal({ isOpen, onClose, title, message, type = "info" }:
                 <p className="text-muted-foreground font-medium leading-relaxed mb-8">
                   {message}
                 </p>
-                <Button 
-                  onClick={onClose}
-                  className="w-full h-14 rounded-xl font-black bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20"
-                >
-                  GOT IT
-                </Button>
+                <div className="flex gap-4 w-full">
+                  {onConfirm && (
+                    <Button 
+                      variant="ghost"
+                      onClick={onClose}
+                      className="flex-1 h-14 rounded-xl font-black text-muted-foreground"
+                    >
+                      CANCEL
+                    </Button>
+                  )}
+                  <Button 
+                    onClick={() => {
+                      if (onConfirm) onConfirm();
+                      onClose();
+                    }}
+                    className="flex-1 h-14 rounded-xl font-black bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20"
+                  >
+                    {confirmLabel}
+                  </Button>
+                </div>
               </div>
             </motion.div>
           </div>

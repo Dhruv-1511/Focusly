@@ -24,6 +24,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FocuslyModal } from "../ui/FocuslyModal";
 import { useState } from "react";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 const menuItems = [
   { name: "Home", icon: Home, href: "/" },
@@ -141,6 +142,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         title="Signing Out?"
         message="Are you sure you want to end your focus session? Your progress is saved."
         type="warning"
+        confirmLabel="SIGN OUT"
+        onConfirm={() => signOut()}
       />
     </>
   );

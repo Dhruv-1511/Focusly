@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { PROBLEMS } from "@/data/mock";
+import { useState, useEffect } from "react";
+import { PROBLEMS as MOCK_PROBLEMS } from "@/data/mock";
 import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 export default function ProblemsPage() {
   const [search, setSearch] = useState("");
+  const [problems, setProblems] = useState<any[]>(MOCK_PROBLEMS);
   const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
     open: false,
     title: "",
@@ -18,9 +19,24 @@ export default function ProblemsPage() {
     type: "info"
   });
 
-  const filtered = PROBLEMS.filter(p => 
+  useEffect(() => {
+    async function fetchProblems() {
+      try {
+        const res = await fetch("/api/problems");
+        const data = await res.json();
+        if (data.success && data.data.length > 0) {
+          setProblems(data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch problems:", error);
+      }
+    }
+    fetchProblems();
+  }, []);
+
+  const filtered = problems.filter(p => 
     p.title.toLowerCase().includes(search.toLowerCase()) || 
-    p.searchTerms.some(t => t.includes(search.toLowerCase()))
+    p.searchTerms.some((t: string) => t.includes(search.toLowerCase()))
   );
 
   return (

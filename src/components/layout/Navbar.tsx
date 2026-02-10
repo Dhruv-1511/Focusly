@@ -8,11 +8,14 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
+import { useSession, signOut } from "next-auth/react";
+
 interface NavbarProps {
   onToggleSidebar?: () => void;
 }
 
 export function Navbar({ onToggleSidebar }: NavbarProps) {
+  const { data: session } = useSession();
   const [scrolled, setScrolled] = useState(false);
   
   useEffect(() => {
@@ -96,13 +99,29 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
             </Button>
           </div>
 
-          <Button 
-            size="sm" 
-            asChild
-            className="hidden sm:flex h-9 px-5 font-black text-[10px] uppercase rounded-xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all bg-primary text-white hover:bg-primary/90"
-          >
-            <Link href="/dashboard">GET STARTED</Link>
-          </Button>
+          {session ? (
+            <div className="flex items-center gap-3">
+              <span className="hidden sm:block text-[10px] font-black uppercase text-muted-foreground mr-2">
+                {session.user?.name}
+              </span>
+              <Button 
+                size="sm" 
+                variant="ghost" 
+                onClick={() => signOut()}
+                className="h-9 px-4 font-black text-[10px] uppercase rounded-xl hover:bg-white/5 text-white"
+              >
+                Sign Out
+              </Button>
+            </div>
+          ) : (
+            <Button 
+              size="sm" 
+              asChild
+              className="hidden sm:flex h-9 px-5 font-black text-[10px] uppercase rounded-xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all bg-primary text-white hover:bg-primary/90"
+            >
+              <Link href="/login">LOGIN</Link>
+            </Button>
+          )}
           
           <Button 
             variant="ghost" 
