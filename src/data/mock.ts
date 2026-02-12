@@ -2,6 +2,8 @@ export const PROBLEMS = [
   {
     id: "focus",
     title: "I can't focus",
+    category: "Productivity",
+    isFeatured: true,
     searchTerms: ["focus", "concentration", "distracted"],
     why: "Commonly caused by digital distractions, lack of structured goals, or high cortisol levels (stress).",
     fiveStepFix: [
@@ -18,6 +20,8 @@ export const PROBLEMS = [
   {
     id: "memory",
     title: "I forget what I study",
+    category: "Learning",
+    isFeatured: false,
     searchTerms: ["forget", "memory", "remember", "retention"],
     why: "The 'Forgetting Curve' describes how information is lost over time when there is no attempt to retain it.",
     fiveStepFix: [
@@ -34,6 +38,8 @@ export const PROBLEMS = [
   {
     id: "stress",
     title: "Exam stress",
+    category: "Wellness",
+    isFeatured: false,
     searchTerms: ["stress", "anxiety", "exam", "worried"],
     why: "Fear of failure or high expectations creates a fight-or-flight response in the brain.",
     fiveStepFix: [
@@ -50,6 +56,8 @@ export const PROBLEMS = [
   {
     id: "procrastination",
     title: "Procrastination",
+    category: "Habits",
+    isFeatured: false,
     searchTerms: ["procrastination", "lazy", "delay", "later"],
     why: "Procrastination is an emotional regulation problem, not a time management one.",
     fiveStepFix: [
@@ -64,6 +72,7 @@ export const PROBLEMS = [
     quickAction: "Open the file or book you've been avoiding right now. Just open it.",
   }
 ];
+
 
 export const MOCK_STUDY_PLAN = {
   daily: [

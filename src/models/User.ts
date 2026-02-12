@@ -1,6 +1,6 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-export interface IUser extends Document {
+export interface IUser {
   name: string;
   email: string;
   image?: string;
@@ -13,17 +13,39 @@ export interface IUser extends Document {
     level: number;
     badges: string[];
   };
+}
+
+export interface IUserDocument extends IUser, Document {
   createdAt: Date;
   updatedAt: Date;
 }
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<IUserDocument>(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    image: { type: String },
-    password: { type: String },
-    role: { type: String, enum: ["student", "admin"], default: "student" },
+    name: { 
+      type: String, 
+      required: true, 
+      trim: true 
+    },
+    email: { 
+      type: String, 
+      required: true, 
+      unique: true, 
+      trim: true, 
+      lowercase: true,
+      index: true
+    },
+    image: { 
+      type: String 
+    },
+    password: { 
+      type: String 
+    },
+    role: { 
+      type: String, 
+      enum: ["student", "admin"], 
+      default: "student" 
+    },
     stats: {
       hoursStudied: { type: Number, default: 0 },
       focusStreak: { type: Number, default: 0 },
@@ -32,7 +54,16 @@ const UserSchema = new Schema<IUser>(
       badges: [{ type: String }],
     },
   },
-  { timestamps: true }
+  { 
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+  }
 );
 
-export default mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
+const User: Model<IUserDocument> = 
+  mongoose.models.User || 
+  mongoose.model<IUserDocument>("User", UserSchema);
+
+export default User;
+
