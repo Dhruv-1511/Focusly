@@ -44,7 +44,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
