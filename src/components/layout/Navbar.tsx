@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Zap, Menu, Bell, Search } from "lucide-react";
+import { Zap, Menu, Bell, Search, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -31,108 +31,126 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={cn(
-        "sticky top-6 z-40 transition-all duration-500 w-full px-4",
-        scrolled ? "top-4" : "top-6"
+        "sticky top-0 z-50 transition-all duration-500 w-full px-4 lg:pl-[280px] pt-6",
+        scrolled ? "pt-4" : "pt-6"
       )}
     >
       <div className={cn(
-        "glass rounded-2xl px-6 py-3 flex items-center justify-between overflow-hidden relative mx-auto max-w-7xl",
-        scrolled && "bg-white/20"
+        "glass rounded-[1.5rem] px-8 py-4 flex items-center justify-between overflow-hidden relative mx-auto max-w-7xl border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.4)]",
+        scrolled && "bg-black/60 backdrop-blur-3xl border-white/20 shadow-primary/5 shadow-2xl"
       )}>
         {/* Animated Background Accent */}
         <motion.div 
           animate={{ 
             x: [0, 100, 0],
-            opacity: [0.05, 0.1, 0.05]
+            opacity: [0.03, 0.08, 0.03]
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 bg-linear-to-r from-primary/10 via-transparent to-secondary/10 -z-10"
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-linear-to-r from-primary via-transparent to-secondary -z-10"
         />
 
-        <div className="flex items-center gap-10">
-          <Link href="/" className="flex lg:hidden items-center gap-3 active:scale-95 transition-transform">
-            <div className="flex items-center justify-center">
+        <div className="flex items-center gap-12">
+          <Link href="/" className="flex lg:hidden items-center gap-3 active:scale-95 transition-all group">
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full animate-pulse" />
               <Image 
                 src="/logo.png" 
                 alt="Focusly Logo" 
-                width={40}
-                height={40}
+                width={36}
+                height={36}
                 priority
-                className="object-contain drop-shadow-[0_0_8px_rgba(129,140,248,0.5)]"
+                className="object-contain relative z-10"
               />
             </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8 text-white">
+          <nav className="hidden lg:flex items-center gap-10">
             {["Problems", "Planner", "Tools", "Community"].map((item) => (
               <Link 
                 key={item}
                 href={`/${item.toLowerCase()}`} 
-                className="text-xs font-black uppercase text-muted-foreground hover:text-white transition-colors relative group"
+                className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-white transition-all relative group"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+                <motion.span 
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"
+                  initial={false}
+                  whileHover={{ width: "100%" }}
+                />
               </Link>
             ))}
           </nav>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center bg-white/5 rounded-xl px-3 py-1.5 border border-white/10 group focus-within:border-primary/50 transition-all">
-            <Search className="h-3.5 w-3.5 text-muted-foreground group-focus-within:text-primary" />
+        <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center bg-white/5 rounded-2xl px-4 py-2 border border-white/5 group focus-within:border-primary/50 focus-within:bg-white/10 transition-all shadow-inner">
+            <Search className="h-3.5 w-3.5 text-muted-foreground group-focus-within:text-primary transition-colors" />
             <input 
               type="text" 
-              placeholder="Quick search..." 
-              className="bg-transparent border-none outline-none text-[10px] font-black uppercase px-2 w-24 focus:w-40 transition-all text-white placeholder:text-muted-foreground/50"
+              placeholder="QUICK SEARCH..." 
+              className="bg-transparent border-none outline-none text-[9px] font-black uppercase tracking-widest px-3 w-32 focus:w-56 transition-all text-white placeholder:text-muted-foreground/30"
             />
-            <span className="text-[9px] font-black opacity-30 px-1.5 py-0.5 rounded border border-white/10 text-white">⌘K</span>
+            <div className="flex items-center gap-1 opacity-20 group-focus-within:opacity-50 transition-opacity">
+              <span className="text-[8px] font-black px-1.5 py-0.5 rounded-md bg-white/10 text-white">⌘</span>
+              <span className="text-[8px] font-black px-1.5 py-0.5 rounded-md bg-white/10 text-white">K</span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Button 
               variant="ghost" 
               size="icon" 
-              className="h-9 w-9 rounded-xl hover:bg-white/5 text-white relative"
+              className="h-10 w-10 rounded-[1rem] hover:bg-white/5 text-white relative group border border-transparent hover:border-white/5 transition-all"
             >
-              <Bell className="h-4 w-4" />
-              <span className="absolute top-2 right-2 h-1.5 w-1.5 bg-primary rounded-full shadow-[0_0_8px_var(--primary)]" />
+              <Bell className="h-4 w-4 transition-transform group-hover:rotate-12" />
+              <span className="absolute top-2.5 right-2.5 h-2 w-2 bg-primary rounded-full border-2 border-background shadow-[0_0_10px_var(--primary)]" />
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-10 w-10 rounded-[1rem] hover:bg-white/5 text-white border border-transparent hover:border-white/5 transition-all lg:hidden" 
+              onClick={onToggleSidebar}
+            >
+              <Menu className="h-5 w-5" />
             </Button>
           </div>
 
+          <div className="h-6 w-[1px] bg-white/10 mx-2 hidden sm:block" />
+
           {session ? (
-            <div className="flex items-center gap-3">
-              <span className="hidden sm:block text-[10px] font-black uppercase text-muted-foreground mr-2">
-                {session.user?.name}
-              </span>
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:flex flex-col items-end">
+                <span className="text-[10px] font-black uppercase text-white tracking-tighter">
+                  {session.user?.name}
+                </span>
+                <span className="text-[8px] font-black text-primary uppercase flex items-center gap-1">
+                   <Sparkles className="h-2 w-2" /> Tier Pro
+                </span>
+              </div>
               <Button 
                 size="sm" 
                 variant="ghost" 
                 onClick={() => signOut()}
-                className="h-9 px-4 font-black text-[10px] uppercase rounded-xl hover:bg-white/5 text-white"
+                className="h-10 px-6 font-black text-[10px] uppercase rounded-xl hover:bg-destructive/10 hover:text-destructive border border-transparent hover:border-destructive/20 transition-all"
               >
-                Sign Out
+                EXIT
               </Button>
             </div>
           ) : (
             <Button 
-              size="sm" 
+              size="xl" 
               asChild
-              className="hidden sm:flex h-9 px-5 font-black text-[10px] uppercase rounded-xl shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all bg-primary text-white hover:bg-primary/90"
+              className="hidden sm:flex h-11 px-8 font-black text-[10px] tracking-widest uppercase rounded-2xl shadow-2xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all bg-primary text-white border-none glow-primary"
             >
-              <Link href="/login">LOGIN</Link>
+              <Link href="/login" className="flex items-center gap-2">
+                AUTHENTICATE <Zap className="h-3 w-3 fill-current" />
+              </Link>
             </Button>
           )}
-          
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="lg:hidden rounded-xl h-9 w-9 text-white" 
-            onClick={onToggleSidebar}
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
         </div>
       </div>
     </motion.header>
   );
 }
+
