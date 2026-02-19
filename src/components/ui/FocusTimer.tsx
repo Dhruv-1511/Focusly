@@ -59,7 +59,7 @@ export function FocusTimer() {
     <div className="flex flex-col items-center">
       <div className="relative h-80 w-80 mb-12 flex items-center justify-center">
         {/* Progress Circle */}
-        <svg className="absolute inset-0 h-full w-full rotate-[-90deg]">
+        <svg className="absolute inset-0 h-full w-full -rotate-90">
           <circle
             cx="160"
             cy="160"
@@ -125,12 +125,12 @@ export function FocusTimer() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 mt-16 w-full max-w-md">
-        <div className="glass-card p-6 rounded-[2rem] text-center group cursor-pointer hover:border-primary/20 transition-all">
+        <div className="glass-card p-6 rounded-4xl text-center group cursor-pointer hover:border-primary/20 transition-all">
           <Brain className="h-6 w-6 text-primary mx-auto mb-3" />
           <div className="text-[10px] font-black uppercase text-muted-foreground mb-1">Session Type</div>
           <div className="text-sm font-black text-white uppercase tracking-tight">Deep Work</div>
         </div>
-        <div className="glass-card p-6 rounded-[2rem] text-center group cursor-pointer hover:border-secondary/20 transition-all">
+        <div className="glass-card p-6 rounded-4xl text-center group cursor-pointer hover:border-secondary/20 transition-all">
           <Zap className="h-6 w-6 text-secondary mx-auto mb-3" />
           <div className="text-[10px] font-black uppercase text-muted-foreground mb-1">Target Gain</div>
           <div className="text-sm font-black text-white uppercase tracking-tight">+150 XP</div>
