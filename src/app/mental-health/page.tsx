@@ -1,223 +1,145 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  HeartPulse, 
-  Wind, 
-  Brain, 
-  Moon, 
-  Sparkles, 
-  AlertTriangle,
-  Zap,
-  ArrowRight,
-  CheckCircle2
-} from "lucide-react";
+import { HeartPulse, Brain, Zap, Moon, Sun, Wind, Sparkles, ArrowRight, ShieldCheck, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 export default function MentalHealthPage() {
-  const handleSOS = () => {
-    console.log("SOS Mode Activated - Calm sequence starting...");
-    alert("SOS Mode Activated: Please take a deep breath. 4 seconds inhale, 7 seconds hold, 8 seconds exhale.");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedFeeling, setSelectedFeeling] = useState("");
+
+  const handleFeeling = (feeling: string) => {
+    setSelectedFeeling(feeling);
+    setModalOpen(true);
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <section className="relative pt-32 pb-20 overflow-hidden bg-background">
-        <div className="container mx-auto px-4 sm:px-8 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-4 py-1.5 mb-8 text-xs font-black tracking-[0.2em] text-blue-600 uppercase bg-blue-50 rounded-lg border border-blue-100">
-              Wellness & Balance
-            </span>
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 text-foreground leading-[0.9]">
-              Exams are temporary.<br />
-              <span className="text-gradient">Health is permanent.</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-              A balanced mind is your ultimate study tool. Monitor your energy, track your mood, and prevent burnout.
-            </p>
-          </motion.div>
+    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto space-y-16">
+      <header className="relative">
+        <div className="flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
+          <HeartPulse className="h-3 w-3 text-primary animate-pulse" />
+          <span className="text-[10px] font-black uppercase text-primary tracking-widest">Neural Balance Monitor</span>
         </div>
-      </section>
+        <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tight leading-[0.9] uppercase italic text-white">
+          MENTAL <br />
+          <span className="text-gradient">EQUILIBRIUM.</span>
+        </h1>
+        <p className="text-muted-foreground text-lg max-w-2xl font-medium">A high-performance brain requires high-performance recovery.</p>
+      </header>
 
-      <div className="container mx-auto px-4 sm:px-8 pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 space-y-12">
-            {/* Mood Checker */}
-            <motion.section 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="glass rounded-lg p-10 md:p-16 flex flex-col md:flex-row gap-12 items-center"
-            >
-               <div className="flex-1">
-                  <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight">Weekly Mood Check</h2>
-                  <p className="text-muted-foreground text-lg font-medium mb-10 leading-relaxed">
-                     How have you felt about your progress this week? We use this to adjust the difficulty of your AI study plan.
-                  </p>
-                  <div className="flex flex-wrap justify-between gap-4 max-w-sm">
-                     <MoodButton emoji="🤩" label="Great" color="text-yellow-500" />
-                     <MoodButton emoji="😊" label="Good" color="text-green-500" />
-                     <MoodButton emoji="😐" label="Okay" color="text-blue-500" />
-                     <MoodButton emoji="😔" label="Stressed" color="text-orange-500" />
-                     <MoodButton emoji="🤯" label="Burned Out" color="text-red-500" />
-                  </div>
-               </div>
-               <div className="w-full md:w-64 aspect-square bg-muted/30 rounded-lg border flex flex-col items-center justify-center p-8 text-center shadow-inner relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="h-24 w-24 rounded-lg bg-secondary text-white flex items-center justify-center text-4xl mb-6 shadow-2xl shadow-secondary/30 border-8 border-white group-hover:scale-110 transition-transform duration-500">
-                     😊
-                  </div>
-                  <div className="text-xs font-black mb-1 uppercase tracking-[0.2em] text-primary relative z-10">Current State</div>
-                  <div className="text-sm text-muted-foreground font-black leading-tight relative z-10">"STAY CONSISTENT. YOU'RE DOING GREAT!"</div>
-               </div>
-            </motion.section>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Mood Logger */}
+        <div className="lg:col-span-12">
+           <section className="glass-card rounded-[3.5rem] p-12 md:p-20 relative overflow-hidden group border-white/5">
+              <div className="absolute -top-20 -right-20 h-80 w-80 bg-primary/10 blur-[100px] rounded-full group-hover:blur-[120px] transition-all" />
+              
+              <div className="text-center max-w-2xl mx-auto mb-16 relative z-10">
+                 <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tighter italic">How is your neural load?</h2>
+                 <p className="text-muted-foreground font-medium uppercase text-[10px] tracking-[0.3em]">AI-driven focus adjustments based on emotional state.</p>
+              </div>
 
-            {/* Burnout Alert */}
-            <motion.section 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-destructive text-destructive-foreground rounded-lg p-12 md:p-16 shadow-[0_40px_80px_-15px_rgba(239,68,68,0.3)] relative overflow-hidden group"
-            >
-               <div className="relative z-10 flex flex-col lg:flex-row gap-10 items-center">
-                  <div className="h-28 w-28 rounded-lg bg-white/10 backdrop-blur-md flex items-center justify-center flex-shrink-0 animate-pulse border border-white/20">
-                     <AlertTriangle className="h-14 w-14" />
-                  </div>
-                  <div className="flex-1 text-center lg:text-left">
-                     <div className="text-[10px] font-black uppercase tracking-[0.3em] mb-4 opacity-70">AI SAFETY SYSTEM</div>
-                     <h2 className="text-4xl md:text-5xl font-black mb-6 leading-none">Burnout Alert Detected</h2>
-                     <p className="text-xl font-medium opacity-90 mb-10 leading-relaxed max-w-2xl">
-                        You've clocked in 45 hours of deep focus this week with zero breaks. 
-                        We recommend a 24h digital detox to restore your mental clarity.
-                     </p>
-                     <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
-                        <Button size="xl" className="h-16 px-10 bg-white text-destructive hover:bg-white/95 font-black text-lg rounded-lg shadow-2xl transition-all hover:scale-105 active:scale-95" onClick={() => console.log("Light plan activated")}>
-                          ACTIVATE LIGHT PLAN 🍃
-                        </Button>
-                        <Button size="xl" variant="ghost" className="text-white hover:bg-white/10 font-black tracking-widest text-xs uppercase rounded-lg" onClick={() => console.log("Burnout alert dismissed")}>
-                          Dismiss Alert
-                        </Button>
-                     </div>
-                  </div>
-               </div>
-               <AlertTriangle className="absolute bottom-[-10%] right-[-10%] h-[400px] w-[400px] text-white/5 -rotate-12 transition-transform duration-1000 group-hover:rotate-0" />
-            </motion.section>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
+                 <MoodButton emoji="😊" label="Optimal" onClick={() => handleFeeling("OPTIMAL")} />
+                 <MoodButton emoji="😐" label="Fatigued" onClick={() => handleFeeling("FATIGUED")} />
+                 <MoodButton emoji="😔" label="Stressed" onClick={() => handleFeeling("STRESSED")} />
+                 <MoodButton emoji="🤯" label="Burnout" onClick={() => handleFeeling("BURNOUT")} />
+              </div>
+           </section>
+        </div>
 
-            {/* Relaxation Tools */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-               <RelaxationCard 
-                  icon={Wind} 
-                  title="Breathing Guide" 
-                  desc="Scientific 4-7-8 technique for instant exam anxiety relief and heart rate variability."
-                  color="bg-blue-500"
-               />
-               <RelaxationCard 
-                  icon={Brain} 
-                  title="Focus Meditation" 
-                  desc="High-performance guided 5-minute sessions to clear brain fog and reset focus."
-                  color="bg-purple-500"
-               />
-            </div>
-          </div>
+        {/* Recovery Protocols */}
+        <div className="lg:col-span-8 space-y-10">
+           <h3 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-3">
+              <div className="h-1.5 w-12 bg-primary rounded-full" /> 
+              Recovery Protocols
+           </h3>
+           
+           <div className="space-y-6">
+              <RecoveryItem 
+                title="Box Breathing v1.0" 
+                desc="Reset cortisol levels in 120 seconds with controlled respiratory cycles."
+                icon={Wind}
+                time="2m"
+                color="text-blue-400"
+              />
+              <RecoveryItem 
+                title="Neural Reset 528Hz" 
+                desc="Acoustic frequencies designed to repair DNA stress markers and enhance calm."
+                icon={Activity}
+                time="10m"
+                color="text-primary"
+              />
+              <RecoveryItem 
+                title="Digital Detox Blast" 
+                desc="Instant disconnection from all social nodes for immediate dopamine baseline reset."
+                icon={Zap}
+                time="Indefinite"
+                color="text-orange-500"
+              />
+           </div>
+        </div>
 
-          <div className="space-y-8">
-            {/* Anxiety Tool Widget */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="glass rounded-lg p-10 shadow-2xl relative overflow-hidden group"
-            >
-               <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-lg -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-               <h3 className="text-2xl font-black mb-6 flex items-center gap-3 relative z-10">
-                  <Sparkles className="h-6 w-6 text-orange-500" /> Anxiety SOS
-               </h3>
-               <p className="text-muted-foreground text-lg font-medium mb-10 leading-relaxed relative z-10">Feeling overwhelmed? Push for a 2-minute science-backed calm-down sequence.</p>
-               <Button size="xl" className="w-full h-20 bg-orange-500 text-white hover:bg-orange-600 rounded-lg shadow-2xl shadow-orange-500/30 group relative z-10 font-black text-xl" onClick={handleSOS}>
-                  LAUNCH SOS MODE <Zap className="ml-3 h-6 w-6 group-hover:fill-white transition-all animate-pulse" />
-               </Button>
-            </motion.div>
-
-            {/* Affirmations */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-foreground text-background rounded-lg p-12 relative overflow-hidden group cursor-pointer shadow-2xl" 
-              onClick={() => console.log("New affirmation generated")}
-            >
-               <div className="absolute inset-0 bg-primary opacity-0 group-hover:opacity-10 transition-opacity" />
-               <h3 className="text-[10px] font-black uppercase tracking-[0.4em] mb-10 opacity-50">DAILY AFFIRMATION</h3>
-               <p className="text-3xl font-black leading-tight mb-8 tracking-tight group-hover:text-primary transition-colors">
-                  "One bad mark does not define my intelligence or my future. I am learning and growing every day."
-               </p>
-               <div className="flex items-center gap-3 font-black text-xs uppercase tracking-[0.2em] group-hover:translate-x-3 transition-transform">
-                  NEW AFFIRMATION <ArrowRight className="h-4 w-4 text-primary" />
-               </div>
-               <HeartPulse className="absolute bottom-[-20px] right-[-20px] h-48 w-48 text-white/5 opacity-20 -rotate-12 group-hover:rotate-0 transition-transform duration-700" />
-            </motion.div>
-
-            {/* Sleep Tracking Placeholder */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="glass rounded-lg p-12 border-dashed border-4 flex flex-col items-center text-center group"
-            >
-               <div className="h-20 w-20 rounded-lg bg-muted flex items-center justify-center mb-8 group-hover:scale-110 transition-transform shadow-inner">
-                 <Moon className="h-10 w-10 text-muted-foreground" />
-               </div>
-               <div className="text-2xl font-black mb-2 tracking-tight">Sleep Tracking</div>
-               <p className="text-muted-foreground text-sm font-medium leading-relaxed">Coming soon. Sleep is the ultimate study hack for memory consolidation.</p>
-            </motion.div>
-          </div>
+        {/* AI Insight Sidebar */}
+        <div className="lg:col-span-4 space-y-8">
+           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden bg-white text-black border-none h-full">
+              <div className="mb-10 flex justify-between items-start">
+                 <div className="h-14 w-14 rounded-2xl bg-black/5 flex items-center justify-center">
+                    <Brain className="h-8 w-8 text-black" />
+                 </div>
+                 <ShieldCheck className="h-6 w-6 text-emerald-600" />
+              </div>
+              <h4 className="text-2xl font-black mb-6 uppercase tracking-tighter italic leading-none">AI THERAPIST <br /><span className="text-black/40">V0.4</span></h4>
+              <p className="text-sm font-medium text-black/60 mb-10 leading-relaxed">
+                 "I've noticed your focus sessions have been getting shorter over the last 48 hours. This typically indicates a rise in background cognitive load. I recommend a 30-minute 'Digital Silence' protocol before your next session."
+              </p>
+              <Button className="w-full h-16 rounded-2xl bg-black text-white hover:bg-black/80 font-black uppercase text-[10px] tracking-widest transition-all">
+                 START DIALOGUE
+              </Button>
+           </div>
         </div>
       </div>
+
+      <FocuslyModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)}
+        title="Neural state Logged"
+        message={`We've adjusted your protocol to account for your ${selectedFeeling} state. Focusly will now prioritize recovery modules.`}
+        type="info"
+      />
     </div>
   );
 }
 
-function MoodButton({ emoji, label, color }: { emoji: string; label: string; color: string }) {
+function MoodButton({ emoji, label, onClick }: any) {
   return (
-    <Button 
-      variant="ghost" 
-      className="flex flex-col items-center gap-4 h-auto p-4 group hover:bg-white rounded-lg transition-all shadow-none hover:shadow-xl"
-      onClick={() => console.log(`Mood selected: ${label}`)}
+    <button 
+      onClick={onClick}
+      className="flex flex-col items-center justify-center p-10 rounded-[2.5rem] bg-white/5 border border-white/5 hover:border-primary/20 hover:bg-white/10 group transition-all transform active:scale-95"
     >
-       <div className="h-20 w-20 rounded-lg bg-muted/30 border border-transparent group-hover:border-border flex items-center justify-center text-4xl group-hover:scale-110 group-hover:bg-white transition-all shadow-sm">
-          {emoji}
-       </div>
-       <span className={cn("text-[10px] uppercase font-black tracking-[0.2em] transition-colors", color)}>{label}</span>
-    </Button>
+       <div className="text-5xl mb-6 group-hover:scale-125 transition-transform duration-500">{emoji}</div>
+       <div className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground group-hover:text-white transition-colors">{label}</div>
+    </button>
   );
 }
 
-function RelaxationCard({ icon: Icon, title, desc, color }: any) {
+function RecoveryItem({ title, desc, icon: Icon, time, color }: any) {
   return (
-    <motion.div 
-      whileHover={{ y: -10 }}
-      className="glass p-12 rounded-lg border-2 shadow-sm hover:border-primary transition-all cursor-pointer group hover:shadow-2xl relative overflow-hidden"
-      onClick={() => console.log(`Opening guide: ${title}`)}
-    >
-       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-lg -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />
-       <div className={`${color} h-16 w-16 rounded-lg flex items-center justify-center text-white mb-10 group-hover:scale-110 transition-transform shadow-2xl relative z-10`}>
+    <div className="glass-card p-8 rounded-[2.5rem] flex flex-col sm:flex-row items-center gap-8 group hover:border-white/20 transition-all shimmer">
+       <div className={`h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center ${color} border border-white/5 group-hover:scale-110 transition-transform`}>
           <Icon className="h-8 w-8" />
        </div>
-       <h3 className="text-3xl font-black mb-4 tracking-tight relative z-10">{title}</h3>
-       <p className="text-muted-foreground text-lg font-medium leading-relaxed mb-10 relative z-10">{desc}</p>
-       <div className="text-sm font-black text-primary flex items-center gap-3 group-hover:gap-5 transition-all relative z-10 uppercase tracking-widest">
-          START GUIDE <ArrowRight className="h-5 w-5" />
+       <div className="flex-1 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+             <h4 className="font-black text-lg uppercase tracking-tight text-white">{title}</h4>
+             <span className="text-[9px] font-black px-2 py-0.5 rounded border border-white/10 text-muted-foreground uppercase">{time}</span>
+          </div>
+          <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
        </div>
-    </motion.div>
+       <Button variant="outline" className="h-14 px-8 rounded-2xl border-white/10 hover:bg-white/5 font-black uppercase text-[10px] tracking-widest group-hover:bg-primary group-hover:text-white group-hover:border-none transition-all">
+          EXECUTE
+       </Button>
+    </div>
   );
 }
-
-
-

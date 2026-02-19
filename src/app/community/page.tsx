@@ -1,206 +1,146 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { 
-  MessageSquare, 
-  Search, 
-  Plus, 
-  Users, 
-  Target, 
-  ArrowRight, 
-  HelpCircle,
-  Zap,
-  CheckCircle2,
-  Filter
-} from "lucide-react";
+import { Users, MessageSquare, Trophy, Heart, Share2, Sparkles, TrendingUp, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { FocuslyModal } from "@/components/ui/FocuslyModal";
+import Image from "next/image";
 
-const questions = [
-  { 
-    title: "How to remember organic chemistry formulas?", 
-    user: "Alex.R", 
-    answers: 24, 
-    ai: true, 
-    tags: ["Chemistry", "Memory"],
-    date: "2h ago"
-  },
-  { 
-    title: "Best focus music for deep work?", 
-    user: "Sarah.M", 
-    answers: 12, 
-    ai: false, 
-    tags: ["Focus", "Tips"],
-    date: "5h ago"
-  },
-  { 
-    title: "How to stop procrastinating on big projects?", 
-    user: "Kevin.L", 
-    answers: 48, 
-    ai: true, 
-    tags: ["Motivation", "Logic"],
-    date: "1d ago"
-  },
+const FEED_ITEMS = [
+  { id: 1, user: "Alex J.", action: "completed a 4-hour focus session", time: "2m ago", xp: "+450 XP", avatar: "A" },
+  { id: 2, user: "Sarah K.", action: "reached a 30-day streak", time: "15m ago", xp: "+1000 XP", avatar: "S" },
+  { id: 3, user: "Marcus V.", action: "shared a new Biology mindmap", time: "1h ago", xp: "+200 XP", avatar: "M" },
+  { id: 4, user: "Elena R.", action: "leveled up to 'Neural Master'", time: "3h ago", xp: "+500 XP", avatar: "E" },
 ];
 
-const studyGroups = [
-  { name: "Final Exam Prep: Physics", members: 124, active: true },
-  { name: "Calculus Deep Dive", members: 89, active: true },
-  { name: "Organic Chemistry Support", members: 56, active: false },
+const GUILDS = [
+  { name: "Stem Squad", members: "12.4k", activity: "High", icon: "🧬" },
+  { name: "Night Owls", members: "8.1k", activity: "Medium", icon: "🦉" },
+  { name: "Code Masters", members: "5.2k", activity: "Very High", icon: "💻" },
+  { name: "Creative Minds", members: "7.8k", activity: "High", icon: "🎨" },
 ];
 
 export default function CommunityPage() {
-  const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
-    open: false,
-    title: "",
-    message: "",
-    type: "info"
-  });
-
   return (
-    <div className="p-8 lg:p-12 max-w-7xl mx-auto">
-      <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-        <div>
-          <h1 className="text-4xl font-black mb-2 tracking-tight text-white uppercase italic">Focusly Collective</h1>
-          <p className="text-muted-foreground font-medium">Collaborate with the collective student brain. Ask anything.</p>
+    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto space-y-16">
+      <header className="relative">
+        <div className="flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
+          <Users className="h-3 w-3 text-primary animate-pulse" />
+          <span className="text-[10px] font-black uppercase text-primary tracking-widest">Global Neural Network</span>
         </div>
-        <Button 
-          size="xl" 
-          variant="secondary" 
-          className="shadow-xl shadow-secondary/20 gap-2 scale-100 hover:scale-[1.02] transition-all"
-          onClick={() => console.log("Opening ask question modal")}
-        >
-           <Plus className="h-6 w-6" /> Ask a Question
-        </Button>
+        <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tight leading-[0.9] uppercase italic text-white">
+          THE <br />
+          <span className="text-gradient">COMMUNITY.</span>
+        </h1>
+        <p className="text-muted-foreground text-lg max-w-2xl font-medium">You are not alone. Synchronize with 50,000+ high-performance students worldwide.</p>
       </header>
 
-      {/* Search & Filter */}
-      <div className="flex flex-col md:flex-row gap-4 mb-12">
-        <div className="relative flex-1 group">
-           <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
-           <input 
-              type="text"
-              placeholder="Search community questions..."
-              className="w-full h-14 pl-14 pr-4 rounded-lg border bg-card text-lg focus:ring-2 focus:ring-primary outline-none font-medium transition-all"
-           />
-        </div>
-        <Button 
-          variant="outline" 
-          size="xl" 
-          className="gap-2 font-bold px-8 shadow-sm"
-          onClick={() => console.log("Opening filters")}
-        >
-           <Filter className="h-5 w-5" /> Filter by Subject
-        </Button>
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Live Feed */}
+        <div className="lg:col-span-8 space-y-8">
+           <div className="flex items-center justify-between mb-4">
+              <h2 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-3">
+                <div className="h-1.5 w-12 bg-primary rounded-full" /> 
+                Neural Pulse Feed
+              </h2>
+              <div className="flex items-center gap-2 text-[10px] font-black text-emerald-400 uppercase tracking-widest">
+                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+                 8,241 Online
+              </div>
+           </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div className="lg:col-span-2 space-y-6">
-           {questions.map((q, i) => (
-             <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-card p-8 rounded-lg border hover:border-primary transition-all group shadow-sm cursor-pointer"
-             >
-                <div className="flex items-center gap-2 mb-4">
-                   {q.tags.map(tag => (
-                      <span key={tag} className="text-[10px] font-bold uppercase tracking-widest px-2 py-1 bg-muted rounded-lg">
-                         {tag}
-                      </span>
-                   ))}
-                   <span className="text-[10px] font-bold text-muted-foreground ml-auto">{q.date}</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-6 group-hover:text-primary transition-colors">{q.title}</h3>
-                <div className="flex items-center justify-between pt-6 border-t font-bold text-sm">
-                   <div className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-lg bg-secondary text-white flex items-center justify-center text-xs">{q.user[0]}</div>
-                      <span className="text-muted-foreground">{q.user}</span>
+           <div className="space-y-4">
+              {FEED_ITEMS.map((item, i) => (
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  key={item.id}
+                  className="glass-card p-6 rounded-[2rem] flex items-center gap-6 group hover:border-white/20 transition-all shimmer"
+                >
+                   <div className="h-14 w-14 rounded-2xl bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xl font-black text-white hover:scale-110 transition-transform">
+                      {item.avatar}
                    </div>
-                   <div className="flex items-center gap-4">
-                      {q.ai && (
-                        <div className="flex items-center gap-1 text-primary">
-                           <Zap className="h-4 w-4 fill-primary" /> <span className="text-xs uppercase font-bold">AI Ready</span>
-                        </div>
-                      )}
-                      <div className="flex items-center gap-1 text-muted-foreground">
-                         <MessageSquare className="h-4 w-4" /> {q.answers} Answers
+                   <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                         <span className="font-black text-white uppercase tracking-tight italic">{item.user}</span>
+                         <span className="text-[10px] text-muted-foreground uppercase font-medium">{item.time}</span>
+                      </div>
+                      <p className="text-muted-foreground text-sm font-medium">{item.action}</p>
+                   </div>
+                   <div className="text-right">
+                      <div className="text-primary font-black italic tracking-tighter">{item.xp}</div>
+                      <div className="flex gap-2 mt-2">
+                         <button className="text-muted-foreground hover:text-primary transition-colors"><Heart className="h-4 w-4" /></button>
+                         <button className="text-muted-foreground hover:text-primary transition-colors"><MessageSquare className="h-4 w-4" /></button>
+                         <button className="text-muted-foreground hover:text-primary transition-colors"><Share2 className="h-4 w-4" /></button>
                       </div>
                    </div>
-                </div>
-             </motion.div>
-           ))}
+                </motion.div>
+              ))}
+           </div>
+
+           <Button variant="outline" className="w-full h-16 rounded-2xl border-white/5 bg-white/5 hover:bg-white/10 font-black uppercase text-[10px] tracking-[0.2em] transform active:scale-95 transition-all">
+              LOAD MORE NEURAL EVENTS
+           </Button>
         </div>
 
-        <div className="space-y-8">
-           {/* Study Groups */}
-           <div className="bg-card rounded-lg border p-8 shadow-sm">
-              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-                 <Users className="h-5 w-5 text-primary" /> Study Groups
+        {/* Sidebar Widgets */}
+        <div className="lg:col-span-4 space-y-8">
+           {/* Guilds */}
+           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-8 opacity-5 -rotate-12 group-hover:rotate-0 transition-transform duration-1000">
+                 <Trophy className="h-32 w-32 text-primary" />
+              </div>
+              <h3 className="text-xl font-black mb-8 flex items-center gap-3 uppercase tracking-tighter italic">
+                 <Sparkles className="h-5 w-5 text-primary" /> ACTIVE GUILDS
               </h3>
               <div className="space-y-4">
-                 {studyGroups.map(group => (
-                   <div 
-                    key={group.name} 
-                    className="p-4 rounded-lg bg-muted/30 border border-transparent hover:border-primary cursor-pointer group transition-all"
-                    onClick={() => setModal({
-                      open: true,
-                      title: "Group Joined",
-                      message: `You've joined ${group.name}. Start collaborating with your peers!`,
-                      type: "success"
-                    })}
-                   >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="font-bold text-sm group-hover:text-primary transition-colors">{group.name}</div>
-                        {group.active && <div className="h-2 w-2 rounded-lg bg-secondary animate-pulse" />}
+                 {GUILDS.map((guild) => (
+                   <div key={guild.name} className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-transparent hover:border-white/10 transition-all cursor-pointer group/guild">
+                      <div className="flex items-center gap-4">
+                         <div className="text-2xl h-12 w-12 rounded-xl bg-white/5 flex items-center justify-center group-hover/guild:scale-110 transition-transform">{guild.icon}</div>
+                         <div>
+                            <div className="text-xs font-black uppercase text-white tracking-widest">{guild.name}</div>
+                            <div className="text-[9px] text-muted-foreground font-black uppercase tracking-widest mt-0.5">{guild.members} Members</div>
+                         </div>
                       </div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{group.members} Members</div>
+                      <div className={cn(
+                        "text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest",
+                        guild.activity === "Very High" ? "bg-emerald-500/20 text-emerald-400" : "bg-primary/20 text-primary"
+                      )}>
+                         {guild.activity}
+                      </div>
                    </div>
                  ))}
-                  <Button variant="link" className="w-full text-primary font-black uppercase text-[10px] tracking-widest" onClick={() => setModal({
-                    open: true,
-                    title: "Coming Soon",
-                    message: "We're launching subject-specific hubs very soon. Stay tuned!",
-                    type: "info"
-                  })}>Discover more groups</Button>
               </div>
+              <Button className="w-full mt-8 rounded-xl bg-primary text-white font-black uppercase text-[10px] tracking-widest h-12 border-none">JOIN A GUILD</Button>
            </div>
 
-           {/* Guidelines */}
-           <div className="p-8 bg-card border rounded-lg relative overflow-hidden shadow-xl">
-              <h3 className="text-lg font-black mb-6 flex items-center gap-2 uppercase tracking-tight">
-                 <HelpCircle className="h-5 w-5 text-primary" /> Support Rules
+           {/* Leaderboard Snippet */}
+           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden bg-primary/5">
+              <h3 className="text-xl font-black mb-10 flex items-center gap-3 uppercase tracking-tighter italic">
+                 <TrendingUp className="h-5 w-5 text-primary" /> TOP OF FLOW
               </h3>
-              <ul className="space-y-4 text-xs font-bold text-slate-600">
-                 <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> No judgment. Every struggle is valid.</li>
-                 <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Explain your thought process, don't just ask for answers.</li>
-                 <li className="flex gap-3"><CheckCircle2 className="h-4 w-4 text-secondary flex-shrink-0" /> Earn 50 XP for every helpful answer you give.</li>
-              </ul>
-              <div className="mt-8 p-5 bg-slate-50 rounded-lg border border-slate-100">
-                 <div className="text-[10px] font-black uppercase tracking-widest mb-2 text-primary">Community Reward</div>
-                 <div className="text-xs font-black leading-relaxed text-slate-900">Top contributor this month gets <span className="text-primary italic">Premium Planner</span> for free.</div>
+              <div className="space-y-6">
+                 {[1,2,3].map(rank => (
+                   <div key={rank} className="flex items-center gap-4 relative">
+                      <div className={cn(
+                        "h-8 w-8 rounded-lg flex items-center justify-center font-black italic",
+                        rank === 1 ? "bg-primary text-black" : "bg-white/5 text-muted-foreground"
+                      )}>{rank}</div>
+                      <div className="flex-1 font-black uppercase text-xs tracking-widest">STUDENT_{rank*12}</div>
+                      <div className="text-xs font-black italic text-primary">{(4000 - rank * 500).toLocaleString()} XP</div>
+                   </div>
+                 ))}
               </div>
+              <Button variant="link" className="w-full mt-10 p-0 h-auto font-black text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-white transition-colors">VIEW FULL LEADERBOARD</Button>
            </div>
         </div>
       </div>
-      <FocuslyModal 
-        isOpen={modal.open} 
-        onClose={() => setModal({ ...modal, open: false })}
-        title={modal.title}
-        message={modal.message}
-        type={modal.type}
-      />
     </div>
   );
 }
 
-
-
-
-
-
-
-
+function cn(...classes: string[]) {
+  return classes.filter(Boolean).join(' ');
+}

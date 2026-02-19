@@ -119,23 +119,40 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
           <div className="h-6 w-[1px] bg-white/10 mx-2 hidden sm:block" />
 
           {session ? (
-            <div className="flex items-center gap-4">
-              <div className="hidden sm:flex flex-col items-end">
-                <span className="text-[10px] font-black uppercase text-white tracking-tighter">
-                  {session.user?.name}
-                </span>
-                <span className="text-[8px] font-black text-primary uppercase flex items-center gap-1">
-                   <Sparkles className="h-2 w-2" /> Tier Pro
-                </span>
+            <div className="flex items-center gap-6">
+              <div className="hidden lg:flex flex-col items-end gap-1.5 min-w-[120px]">
+                 <div className="flex justify-between w-full items-baseline">
+                    <span className="text-[8px] font-black text-primary uppercase tracking-widest">Level 15</span>
+                    <span className="text-[8px] font-black text-muted-foreground uppercase tracking-widest">2,450 / 3,000 XP</span>
+                 </div>
+                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/5">
+                    <motion.div 
+                      initial={{ width: 0 }}
+                      animate={{ width: "75%" }}
+                      className="h-full bg-linear-to-r from-primary to-indigo-500 rounded-full shadow-[0_0_10px_var(--primary)]" 
+                    />
+                 </div>
               </div>
-              <Button 
-                size="sm" 
-                variant="ghost" 
-                onClick={() => signOut()}
-                className="h-10 px-6 font-black text-[10px] uppercase rounded-xl hover:bg-destructive/10 hover:text-destructive border border-transparent hover:border-destructive/20 transition-all"
-              >
-                EXIT
-              </Button>
+
+              <div className="flex items-center gap-4">
+                <div className="hidden sm:flex flex-col items-end">
+                  <span className="text-[10px] font-black uppercase text-white tracking-tighter">
+                    {session.user?.name}
+                  </span>
+                  <span className="text-[8px] font-black text-primary uppercase flex items-center gap-1">
+                     <Sparkles className="h-2 w-2" /> Tier Pro
+                  </span>
+                </div>
+                <div className="h-10 w-[1px] bg-white/10 mx-1 hidden sm:block" />
+                <Button 
+                  size="sm" 
+                  variant="ghost" 
+                  onClick={() => signOut()}
+                  className="h-10 px-4 font-black text-[10px] uppercase rounded-xl hover:bg-destructive/10 hover:text-destructive border border-transparent hover:border-destructive/20 transition-all"
+                >
+                  EXIT
+                </Button>
+              </div>
             </div>
           ) : (
             <Button 

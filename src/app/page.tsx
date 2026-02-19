@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
+import { cn } from "@/lib/utils";
 
 const PROBLEM_CHIPS = ["Focus Issues", "Memory Loss", "Procrastination", "Exam Anxiety", "Time Management"];
 
@@ -186,6 +187,45 @@ export default function Home() {
                 <ArrowRight className="h-5 w-5" />
              </Link>
           </motion.div>
+        </div>
+
+        {/* Featured Solutions */}
+        <div className="mt-40">
+           <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8 text-center md:text-left">
+              <div className="max-w-xl">
+                 <h2 className="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tighter italic">REWIRE YOUR <br /><span className="text-secondary italic">LEARNING.</span></h2>
+                 <p className="text-lg text-muted-foreground font-medium">Quick, scientifically-backed fixes for the most common academic obstacles.</p>
+              </div>
+              <Button variant="link" asChild className="p-0 h-auto text-primary font-black uppercase text-[10px] tracking-[0.3em] hover:text-white transition-colors">
+                <Link href="/problems">EXPLORE ALL 50+ SOLUTIONS <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+           </div>
+
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { title: "Dopamine Resets", icon: Zap, color: "text-orange-500", desc: "Break the cycle of infinite scrolling and regain deep attention." },
+                { title: "Active Recall", icon: Brain, color: "text-primary", desc: "Lock information into long-term memory with neural retrieval." },
+                { title: "Flow Architect", icon: Target, color: "text-secondary", desc: "Structurally eliminate friction from your study environment." }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ y: -8 }}
+                  className="glass p-10 rounded-[3rem] border-white/5 hover:border-white/20 transition-all shimmer group h-full"
+                >
+                   <div className="h-14 w-14 rounded-2xl bg-white/5 flex items-center justify-center mb-10 group-hover:scale-110 transition-transform">
+                      <item.icon className={cn("h-7 w-7", item.color)} />
+                   </div>
+                   <h3 className="text-2xl font-black mb-4 uppercase tracking-tighter italic text-white">{item.title}</h3>
+                   <p className="text-muted-foreground text-sm font-medium leading-relaxed mb-10">{item.desc}</p>
+                   <Button variant="ghost" className="p-0 h-auto text-[10px] font-black uppercase tracking-widest text-primary hover:bg-transparent hover:gap-2 transition-all">
+                      RUN PROTOCOL <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                   </Button>
+                </motion.div>
+              ))}
+           </div>
         </div>
       </section>
 
