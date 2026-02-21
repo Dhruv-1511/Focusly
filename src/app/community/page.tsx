@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, MessageSquare, Trophy, Heart, Share2, Sparkles, TrendingUp, Zap } from "lucide-react";
+import { Users, MessageSquare, Trophy, Heart, Share2, Sparkles, TrendingUp, Zap, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const FEED_ITEMS = [
   { id: 1, user: "Alex J.", action: "completed a 4-hour focus session", time: "2m ago", xp: "+450 XP", avatar: "A" },
@@ -15,132 +15,129 @@ const FEED_ITEMS = [
 const GUILDS = [
   { name: "Stem Squad", members: "12.4k", activity: "High", icon: "🧬" },
   { name: "Night Owls", members: "8.1k", activity: "Medium", icon: "🦉" },
-  { name: "Code Masters", members: "5.2k", activity: "Very High", icon: "💻" },
+  { name: "Code Masters", members: "5.2k", activity: "Peak", icon: "💻" },
   { name: "Creative Minds", members: "7.8k", activity: "High", icon: "🎨" },
 ];
 
 export default function CommunityPage() {
   return (
-    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto space-y-16">
-      <header className="relative">
-        <div className="flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
-          <Users className="h-3 w-3 text-primary animate-pulse" />
-          <span className="text-[10px] font-black uppercase text-primary tracking-widest">Global Neural Network</span>
+    <div className="space-y-12">
+      <header>
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Global Neural Network</span>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tight leading-[0.9] uppercase italic text-white">
-          THE <br />
-          <span className="text-gradient">COMMUNITY.</span>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+          The <span className="text-primary italic">Community</span>
         </h1>
-        <p className="text-muted-foreground text-lg max-w-2xl font-medium">You are not alone. Synchronize with 50,000+ high-performance students worldwide.</p>
+        <p className="text-muted-foreground font-medium text-sm md:text-base max-w-xl leading-relaxed">
+          Synchronize with 50,000+ high-performance students worldwide and share your neural progress.
+        </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Live Feed */}
         <div className="lg:col-span-8 space-y-8">
-           <div className="flex items-center justify-between mb-4">
-              <h2 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-3">
-                <div className="h-1.5 w-12 bg-primary rounded-full" /> 
-                Neural Pulse Feed
-              </h2>
-              <div className="flex items-center gap-2 text-[10px] font-black text-emerald-400 uppercase tracking-widest">
-                 <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                 8,241 Online
+           <div className="flex items-center justify-between">
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-4">
+                 Neural Pulse Feed
+                 <div className="h-px bg-white/5 w-24" />
+              </h3>
+              <div className="flex items-center gap-2 text-[10px] font-bold text-secondary uppercase tracking-wider">
+                 <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
+                 8,241 Neural Nodes Online
               </div>
            </div>
 
            <div className="space-y-4">
               {FEED_ITEMS.map((item, i) => (
                 <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.1 }}
                   key={item.id}
-                  className="glass-card p-6 rounded-[2rem] flex items-center gap-6 group hover:border-white/20 transition-all shimmer"
+                  className="glass p-5 rounded-3xl flex items-center gap-6 group hover:border-white/10 transition-all"
                 >
-                   <div className="h-14 w-14 rounded-2xl bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-xl font-black text-white hover:scale-110 transition-transform">
+                   <div className="h-12 w-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-lg font-bold text-primary group-hover:scale-110 transition-transform">
                       {item.avatar}
                    </div>
-                   <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                         <span className="font-black text-white uppercase tracking-tight italic">{item.user}</span>
-                         <span className="text-[10px] text-muted-foreground uppercase font-medium">{item.time}</span>
+                   <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-2 mb-0.5">
+                         <span className="font-bold text-sm text-white">{item.user}</span>
+                         <span className="text-[9px] text-muted-foreground font-semibold uppercase tracking-tighter">{item.time}</span>
                       </div>
-                      <p className="text-muted-foreground text-sm font-medium">{item.action}</p>
+                      <p className="text-muted-foreground text-xs font-medium truncate">{item.action}</p>
                    </div>
-                   <div className="text-right">
-                      <div className="text-primary font-black italic tracking-tighter">{item.xp}</div>
-                      <div className="flex gap-2 mt-2">
-                         <button className="text-muted-foreground hover:text-primary transition-colors"><Heart className="h-4 w-4" /></button>
-                         <button className="text-muted-foreground hover:text-primary transition-colors"><MessageSquare className="h-4 w-4" /></button>
-                         <button className="text-muted-foreground hover:text-primary transition-colors"><Share2 className="h-4 w-4" /></button>
+                   <div className="text-right shrink-0">
+                      <div className="text-xs font-bold text-primary mb-2">{item.xp}</div>
+                      <div className="flex gap-3">
+                         <button className="text-muted-foreground hover:text-white transition-colors"><Heart className="h-3.5 w-3.5" /></button>
+                         <button className="text-muted-foreground hover:text-white transition-colors"><MessageSquare className="h-3.5 w-3.5" /></button>
+                         <button className="text-muted-foreground hover:text-white transition-colors"><Share2 className="h-3.5 w-3.5" /></button>
                       </div>
                    </div>
                 </motion.div>
               ))}
            </div>
 
-           <Button variant="outline" className="w-full h-16 rounded-2xl border-white/5 bg-white/5 hover:bg-white/10 font-black uppercase text-[10px] tracking-[0.2em] transform active:scale-95 transition-all">
-              LOAD MORE NEURAL EVENTS
+           <Button variant="ghost" className="w-full h-12 rounded-xl border border-white/5 bg-white/2 hover:bg-white/5 font-bold text-[10px] tracking-wider text-muted-foreground transition-all">
+              Load More Neural Events
            </Button>
         </div>
 
         {/* Sidebar Widgets */}
-        <div className="lg:col-span-4 space-y-8">
+        <div className="lg:col-span-4 space-y-6">
            {/* Guilds */}
-           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8 opacity-5 -rotate-12 group-hover:rotate-0 transition-transform duration-1000">
+           <div className="glass p-8 rounded-3xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-1000">
                  <Trophy className="h-32 w-32 text-primary" />
               </div>
-              <h3 className="text-xl font-black mb-8 flex items-center gap-3 uppercase tracking-tighter italic">
-                 <Sparkles className="h-5 w-5 text-primary" /> ACTIVE GUILDS
+              <h3 className="text-lg font-bold mb-8 flex items-center gap-2">
+                 <Sparkles className="h-5 w-5 text-primary" /> Active Guilds
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3">
                  {GUILDS.map((guild) => (
-                   <div key={guild.name} className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-transparent hover:border-white/10 transition-all cursor-pointer group/guild">
+                   <div key={guild.name} className="flex items-center justify-between p-3.5 rounded-2xl bg-white/2 border border-transparent hover:border-white/10 transition-all cursor-pointer group/guild">
                       <div className="flex items-center gap-4">
-                         <div className="text-2xl h-12 w-12 rounded-xl bg-white/5 flex items-center justify-center group-hover/guild:scale-110 transition-transform">{guild.icon}</div>
+                         <div className="text-xl h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center group-hover/guild:scale-110 transition-transform">{guild.icon}</div>
                          <div>
-                            <div className="text-xs font-black uppercase text-white tracking-widest">{guild.name}</div>
-                            <div className="text-[9px] text-muted-foreground font-black uppercase tracking-widest mt-0.5">{guild.members} Members</div>
+                            <div className="text-xs font-bold text-white tracking-tight">{guild.name}</div>
+                            <div className="text-[9px] text-muted-foreground font-semibold uppercase tracking-wider mt-0.5">{guild.members}</div>
                          </div>
                       </div>
                       <div className={cn(
-                        "text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest",
-                        guild.activity === "Very High" ? "bg-emerald-500/20 text-emerald-400" : "bg-primary/20 text-primary"
+                        "text-[8px] font-bold px-2 py-0.5 rounded uppercase tracking-wider",
+                        guild.activity === "Peak" ? "bg-secondary/10 text-secondary" : "bg-primary/10 text-primary"
                       )}>
                          {guild.activity}
                       </div>
                    </div>
                  ))}
               </div>
-              <Button className="w-full mt-8 rounded-xl bg-primary text-white font-black uppercase text-[10px] tracking-widest h-12 border-none">JOIN A GUILD</Button>
+              <Button className="w-full mt-8 rounded-xl bg-white text-black font-bold text-xs h-11 border-none shadow-lg">Join a Guild</Button>
            </div>
 
            {/* Leaderboard Snippet */}
-           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden bg-primary/5">
-              <h3 className="text-xl font-black mb-10 flex items-center gap-3 uppercase tracking-tighter italic">
-                 <TrendingUp className="h-5 w-5 text-primary" /> TOP OF FLOW
+           <div className="glass p-8 rounded-3xl bg-primary/2">
+              <h3 className="text-lg font-bold mb-10 flex items-center gap-2">
+                 <TrendingUp className="h-5 w-5 text-primary" /> Top of Flow
               </h3>
-              <div className="space-y-6">
+              <div className="space-y-5">
                  {[1,2,3].map(rank => (
-                   <div key={rank} className="flex items-center gap-4 relative">
+                   <div key={rank} className="flex items-center gap-4">
                       <div className={cn(
-                        "h-8 w-8 rounded-lg flex items-center justify-center font-black italic",
-                        rank === 1 ? "bg-primary text-black" : "bg-white/5 text-muted-foreground"
+                        "h-8 w-8 rounded-lg flex items-center justify-center font-bold text-xs",
+                        rank === 1 ? "bg-primary text-white" : "bg-white/5 text-muted-foreground"
                       )}>{rank}</div>
-                      <div className="flex-1 font-black uppercase text-xs tracking-widest">STUDENT_{rank*12}</div>
-                      <div className="text-xs font-black italic text-primary">{(4000 - rank * 500).toLocaleString()} XP</div>
+                      <div className="flex-1 font-bold text-xs tracking-tight">Student_{rank*12}</div>
+                      <div className="text-[10px] font-bold text-primary">{(4000 - rank * 500).toLocaleString()} XP</div>
                    </div>
                  ))}
               </div>
-              <Button variant="link" className="w-full mt-10 p-0 h-auto font-black text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-white transition-colors">VIEW FULL LEADERBOARD</Button>
+              <Button variant="link" className="w-full mt-10 p-0 h-auto font-bold text-[10px] tracking-wider text-muted-foreground hover:text-primary transition-colors">View Full Leaderboard</Button>
            </div>
         </div>
       </div>
     </div>
   );
-}
-
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
 }

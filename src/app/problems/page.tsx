@@ -6,8 +6,8 @@ import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle, Sparkles, Trend
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
+import { cn } from "@/lib/utils";
 
 export default function ProblemsPage() {
   const [search, setSearch] = useState("");
@@ -40,77 +40,77 @@ export default function ProblemsPage() {
   );
 
   return (
-    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto space-y-16">
+    <div className="space-y-12">
       <motion.header 
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative"
       >
-        <div className="flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
-          <Sparkles className="h-3 w-3 text-primary animate-pulse" />
-          <span className="text-[10px] font-black uppercase text-primary tracking-widest">Neural Solution Engine</span>
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Library Engine</span>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tight leading-[0.9]">
-          WHAT IS YOUR <br />
-          <span className="text-gradient">OBSTACLE?</span>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
+          What are you <span className="text-primary italic">facing</span> today?
         </h1>
-        <p className="text-muted-foreground text-lg max-w-2xl font-medium">Pick a struggle, follow our scientifically backed 5-step solutions, and regain control of your focus.</p>
+        <p className="text-muted-foreground font-medium text-sm md:text-base max-w-2xl leading-relaxed">
+          Select your obstacle and follow our scientifically-backed recovery protocols to regain control of your cognitive performance.
+        </p>
       </motion.header>
 
       {/* Search Section */}
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="relative max-w-4xl"
+        className="max-w-3xl"
       >
         <div className="relative group">
-          <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-[2.5rem] opacity-0 group-focus-within:opacity-100 transition-opacity -z-10" />
-          <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground group-focus-within:text-primary transition-colors" />
+          <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+            <Search className="h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+          </div>
           <input 
             type="text"
-            placeholder="Search your problem (e.g. 'Procrastination', 'Phone Addition')"
-            className="w-full h-20 pl-16 pr-6 rounded-[1.25rem] border-white/10 bg-white/5 backdrop-blur-xl text-xl focus:ring-4 focus:ring-primary/10 focus:border-primary/50 outline-none transition-all shadow-2xl font-bold placeholder:text-muted-foreground/30"
+            placeholder="Search by keyword, obstacle, or symptom..."
+            className="w-full h-14 pl-14 pr-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-md text-base focus:ring-4 focus:ring-primary/5 focus:border-primary/40 outline-none transition-all font-medium placeholder:text-muted-foreground/30 shadow-inner"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div className="lg:col-span-8">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-3">
-              <div className="h-1.5 w-12 bg-primary rounded-full" /> 
-              Active Solutions
+            <h2 className="text-sm font-bold text-muted-foreground flex items-center gap-3">
+              Available Protocols
             </h2>
-            <span className="text-[10px] font-black uppercase text-muted-foreground/50">{filtered.length} RESULTS</span>
+            <span className="text-[10px] font-bold text-muted-foreground/40">{filtered.length} RESULTS</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <AnimatePresence mode="popLayout">
               {filtered.map((problem, index) => (
                 <motion.div
                   key={problem.id}
                   layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  transition={{ duration: 0.2, delay: index * 0.02 }}
                 >
                   <Link href={`/problems/${problem.id}`}>
-                    <div className="glass-card group h-full p-8 rounded-[2rem] hover:glow-primary cursor-pointer flex flex-col justify-between shimmer">
+                    <div className="glass group h-full p-6 rounded-2xl hover:border-white/10 transition-all flex flex-col justify-between">
                       <div>
-                        <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 mb-8 border border-primary/20">
-                           <Zap className="h-8 w-8" />
+                        <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform mb-6 border border-primary/20">
+                           <Zap className="h-5 w-5" />
                         </div>
-                        <h3 className="text-3xl font-black mb-4 group-hover:text-primary transition-colors leading-tight uppercase tracking-tight">{problem.title}</h3>
-                        <p className="text-muted-foreground text-sm line-clamp-2 font-medium mb-8 leading-relaxed">
+                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors tracking-tight">{problem.title}</h3>
+                        <p className="text-muted-foreground text-xs line-clamp-2 font-medium mb-8 leading-relaxed">
                           {problem.why}
                         </p>
                       </div>
-                      <div className="flex items-center text-xs font-black uppercase tracking-widest text-primary group-hover:gap-2 transition-all">
-                        Solve Now <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      <div className="flex items-center text-[11px] font-bold text-primary group-hover:translate-x-1 transition-transform">
+                        INITIALIZE <ArrowRight className="ml-2 h-3.5 w-3.5" />
                       </div>
                     </div>
                   </Link>
@@ -122,55 +122,50 @@ export default function ProblemsPage() {
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="col-span-full p-20 text-center glass-card rounded-[2.5rem] flex flex-col items-center border-dashed"
+                className="col-span-full py-16 text-center glass rounded-3xl flex flex-col items-center border-dashed"
               >
-                 <div className="h-20 w-20 rounded-full bg-muted/20 flex items-center justify-center mb-8">
-                    <AlertCircle className="h-10 w-10 text-muted-foreground" />
-                 </div>
-                 <h3 className="text-2xl font-black mb-4 uppercase">No solution found?</h3>
-                 <p className="text-muted-foreground mb-10 max-w-md mx-auto font-medium">Our AI can generate a custom solution specifically for your unique struggle.</p>
+                 <AlertCircle className="h-10 w-10 text-muted-foreground mb-4" />
+                 <h3 className="text-lg font-bold mb-2">No specialized protocol found</h3>
+                 <p className="text-muted-foreground mb-8 text-sm max-w-xs mx-auto font-medium">Request a neural-sync strategy for your specific challenge.</p>
                  <Button 
-                   size="xl"
-                   className="font-black px-12 rounded-2xl bg-white text-black hover:scale-105"
+                   size="sm"
+                   className="font-bold px-8 rounded-xl bg-white text-black hover:bg-neutral-200"
                    onClick={() => setModal({
                       open: true,
                       title: "Request Received",
-                      message: "Our AI team has been notified. We'll generate a custom 5-step fix for this problem soon!",
+                      message: "Our research team has been notified. We'll build a protocol for this soon!",
                       type: "success"
                     })}
                  >
-                   REQUEST CUSTOM SOLUTION
+                   Send Request
                  </Button>
               </motion.div>
             )}
           </div>
         </div>
 
-        <div className="lg:col-span-4 space-y-8">
+        <div className="lg:col-span-4 space-y-6">
            {/* Problem of the Day */}
            <motion.div 
-             whileHover={{ y: -5 }}
-             className="relative overflow-hidden group rounded-[2.5rem] bg-linear-to-br from-indigo-500 to-primary p-1 shadow-2xl"
+             whileHover={{ y: -2 }}
+             className="relative overflow-hidden group rounded-3xl p-px bg-linear-to-br from-indigo-500 via-primary to-primary/20"
            >
-              <div className="bg-background rounded-[2.4rem] p-10 h-full relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-8 text-primary/20 group-hover:text-primary/40 transition-colors">
-                  <TrendingUp className="h-20 w-20" />
+              <div className="bg-background/90 backdrop-blur-xl rounded-[23px] p-8 h-full relative overflow-hidden">
+                <div className="absolute -top-4 -right-4 p-8 text-primary/5 group-hover:text-primary/10 transition-colors">
+                  <TrendingUp className="h-24 w-24" />
                 </div>
                 
                 <div className="relative z-10">
-                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary mb-6">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                    </span>
-                    Daily Highlight
+                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-primary mb-6">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    High Priority
                   </div>
-                  <h3 className="text-3xl font-black mb-10 leading-[0.95] text-white uppercase tracking-tighter">
-                    "STUCK IN A <br /><span className="text-primary italic">DOPAMINE LOOP?</span>"
+                  <h3 className="text-2xl font-bold mb-8 leading-tight text-white tracking-tight">
+                    Stuck in a <br /><span className="text-primary italic">Dopamine Loop?</span>
                   </h3>
-                  <Button size="xl" className="w-full bg-primary text-white hover:scale-[1.02] rounded-2xl group border-none" asChild>
-                    <Link href="/problems/dopamine" className="flex items-center gap-3">
-                      BREAK THE LOOP <ArrowRight className="h-5 w-5" />
+                  <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-white rounded-xl shadow-lg shadow-primary/20" asChild>
+                    <Link href="/problems/dopamine" className="flex items-center gap-2 font-bold text-sm">
+                      Initialize Reset <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
                 </div>
@@ -178,27 +173,25 @@ export default function ProblemsPage() {
            </motion.div>
 
            {/* Stats/Quick Tips */}
-           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden">
-              <div className="absolute top-[-20%] right-[-20%] h-64 w-64 bg-secondary/5 blur-[80px] rounded-full" />
-              <h3 className="text-xs font-black uppercase tracking-[0.3em] mb-10 flex items-center gap-3">
-                <div className="h-1.5 w-8 bg-secondary rounded-full" /> 
-                Tactical Insights
+           <div className="glass p-8 rounded-3xl">
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-8 text-center border-b border-white/5 pb-4">
+                Field Intelligence
               </h3>
-              <div className="space-y-10">
+              <div className="space-y-8">
                  <Tip 
-                    title="THE 10M RULE" 
-                    desc="Digital distance is mental power. Move your phone." 
-                    icon={<Zap className="h-4 w-4 text-secondary" />}
+                    title="THE 10M DISTANCE" 
+                    desc="Cognitive effort is reduced when phones are physically distant." 
+                    icon={<Zap className="h-3.5 w-3.5 text-secondary" />}
                  />
                  <Tip 
-                    title="THE 2M STARTER" 
-                    desc="Friction is the enemy. Start for 120 seconds only." 
-                    icon={<BookOpen className="h-4 w-4 text-secondary" />}
+                    title="2-MINUTE FRICTION" 
+                    desc="Commit to only 120 seconds of work to bypass starting fear." 
+                    icon={<BookOpen className="h-3.5 w-3.5 text-secondary" />}
                  />
                  <Tip 
-                    title="ACTIVE RECALL" 
-                    desc="Testing is learning. Cover the page, say it out loud." 
-                    icon={<Target className="h-4 w-4 text-secondary" />}
+                    title="FORCED RETRIEVAL" 
+                    desc="Testing is learning. Cover information and recite from memory." 
+                    icon={<Target className="h-3.5 w-3.5 text-secondary" />}
                  />
               </div>
            </div>
@@ -218,17 +211,18 @@ export default function ProblemsPage() {
 
 function Tip({ title, desc, icon }: any) {
   return (
-    <div className="flex gap-5 group">
-       <div className="h-10 w-10 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+    <div className="flex gap-4 items-start group">
+       <div className="h-9 w-9 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20">
           {icon}
        </div>
        <div>
-          <div className="text-[10px] font-black uppercase tracking-widest text-secondary mb-1">{title}</div>
-          <div className="text-sm font-medium text-muted-foreground leading-snug">{desc}</div>
+          <div className="text-[10px] font-bold text-secondary mb-1 tracking-wide">{title}</div>
+          <div className="text-xs font-medium text-muted-foreground leading-relaxed">{desc}</div>
        </div>
     </div>
   );
 }
+
 
 
 

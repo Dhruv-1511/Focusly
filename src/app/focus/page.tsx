@@ -64,23 +64,23 @@ export default function FocusPage() {
   };
 
   return (
-    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto flex flex-col min-h-[calc(100vh-120px)] space-y-12">
-      <header className="relative">
-        <div className="flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
-          <Timer className="h-3 w-3 text-primary animate-pulse" />
-          <span className="text-[10px] font-black uppercase text-primary tracking-widest">Neural Flow State Active</span>
+    <div className="max-w-6xl mx-auto space-y-12 min-h-[calc(100vh-140px)] flex flex-col justify-center">
+      <header className="text-center">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Neural Flow State Active</span>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tight leading-[0.9] uppercase italic text-white">
-          FOCUS <br />
-          <span className="text-gradient">ZONE.</span>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+          Focus <span className="text-primary italic">Zone</span>
         </h1>
-        <p className="text-muted-foreground text-lg max-w-2xl font-medium">Digital isolation initialized. Your deep work session is waiting.</p>
+        <p className="text-muted-foreground font-medium text-sm md:text-base max-w-xl mx-auto">
+          Digital isolation initialized. Your deep work session is waiting.
+        </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1">
-        <div className="lg:col-span-8 flex flex-col">
-          <section className="glass-card rounded-[3rem] p-12 md:p-20 flex-1 flex flex-col items-center justify-center relative overflow-hidden group border-white/5">
-             {/* Dynamic Background Pulse */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="lg:col-span-8">
+          <section className="glass rounded-[3rem] p-12 md:p-16 flex flex-col items-center justify-center relative overflow-hidden group border-white/5 h-full">
              <AnimatePresence>
                {isActive && (
                  <motion.div 
@@ -88,17 +88,17 @@ export default function FocusPage() {
                    animate={{ opacity: 1, scale: 1.2 }}
                    exit={{ opacity: 0 }}
                    transition={{ repeat: Infinity, duration: 4, repeatType: "reverse" }}
-                   className="absolute inset-0 bg-primary/5 rounded-lg pointer-events-none blur-3xl" 
+                   className="absolute inset-0 bg-primary/2 rounded-full pointer-events-none blur-3xl" 
                  />
                )}
              </AnimatePresence>
 
-             <div className="flex gap-3 mb-16 relative z-10 bg-white/5 p-1.5 rounded-2xl border border-white/5">
+             <div className="flex gap-2 mb-12 p-1 bg-white/5 rounded-2xl border border-white/5 relative z-10">
                 <button 
                    onClick={() => setTimerMode("Focus", 25)}
                    className={cn(
-                     "px-8 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all",
-                     mode === "Focus" ? "bg-primary text-white shadow-xl shadow-primary/20" : "text-muted-foreground hover:text-white"
+                     "px-6 py-2.5 rounded-xl font-bold text-xs transition-all",
+                     mode === "Focus" ? "bg-primary text-white shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-white"
                    )}
                 >
                    Deep Work
@@ -106,117 +106,107 @@ export default function FocusPage() {
                 <button 
                    onClick={() => setTimerMode("Break", 5)}
                    className={cn(
-                     "px-8 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all",
-                     mode === "Break" ? "bg-primary text-white shadow-xl shadow-primary/20" : "text-muted-foreground hover:text-white"
+                     "px-6 py-2.5 rounded-xl font-bold text-xs transition-all",
+                     mode === "Break" ? "bg-primary text-white shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-white"
                    )}
                 >
                    Cooldown
                 </button>
              </div>
 
-             <div className="relative mb-16 group/timer">
-               <motion.div 
-                 animate={isActive ? { opacity: [0.3, 0.6, 0.3] } : { opacity: 0.2 }}
-                 transition={{ repeat: Infinity, duration: 2 }}
-                 className="absolute inset-x-0 -bottom-8 h-1 bg-primary blur-md"
-               />
-               <div className="text-9xl md:text-[15rem] font-black tracking-tighter tabular-nums relative z-10 text-white flex items-baseline leading-none italic">
-                  {String(minutes).padStart(2, '0')}<span className="text-primary animate-pulse">:</span>{String(seconds).padStart(2, '0')}
+             <div className="relative mb-12 z-10">
+               <div className="text-8xl md:text-[10rem] font-bold tracking-tighter tabular-nums text-white flex items-baseline leading-none">
+                  {String(minutes).padStart(2, '0')}<span className={cn("text-primary/40", isActive && "animate-pulse")}>:</span>{String(seconds).padStart(2, '0')}
                </div>
              </div>
 
-             <div className="flex gap-6 relative z-10">
+             <div className="flex items-center gap-6 relative z-10">
                 <Button 
                    onClick={toggleTimer}
-                   variant={isActive ? "outline" : "glow"}
+                   size="xl"
                    className={cn(
-                     "h-20 px-12 rounded-2xl font-black text-xl transition-all group border-none shadow-2xl",
-                     isActive ? "bg-white/10 text-white hover:bg-white/20" : "text-white"
+                     "h-16 px-10 rounded-2xl font-bold text-base transition-all shadow-xl",
+                     isActive ? "bg-white/10 text-white hover:bg-white/20" : "bg-primary text-white hover:bg-primary/90"
                    )}
                 >
                    {isActive ? (
-                     <><Pause className="mr-3 h-6 w-6 fill-current" /> PAUSE SESSION</>
+                     <><Pause className="mr-2 h-5 w-5 fill-current" /> Pause</>
                    ) : (
-                     <><Play className="mr-3 h-6 w-6 fill-current" /> INITIATE FLOW</>
+                     <><Play className="mr-2 h-5 w-5 fill-current" /> Initialize</>
                    )}
                 </Button>
                 <Button 
                    onClick={resetTimer}
-                   variant="outline"
-                   className="h-20 w-20 rounded-2xl border-white/10 hover:bg-white/5 transition-all group"
+                   variant="ghost"
+                   className="h-16 w-16 rounded-2xl border border-white/5 hover:bg-white/5 transition-all group"
                 >
-                   <RotateCcw className="h-6 w-6 group-hover:rotate-180 transition-transform duration-500" />
+                   <RotateCcw className="h-5 w-5 text-muted-foreground group-hover:text-white group-hover:rotate-180 transition-transform duration-500" />
                 </Button>
              </div>
 
-             <div className="mt-20 flex flex-wrap justify-center gap-8 text-[9px] font-black uppercase tracking-[0.25em] text-muted-foreground relative z-10">
-                <div className="flex items-center gap-2.5 group/stat">
-                   <BellOff className="h-3.5 w-3.5 group-hover/stat:text-white transition-colors" /> NO DISTRACTIONS
+             <div className="mt-12 flex flex-wrap justify-center gap-6 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 relative z-10">
+                <div className="flex items-center gap-2">
+                   <BellOff className="h-3.5 w-3.5" /> DISTRACTION LOCK
                 </div>
-                <div className="hidden sm:block h-1 w-1 rounded-full bg-white/10" />
-                <div className="flex items-center gap-2.5 group/stat">
-                   <ShieldAlert className="h-3.5 w-3.5 text-orange-500 group-focus:animate-ping" /> SHIELD ACTIVE
+                <div className="h-1 w-1 rounded-full bg-white/10" />
+                <div className="flex items-center gap-2">
+                   <ShieldAlert className="h-3.5 w-3.5" /> NEURAL SHIELD
                 </div>
-                <div className="hidden sm:block h-1 w-1 rounded-full bg-white/10" />
-                <div className="flex items-center gap-2.5 group/stat">
-                   <Activity className="h-3.5 w-3.5 text-emerald-500" /> NEURAL SYNC
+                <div className="h-1 w-1 rounded-full bg-white/10" />
+                <div className="flex items-center gap-2">
+                   <Activity className="h-3.5 w-3.5" /> FLOW SYNC
                 </div>
              </div>
           </section>
         </div>
 
-        <div className="lg:col-span-4 space-y-8">
-           {/* Ambient Station */}
-           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden group">
-              <div className="absolute -top-10 -right-10 h-32 w-32 bg-primary/10 blur-[60px] rounded-full group-hover:blur-[80px] transition-all" />
-              <h3 className="text-xl font-black mb-8 flex items-center gap-3 uppercase tracking-tighter italic">
-                 <Music className="h-5 w-5 text-primary" /> SONIC WAVES
+        <div className="lg:col-span-4 space-y-6">
+           <div className="glass p-8 rounded-3xl relative overflow-hidden group">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                 <Music className="h-5 w-5 text-primary" /> Ambient Station
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-2">
                  <AmbientTrack icon={Moon} name="Deep Space Lo-Fi" active={true} />
-                 <AmbientTrack icon={Zap} name="Electric Thunder" />
-                 <AmbientTrack icon={HeartPulse} name="Alpha Waves 432Hz" />
-                 <AmbientTrack icon={Coffee} name="Cozy Rain Cafe" />
+                 <AmbientTrack icon={Zap} name="Static Thunder" />
+                 <AmbientTrack icon={HeartPulse} name="Alpha Waves" />
+                 <AmbientTrack icon={Coffee} name="Cozy Cafe" />
               </div>
-              <div className="mt-10 pt-8 border-t border-white/5">
-                 <div className="flex items-center justify-between mb-3 text-[9px] font-black uppercase tracking-widest">
-                    <span className="text-muted-foreground">Output Intensity</span>
-                    <span className="text-primary">45%</span>
+              <div className="mt-8 pt-6 border-t border-white/5">
+                 <div className="flex items-center justify-between mb-3 text-[10px] font-bold text-muted-foreground">
+                    <span className="uppercase tracking-wider">Atmospheric Intensity</span>
+                    <span className="text-primary font-bold">45%</span>
                  </div>
-                 <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden p-0.5">
-                    <div className="h-full bg-primary rounded-full shadow-[0_0_10px_rgba(129,140,248,0.5)] w-[45%]" />
+                 <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full bg-primary rounded-full w-[45%]" />
                  </div>
               </div>
            </div>
 
-           {/* Stats Widget */}
-           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden group bg-primary/5">
-              <div className="relative z-10">
-                <h3 className="text-xl font-black mb-8 flex items-center gap-3 uppercase tracking-tighter italic">
-                  <Layers className="h-5 w-5 text-primary" /> HARVEST
-                </h3>
-                <div className="space-y-6">
-                   <div className="flex justify-between items-end">
-                      <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">FLOW QUALITY</div>
-                      <div className="text-2xl font-black text-white italic uppercase tracking-tighter">OPTIMAL</div>
+           <div className="glass p-8 rounded-3xl relative overflow-hidden flex flex-col h-full">
+              <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
+                <Layers className="h-5 w-5 text-primary" /> Flow Harvest
+              </h3>
+              <div className="space-y-6">
+                 <div className="flex justify-between items-baseline">
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Flow Quality</span>
+                    <span className="text-lg font-bold text-white tracking-tight">Optimal</span>
+                 </div>
+                 <div className="flex justify-between items-baseline">
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Potential Gain</span>
+                    <span className="text-lg font-bold text-primary tracking-tight">+250 XP</span>
+                 </div>
+              </div>
+              <div className="mt-10 flex-1 flex items-end gap-1 px-1">
+                 {[40, 70, 45, 90, 65, 80, 50, 95].map((h, i) => (
+                   <div key={i} className="flex-1 bg-white/5 rounded-t-xl relative h-24">
+                      <motion.div 
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${h}%` }}
+                        transition={{ delay: i * 0.05, duration: 1 }}
+                        className="absolute bottom-0 inset-x-0 bg-primary/20 group-hover:bg-primary/40 transition-colors rounded-t-xl"
+                      />
                    </div>
-                   <div className="flex justify-between items-end">
-                      <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">EST. REWARD</div>
-                      <div className="text-2xl font-black text-primary italic uppercase tracking-tighter">+250 XP</div>
-                   </div>
-                </div>
-                <div className="mt-12 h-24 flex items-end gap-1.5">
-                   {[40, 70, 45, 90, 65, 80, 50, 95].map((h, i) => (
-                     <div key={i} className="flex-1 bg-white/5 rounded-lg relative overflow-hidden h-full">
-                        <motion.div 
-                          initial={{ height: 0 }}
-                          whileInView={{ height: `${h}%` }}
-                          transition={{ delay: i * 0.05, duration: 1 }}
-                          className="absolute bottom-0 inset-x-0 bg-primary/40 group-hover:bg-primary transition-colors"
-                        />
-                     </div>
-                   ))}
-                </div>
+                 ))}
               </div>
            </div>
         </div>
@@ -229,19 +219,19 @@ function AmbientTrack({ icon: Icon, name, active = false }: any) {
   return (
     <button 
       className={cn(
-        "w-full flex items-center gap-4 p-4 rounded-2xl border transition-all group/track",
-        active ? "bg-primary/20 border-primary/20" : "bg-white/5 border-transparent hover:bg-white/10"
+        "w-full flex items-center gap-4 p-3 rounded-xl border transition-all",
+        active ? "bg-primary/10 border-primary/20" : "bg-white/5 border-transparent hover:bg-white/10"
       )}
     >
        <div className={cn(
-         "h-12 w-12 rounded-xl flex items-center justify-center transition-all",
-         active ? "bg-primary text-black" : "bg-white/5 text-muted-foreground group-hover/track:text-white"
+         "h-10 w-10 rounded-lg flex items-center justify-center transition-all",
+         active ? "bg-primary text-white" : "bg-white/5 text-muted-foreground"
        )}>
-          <Icon className="h-5 w-5 fill-current" />
+          <Icon className="h-4 w-4" />
        </div>
        <span className={cn(
-         "font-black text-[10px] uppercase tracking-widest",
-         active ? "text-white" : "text-muted-foreground group-hover/track:text-white"
+         "font-bold text-xs tracking-tight",
+         active ? "text-white" : "text-muted-foreground"
        )}>{name}</span>
        {active && (
          <div className="ml-auto flex gap-0.5">
@@ -258,3 +248,5 @@ function AmbientTrack({ icon: Icon, name, active = false }: any) {
     </button>
   );
 }
+
+

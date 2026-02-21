@@ -16,31 +16,34 @@ export default function MentalHealthPage() {
   };
 
   return (
-    <div className="p-4 sm:p-8 lg:p-12 max-w-7xl mx-auto space-y-16">
-      <header className="relative">
-        <div className="flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit">
-          <HeartPulse className="h-3 w-3 text-primary animate-pulse" />
-          <span className="text-[10px] font-black uppercase text-primary tracking-widest">Neural Balance Monitor</span>
+    <div className="space-y-12">
+      <header>
+        <div className="flex items-center gap-2 mb-3">
+          <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Neural Balance Monitor</span>
         </div>
-        <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tight leading-[0.9] uppercase italic text-white">
-          MENTAL <br />
-          <span className="text-gradient">EQUILIBRIUM.</span>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+          Mental <span className="text-primary italic">Equilibrium</span>
         </h1>
-        <p className="text-muted-foreground text-lg max-w-2xl font-medium">A high-performance brain requires high-performance recovery.</p>
+        <p className="text-muted-foreground font-medium text-sm md:text-base max-w-xl leading-relaxed">
+          A high-performance brain requires high-performance recovery protocols to maintain cognitive longevity.
+        </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Mood Logger */}
         <div className="lg:col-span-12">
-           <section className="glass-card rounded-[3.5rem] p-12 md:p-20 relative overflow-hidden group border-white/5">
-              <div className="absolute -top-20 -right-20 h-80 w-80 bg-primary/10 blur-[100px] rounded-full group-hover:blur-[120px] transition-all" />
+           <section className="glass rounded-[3rem] p-10 md:p-14 relative overflow-hidden group border-white/5">
+              <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                 <HeartPulse className="h-48 w-48 text-primary" />
+              </div>
               
-              <div className="text-center max-w-2xl mx-auto mb-16 relative z-10">
-                 <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tighter italic">How is your neural load?</h2>
-                 <p className="text-muted-foreground font-medium uppercase text-[10px] tracking-[0.3em]">AI-driven focus adjustments based on emotional state.</p>
+              <div className="text-center max-w-xl mx-auto mb-12 relative z-10">
+                 <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight">How is your neural load today?</h2>
+                 <p className="text-muted-foreground font-medium text-xs">AI-driven focus adjustments based on your current emotional baseline.</p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
                  <MoodButton emoji="😊" label="Optimal" onClick={() => handleFeeling("OPTIMAL")} />
                  <MoodButton emoji="😐" label="Fatigued" onClick={() => handleFeeling("FATIGUED")} />
                  <MoodButton emoji="😔" label="Stressed" onClick={() => handleFeeling("STRESSED")} />
@@ -50,15 +53,15 @@ export default function MentalHealthPage() {
         </div>
 
         {/* Recovery Protocols */}
-        <div className="lg:col-span-8 space-y-10">
-           <h3 className="text-sm font-black uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-3">
-              <div className="h-1.5 w-12 bg-primary rounded-full" /> 
-              Recovery Protocols
+        <div className="lg:col-span-8 space-y-8">
+           <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-4">
+              Available Recovery Protocols
+              <div className="h-px bg-white/5 flex-1" />
            </h3>
            
-           <div className="space-y-6">
+           <div className="space-y-4">
               <RecoveryItem 
-                title="Box Breathing v1.0" 
+                title="Box Breathing" 
                 desc="Reset cortisol levels in 120 seconds with controlled respiratory cycles."
                 icon={Wind}
                 time="2m"
@@ -75,27 +78,27 @@ export default function MentalHealthPage() {
                 title="Digital Detox Blast" 
                 desc="Instant disconnection from all social nodes for immediate dopamine baseline reset."
                 icon={Zap}
-                time="Indefinite"
+                time="∞"
                 color="text-orange-500"
               />
            </div>
         </div>
 
         {/* AI Insight Sidebar */}
-        <div className="lg:col-span-4 space-y-8">
-           <div className="glass-card rounded-[2.5rem] p-10 relative overflow-hidden bg-white text-black border-none h-full">
-              <div className="mb-10 flex justify-between items-start">
-                 <div className="h-14 w-14 rounded-2xl bg-black/5 flex items-center justify-center">
-                    <Brain className="h-8 w-8 text-black" />
+        <div className="lg:col-span-4 h-full">
+           <div className="glass p-8 rounded-3xl border-white/5 h-full flex flex-col">
+              <div className="mb-8 flex justify-between items-start">
+                 <div className="h-12 w-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
+                    <Brain className="h-6 w-6 text-primary" />
                  </div>
-                 <ShieldCheck className="h-6 w-6 text-emerald-600" />
+                 <div className="px-2 py-1 rounded bg-secondary/10 border border-secondary/20 text-[9px] font-bold text-secondary uppercase tracking-wider">Verified</div>
               </div>
-              <h4 className="text-2xl font-black mb-6 uppercase tracking-tighter italic leading-none">AI THERAPIST <br /><span className="text-black/40">V0.4</span></h4>
-              <p className="text-sm font-medium text-black/60 mb-10 leading-relaxed">
+              <h4 className="text-xl font-bold mb-4 tracking-tight">Neural Guide <span className="text-muted-foreground/40 font-medium">v0.4</span></h4>
+              <p className="text-xs font-semibold text-muted-foreground mb-10 leading-relaxed flex-1">
                  "I've noticed your focus sessions have been getting shorter over the last 48 hours. This typically indicates a rise in background cognitive load. I recommend a 30-minute 'Digital Silence' protocol before your next session."
               </p>
-              <Button className="w-full h-16 rounded-2xl bg-black text-white hover:bg-black/80 font-black uppercase text-[10px] tracking-widest transition-all">
-                 START DIALOGUE
+              <Button className="w-full h-12 rounded-xl bg-white text-black hover:bg-neutral-200 font-bold text-xs transition-all shadow-lg">
+                 Start Dialogue
               </Button>
            </div>
         </div>
@@ -116,30 +119,31 @@ function MoodButton({ emoji, label, onClick }: any) {
   return (
     <button 
       onClick={onClick}
-      className="flex flex-col items-center justify-center p-10 rounded-[2.5rem] bg-white/5 border border-white/5 hover:border-primary/20 hover:bg-white/10 group transition-all transform active:scale-95"
+      className="flex flex-col items-center justify-center p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-primary/20 hover:bg-white/10 group transition-all transform active:scale-95"
     >
-       <div className="text-5xl mb-6 group-hover:scale-125 transition-transform duration-500">{emoji}</div>
-       <div className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground group-hover:text-white transition-colors">{label}</div>
+       <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{emoji}</div>
+       <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground group-hover:text-white transition-colors">{label}</div>
     </button>
   );
 }
 
 function RecoveryItem({ title, desc, icon: Icon, time, color }: any) {
   return (
-    <div className="glass-card p-8 rounded-[2.5rem] flex flex-col sm:flex-row items-center gap-8 group hover:border-white/20 transition-all shimmer">
-       <div className={`h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center ${color} border border-white/5 group-hover:scale-110 transition-transform`}>
-          <Icon className="h-8 w-8" />
+    <div className="glass p-6 rounded-3xl flex flex-col sm:flex-row items-center gap-6 group hover:border-white/10 transition-all">
+       <div className={`h-12 w-12 rounded-xl bg-white/5 flex items-center justify-center ${color} border border-white/5 group-hover:scale-105 transition-transform shrink-0`}>
+          <Icon className="h-6 w-6" />
        </div>
        <div className="flex-1 text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-             <h4 className="font-black text-lg uppercase tracking-tight text-white">{title}</h4>
-             <span className="text-[9px] font-black px-2 py-0.5 rounded border border-white/10 text-muted-foreground uppercase">{time}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-1">
+             <h4 className="font-bold text-base text-white tracking-tight">{title}</h4>
+             <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-white/5 text-muted-foreground border border-white/5 w-fit mx-auto sm:mx-0 uppercase tracking-tighter">{time}</span>
           </div>
-          <p className="text-muted-foreground text-sm font-medium leading-relaxed">{desc}</p>
+          <p className="text-muted-foreground text-[11px] font-medium leading-relaxed">{desc}</p>
        </div>
-       <Button variant="outline" className="h-14 px-8 rounded-2xl border-white/10 hover:bg-white/5 font-black uppercase text-[10px] tracking-widest group-hover:bg-primary group-hover:text-white group-hover:border-none transition-all">
+       <Button variant="ghost" className="h-10 px-6 rounded-xl border border-white/5 hover:bg-white/5 font-bold text-[10px] tracking-wider text-primary group-hover:bg-primary group-hover:text-white transition-all">
           EXECUTE
        </Button>
     </div>
   );
 }
+
