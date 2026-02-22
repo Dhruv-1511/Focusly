@@ -43,74 +43,97 @@ const FEATURES = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Background Decor */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full animate-float" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 blur-[120px] rounded-full animate-float" style={{ animationDelay: '-2s' }} />
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+      </div>
+
       {/* Hero Section */}
-      <section className="relative pt-44 pb-20 px-6">
+      <section className="relative pt-44 pb-32 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 mb-10"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/3 text-white border border-white/10 mb-12 backdrop-blur-md shadow-2xl"
           >
-            <Sparkles className="h-3.5 w-3.5" />
-            <span className="text-[10px] font-bold tracking-widest uppercase">The Future of Deep Work</span>
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+            <span className="text-[10px] font-black tracking-[0.3em] uppercase">The Future of Neural Performance</span>
           </motion.div>
 
           <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 leading-[0.9]"
+            transition={{ delay: 0.1, duration: 0.8, ease: "circOut" }}
+            className="text-7xl md:text-9xl font-black tracking-tighter mb-10 leading-[0.85] uppercase"
           >
-            Work smarter, <br />
-            <span className="text-primary italic">not harder.</span>
+            Master your <br />
+            <span className="text-gradient italic drop-shadow-sm">Inner Flow.</span>
           </motion.h1>
 
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-14 font-medium leading-relaxed"
+            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-16 font-semibold leading-relaxed"
           >
-            Focusly is the neural-sync platform designed to eliminate distractions and help you achieve deep work in half the time.
+            Focusly is the high-bandwidth neural-sync platform designed to eliminate distractions and achieve deep work with <span className="text-white">surgical precision.</span>
           </motion.p>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-28"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-32"
           >
-            <Button size="lg" asChild className="h-14 px-10 rounded-full bg-white text-black hover:bg-neutral-200 transition-all font-bold text-base shadow-xl">
-              <Link href="/dashboard">Get Started Free</Link>
+            <Button variant="glow" size="xl" asChild className="h-16 px-12 rounded-[2rem] font-black text-lg gap-3">
+              <Link href="/dashboard">INITIATE SYNC <ArrowRight className="h-5 w-5" /></Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="h-14 px-10 rounded-full border-white/10 hover:bg-white/5 transition-all font-bold text-base bg-white/2 backdrop-blur-sm">
-              <Link href="/tools">Watch Demo</Link>
+            <Button size="xl" variant="outline" asChild className="h-16 px-12 rounded-[2rem] border-white/5 bg-white/2 backdrop-blur-xl hover:bg-white/5 transition-all font-black text-lg">
+              <Link href="/tools">WATCH PROTOCOL</Link>
             </Button>
           </motion.div>
 
-          {/* Device Mockup or Visual */}
+          {/* Device Mockup */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 1, ease: "circOut" }}
-            className="relative max-w-5xl mx-auto"
+            transition={{ delay: 0.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative max-w-6xl mx-auto group shadow-[0_0_100px_rgba(99,102,241,0.1)]"
           >
-            <div className="absolute -inset-1 bg-linear-to-b from-primary/20 to-transparent blur-2xl rounded-[3rem] -z-10" />
-            <div className="glass rounded-[2.5rem] p-3 overflow-hidden border-white/5 shadow-2xl">
-               <div className="relative aspect-video rounded-3xl bg-neutral-950 border border-white/5 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 bg-primary/10 blur-3xl rounded-full scale-150" />
+            <div className="absolute -inset-1 bg-linear-to-b from-primary/30 to-transparent blur-3xl rounded-[4rem] -z-10 group-hover:from-primary/40 transition-colors" />
+            <div className="glass-card p-4 overflow-hidden border-white/10 shadow-3xl rounded-[3rem]">
+               <div className="relative aspect-video rounded-[2.5rem] bg-neutral-950 border border-white/5 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full scale-150 animate-pulse" />
                   <div className="z-10 text-center">
-                     <Brain className="h-20 w-20 text-primary/30 mx-auto mb-4 animate-pulse" />
-                     <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40">Syncing Neurons...</div>
+                     <div className="relative">
+                        <div className="absolute inset-0 bg-primary/30 blur-2xl animate-pulse rounded-full" />
+                        <Brain className="h-24 w-24 text-white mx-auto mb-6 relative animate-bounce-slow" />
+                     </div>
+                     <div className="text-xs font-black uppercase tracking-[0.5em] text-white/50">Neural Synchronization...</div>
                   </div>
+                  
                   {/* Floating UI elements */}
-                  <div className="absolute top-10 right-10 glass p-5 rounded-3xl border-white/10 animate-float">
-                     <div className="flex items-center gap-4">
-                        <div className="h-2.5 w-2.5 rounded-full bg-secondary animate-pulse" />
+                  <div className="absolute top-12 right-12 glass-card p-6 rounded-3xl border-white/10 animate-float shadow-2xl">
+                     <div className="flex items-center gap-5">
+                        <div className="h-3 w-3 rounded-full bg-secondary animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
                         <div>
-                           <div className="text-[10px] uppercase tracking-widest font-bold text-white mb-1">Neural Flow Active</div>
-                           <div className="text-[9px] font-semibold text-muted-foreground uppercase">Stability: 98.4%</div>
+                           <div className="text-xs uppercase tracking-[0.2em] font-black text-white mb-1">COGNITIVE FLOW</div>
+                           <div className="text-[10px] font-bold text-secondary uppercase tracking-widest">STABILITY: 99.2%</div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div className="absolute bottom-12 left-12 glass-card p-6 rounded-3xl border-white/10 animate-float shadow-2xl" style={{ animationDelay: '-1s' }}>
+                     <div className="flex items-center gap-4">
+                        <div className="h-10 w-10 bg-primary/20 rounded-xl flex items-center justify-center">
+                           <Zap className="h-5 w-5 text-primary fill-current" />
+                        </div>
+                        <div>
+                           <div className="text-[10px] uppercase tracking-[0.2em] font-black text-white mb-1">XP MULTIPLIER</div>
+                           <div className="text-[10px] font-bold text-primary uppercase tracking-widest">3.5X BOOST</div>
                         </div>
                      </div>
                   </div>
@@ -121,32 +144,40 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-40 px-6">
+      <section className="py-48 px-6 relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Built for High Performance</h2>
-            <p className="text-muted-foreground max-w-xl mx-auto font-medium">Everything you need to master your schedule and achieve your goals with surgical precision.</p>
+          <div className="text-center mb-32 relative z-10">
+            <motion.div 
+               whileInView={{ opacity: 1, scale: 1 }}
+               initial={{ opacity: 0, scale: 0.8 }}
+               className="h-1 w-20 bg-primary mx-auto mb-10 rounded-full"
+            />
+            <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase leading-none">Architected for <br />Peak Potential</h2>
+            <p className="text-muted-foreground text-xl max-w-2xl mx-auto font-semibold leading-relaxed">Everything needed to master your cognitive bandwidth and achieve goals with surgical precision.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
             {FEATURES.map((feature, i) => (
               <motion.div 
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="glass p-10 rounded-[2.5rem] border-white/5 hover:border-white/20 transition-all group cursor-default"
+                className="glass-card p-12 overflow-hidden group cursor-default"
               >
-                <div className={cn("h-14 w-14 rounded-2xl flex items-center justify-center mb-8 border border-white/5 transition-all group-hover:scale-110", feature.bg)}>
-                  <feature.icon className={cn("h-6 w-6", feature.color)} />
+                <div className={cn(
+                  "h-16 w-16 rounded-2xl flex items-center justify-center mb-10 border border-white/5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-xl", 
+                  feature.bg
+                )}>
+                  <feature.icon className={cn("h-8 w-8", feature.color)} />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 tracking-tight">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-8 font-medium">
+                <h3 className="text-3xl font-black mb-6 tracking-tight uppercase leading-none">{feature.title}</h3>
+                <p className="text-muted-foreground text-base leading-relaxed mb-10 font-black uppercase tracking-widest text-[11px] opacity-70">
                   {feature.description}
                 </p>
-                <Link href="/tools" className="text-[11px] font-bold text-primary flex items-center gap-2 group/link uppercase tracking-wider">
-                  Learn more <ArrowRight className="h-3.5 w-3.5 group-hover/link:translate-x-1 transition-transform" />
+                <Link href="/tools" className="text-[12px] font-black text-primary flex items-center gap-3 group/link uppercase tracking-[0.2em]">
+                  CALIBRATE <ArrowRight className="h-4 w-4 group-hover/link:translate-x-2 transition-transform" />
                 </Link>
               </motion.div>
             ))}
@@ -154,48 +185,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats/Social Proof */}
-      <section className="py-24 px-6 border-y border-white/5 bg-white/2">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-12 md:gap-24 opacity-60">
-           <div className="flex items-center gap-3"><Users className="h-5 w-5 text-primary" /> <span className="text-[11px] font-bold tracking-widest uppercase">50k+ Optimized</span></div>
-           <div className="flex items-center gap-3"><Target className="h-5 w-5 text-secondary" /> <span className="text-[11px] font-bold tracking-widest uppercase">98% Retention</span></div>
-           <div className="flex items-center gap-3"><Clock className="h-5 w-5 text-primary" /> <span className="text-[11px] font-bold tracking-widest uppercase">2M+ Hours Saved</span></div>
-           <div className="flex items-center gap-3"><CheckCircle2 className="h-5 w-5 text-secondary" /> <span className="text-[11px] font-bold tracking-widest uppercase">Validated</span></div>
+      {/* Stats Section */}
+      <section className="py-32 px-6 border-y border-white/5 bg-white/2 backdrop-blur-3xl relative">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-12 md:gap-32">
+           {[
+             { icon: Users, label: "NEURAL LINKS", value: "150k+" },
+             { icon: Target, label: "RETENTION RATE", value: "99.4%" },
+             { icon: Clock, label: "XP EARNED", value: "25M+" },
+             { icon: CheckCircle2, label: "PROTOCOLS", value: "1.2M" }
+           ].map((stat, i) => (
+             <div key={i} className="flex flex-col items-center gap-4 group">
+               <stat.icon className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
+               <div className="text-3xl font-black tracking-tighter text-white">{stat.value}</div>
+               <div className="text-[10px] font-black tracking-[0.3em] uppercase text-muted-foreground group-hover:text-primary transition-colors">{stat.label}</div>
+             </div>
+           ))}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-44 px-6 text-center">
-        <div className="max-w-4xl mx-auto glass p-16 md:p-24 rounded-[4rem] border-white/5 relative overflow-hidden group">
-           <div className="absolute inset-0 bg-primary/10 blur-[120px] group-hover:bg-primary/20 transition-colors" />
+      <section className="py-52 px-6 text-center">
+        <div className="max-w-5xl mx-auto glass-card p-24 md:p-32 relative overflow-hidden group rounded-[4rem]">
+           <div className="absolute inset-0 bg-primary/5 blur-[120px] group-hover:bg-primary/10 transition-colors animate-pulse" />
            <div className="relative z-10">
-              <h2 className="text-5xl md:text-7xl font-bold mb-10 tracking-tight">Ready to transform?</h2>
-              <p className="text-muted-foreground mb-14 max-w-lg mx-auto font-medium text-lg leading-relaxed">Join thousands of high-performers who have already optimized their flow state with Focusly.</p>
-              <Button size="xl" asChild className="h-16 px-14 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-xl shadow-2xl shadow-primary/30 transition-all hover:scale-[1.03] active:scale-[0.98]">
-                <Link href="/register">Join the Pro Squad</Link>
+              <h2 className="text-6xl md:text-8xl font-black mb-12 tracking-tighter uppercase leading-none">Ready to <br /><span className="text-gradient">Ascend?</span></h2>
+              <p className="text-muted-foreground mb-16 max-w-xl mx-auto font-black uppercase tracking-widest text-sm leading-relaxed opacity-80">Join the elite high-performers who have already catalyzed their peak flow state with Focusly.</p>
+              <Button variant="glow" size="xl" asChild className="h-20 px-16 rounded-[2.5rem] font-black text-2xl shadow-3xl hover:scale-105 active:scale-95 transition-all">
+                <Link href="/register">JOIN THE SQUAD</Link>
               </Button>
            </div>
         </div>
       </section>
 
-      <footer className="py-20 border-t border-white/5 px-6 bg-white/2">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-           <div className="flex items-center gap-3">
-              <div className="h-8 w-8 bg-primary rounded-xl flex items-center justify-center">
-                <Zap className="h-5 w-5 fill-white text-white" />
+      <footer className="py-24 border-t border-white/5 px-6 bg-white/2 backdrop-blur-2xl">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16">
+           <div className="flex items-center gap-4 group cursor-pointer">
+              <div className="h-10 w-10 bg-primary rounded-2xl flex items-center justify-center transition-all group-hover:rotate-12 group-hover:scale-110 shadow-lg shadow-primary/20">
+                <Zap className="h-6 w-6 fill-white text-white" />
               </div>
-              <span className="font-bold text-xl tracking-tight italic">Focusly</span>
+              <span className="font-black text-2xl tracking-tighter italic uppercase">Focusly</span>
            </div>
-           <div className="flex gap-12 text-sm font-semibold text-muted-foreground">
-              <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
-              <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+           <div className="flex gap-16 text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">
+              <Link href="#" className="hover:text-primary transition-colors">Privacy Protocol</Link>
+              <Link href="#" className="hover:text-white transition-colors">Terms of Sync</Link>
               <Link href="#" className="hover:text-white transition-colors">Neural Log</Link>
            </div>
-           <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40">
-             &copy; 2026 Focusly Neural Systems.
+           <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/30">
+             &copy; 2026 Focusly Neural Systems. All units active.
            </div>
         </div>
       </footer>
     </div>
   );
 }
+
