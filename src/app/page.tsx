@@ -144,8 +144,9 @@ export default function Home() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-48 px-6 relative">
+      <section id="features" className="py-48 px-6 relative">
         <div className="max-w-7xl mx-auto">
+          {/* ... existing features ... */}
           <div className="text-center mb-32 relative z-10">
             <motion.div 
                whileInView={{ opacity: 1, scale: 1 }}
@@ -185,22 +186,88 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-32 px-6 border-y border-white/5 bg-white/2 backdrop-blur-3xl relative">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-12 md:gap-32">
-           {[
-             { icon: Users, label: "NEURAL LINKS", value: "150k+" },
-             { icon: Target, label: "RETENTION RATE", value: "99.4%" },
-             { icon: Clock, label: "XP EARNED", value: "25M+" },
-             { icon: CheckCircle2, label: "PROTOCOLS", value: "1.2M" }
-           ].map((stat, i) => (
-             <div key={i} className="flex flex-col items-center gap-4 group">
-               <stat.icon className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
-               <div className="text-3xl font-black tracking-tighter text-white">{stat.value}</div>
-               <div className="text-[10px] font-black tracking-[0.3em] uppercase text-muted-foreground group-hover:text-primary transition-colors">{stat.label}</div>
-             </div>
-           ))}
+      {/* Tools Preview */}
+      <section id="tools" className="py-32 px-6">
+         <div className="max-w-7xl mx-auto glass rounded-[4rem] p-16 md:p-24 relative overflow-hidden group border-white/5">
+            <div className="absolute top-0 right-0 p-24 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-1000">
+               <Zap className="h-64 w-64 text-primary" />
+            </div>
+            <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
+               <div className="flex-1">
+                  <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tight uppercase">Tools of the <br /><span className="text-gradient">Trade.</span></h2>
+                  <p className="text-muted-foreground text-lg font-semibold mb-12 max-w-xl">
+                     Access our suite of neural-sync tools designed for distraction-free deep work. From smart timers to AI curriculum architects.
+                  </p>
+                  <Button variant="glow" size="lg" asChild className="rounded-2xl h-14 px-10 font-black text-sm uppercase">
+                     <Link href="/tools">Access Arsenal</Link>
+                  </Button>
+               </div>
+               <div className="flex-1 grid grid-cols-2 gap-4">
+                  {[Brain, Clock, Shield, Target].map((Icon, i) => (
+                    <div key={i} className="glass p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:border-primary/20 transition-all group/icon">
+                       <Icon className="h-10 w-10 text-primary group-hover/icon:scale-110 transition-transform" />
+                       <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Module 0{i+1}</span>
+                    </div>
+                  ))}
+               </div>
+            </div>
+         </div>
+      </section>
+
+      {/* Stats Section / Community */}
+      <section id="community" className="py-32 px-6 border-y border-white/5 bg-white/2 backdrop-blur-3xl relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-24">
+             <h2 className="text-4xl font-black mb-4 uppercase tracking-tighter text-white">Global Neural Link</h2>
+             <p className="text-muted-foreground font-semibold uppercase tracking-widest text-xs">Join thousands of high-performers already in flow.</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-12 md:gap-32">
+            {[
+              { icon: Users, label: "NEURAL LINKS", value: "150k+" },
+              { icon: Target, label: "RETENTION RATE", value: "99.4%" },
+              { icon: Clock, label: "XP EARNED", value: "25M+" },
+              { icon: CheckCircle2, label: "PROTOCOLS", value: "1.2M" }
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col items-center gap-4 group">
+                <stat.icon className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
+                <div className="text-3xl font-black tracking-tighter text-white">{stat.value}</div>
+                <div className="text-[10px] font-black tracking-[0.3em] uppercase text-muted-foreground group-hover:text-primary transition-colors">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-48 px-6">
+         <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-24">
+               <h2 className="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tight">Unlock <span className="text-gradient">Unlimited</span> Flow</h2>
+               <p className="text-muted-foreground text-xl font-semibold">Choose the protocol that fits your performance needs.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <PricingCard 
+                 name="Resident" 
+                 price="0" 
+                 desc="Core neural features for standard focus needs."
+                 features={["Standard Focus Timer", "Basic Study Plans", "Community Access"]} 
+               />
+               <PricingCard 
+                 name="Pro Elite" 
+                 price="12" 
+                 desc="The ultimate performance kit for deep work masters."
+                 features={["AI Schedule Architect", "Focus Shield (All Devices)", "Smart Recall Flashcards", "Priority Community Guilds"]}
+                 highlighted={true}
+               />
+               <PricingCard 
+                 name="Synapse" 
+                 price="29" 
+                 desc="Full enterprise-grade neural integration for teams."
+                 features={["Everything in Pro", "Team Analytics HUD", "Custom AI Models", "Neural API Access"]} 
+               />
+            </div>
+         </div>
       </section>
 
       {/* CTA Section */}
@@ -238,4 +305,46 @@ export default function Home() {
     </div>
   );
 }
+
+function PricingCard({ name, price, desc, features, highlighted = false }: any) {
+  return (
+    <motion.div 
+      whileHover={{ y: -10 }}
+      className={cn(
+        "glass p-10 md:p-12 rounded-[3rem] relative flex flex-col overflow-hidden transition-all",
+        highlighted ? "border-primary/50 ring-4 ring-primary/5 shadow-2xl scale-105 z-10 bg-primary/5" : "border-white/5"
+      )}
+    >
+       {highlighted && (
+         <div className="absolute top-0 right-0 bg-primary text-white text-[9px] font-black px-6 py-2 rounded-bl-3xl uppercase tracking-widest">Recommended</div>
+       )}
+       <div className="mb-10">
+          <h3 className="text-2xl font-black uppercase mb-2">{name}</h3>
+          <p className="text-muted-foreground text-xs font-semibold leading-relaxed">{desc}</p>
+       </div>
+       <div className="flex items-baseline gap-2 mb-10">
+          <span className="text-6xl font-black">${price}</span>
+          <span className="text-muted-foreground font-bold text-xs">/MONTHLY</span>
+       </div>
+       <div className="space-y-4 mb-12 flex-1">
+          {features.map((f: string, i: number) => (
+            <div key={i} className="flex items-center gap-4 text-sm font-semibold text-white/80">
+               <div className="h-5 w-5 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="h-3 w-3 text-primary" />
+               </div>
+               {f}
+            </div>
+          ))}
+       </div>
+       <Button 
+         variant={highlighted ? "glow" : "outline"} 
+         size="lg" 
+         className="w-full rounded-2xl h-14 font-black text-sm uppercase"
+       >
+          Initialize Plan
+       </Button>
+    </motion.div>
+  );
+}
+
 

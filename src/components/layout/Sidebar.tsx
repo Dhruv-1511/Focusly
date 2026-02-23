@@ -16,8 +16,7 @@ import {
   LogOut,
   X,
   ShieldCheck,
-  ChevronRight,
-  Zap
+  ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -43,6 +42,41 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
+const BrainZapLogo = ({ className = "h-6 w-6" }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 100 100" 
+    className={className}
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient id="sidebar-logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#6366f1" />
+        <stop offset="100%" stopColor="#10b981" />
+      </linearGradient>
+      <filter id="sidebar-glow">
+        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <path
+      d="M20 50 Q35 20 50 50 T80 50"
+      stroke="url(#sidebar-logo-gradient)"
+      strokeWidth="2"
+      strokeLinecap="round"
+      opacity="0.3"
+    />
+    <path
+      d="M55 15 L35 55 L50 55 L45 85 L65 45 L50 45 L55 15Z"
+      fill="url(#sidebar-logo-gradient)"
+      filter="url(#sidebar-glow)"
+    />
+  </svg>
+);
+
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname() || "";
   const { data: session } = useSession();
@@ -56,9 +90,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="p-8 pb-10 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group transition-all" onClick={onClose}>
             <div className="relative h-10 w-10 rounded-xl overflow-hidden bg-primary/20 flex items-center justify-center border border-primary/20 group-hover:scale-110 transition-transform shadow-lg shadow-primary/20">
-              <Zap className="h-6 w-6 text-primary fill-primary/30" />
+              <BrainZapLogo className="h-7 w-7" />
             </div>
-            <span className="text-2xl font-black text-white tracking-tighter italic">
+            <span className="text-2xl font-black text-white tracking-tighter italic uppercase">
               Focusly
             </span>
           </Link>
@@ -139,8 +173,11 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 variant="outline"
                 size="icon" 
                 className="h-9 w-full rounded-xl text-muted-foreground hover:text-white hover:bg-white/5 border-white/5"
+                asChild
               >
-                <Settings className="h-4 w-4" />
+                <Link href="/settings">
+                  <Settings className="h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </div>
