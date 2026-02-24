@@ -25,6 +25,7 @@ export default function FocusPage() {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("Focus"); // Focus, Break
+  const [activeTrack, setActiveTrack] = useState("Deep Space Lo-Fi");
 
   useEffect(() => {
     let interval: any = null;
@@ -166,10 +167,30 @@ export default function FocusPage() {
                  <Music className="h-5 w-5 text-primary" /> Ambient Station
               </h3>
               <div className="space-y-2">
-                 <AmbientTrack icon={Moon} name="Deep Space Lo-Fi" active={true} />
-                 <AmbientTrack icon={Zap} name="Static Thunder" />
-                 <AmbientTrack icon={HeartPulse} name="Alpha Waves" />
-                 <AmbientTrack icon={Coffee} name="Cozy Cafe" />
+                 <AmbientTrack 
+                   icon={Moon} 
+                   name="Deep Space Lo-Fi" 
+                   active={activeTrack === "Deep Space Lo-Fi"} 
+                   onClick={() => setActiveTrack("Deep Space Lo-Fi")}
+                 />
+                 <AmbientTrack 
+                   icon={Zap} 
+                   name="Static Thunder" 
+                   active={activeTrack === "Static Thunder"}
+                   onClick={() => setActiveTrack("Static Thunder")}
+                 />
+                 <AmbientTrack 
+                   icon={HeartPulse} 
+                   name="Alpha Waves" 
+                   active={activeTrack === "Alpha Waves"}
+                   onClick={() => setActiveTrack("Alpha Waves")}
+                 />
+                 <AmbientTrack 
+                   icon={Coffee} 
+                   name="Cozy Cafe" 
+                   active={activeTrack === "Cozy Cafe"}
+                   onClick={() => setActiveTrack("Cozy Cafe")}
+                 />
               </div>
               <div className="mt-8 pt-6 border-t border-white/5">
                  <div className="flex items-center justify-between mb-3 text-[10px] font-bold text-muted-foreground">
@@ -215,9 +236,10 @@ export default function FocusPage() {
   );
 }
 
-function AmbientTrack({ icon: Icon, name, active = false }: any) {
+function AmbientTrack({ icon: Icon, name, active = false, onClick }: any) {
   return (
     <button 
+      onClick={onClick}
       className={cn(
         "w-full flex items-center gap-4 p-3 rounded-xl border transition-all",
         active ? "bg-primary/10 border-primary/20" : "bg-white/5 border-transparent hover:bg-white/10"

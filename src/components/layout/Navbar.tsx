@@ -96,11 +96,11 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
     };
   }, []);
 
-  const NOTIFICATIONS = [
+  const [notifications, setNotifications] = useState([
     { id: 1, title: "Neural Link Active", desc: "Your cognitive sync is at 98%", time: "2m ago", icon: Zap, color: "text-primary" },
     { id: 2, title: "Guild Milestone", desc: "Stem Squad reached LVL 50", time: "15m ago", icon: TrendingUp, color: "text-secondary" },
     { id: 3, title: "Deep Work Ready", desc: "Calculus session scheduled", time: "1h ago", icon: Brain, color: "text-primary" },
-  ];
+  ]);
 
   return (
     <motion.header
@@ -141,7 +141,10 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
                 onFocus={() => setSearchFocused(true)}
               />
               {searchFocused && (
-                 <button onClick={() => setSearchFocused(false)}>
+                 <button onClick={() => {
+                    setSearchFocused(false);
+                    router.push("/problems");
+                 }}>
                     <X className="h-4 w-4 text-muted-foreground hover:text-white" />
                  </button>
               )}
@@ -161,7 +164,14 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
                      </div>
                      <div className="space-y-1">
                         {["Calculus Optimization", "Dopamine Reset", "Neural Spaced Repetition"].map((item) => (
-                           <button key={item} className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-white/5 text-xs font-bold text-muted-foreground hover:text-white transition-all group">
+                           <button 
+                             key={item} 
+                             onClick={() => {
+                               setSearchFocused(false);
+                               router.push("/problems");
+                             }}
+                             className="w-full flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-white/5 text-xs font-bold text-muted-foreground hover:text-white transition-all group"
+                           >
                               <Search className="h-3.5 w-3.5 opacity-30 group-hover:opacity-100" />
                               {item}
                            </button>
@@ -220,21 +230,40 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
                   >
                      <div className="flex items-center justify-between mb-6 px-1">
                         <div className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Neural Logs</div>
-                        <button className="text-[9px] font-black text-primary hover:text-white transition-colors uppercase tracking-widest">Clear All</button>
+                        <button 
+                          onClick={() => setNotifications([])}
+                          className="text-[9px] font-black text-primary hover:text-white transition-colors uppercase tracking-widest disabled:opacity-30 disabled:pointer-events-none"
+                          disabled={notifications.length === 0}
+                        >
+                          Clear All
+                        </button>
                      </div>
                      <div className="space-y-3">
-                        {NOTIFICATIONS.map((n) => (
-                           <div key={n.id} className="flex gap-4 p-3.5 rounded-2xl hover:bg-white/3 transition-all cursor-pointer group">
-                              <div className={cn("h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/5 group-hover:scale-110 transition-transform", n.color)}>
-                                 <n.icon className="h-4.5 w-4.5" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                 <div className="text-xs font-bold text-white mb-0.5 truncate">{n.title}</div>
-                                 <div className="text-[10px] text-muted-foreground font-medium truncate mb-1">{n.desc}</div>
-                                 <div className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-tighter">{n.time}</div>
-                              </div>
-                           </div>
-                        ))}
+                        {notifications.length > 0 ? (
+                          notifications.map((n) => (
+                             <div 
+                               key={n.id} 
+                               onClick={() => {
+                                 setShowNotifications(false);
+                                 router.push("/dashboard");
+                               }}
+                               className="flex gap-4 p-3.5 rounded-2xl hover:bg-white/3 transition-all cursor-pointer group"
+                             >
+                                <div className={cn("h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0 border border-white/5 group-hover:scale-110 transition-transform", n.color)}>
+                                   <n.icon className="h-4.5 w-4.5" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                   <div className="text-xs font-bold text-white mb-0.5 truncate">{n.title}</div>
+                                   <div className="text-[10px] text-muted-foreground font-medium truncate mb-1">{n.desc}</div>
+                                   <div className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-tighter">{n.time}</div>
+                                </div>
+                             </div>
+                          ))
+                        ) : (
+                          <div className="py-12 text-center text-[10px] font-black uppercase tracking-widest text-muted-foreground/30">
+                            Neural logs empty
+                          </div>
+                        )}
                      </div>
                   </motion.div>
                )}

@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useState } from "react";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 const TOOLS = [
   {
@@ -76,6 +78,12 @@ const TOOLS = [
 ];
 
 export default function ToolsPage() {
+  const [modal, setModal] = useState({ open: false, title: "", message: "", type: "info" as "info" | "success" | "warning" });
+
+  const showFeedback = (title: string, message: string, type: "info" | "success" | "warning" = "info") => {
+    setModal({ open: true, title, message, type });
+  };
+
   return (
     <div className="space-y-12">
       <header>
@@ -139,11 +147,22 @@ export default function ToolsPage() {
             <p className="text-sm md:text-base text-muted-foreground font-medium mb-10 leading-relaxed">
                A complete OS-level distraction blocking layer. No notifications, no alt-tabbing, just pure, unadulterated focus flow.
             </p>
-            <Button size="lg" className="rounded-xl h-12 px-8 font-bold text-sm bg-white text-black hover:bg-neutral-200 transition-all shadow-xl">
+            <Button 
+                size="lg" 
+                className="rounded-xl h-12 px-8 font-bold text-sm bg-white text-black hover:bg-neutral-200 transition-all shadow-xl"
+                onClick={() => showFeedback("WAITLIST ACCESS", "Broadcasting your neural ID to the OS Shell alpha queue. Position: #12,402", "success")}
+            >
                Join Waitlist
             </Button>
          </div>
       </section>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }

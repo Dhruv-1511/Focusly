@@ -20,12 +20,18 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 export default function PlannerPage() {
   const [step, setStep] = useState(1);
   const [subjects, setSubjects] = useState(["Mathematics", "Physics"]);
   const [loading, setLoading] = useState(false);
   const [showPlan, setShowPlan] = useState(false);
+  const [modal, setModal] = useState({ open: false, title: "", message: "", type: "info" as "info" | "success" | "warning" });
+
+  const showFeedback = (title: string, message: string, type: "info" | "success" | "warning" = "info") => {
+    setModal({ open: true, title, message, type });
+  };
 
   const generatePlan = () => {
     setLoading(true);
@@ -182,9 +188,9 @@ export default function PlannerPage() {
                        <div className="h-px bg-white/5 flex-1" />
                     </h3>
                     <div className="space-y-2">
-                       <PlanItem time="08:00 AM" task="Deep Work: Calculus (Gaps)" color="bg-blue-500" />
-                       <PlanItem time="10:00 AM" task="Active Recall: Physics Formulas" color="bg-primary" />
-                       <PlanItem time="11:30 AM" task="Pomodoro Review Cycle" color="bg-secondary" />
+                       <PlanItem time="08:00 AM" task="Deep Work: Calculus (Gaps)" color="bg-blue-500" onClick={() => showFeedback("PROTOCOL INITIATED", "Digital isolation active. Commencing Calculus deep work session.", "success")} />
+                       <PlanItem time="10:00 AM" task="Active Recall: Physics Formulas" color="bg-primary" onClick={() => showFeedback("RECALL ACTIVE", "Neural retrieval pathways open. Master those formulas.", "info")} />
+                       <PlanItem time="11:30 AM" task="Pomodoro Review Cycle" color="bg-secondary" onClick={() => showFeedback("COOLDOWN SYNC", "Strategic break initiated. Brain plasticity recharging.", "info")} />
                     </div>
                   </section>
 
@@ -217,7 +223,10 @@ export default function PlannerPage() {
                               <p className="text-xs font-semibold text-white/80 leading-relaxed">Physics retention will increase 15% if reviewed before 10 PM tonight.</p>
                            </div>
                         </div>
-                        <Button className="w-full mt-8 h-12 rounded-xl bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20 font-bold text-xs">
+                        <Button 
+                          className="w-full mt-8 h-12 rounded-xl bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20 font-bold text-xs"
+                          onClick={() => showFeedback("SYNC SUCCESS", "Neural schedule has been broadcast to all your linked calendar protocols.", "success")}
+                        >
                            Sync to Calendar
                         </Button>
                      </div>
@@ -227,15 +236,23 @@ export default function PlannerPage() {
           )}
         </AnimatePresence>
       </div>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }
 
-function PlanItem({ time, task, color }: any) {
+function PlanItem({ time, task, color, onClick }: any) {
   return (
     <motion.div 
       whileHover={{ scale: 1.01 }}
-      className="flex items-center gap-6 p-4 rounded-xl bg-white/5 border border-transparent hover:border-white/5 transition-all group relative overflow-hidden"
+      onClick={onClick}
+      className="flex items-center gap-6 p-4 rounded-xl bg-white/5 border border-transparent hover:border-white/5 transition-all group relative overflow-hidden cursor-pointer"
     >
        <div className={cn("absolute left-0 top-0 bottom-0 w-1", color)} />
        <div className="text-[11px] font-bold text-muted-foreground w-20">{time}</div>

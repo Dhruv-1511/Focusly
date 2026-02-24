@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Users, MessageSquare, Trophy, Heart, Share2, Sparkles, TrendingUp, Zap, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 const FEED_ITEMS = [
   { id: 1, user: "Alex J.", action: "completed a 4-hour focus session", time: "2m ago", xp: "+450 XP", avatar: "A" },
@@ -20,6 +22,12 @@ const GUILDS = [
 ];
 
 export default function CommunityPage() {
+  const [modal, setModal] = useState({ open: false, title: "", message: "", type: "info" as "info" | "success" | "warning" });
+
+  const showFeedback = (title: string, message: string, type: "info" | "success" | "warning" = "info") => {
+    setModal({ open: true, title, message, type });
+  };
+
   return (
     <div className="space-y-12">
       <header>
@@ -56,7 +64,8 @@ export default function CommunityPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: i * 0.1 }}
                   key={item.id}
-                  className="glass p-5 rounded-3xl flex items-center gap-6 group hover:border-white/10 transition-all"
+                  className="glass p-5 rounded-3xl flex items-center gap-6 group hover:border-white/10 transition-all cursor-pointer"
+                  onClick={() => showFeedback("NEURAL SYNC", `Synchronizing with ${item.user}'s progress log...`, "info")}
                 >
                    <div className="h-12 w-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-lg font-bold text-primary group-hover:scale-110 transition-transform">
                       {item.avatar}
@@ -71,16 +80,29 @@ export default function CommunityPage() {
                    <div className="text-right shrink-0">
                       <div className="text-xs font-bold text-primary mb-2">{item.xp}</div>
                       <div className="flex gap-3">
-                         <button className="text-muted-foreground hover:text-white transition-colors"><Heart className="h-3.5 w-3.5" /></button>
-                         <button className="text-muted-foreground hover:text-white transition-colors"><MessageSquare className="h-3.5 w-3.5" /></button>
-                         <button className="text-muted-foreground hover:text-white transition-colors"><Share2 className="h-3.5 w-3.5" /></button>
+                         <button 
+                           onClick={(e) => { e.stopPropagation(); showFeedback("RESONANCE", "You shared neural resonance with this achievement.", "success"); }}
+                           className="text-muted-foreground hover:text-white transition-colors"
+                         ><Heart className="h-3.5 w-3.5" /></button>
+                         <button 
+                           onClick={(e) => { e.stopPropagation(); showFeedback("NEURAL DATA", "Opening communication link to progress log...", "info"); }}
+                           className="text-muted-foreground hover:text-white transition-colors"
+                         ><MessageSquare className="h-3.5 w-3.5" /></button>
+                         <button 
+                           onClick={(e) => { e.stopPropagation(); showFeedback("BROADCAST", "Broadcasting this achievement to your external neural network.", "info"); }}
+                           className="text-muted-foreground hover:text-white transition-colors"
+                         ><Share2 className="h-3.5 w-3.5" /></button>
                       </div>
                    </div>
                 </motion.div>
               ))}
            </div>
 
-           <Button variant="ghost" className="w-full h-12 rounded-xl border border-white/5 bg-white/2 hover:bg-white/5 font-bold text-[10px] tracking-wider text-muted-foreground transition-all">
+           <Button 
+            variant="ghost" 
+            className="w-full h-12 rounded-xl border border-white/5 bg-white/2 hover:bg-white/5 font-bold text-[10px] tracking-wider text-muted-foreground transition-all"
+            onClick={() => showFeedback("LOADING DATA", "Accessing deeper layers of the global neural network...", "info")}
+           >
               Load More Neural Events
            </Button>
         </div>
@@ -97,7 +119,11 @@ export default function CommunityPage() {
               </h3>
               <div className="space-y-3">
                  {GUILDS.map((guild) => (
-                   <div key={guild.name} className="flex items-center justify-between p-3.5 rounded-2xl bg-white/2 border border-transparent hover:border-white/10 transition-all cursor-pointer group/guild">
+                   <div 
+                     key={guild.name} 
+                     onClick={() => showFeedback("GUILD ACCESS", `Initializing communication link with ${guild.name} tactical command.`, "info")}
+                     className="flex items-center justify-between p-3.5 rounded-2xl bg-white/2 border border-transparent hover:border-white/10 transition-all cursor-pointer group/guild"
+                   >
                       <div className="flex items-center gap-4">
                          <div className="text-xl h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center group-hover/guild:scale-110 transition-transform">{guild.icon}</div>
                          <div>
@@ -114,7 +140,10 @@ export default function CommunityPage() {
                    </div>
                  ))}
               </div>
-              <Button className="w-full mt-8 rounded-xl bg-white text-black font-bold text-xs h-11 border-none shadow-lg">Join a Guild</Button>
+              <Button 
+                className="w-full mt-8 rounded-xl bg-white text-black font-bold text-xs h-11 border-none shadow-lg"
+                onClick={() => showFeedback("GUILD RECRUITMENT", "Broadcasting your neural profile to all elite tactical guilds...", "info")}
+              >Join a Guild</Button>
            </div>
 
            {/* Leaderboard Snippet */}
@@ -134,10 +163,21 @@ export default function CommunityPage() {
                    </div>
                  ))}
               </div>
-              <Button variant="link" className="w-full mt-10 p-0 h-auto font-bold text-[10px] tracking-wider text-muted-foreground hover:text-primary transition-colors">View Full Leaderboard</Button>
+              <Button 
+                variant="link" 
+                className="w-full mt-10 p-0 h-auto font-bold text-[10px] tracking-wider text-muted-foreground hover:text-primary transition-colors"
+                onClick={() => showFeedback("FULL RANKINGS", "Neural database synchronization in progress. Global leaderboard will update in 12m.", "info")}
+              >View Full Leaderboard</Button>
            </div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }

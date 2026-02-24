@@ -293,9 +293,9 @@ export default function Home() {
               <span className="font-black text-2xl tracking-tighter italic uppercase">Focusly</span>
            </div>
            <div className="flex gap-16 text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">
-              <Link href="#" className="hover:text-primary transition-colors">Privacy Protocol</Link>
-              <Link href="#" className="hover:text-white transition-colors">Terms of Sync</Link>
-              <Link href="#" className="hover:text-white transition-colors">Neural Log</Link>
+              <Link href="/settings" className="hover:text-primary transition-colors">Privacy Protocol</Link>
+              <Link href="/settings" className="hover:text-white transition-colors">Terms of Sync</Link>
+              <Link href="/dashboard" className="hover:text-white transition-colors">Neural Log</Link>
            </div>
            <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/30">
              &copy; 2026 Focusly Neural Systems. All units active.
@@ -340,8 +340,9 @@ function PricingCard({ name, price, desc, features, highlighted = false }: any) 
          variant={highlighted ? "glow" : "outline"} 
          size="lg" 
          className="w-full rounded-2xl h-14 font-black text-sm uppercase"
+         asChild
        >
-          Initialize Plan
+          <Link href="/register">Initialize Plan</Link>
        </Button>
     </motion.div>
   );

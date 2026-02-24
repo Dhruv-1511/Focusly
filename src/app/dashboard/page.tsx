@@ -146,14 +146,29 @@ export default function Dashboard() {
                    <Calendar className="h-3.5 w-3.5 text-primary" /> Phase: Peak Performance
                 </div>
               </div>
-              <Button size="sm" variant="outline" className="h-10 px-5 rounded-xl text-xs font-black uppercase tracking-widest gap-2">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="h-10 px-5 rounded-xl text-xs font-black uppercase tracking-widest gap-2"
+                onClick={() => {
+                  setModalMessage("Neural pathways analyzed. System is ready for a full recalibration protocol.");
+                  setModalOpen(true);
+                }}
+              >
                 <Plus className="h-3.5 w-3.5" /> RECALIBRATE
               </Button>
             </div>
             
             <div className="space-y-3 relative z-10">
               {studyPlan.daily.map((task: any, i: number) => (
-                <div key={i} className="flex items-center gap-6 p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/4 hover:border-white/10 transition-all cursor-pointer group/item">
+                <div 
+                  key={i} 
+                  onClick={() => {
+                    setModalMessage(`Accessing deep dive protocol for: ${task.task}. Digital isolation initialized.`);
+                    setModalOpen(true);
+                  }}
+                  className="flex items-center gap-6 p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/4 hover:border-white/10 transition-all cursor-pointer group/item"
+                >
                   <div className="text-xs font-black text-muted-foreground/50 w-12 tabular-nums">{task.time}</div>
                   <div className="flex-1">
                     <div className="text-base font-bold text-white flex items-center gap-3">
@@ -169,7 +184,16 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Button size="icon" variant="ghost" className="h-10 w-10 rounded-xl hover:bg-secondary/10 hover:text-secondary border border-transparent hover:border-secondary/20">
+                    <Button 
+                      size="icon" 
+                      variant="ghost" 
+                      className="h-10 w-10 rounded-xl hover:bg-secondary/10 hover:text-secondary border border-transparent hover:border-secondary/20"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setModalMessage(`Phase complete: ${task.task}. Neural XP harvested.`);
+                        setModalOpen(true);
+                      }}
+                    >
                       <CheckCircle2 className="h-5 w-5" />
                     </Button>
                   </div>
@@ -177,24 +201,36 @@ export default function Dashboard() {
               ))}
             </div>
             
-            <Button variant="glow" size="xl" className="w-full mt-10 h-16 rounded-[2rem] font-black text-lg gap-3">
+            <Button 
+              variant="glow" 
+              size="xl" 
+              className="w-full mt-10 h-16 rounded-[2rem] font-black text-lg gap-3"
+              onClick={() => {
+                setModalMessage("Neural flow state initiated. All background protocols suspended for maximum throughput.");
+                setModalOpen(true);
+              }}
+            >
                INITIATE NEURAL FLOW <Zap className="h-5 w-5 fill-current" />
             </Button>
           </section>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-             <ToolActionCard 
-               title="SMART RECALL" 
-               desc="Physics Core Protocol" 
-               icon={Brain} 
-               color="primary"
-             />
-             <ToolActionCard 
-               title="NEURAL PRACTICE" 
-               desc="Genetics Baseline Test" 
-               icon={Target} 
-               color="secondary"
-             />
+             <Link href="/problems" className="block">
+               <ToolActionCard 
+                 title="SMART RECALL" 
+                 desc="Physics Core Protocol" 
+                 icon={Brain} 
+                 color="primary"
+               />
+             </Link>
+             <Link href="/focus" className="block">
+               <ToolActionCard 
+                 title="NEURAL PRACTICE" 
+                 desc="Genetics Baseline Test" 
+                 icon={Target} 
+                 color="secondary"
+               />
+             </Link>
           </div>
         </motion.div>
 

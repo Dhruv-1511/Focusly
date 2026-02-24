@@ -20,10 +20,16 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 export default function SettingsPage() {
   const { data: session } = useSession();
   const [activeTab, setActiveTab] = useState("profile");
+  const [modal, setModal] = useState({ open: false, title: "", message: "", type: "info" as "info" | "success" | "warning" });
+
+  const showFeedback = (title: string, message: string, type: "info" | "success" | "warning" = "info") => {
+    setModal({ open: true, title, message, type });
+  };
 
   const TABS = [
     { id: "profile", label: "Profile", icon: User },
@@ -86,23 +92,30 @@ export default function SettingsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="glass rounded-[2.5rem] p-8 md:p-12 border-white/5"
           >
-            {activeTab === "profile" && <ProfileSettings session={session} />}
+            {activeTab === "profile" && <ProfileSettings session={session} onFeedback={showFeedback} />}
             {activeTab === "notifications" && <NotificationSettings />}
-            {activeTab === "appearance" && <AppearanceSettings />}
+            {activeTab === "appearance" && <AppearanceSettings onFeedback={showFeedback} />}
             {activeTab === "focus" && <FocusSettings />}
-            {activeTab === "security" && <SecuritySettings />}
+            {activeTab === "security" && <SecuritySettings onFeedback={showFeedback} />}
           </motion.div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modal.open} 
+        onClose={() => setModal({ ...modal, open: false })}
+        title={modal.title}
+        message={modal.message}
+        type={modal.type}
+      />
     </div>
   );
 }
 
-function ProfileSettings({ session }: any) {
+function ProfileSettings({ session, onFeedback }: any) {
   return (
     <div className="space-y-12">
       <div className="flex flex-col md:flex-row items-center gap-10">
-        <div className="relative group cursor-pointer">
+        <div className="relative group cursor-pointer" onClick={() => onFeedback("IMAGE SYNC", "Interface for uploading neural avatar is initializing...", "info")}>
           <div className="h-32 w-32 rounded-3xl bg-linear-to-br from-primary to-indigo-600 flex items-center justify-center text-white text-4xl font-black ring-4 ring-white/5 group-hover:scale-105 transition-all shadow-2xl overflow-hidden">
             {session?.user?.image ? (
               <img src={session.user.image} alt="" className="h-full w-full object-cover" />
@@ -121,12 +134,13 @@ function ProfileSettings({ session }: any) {
            <h3 className="text-2xl font-bold mb-2">{session?.user?.name || "System Resident"}</h3>
            <p className="text-muted-foreground text-xs font-medium mb-6">Pro Elite Member • Synchronized 12 days ago</p>
            <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <Button size="sm" className="rounded-xl font-bold text-[10px] tracking-wider px-6 h-10 bg-white text-black hover:bg-neutral-200">UPDATE AVATAR</Button>
-              <Button size="sm" variant="ghost" className="rounded-xl font-bold text-[10px] tracking-wider px-6 h-10 border border-white/5 hover:bg-white/5">REMOVE</Button>
+              <Button size="sm" className="rounded-xl font-bold text-[10px] tracking-wider px-6 h-10 bg-white text-black hover:bg-neutral-200" onClick={() => onFeedback("IMAGE SYNC", "Searching local neural storage for avatar data...", "info")}>UPDATE AVATAR</Button>
+              <Button size="sm" variant="ghost" className="rounded-xl font-bold text-[10px] tracking-wider px-6 h-10 border border-white/5 hover:bg-white/5" onClick={() => onFeedback("REMOVAL SEQUENCE", "Avatar data purged from system memory.", "warning")}>REMOVE</Button>
            </div>
         </div>
       </div>
-
+      
+      {/* ... rest of inputs ... */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/5">
         <div className="space-y-2">
           <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 ml-1">Display Name</label>
@@ -160,7 +174,10 @@ function ProfileSettings({ session }: any) {
       </div>
 
       <div className="flex justify-end pt-6">
-        <Button className="rounded-2xl h-14 px-10 font-bold text-sm bg-primary text-white hover:bg-primary/90 shadow-xl shadow-primary/20 group">
+        <Button 
+          className="rounded-2xl h-14 px-10 font-bold text-sm bg-primary text-white hover:bg-primary/90 shadow-xl shadow-primary/20 group"
+          onClick={() => onFeedback("SYNC SUCCESS", "Your neural identity has been updated across the entire interface.", "success")}
+        >
           SYNC CHANGES <ChevronRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>
@@ -202,7 +219,7 @@ function NotificationSettings() {
   );
 }
 
-function AppearanceSettings() {
+function AppearanceSettings({ onFeedback }: any) {
   return (
     <div className="space-y-10">
       <div>
@@ -211,10 +228,10 @@ function AppearanceSettings() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-         <ThemeCard name="Midnight Drift" color="bg-[#030712]" active={true} />
-         <ThemeCard name="Cyber Cyan" color="bg-[#020617]" accent="bg-cyan-500" />
-         <ThemeCard name="Emerald Deep" color="bg-[#051109]" accent="bg-emerald-500" />
-         <ThemeCard name="Void Indigo" color="bg-[#0a0a1a]" accent="bg-indigo-600" />
+         <ThemeCard name="Midnight Drift" color="bg-[#030712]" active={true} onClick={() => onFeedback("THEME SYNC", "Midnight Drift theme applied to your local session.", "success")} />
+         <ThemeCard name="Cyber Cyan" color="bg-[#020617]" accent="bg-cyan-500" onClick={() => onFeedback("THEME SYNC", "Cyber Cyan theme applied. Neural focus spectrum adjusted.", "success")} />
+         <ThemeCard name="Emerald Deep" color="bg-[#051109]" accent="bg-emerald-500" onClick={() => onFeedback("THEME SYNC", "Emerald Deep theme applied. Bio-rhythm synchronized.", "success")} />
+         <ThemeCard name="Void Indigo" color="bg-[#0a0a1a]" accent="bg-indigo-600" onClick={() => onFeedback("THEME SYNC", "Void Indigo theme applied. Maximum contrast protocol active.", "success")} />
       </div>
 
       <div className="pt-8 border-t border-white/5 space-y-6">
@@ -265,7 +282,7 @@ function FocusSettings() {
   );
 }
 
-function SecuritySettings() {
+function SecuritySettings({ onFeedback }: any) {
   return (
     <div className="space-y-10">
       <div>
@@ -277,7 +294,13 @@ function SecuritySettings() {
          <div className="p-8 rounded-3xl bg-red-500/5 border border-red-500/10">
             <h4 className="text-sm font-bold text-red-500 mb-2">Danger Zone</h4>
             <p className="text-xs font-medium text-muted-foreground mb-8">Once you delete your account, there is no going back. All neural historical data will be purged.</p>
-            <Button variant="ghost" className="rounded-xl font-bold text-[10px] tracking-wider px-6 h-10 border border-red-500/20 text-red-500 hover:bg-red-500/10 hover:text-red-500">DELETE DATA LOG</Button>
+            <Button 
+              variant="ghost" 
+              className="rounded-xl font-bold text-[10px] tracking-wider px-6 h-10 border border-red-500/20 text-red-500 hover:bg-red-500/10 hover:text-red-500"
+              onClick={() => onFeedback("TERMINATION PROTOCOL", "Are you sure you want to terminate your link? This action is irreversible.", "warning")}
+            >
+              DELETE DATA LOG
+            </Button>
          </div>
       </div>
     </div>
@@ -308,12 +331,15 @@ function ToggleItem({ title, desc, checked }: any) {
   );
 }
 
-function ThemeCard({ name, color, accent = "bg-primary", active = false }: any) {
+function ThemeCard({ name, color, accent = "bg-primary", active = false, onClick }: any) {
   return (
-    <div className={cn(
-      "glass p-4 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-white/10 transition-all group",
-      active ? "border-primary/50" : "border-transparent"
-    )}>
+    <div 
+      onClick={onClick}
+      className={cn(
+        "glass p-4 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-white/10 transition-all group",
+        active ? "border-primary/50" : "border-transparent"
+      )}
+    >
        <div className={cn("h-12 w-20 rounded-xl flex items-center justify-center relative overflow-hidden", color)}>
           <div className={cn("h-2 w-2 rounded-full absolute top-2 left-2", accent)} />
           <div className="h-1 w-8 bg-white/5 absolute bottom-4 left-2 rounded" />
