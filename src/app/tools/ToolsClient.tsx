@@ -20,7 +20,17 @@ import Link from "next/link";
 import { useState } from "react";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
-const TOOLS = [
+interface Tool {
+  name: string;
+  desc: string;
+  icon: React.ElementType;
+  color: string;
+  bg: string;
+  status: string;
+  link: string;
+}
+
+const TOOLS: Tool[] = [
   {
     name: "Neural Timer",
     desc: "AI-optimized Pomodoro focus cycles synchronized with your peak circadian rhythm.",

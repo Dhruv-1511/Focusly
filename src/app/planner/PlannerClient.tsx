@@ -21,6 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
+import { Milestone as MilestoneType, PlanItem as PlanItemType } from "@/types";
 
 export default function PlannerPage() {
   const [step, setStep] = useState(1);
@@ -281,7 +282,11 @@ export default function PlannerPage() {
   );
 }
 
-function PlanItem({ time, task, color, onClick }: any) {
+interface PlanItemProps extends PlanItemType {
+  onClick: () => void;
+}
+
+function PlanItem({ time, task, color, onClick }: PlanItemProps) {
   return (
     <motion.div 
       whileHover={{ scale: 1.01 }}
@@ -296,7 +301,7 @@ function PlanItem({ time, task, color, onClick }: any) {
   );
 }
 
-function Milestone({ label, date, type, highlighted = false }: any) {
+function Milestone({ label, date, type, highlighted = false }: MilestoneType) {
   return (
     <div className={cn(
       "flex items-center justify-between p-4 px-6 transition-all",

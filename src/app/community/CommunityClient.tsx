@@ -7,14 +7,30 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
-const FEED_ITEMS = [
+interface FeedItem {
+  id: number;
+  user: string;
+  action: string;
+  time: string;
+  xp: string;
+  avatar: string;
+}
+
+const FEED_ITEMS: FeedItem[] = [
   { id: 1, user: "Alex J.", action: "completed a 4-hour focus session", time: "2m ago", xp: "+450 XP", avatar: "A" },
   { id: 2, user: "Sarah K.", action: "reached a 30-day streak", time: "15m ago", xp: "+1000 XP", avatar: "S" },
   { id: 3, user: "Marcus V.", action: "shared a new Biology mindmap", time: "1h ago", xp: "+200 XP", avatar: "M" },
   { id: 4, user: "Elena R.", action: "leveled up to 'Neural Master'", time: "3h ago", xp: "+500 XP", avatar: "E" },
 ];
 
-const GUILDS = [
+interface Guild {
+  name: string;
+  members: string;
+  activity: string;
+  icon: string;
+}
+
+const GUILDS: Guild[] = [
   { name: "Stem Squad", members: "12.4k", activity: "High", icon: "🧬" },
   { name: "Night Owls", members: "8.1k", activity: "Medium", icon: "🦉" },
   { name: "Code Masters", members: "5.2k", activity: "Peak", icon: "💻" },

@@ -28,7 +28,7 @@ export default function FocusPage() {
   const [activeTrack, setActiveTrack] = useState("Deep Space Lo-Fi");
 
   useEffect(() => {
-    let interval: any = null;
+    let interval: NodeJS.Timeout | null = null;
     if (isActive) {
       interval = setInterval(() => {
         if (seconds > 0) {
@@ -37,17 +37,19 @@ export default function FocusPage() {
         if (seconds === 0) {
           if (minutes === 0) {
             setIsActive(false);
-            clearInterval(interval);
+            if (interval) clearInterval(interval);
           } else {
             setMinutes(minutes - 1);
             setSeconds(59);
           }
         }
       }, 1000);
-    } else {
+    } else if (interval) {
       clearInterval(interval);
     }
-    return () => clearInterval(interval);
+    return () => {
+      if (interval) clearInterval(interval);
+    }
   }, [isActive, seconds, minutes]);
 
   const toggleTimer = () => setIsActive(!isActive);
@@ -236,7 +238,14 @@ export default function FocusPage() {
   );
 }
 
-function AmbientTrack({ icon: Icon, name, active = false, onClick }: any) {
+interface AmbientTrackProps {
+  icon: React.ElementType;
+  name: string;
+  active?: boolean;
+  onClick: () => void;
+}
+
+function AmbientTrack({ icon: Icon, name, active = false, onClick }: AmbientTrackProps) {
   return (
     <button 
       onClick={onClick}

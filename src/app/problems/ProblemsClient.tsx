@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PROBLEMS as MOCK_PROBLEMS } from "@/data/mock";
+import { PROBLEMS as MOCK_PROBLEMS, Problem } from "@/data/mock";
 import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle, Sparkles, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export default function ProblemsPage() {
   const [search, setSearch] = useState("");
-  const [problems, setProblems] = useState<any[]>(MOCK_PROBLEMS);
+  const [problems, setProblems] = useState<Problem[]>(MOCK_PROBLEMS);
   const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
     open: false,
     title: "",
@@ -209,7 +209,13 @@ export default function ProblemsPage() {
   );
 }
 
-function Tip({ title, desc, icon }: any) {
+interface TipProps {
+  title: string;
+  desc: string;
+  icon: React.ReactNode;
+}
+
+function Tip({ title, desc, icon }: TipProps) {
   return (
     <div className="flex gap-4 items-start group">
        <div className="h-9 w-9 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0 border border-secondary/20">

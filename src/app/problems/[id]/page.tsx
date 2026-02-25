@@ -15,10 +15,19 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { FocuslyModal } from "@/components/ui/FocuslyModal";
+import { useState } from "react";
 
 export default function ProblemDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const problem = PROBLEMS.find(p => p.id === id);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({ title: "", message: "", type: "info" as "success" | "info" });
+
+  const notify = (title: string, message: string, type: "success" | "info" = "info") => {
+    setModalData({ title, message, type });
+    setModalOpen(true);
+  };
 
   if (!problem) {
     return <div className="p-12 text-center">Problem not found.</div>;
@@ -38,10 +47,10 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
           <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-foreground">{problem.title}</h1>
         </div>
         <div className="flex gap-4">
-          <Button variant="outline" className="gap-2 font-bold px-6" onClick={() => console.log("Problem saved for later")}>
+          <Button variant="outline" className="gap-2 font-bold px-6" onClick={() => notify("SAVED", "Technical debt added to your personal knowledge base.", "success")}>
             <Save className="h-4 w-4" /> Save for later
           </Button>
-          <Button className="gap-2 font-bold px-6" onClick={() => console.log("Opening share dialog")}>
+          <Button className="gap-2 font-bold px-6" onClick={() => notify("BROADCAST", "Opening encrypted sharing channels...", "info")}>
             <Share2 className="h-4 w-4" /> Share
           </Button>
         </div>
@@ -74,7 +83,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
                     key={i} 
                     className="flex items-start gap-6 group"
                   >
-                    <div className="h-10 w-10 flex-shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow-md group-hover:scale-110 transition-transform">
+                    <div className="h-10 w-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow-md group-hover:scale-110 transition-transform">
                       {i + 1}
                     </div>
                     <p className="text-lg font-bold pt-1.5 leading-tight">{step}</p>
@@ -83,9 +92,9 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
              </div>
               <Button 
                 size="xl" 
-                variant="secondary" 
-                className="w-full mt-12 shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all"
-                onClick={() => alert("Great job! Problem marked as solved. +50 XP earned.")}
+                variant="glow" 
+                className="w-full mt-12 shadow-xl hover:shadow-secondary/20 scale-100 hover:scale-[1.02] transition-all h-16 rounded-2xl"
+                onClick={() => notify("PROTOCOL COMPLETE", "Great job! Problem marked as solved. +50 XP harvested.", "success")}
               >
                  Mark Problem as Solved ✅
               </Button>
@@ -125,7 +134,7 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
               <div className="space-y-4">
                  {problem.mistakes.map(mistake => (
                    <div key={mistake} className="flex gap-3 items-start text-sm font-semibold text-red-900 border-b border-red-100 pb-4 last:border-0 last:pb-0">
-                      <div className="h-1.5 w-1.5 rounded-full bg-red-400 mt-2 flex-shrink-0" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-red-400 mt-2 shrink-0" />
                       {mistake}
                    </div>
                  ))}
@@ -133,6 +142,13 @@ export default function ProblemDetail({ params }: { params: Promise<{ id: string
            </div>
         </div>
       </div>
+      <FocuslyModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)}
+        title={modalData.title}
+        message={modalData.message}
+        type={modalData.type}
+      />
     </div>
   );
 }

@@ -1,4 +1,19 @@
-export const PROBLEMS = [
+import { StudyPlan } from "@/types";
+
+export interface Problem {
+  id: string;
+  title: string;
+  category: string;
+  isFeatured: boolean;
+  searchTerms: string[];
+  why: string;
+  fiveStepFix: string[];
+  tools: string[];
+  mistakes: string[];
+  quickAction: string;
+}
+
+export const PROBLEMS: Problem[] = [
   {
     id: "focus",
     title: "I can't focus",
@@ -74,7 +89,8 @@ export const PROBLEMS = [
 ];
 
 
-export const MOCK_STUDY_PLAN = {
+export const MOCK_STUDY_PLAN: StudyPlan = {
+  id: "default-plan",
   daily: [
     { time: "08:00 AM", task: "Deep Work: Mathematics", type: "Focus" },
     { time: "10:00 AM", task: "Break / Hydrate", type: "Break" },
