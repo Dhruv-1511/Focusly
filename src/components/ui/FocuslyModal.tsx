@@ -60,8 +60,11 @@ export function FocuslyModal({
               </button>
               
               <div className="flex flex-col items-center text-center mt-4">
-                <div className="mb-6 p-4 rounded-2xl bg-white/5 border border-white/10">
-                  {getIcon()}
+                <div className="mb-6 p-4 rounded-2xl bg-white/5 border border-white/10 relative">
+                  <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-50 animate-pulse-slow" />
+                  <div className="relative z-10">
+                    {getIcon()}
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold mb-3 text-white tracking-tight">
                   {title}

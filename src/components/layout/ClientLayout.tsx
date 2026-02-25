@@ -3,13 +3,19 @@
 import { usePathname } from "next/navigation";
 import { DashboardLayout } from "./DashboardLayout";
 import { LandingNavbar } from "./LandingNavbar";
+import { BackToTop } from "@/components/ui/BackToTop";
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isLandingPage = pathname === "/";
 
   if (!isLandingPage) {
-    return <DashboardLayout>{children}</DashboardLayout>;
+    return (
+      <DashboardLayout>
+        {children}
+        <BackToTop />
+      </DashboardLayout>
+    );
   }
 
   return (
@@ -23,6 +29,8 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       {/* Landing background glows */}
       <div className="fixed top-[-10%] right-[-10%] w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
       <div className="fixed bottom-[-10%] left-[-10%] w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
+      
+      <BackToTop />
     </div>
   );
 }
