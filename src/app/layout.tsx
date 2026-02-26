@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: {
-    default: "Focusly | Solve, Plan & Excel",
+    default: "Focusly | Solve, Plan and Excel",
     template: "%s | Focusly"
   },
   description: "Focusly is the ultimate neural-sync platform designed to eliminate distractions and achieve deep work with surgical precision.",
