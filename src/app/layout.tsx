@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Focusly | Solve, Plan & Excel",
+    title: "Focusly | Solve, Plan and Excel",
     description: "The ultimate student-focused platform for guidance, structure, and progress tracking.",
     url: "https://focusly.app",
     siteName: "Focusly",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Focusly | Solve, Plan & Excel",
+    title: "Focusly | Solve, Plan and Excel",
     description: "Achieve deep work with surgical precision.",
     images: ["/og-image.png"],
     creator: "@focusly",
