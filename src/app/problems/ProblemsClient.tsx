@@ -71,7 +71,7 @@ export default function ProblemsPage() {
           <input 
             type="text"
             placeholder="Search by keyword, obstacle, or symptom..."
-            className="w-full h-14 pl-14 pr-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-md text-base focus:ring-4 focus:ring-primary/5 focus:border-primary/40 outline-none transition-all font-medium placeholder:text-muted-foreground/30 shadow-inner"
+            className="w-full h-14 pl-14 pr-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-md text-base focus:ring-4 focus:ring-primary/5 focus:border-primary/40 outline-none transition-all font-medium placeholder:text-white/40 shadow-inner"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -84,7 +84,7 @@ export default function ProblemsPage() {
             <h2 className="text-sm font-bold text-muted-foreground flex items-center gap-3">
               Available Protocols
             </h2>
-            <span className="text-[10px] font-bold text-muted-foreground/40">{filtered.length} RESULTS</span>
+            <span className="text-[10px] font-bold text-muted-foreground/70">{filtered.length} RESULTS</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

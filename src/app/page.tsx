@@ -67,7 +67,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.8, ease: "circOut" }}
-            className="text-7xl md:text-9xl font-black tracking-tighter mb-10 leading-[0.85] uppercase"
+            className="text-5xl md:text-7xl font-black tracking-tighter mb-10 leading-[0.85] uppercase"
           >
             Master your <br />
             <span className="text-gradient italic drop-shadow-sm">Inner Flow.</span>
@@ -88,10 +88,10 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-32"
           >
-            <Button variant="glow" size="xl" asChild className="h-16 px-12 rounded-[2rem] font-black text-lg gap-3">
+            <Button variant="glow" size="xl" asChild className="gap-3">
               <Link href="/dashboard">INITIATE SYNC <ArrowRight className="h-5 w-5" /></Link>
             </Button>
-            <Button size="xl" variant="outline" asChild className="h-16 px-12 rounded-[2rem] border-white/5 bg-white/2 backdrop-blur-xl hover:bg-white/5 transition-all font-black text-lg">
+            <Button size="xl" variant="outline" asChild className="bg-white/2 backdrop-blur-xl hover:bg-white/5 transition-all">
               <Link href="/tools">WATCH PROTOCOL</Link>
             </Button>
           </motion.div>
@@ -153,7 +153,7 @@ export default function Home() {
                initial={{ opacity: 0, scale: 0.8 }}
                className="h-1 w-20 bg-primary mx-auto mb-10 rounded-full"
             />
-            <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter uppercase leading-none">Architected for <br />Peak Potential</h2>
+            <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter uppercase leading-none">Architected for <br />Peak Potential</h2>
             <p className="text-muted-foreground text-xl max-w-2xl mx-auto font-semibold leading-relaxed">Everything needed to master your cognitive bandwidth and achieve goals with surgical precision.</p>
           </div>
 
@@ -194,7 +194,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
                <div className="flex-1">
-                  <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tight uppercase">Tools of the <br /><span className="text-gradient">Trade.</span></h2>
+                  <h2 className="text-4xl md:text-5xl font-black mb-8 tracking-tight uppercase">Tools of the <br /><span className="text-gradient">Trade.</span></h2>
                   <p className="text-muted-foreground text-lg font-semibold mb-12 max-w-xl">
                      Access our suite of neural-sync tools designed for distraction-free deep work. From smart timers to AI curriculum architects.
                   </p>
@@ -231,7 +231,7 @@ export default function Home() {
               <div key={i} className="flex flex-col items-center gap-4 group">
                 <stat.icon className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
                 <div className="text-3xl font-black tracking-tighter text-white">{stat.value}</div>
-                <div className="text-[10px] font-black tracking-[0.3em] uppercase text-muted-foreground group-hover:text-primary transition-colors">{stat.label}</div>
+                <div className="text-[10px] font-black tracking-[0.3em] uppercase text-muted-foreground/80 group-hover:text-primary transition-colors">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -242,7 +242,7 @@ export default function Home() {
       <section id="pricing" className="py-48 px-6">
          <div className="max-w-7xl mx-auto">
             <div className="text-center mb-24">
-               <h2 className="text-5xl md:text-7xl font-black mb-6 uppercase tracking-tight">Unlock <span className="text-gradient">Unlimited</span> Flow</h2>
+               <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-tight">Unlock <span className="text-gradient">Unlimited</span> Flow</h2>
                <p className="text-muted-foreground text-xl font-semibold">Choose the protocol that fits your performance needs.</p>
             </div>
             
@@ -275,9 +275,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto glass-card p-24 md:p-32 relative overflow-hidden group rounded-[4rem]">
            <div className="absolute inset-0 bg-primary/5 blur-[120px] group-hover:bg-primary/10 transition-colors animate-pulse" />
            <div className="relative z-10">
-              <h2 className="text-6xl md:text-8xl font-black mb-12 tracking-tighter uppercase leading-none">Ready to <br /><span className="text-gradient">Ascend?</span></h2>
+              <h2 className="text-5xl md:text-7xl font-black mb-12 tracking-tighter uppercase leading-none">Ready to <br /><span className="text-gradient">Ascend?</span></h2>
               <p className="text-muted-foreground mb-16 max-w-xl mx-auto font-black uppercase tracking-widest text-sm leading-relaxed opacity-80">Join the elite high-performers who have already catalyzed their peak flow state with Focusly.</p>
-              <Button variant="glow" size="xl" asChild className="h-20 px-16 rounded-[2.5rem] font-black text-2xl shadow-3xl hover:scale-105 active:scale-95 transition-all">
+              <Button variant="glow" size="xl" asChild className="shadow-3xl hover:scale-105 active:scale-95 transition-all">
                 <Link href="/register">JOIN THE SQUAD</Link>
               </Button>
            </div>
@@ -297,7 +297,7 @@ export default function Home() {
               <Link href="/settings" className="hover:text-white transition-colors">Terms of Sync</Link>
               <Link href="/dashboard" className="hover:text-white transition-colors">Neural Log</Link>
            </div>
-           <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/30">
+           <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/60">
              &copy; 2026 Focusly Neural Systems. All units active.
            </div>
         </div>

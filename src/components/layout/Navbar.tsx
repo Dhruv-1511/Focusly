@@ -63,7 +63,7 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
                 <Link 
                   key={item.name}
                   href={item.href}
-                  className="text-xs font-black uppercase tracking-widest text-muted-foreground/60 hover:text-white transition-colors"
+                   className="text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-white transition-colors"
                 >
                   {item.name}
                 </Link>

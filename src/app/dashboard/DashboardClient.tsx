@@ -91,7 +91,7 @@ export default function Dashboard() {
           <div className="h-2 w-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(99,102,241,0.8)]" />
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Core Neural Link Active</span>
         </motion.div>
-        <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-black mb-4 tracking-tighter leading-none">
+        <motion.h1 variants={itemVariants} className="text-3xl md:text-5xl font-black mb-4 tracking-tighter leading-none">
           Welcome, <span className="text-gradient drop-shadow-sm">{session?.user?.name?.split(' ')[0] || "Focus"}</span>
         </motion.h1>
         <motion.p variants={itemVariants} className="text-muted-foreground font-semibold text-lg max-w-2xl leading-relaxed">

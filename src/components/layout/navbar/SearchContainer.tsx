@@ -31,7 +31,7 @@ export function SearchContainer() {
         <input 
           type="text" 
           placeholder="Search protocols, tools, or research..." 
-          className="bg-transparent border-none outline-none text-sm px-4 w-full text-white placeholder:text-muted-foreground/30 font-semibold"
+          className="bg-transparent border-none outline-none text-sm px-4 w-full text-white placeholder:text-muted-foreground/60 font-semibold"
           onFocus={() => setSearchFocused(true)}
         />
         {searchFocused && (

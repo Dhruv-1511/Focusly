@@ -2,7 +2,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", "Outfit", var(--font-montserrat), ui-sans-serif, system-ui;
+  --font-sans:
+    "Inter", "Outfit", var(--font-montserrat), ui-sans-serif, system-ui;
   --font-mono: "Fira Code", monospace;
 
   --color-background: var(--background);
@@ -44,19 +45,34 @@
 }
 
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes shimmer {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(100%); }
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 :root {
@@ -71,13 +87,13 @@
   --secondary: #10b981;
   --secondary-foreground: #ffffff;
   --muted: #121214;
-  --muted-foreground: #94a3b8;
+  --muted-foreground: #cbd5e1;
   --accent: #1e1e22;
   --accent-foreground: #f8fafc;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.06);
-  --input: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.08);
   --ring: #6366f1;
 }
 
@@ -87,17 +103,25 @@
     color-scheme: dark;
     background: var(--background);
   }
-  
+
   body {
     background-color: var(--background);
     color: var(--foreground);
-    @apply antialiased font-sans selection:bg-primary/30 selection:text-white;
+    @apply antialiased font-sans selection:bg-primary/30 selection:text-white text-base;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "kern", "liga";
-    
-    background-image: 
+
+    background-image:
       radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.07) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.07) 0px, transparent 50%);
+      radial-gradient(
+        at 100% 0%,
+        rgba(16, 185, 129, 0.07) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 50% 100%,
+        rgba(99, 102, 241, 0.07) 0px,
+        transparent 50%
+      );
     background-attachment: fixed;
   }
 
@@ -105,16 +129,29 @@
     border-color: var(--border);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold tracking-tight text-white;
     line-height: 1.1;
   }
 
-  h1 { @apply text-4xl md:text-6xl lg:text-7xl font-black; }
-  h2 { @apply text-3xl md:text-5xl; }
-  h3 { @apply text-2xl md:text-3xl; }
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-black;
+  }
+  h2 {
+    @apply text-2xl md:text-4xl;
+  }
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
 
-  button, [role="button"], a {
+  button,
+  [role="button"],
+  a {
     @apply cursor-pointer outline-none transition-all duration-300;
   }
 }
@@ -122,17 +159,23 @@
 @layer utilities {
   .glass {
     @apply bg-white/3 backdrop-blur-xl border border-white/10 shadow-2xl;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.8),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .glass-dark {
     @apply bg-black/40 backdrop-blur-2xl border border-white/5 shadow-2xl;
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.9), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+    box-shadow:
+      0 12px 40px 0 rgba(0, 0, 0, 0.9),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   }
 
   .glass-card {
     @apply bg-white/3 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/5 transition-all duration-500;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.8),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .text-gradient {
@@ -180,4 +223,3 @@
     mask-image: radial-gradient(circle at center, black, transparent 80%);
   }
 }
-

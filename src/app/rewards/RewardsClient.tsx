@@ -80,7 +80,7 @@ export default function RewardsPage() {
                     </div>
                  </div>
                  <div className="text-right">
-                    <div className="text-[11px] font-bold mb-2 uppercase tracking-wide text-muted-foreground/60">Next Level: 16</div>
+                    <div className="text-[11px] font-bold mb-2 uppercase tracking-wide text-muted-foreground/80">Next Level: 16</div>
                     <div className="text-2xl font-bold text-white tracking-tight">2,450 <span className="text-muted-foreground text-sm">/ 3,000 XP</span></div>
                  </div>
               </div>
@@ -124,7 +124,7 @@ export default function RewardsPage() {
                       <h4 className="text-lg font-bold mb-2 text-white tracking-tight">{badge.name}</h4>
                       <p className="text-[10px] text-muted-foreground font-semibold leading-relaxed px-4">{badge.desc}</p>
                       {badge.locked && (
-                        <div className="absolute top-4 right-4 text-muted-foreground/40">
+                        <div className="absolute top-4 right-4 text-muted-foreground/60">
                            <Lock className="h-4 w-4" />
                         </div>
                       )}
@@ -210,7 +210,7 @@ function StatItem({ label, value, icon: Icon, color }: any) {
           <Icon className="h-5 w-5" />
        </div>
        <div className="text-2xl font-bold tracking-tight text-white">{value}</div>
-       <div className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground/60">{label}</div>
+        <div className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground/80">{label}</div>
     </div>
   );
 }

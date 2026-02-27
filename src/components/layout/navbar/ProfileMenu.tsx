@@ -66,7 +66,7 @@ export function ProfileMenu() {
             className="absolute top-full right-0 mt-3 w-64 glass rounded-3xl p-3 shadow-3xl border-white/10"
           >
             <div className="p-4 mb-2 bg-white/3 rounded-2xl border border-white/5">
-              <div className="text-[10px] font-black text-muted-foreground/50 uppercase tracking-[0.2em] mb-3">Active Status</div>
+              <div className="text-[10px] font-black text-muted-foreground/80 uppercase tracking-[0.2em] mb-3">Active Status</div>
               <div className="flex items-center gap-3">
                 <div className="h-3 w-3 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_var(--secondary)]" />
                 <div className="text-xs font-bold text-white uppercase tracking-wider">Synchronized</div>

@@ -84,7 +84,7 @@ export default function PlannerPage() {
                </div>
                <span className={cn(
                  "text-[9px] font-black uppercase tracking-widest transition-colors duration-500",
-                 step >= s.number ? "text-primary" : "text-muted-foreground/40"
+                 step >= s.number ? "text-primary" : "text-muted-foreground/60"
                )}>
                   {s.name}
                </span>
@@ -182,7 +182,7 @@ export default function PlannerPage() {
                     <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground ml-1">Knowledge Gaps</label>
                     <textarea 
                       placeholder="List topics you find challenging (e.g. Organic Chemistry, Calculus Derivatives)"
-                      className="w-full h-32 p-4 rounded-xl border border-white/10 bg-white/5 text-white outline-none focus:border-primary/50 font-medium text-sm resize-none transition-all placeholder:text-muted-foreground/20"
+                      className="w-full h-32 p-4 rounded-xl border border-white/10 bg-white/5 text-white outline-none focus:border-primary/50 font-medium text-sm resize-none transition-all placeholder:text-muted-foreground/40"
                     ></textarea>
                  </div>
               </div>

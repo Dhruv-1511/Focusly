@@ -68,12 +68,12 @@ export function NotificationSystem() {
                     <div className="flex-1 min-w-0">
                       <div className="text-xs font-bold text-white mb-0.5 truncate">{n.title}</div>
                       <div className="text-[10px] text-muted-foreground font-medium truncate mb-1">{n.desc}</div>
-                      <div className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-tighter">{n.time}</div>
+                      <div className="text-[9px] font-bold text-muted-foreground/60 uppercase tracking-tighter">{n.time}</div>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="py-12 text-center text-[10px] font-black uppercase tracking-widest text-muted-foreground/30">
+                <div className="py-12 text-center text-[10px] font-black uppercase tracking-widest text-muted-foreground/60">
                   Neural logs empty
                 </div>
               )}

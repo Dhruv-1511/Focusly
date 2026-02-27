@@ -43,7 +43,7 @@ export function DailyProtocol({ tasks, onRecalibrate, onTaskAction, onInitiateFl
             onClick={() => onTaskAction(task.task)}
             className="flex items-center gap-6 p-5 rounded-2xl bg-white/2 border border-white/5 hover:bg-white/4 hover:border-white/10 transition-all cursor-pointer group/item"
           >
-            <div className="text-xs font-black text-muted-foreground/50 w-12 tabular-nums">{task.time}</div>
+            <div className="text-xs font-black text-muted-foreground/80 w-12 tabular-nums">{task.time}</div>
             <div className="flex-1">
               <div className="text-base font-bold text-white flex items-center gap-3">
                  {task.task}
@@ -77,7 +77,7 @@ export function DailyProtocol({ tasks, onRecalibrate, onTaskAction, onInitiateFl
       <Button 
         variant="glow" 
         size="xl" 
-        className="w-full mt-10 h-16 rounded-[2rem] font-black text-lg gap-3"
+        className="w-full mt-10 gap-3"
         onClick={onInitiateFlow}
       >
          INITIATE NEURAL FLOW <Zap className="h-5 w-5 fill-current" />

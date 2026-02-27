@@ -34,7 +34,7 @@ export function SidebarMenu({ onClose }: { onClose?: () => void }) {
   return (
     <nav className="flex-1 px-4 space-y-1.5 overflow-y-auto custom-scrollbar">
       <div className="px-5 mb-4 mt-2">
-         <div className="text-[10px] font-black text-muted-foreground/30 uppercase tracking-[0.2em]">Platform Core</div>
+         <div className="text-[10px] font-black text-muted-foreground/60 uppercase tracking-[0.2em]">Platform Core</div>
       </div>
       {menuItems.map((item) => {
         const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));

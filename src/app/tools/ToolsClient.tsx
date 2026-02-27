@@ -133,8 +133,8 @@ export default function ToolsPage() {
              
              <div className="flex items-center justify-between pt-6 border-t border-white/5">
                 <div className="flex items-center gap-2">
-                   <Monitor className="h-3.5 w-3.5 text-muted-foreground/30" />
-                   <Smartphone className="h-3.5 w-3.5 text-muted-foreground/30" />
+                   <Monitor className="h-3.5 w-3.5 text-muted-foreground/60" />
+                   <Smartphone className="h-3.5 w-3.5 text-muted-foreground/60" />
                 </div>
                 <Link href={tool.link} className="text-[11px] font-bold text-primary flex items-center gap-2 group-hover:translate-x-1 transition-transform">
                    INITIALIZE <ArrowRight className="h-3.5 w-3.5" />

@@ -66,13 +66,13 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
-            <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/60 ml-1">Email Address</label>
+            <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80 ml-1">Email Address</label>
             <div className="relative group">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input 
                 type="email" 
                 required
-                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all text-sm font-medium placeholder:text-muted-foreground/30"
+                className="w-full h-12 bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all text-sm font-medium placeholder:text-muted-foreground/60"
                 placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -82,7 +82,7 @@ export default function LoginPage() {
 
           <div className="space-y-2">
             <div className="flex justify-between">
-              <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/60 ml-1">Password</label>
+              <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80 ml-1">Password</label>
               <Link href="#" className="text-[10px] font-bold text-primary hover:text-primary/80 transition-colors">Forgot password?</Link>
             </div>
             <div className="relative group">
@@ -111,7 +111,7 @@ export default function LoginPage() {
           </Button>
         </form>
 
-        <p className="mt-10 text-center text-xs font-medium text-muted-foreground/60">
+        <p className="mt-10 text-center text-xs font-medium text-muted-foreground/80">
           New to Focusly?{" "}
           <Link href="/register" className="text-primary font-bold hover:underline">Create account</Link>
         </p>
