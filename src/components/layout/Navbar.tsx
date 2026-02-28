@@ -10,6 +10,7 @@ import { Logo } from "./navbar/Logo";
 import { SearchContainer } from "./navbar/SearchContainer";
 import { NotificationSystem } from "./navbar/NotificationSystem";
 import { ProfileMenu } from "./navbar/ProfileMenu";
+import { Command as CommandIcon } from "lucide-react";
 
 interface NavbarProps {
   onToggleSidebar?: () => void;
@@ -55,6 +56,15 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
           </Button>
 
           <SearchContainer />
+          
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="hidden md:flex h-9 px-3 gap-2 bg-white/2 border-white/5 text-muted-foreground hover:bg-white/5 transition-all text-[10px] font-black uppercase tracking-widest rounded-xl"
+            onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'k', 'metaKey': true}))}
+          >
+            <CommandIcon className="h-3 w-3" /> FocusLink <span className="opacity-30">⌘K</span>
+          </Button>
         </div>
 
         <div className="flex items-center gap-3 sm:gap-4 md:gap-6">

@@ -26,6 +26,8 @@ export default function FocusPage() {
   const [isActive, setIsActive] = useState(false);
   const [mode, setMode] = useState("Focus"); // Focus, Break
   const [activeTrack, setActiveTrack] = useState("Deep Space Lo-Fi");
+  const [intention, setIntention] = useState("");
+  const [hasStartedGoal, setHasStartedGoal] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -117,35 +119,74 @@ export default function FocusPage() {
                 </button>
              </div>
 
-             <div className="relative mb-12 z-10">
-               <div className="text-8xl md:text-[10rem] font-bold tracking-tighter tabular-nums text-white flex items-baseline leading-none">
-                  {String(minutes).padStart(2, '0')}<span className={cn("text-primary/40", isActive && "animate-pulse")}>:</span>{String(seconds).padStart(2, '0')}
-               </div>
+             <div className="relative mb-12 z-10 w-full max-w-md text-center">
+               {!hasStartedGoal ? (
+                 <motion.div
+                   initial={{ opacity: 0, scale: 0.9 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   className="space-y-6"
+                 >
+                   <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Set Neural Intention</p>
+                   <input 
+                     value={intention}
+                     onChange={(e) => setIntention(e.target.value)}
+                     placeholder="WHAT ARE WE CONQUERING?"
+                     className="w-full bg-white/5 border-b-2 border-primary/20 p-4 text-xl font-black text-center text-white outline-none focus:border-primary transition-colors placeholder:text-white/10 uppercase tracking-tighter"
+                   />
+                   <Button 
+                     variant="glow"
+                     disabled={!intention.trim()}
+                     onClick={() => setHasStartedGoal(true)}
+                     className="w-full h-14 rounded-2xl font-black text-xs uppercase"
+                   >
+                     Initiate Protocol
+                   </Button>
+                 </motion.div>
+               ) : (
+                <>
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-8"
+                  >
+                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mb-2">Active Protocol</p>
+                    <p className="text-xl font-black text-white uppercase tracking-tighter">{intention}</p>
+                  </motion.div>
+                  <div className="text-8xl md:text-[10rem] font-bold tracking-tighter tabular-nums text-white flex items-baseline leading-none justify-center">
+                      {String(minutes).padStart(2, '0')}<span className={cn("text-primary/40", isActive && "animate-pulse")}>:</span>{String(seconds).padStart(2, '0')}
+                  </div>
+                </>
+               )}
              </div>
 
-             <div className="flex items-center gap-6 relative z-10">
-                <Button 
-                   onClick={toggleTimer}
-                   size="xl"
-                   className={cn(
-                     "h-16 px-10 rounded-2xl font-bold text-base transition-all shadow-xl",
-                     isActive ? "bg-white/10 text-white hover:bg-white/20" : "bg-primary text-white hover:bg-primary/90"
-                   )}
-                >
-                   {isActive ? (
-                     <><Pause className="mr-2 h-5 w-5 fill-current" /> Pause</>
-                   ) : (
-                     <><Play className="mr-2 h-5 w-5 fill-current" /> Initialize</>
-                   )}
-                </Button>
-                <Button 
-                   onClick={resetTimer}
-                   variant="ghost"
-                   className="h-16 w-16 rounded-2xl border border-white/5 hover:bg-white/5 transition-all group"
-                >
-                   <RotateCcw className="h-5 w-5 text-muted-foreground group-hover:text-white group-hover:rotate-180 transition-transform duration-500" />
-                </Button>
-             </div>
+             {hasStartedGoal && (
+               <div className="flex items-center gap-6 relative z-10">
+                  <Button 
+                     onClick={toggleTimer}
+                     size="xl"
+                     className={cn(
+                       "h-16 px-10 rounded-2xl font-bold text-base transition-all shadow-xl",
+                       isActive ? "bg-white/10 text-white hover:bg-white/20" : "bg-primary text-white hover:bg-primary/90"
+                     )}
+                  >
+                     {isActive ? (
+                       <><Pause className="mr-2 h-5 w-5 fill-current" /> Pause</>
+                     ) : (
+                       <><Play className="mr-2 h-5 w-5 fill-current" /> Start Focus</>
+                     )}
+                  </Button>
+                  <Button 
+                     onClick={() => {
+                        resetTimer();
+                        setHasStartedGoal(false);
+                     }}
+                     variant="ghost"
+                     className="h-16 w-16 rounded-2xl border border-white/5 hover:bg-white/5 transition-all group"
+                  >
+                     <RotateCcw className="h-5 w-5 text-muted-foreground group-hover:text-white group-hover:rotate-180 transition-transform duration-500" />
+                  </Button>
+               </div>
+             )}
 
              <div className="mt-12 flex flex-wrap justify-center gap-6 text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 relative z-10">
                 <div className="flex items-center gap-2">

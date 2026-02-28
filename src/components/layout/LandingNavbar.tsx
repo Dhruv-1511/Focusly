@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { Command as CommandIcon } from "lucide-react";
 
 export function LandingNavbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -55,6 +56,15 @@ export function LandingNavbar() {
         </nav>
 
         <div className="flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="hidden lg:flex items-center gap-2 text-[10px] font-bold text-muted-foreground uppercase tracking-widest hover:text-white transition-colors"
+            onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'k', 'metaKey': true}))}
+          >
+            <CommandIcon className="h-3 w-3" /> FocusLink <span className="opacity-30">⌘K</span>
+          </Button>
+
           <Link href="/login" className="text-sm font-medium text-muted-foreground hover:text-white transition-colors">
             Sign In
           </Link>
