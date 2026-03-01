@@ -34,7 +34,7 @@ export function SidebarMenu({ onClose }: { onClose?: () => void }) {
   return (
     <nav className="flex-1 px-4 space-y-1.5 overflow-y-auto custom-scrollbar">
       <div className="px-5 mb-4 mt-2">
-         <div className="text-[10px] font-black text-muted-foreground/60 uppercase tracking-[0.2em]">Platform Core</div>
+         <div className="text-[10px] font-semibold text-muted-foreground/40 uppercase tracking-widest">Platform</div>
       </div>
       {menuItems.map((item) => {
         const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
@@ -44,10 +44,10 @@ export function SidebarMenu({ onClose }: { onClose?: () => void }) {
             href={item.href}
             onClick={onClose}
             className={cn(
-              "flex items-center gap-3.5 px-5 py-3 rounded-2xl text-sm font-bold transition-all group relative",
+              "flex items-center gap-3.5 px-5 py-2.5 rounded-xl text-[13px] font-medium transition-all group relative",
               isActive 
-                ? "text-white bg-white/3 border border-white/5 shadow-xl" 
-                : "text-muted-foreground hover:bg-white/3 hover:text-white border border-transparent"
+                ? "text-white bg-white/5 shadow-sm" 
+                : "text-muted-foreground hover:bg-white/2 hover:text-white"
             )}
           >
             <div className={cn(
@@ -60,10 +60,10 @@ export function SidebarMenu({ onClose }: { onClose?: () => void }) {
             {isActive && (
               <motion.div 
                 layoutId="sidebar-active-indicator"
-                className="absolute left-0 w-1.5 h-6 bg-primary rounded-full blur-[1px]"
+                className="absolute left-0 w-1 h-4 bg-primary rounded-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }}
               />
             )}
           </Link>

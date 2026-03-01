@@ -43,97 +43,94 @@ const FEATURES = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-background">
       {/* Background Decor */}
       <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 blur-[120px] rounded-full animate-float" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 blur-[120px] rounded-full animate-float" style={{ animationDelay: '-2s' }} />
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full animate-pulse-slow" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/5 blur-[120px] rounded-full animate-pulse-slow" style={{ animationDelay: '-3s' }} />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-44 pb-32 px-6">
+      <section className="relative pt-48 pb-32 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/3 text-white border border-white/10 mb-12 backdrop-blur-md shadow-2xl"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-xl"
           >
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span className="text-[10px] font-black tracking-[0.3em] uppercase">The Future of Neural Performance</span>
+            <span className="text-[11px] font-semibold tracking-wide text-white/80">New era of productivity is here</span>
           </motion.div>
 
           <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.8, ease: "circOut" }}
-            className="text-5xl md:text-7xl font-black tracking-tighter mb-10 leading-[0.85] uppercase"
+            transition={{ delay: 0.1, duration: 0.8 }}
+            className="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-[1.05]"
           >
             Master your <br />
-            <span className="text-gradient italic drop-shadow-sm">Inner Flow.</span>
+            <span className="text-gradient italic font-serif">Deep Focus.</span>
           </motion.h1>
 
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-16 font-semibold leading-relaxed"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
           >
-            Focusly is the high-bandwidth neural-sync platform designed to eliminate distractions and achieve deep work with <span className="text-white">surgical precision.</span>
+            Focusly is a minimalist neural-sync platform designed to eliminate noise and help you achieve deep work with <span className="text-white">graceful precision.</span>
           </motion.p>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-32"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24"
           >
-            <Button variant="glow" size="xl" asChild className="gap-3">
-              <Link href="/dashboard">INITIATE SYNC <ArrowRight className="h-5 w-5" /></Link>
+            <Button size="lg" asChild className="rounded-2xl h-14 px-8 bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
+              <Link href="/dashboard" className="flex items-center gap-2">Get Started <ArrowRight className="h-4 w-4" /></Link>
             </Button>
-            <Button size="xl" variant="outline" asChild className="bg-white/2 backdrop-blur-xl hover:bg-white/5 transition-all">
-              <Link href="/tools">WATCH PROTOCOL</Link>
+            <Button size="lg" variant="outline" asChild className="rounded-2xl h-14 px-8 bg-white/5 backdrop-blur-xl hover:bg-white/10 border-white/10 transition-all">
+              <Link href="/tools">Learn More</Link>
             </Button>
           </motion.div>
 
           {/* Device Mockup */}
           <motion.div
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative max-w-6xl mx-auto group shadow-[0_0_100px_rgba(99,102,241,0.1)]"
+            className="relative max-w-5xl mx-auto group"
           >
-            <div className="absolute -inset-1 bg-linear-to-b from-primary/30 to-transparent blur-3xl rounded-[4rem] -z-10 group-hover:from-primary/40 transition-colors" />
-            <div className="glass-card p-4 overflow-hidden border-white/10 shadow-3xl rounded-[3rem]">
-               <div className="relative aspect-video rounded-[2.5rem] bg-neutral-950 border border-white/5 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full scale-150 animate-pulse" />
+            <div className="absolute -inset-2 bg-gradient-to-b from-primary/20 to-transparent blur-3xl rounded-[3rem] -z-10" />
+            <div className="glass-card p-3 overflow-hidden border-white/10 rounded-[2.5rem] bg-neutral-900/50">
+               <div className="relative aspect-video rounded-3xl bg-neutral-950 border border-white/5 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 bg-primary/5 blur-[100px] rounded-full scale-150" />
                   <div className="z-10 text-center">
-                     <div className="relative">
-                        <div className="absolute inset-0 bg-primary/30 blur-2xl animate-pulse rounded-full" />
-                        <Brain className="h-24 w-24 text-white mx-auto mb-6 relative animate-bounce-slow" />
-                     </div>
-                     <div className="text-xs font-black uppercase tracking-[0.5em] text-white/50">Neural Synchronization...</div>
+                     <Brain className="h-20 w-20 text-primary/40 mx-auto mb-4" />
+                     <div className="text-[11px] font-medium tracking-[0.3em] text-white/30 uppercase">System Ready</div>
                   </div>
                   
-                  {/* Floating UI elements */}
-                  <div className="absolute top-12 right-12 glass-card p-6 rounded-3xl border-white/10 animate-float shadow-2xl">
-                     <div className="flex items-center gap-5">
-                        <div className="h-3 w-3 rounded-full bg-secondary animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
-                        <div>
-                           <div className="text-xs uppercase tracking-[0.2em] font-black text-white mb-1">COGNITIVE FLOW</div>
-                           <div className="text-[10px] font-bold text-secondary uppercase tracking-widest">STABILITY: 99.2%</div>
+                  {/* Floating elements - refined */}
+                  <div className="absolute top-8 right-8 bg-white/5 backdrop-blur-2xl px-5 py-4 rounded-2xl border border-white/10 shadow-2xl animate-float">
+                     <div className="flex items-center gap-4">
+                        <div className="h-2 w-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                        <div className="text-left">
+                           <div className="text-[10px] font-semibold text-white/50 mb-0.5 uppercase tracking-wider">Flow State</div>
+                           <div className="text-xs font-bold text-white tracking-tight">Active: 99.2%</div>
                         </div>
                      </div>
                   </div>
 
-                  <div className="absolute bottom-12 left-12 glass-card p-6 rounded-3xl border-white/10 animate-float shadow-2xl" style={{ animationDelay: '-1s' }}>
-                     <div className="flex items-center gap-4">
-                        <div className="h-10 w-10 bg-primary/20 rounded-xl flex items-center justify-center">
-                           <Zap className="h-5 w-5 text-primary fill-current" />
+                  <div className="absolute bottom-8 left-8 bg-white/5 backdrop-blur-2xl px-5 py-4 rounded-2xl border border-white/10 shadow-2xl animate-float" style={{ animationDelay: '-1.5s' }}>
+                     <div className="flex items-center gap-3">
+                        <div className="h-8 w-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                           <Zap className="h-4 w-4 text-primary" />
                         </div>
-                        <div>
-                           <div className="text-[10px] uppercase tracking-[0.2em] font-black text-white mb-1">XP MULTIPLIER</div>
-                           <div className="text-[10px] font-bold text-primary uppercase tracking-widest">3.5X BOOST</div>
+                        <div className="text-left">
+                           <div className="text-[10px] font-semibold text-white/50 mb-0.5 uppercase tracking-wider">Focus Boost</div>
+                           <div className="text-xs font-bold text-white tracking-tight">3.5x Multiplier</div>
                         </div>
                      </div>
                   </div>
@@ -143,42 +140,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section id="features" className="py-48 px-6 relative">
+      {/* Features - refined */}
+      <section id="features" className="py-24 px-6 relative">
         <div className="max-w-7xl mx-auto">
-          {/* ... existing features ... */}
-          <div className="text-center mb-32 relative z-10">
-            <motion.div 
-               whileInView={{ opacity: 1, scale: 1 }}
-               initial={{ opacity: 0, scale: 0.8 }}
-               className="h-1 w-20 bg-primary mx-auto mb-10 rounded-full"
-            />
-            <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter uppercase leading-none">Architected for <br />Peak Potential</h2>
-            <p className="text-muted-foreground text-xl max-w-2xl mx-auto font-semibold leading-relaxed">Everything needed to master your cognitive bandwidth and achieve goals with surgical precision.</p>
+          <div className="text-center mb-24">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Elegance in performance.</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium">Tools designed to help you reclaim your time and focus on what truly matters.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FEATURES.map((feature, i) => (
               <motion.div 
                 key={i}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="glass-card p-12 overflow-hidden group cursor-default"
+                className="glass-card p-10 group cursor-default border-gradient"
               >
                 <div className={cn(
-                  "h-16 w-16 rounded-2xl flex items-center justify-center mb-10 border border-white/5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-xl", 
+                  "h-14 w-14 rounded-2xl flex items-center justify-center mb-8 border border-white/5 transition-all duration-500 group-hover:scale-105 group-hover:border-primary/20", 
                   feature.bg
                 )}>
-                  <feature.icon className={cn("h-8 w-8", feature.color)} />
+                  <feature.icon className={cn("h-6 w-6", feature.color)} />
                 </div>
-                <h3 className="text-3xl font-black mb-6 tracking-tight uppercase leading-none">{feature.title}</h3>
-                <p className="text-muted-foreground text-base leading-relaxed mb-10 font-black uppercase tracking-widest text-[11px] opacity-70">
+                <h3 className="text-2xl font-bold mb-4 tracking-tight">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-8 font-medium">
                   {feature.description}
                 </p>
-                <Link href="/tools" className="text-[12px] font-black text-primary flex items-center gap-3 group/link uppercase tracking-[0.2em]">
-                  CALIBRATE <ArrowRight className="h-4 w-4 group-hover/link:translate-x-2 transition-transform" />
+                <Link href="/tools" className="text-xs font-bold text-primary flex items-center gap-2 group/link tracking-tight hover:gap-3 transition-all">
+                  Get Started <ArrowRight className="h-4 w-4" />
                 </Link>
               </motion.div>
             ))}
@@ -186,119 +177,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tools Preview */}
-      <section id="tools" className="py-32 px-6">
-         <div className="max-w-7xl mx-auto glass rounded-[4rem] p-16 md:p-24 relative overflow-hidden group border-white/5">
-            <div className="absolute top-0 right-0 p-24 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-1000">
-               <Zap className="h-64 w-64 text-primary" />
-            </div>
-            <div className="flex flex-col lg:flex-row items-center gap-16 relative z-10">
-               <div className="flex-1">
-                  <h2 className="text-4xl md:text-5xl font-black mb-8 tracking-tight uppercase">Tools of the <br /><span className="text-gradient">Trade.</span></h2>
-                  <p className="text-muted-foreground text-lg font-semibold mb-12 max-w-xl">
-                     Access our suite of neural-sync tools designed for distraction-free deep work. From smart timers to AI curriculum architects.
-                  </p>
-                  <Button variant="glow" size="lg" asChild className="rounded-2xl h-14 px-10 font-black text-sm uppercase">
-                     <Link href="/tools">Access Arsenal</Link>
-                  </Button>
-               </div>
-               <div className="flex-1 grid grid-cols-2 gap-4">
-                  {[Brain, Clock, Shield, Target].map((Icon, i) => (
-                    <div key={i} className="glass p-8 rounded-3xl flex flex-col items-center justify-center gap-4 hover:border-primary/20 transition-all group/icon">
-                       <Icon className="h-10 w-10 text-primary group-hover/icon:scale-110 transition-transform" />
-                       <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Module 0{i+1}</span>
-                    </div>
-                  ))}
-               </div>
-            </div>
-         </div>
-      </section>
-
-      {/* Stats Section / Community */}
-      <section id="community" className="py-32 px-6 border-y border-white/5 bg-white/2 backdrop-blur-3xl relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
-             <h2 className="text-4xl font-black mb-4 uppercase tracking-tighter text-white">Global Neural Link</h2>
-             <p className="text-muted-foreground font-semibold uppercase tracking-widest text-xs">Join thousands of high-performers already in flow.</p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-32">
-            {[
-              { icon: Users, label: "NEURAL LINKS", value: "150k+" },
-              { icon: Target, label: "RETENTION RATE", value: "99.4%" },
-              { icon: Clock, label: "XP EARNED", value: "25M+" },
-              { icon: CheckCircle2, label: "PROTOCOLS", value: "1.2M" }
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col items-center gap-4 group">
-                <stat.icon className="h-6 w-6 text-primary group-hover:scale-110 transition-transform" />
-                <div className="text-3xl font-black tracking-tighter text-white">{stat.value}</div>
-                <div className="text-[10px] font-black tracking-[0.3em] uppercase text-muted-foreground/80 group-hover:text-primary transition-colors">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="py-48 px-6">
+      {/* Pricing - simplified */}
+      <section id="pricing" className="py-24 px-6 bg-white/[0.01]">
          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-24">
-               <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase tracking-tight">Unlock <span className="text-gradient">Unlimited</span> Flow</h2>
-               <p className="text-muted-foreground text-xl font-semibold">Choose the protocol that fits your performance needs.</p>
+            <div className="text-center mb-20">
+               <h2 className="text-4xl md:text-5xl font-bold mb-5 tracking-tight tracking-tight">Simple Pricing.</h2>
+               <p className="text-muted-foreground text-lg font-medium">Transparent plans for individuals and teams.</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                <PricingCard 
-                 name="Resident" 
+                 name="Personal" 
                  price="0" 
-                 desc="Core neural features for standard focus needs."
+                 desc="Core features for students."
                  features={["Standard Focus Timer", "Basic Study Plans", "Community Access"]} 
                />
                <PricingCard 
-                 name="Pro Elite" 
+                 name="Pro" 
                  price="12" 
-                 desc="The ultimate performance kit for deep work masters."
-                 features={["AI Schedule Architect", "Focus Shield (All Devices)", "Smart Recall Flashcards", "Priority Community Guilds"]}
+                 desc="Advanced tools for deep work."
+                 features={["AI Schedule Architect", "Focus Shield", "Smart Recall", "Priority Support"]}
                  highlighted={true}
                />
                <PricingCard 
-                 name="Synapse" 
+                 name="Teams" 
                  price="29" 
-                 desc="Full enterprise-grade neural integration for teams."
-                 features={["Everything in Pro", "Team Analytics HUD", "Custom AI Models", "Neural API Access"]} 
+                 desc="Collaborative focus for groups."
+                 features={["Everything in Pro", "Team Analytics", "Custom Models", "API Access"]} 
                />
             </div>
          </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-52 px-6 text-center">
-        <div className="max-w-5xl mx-auto glass-card p-24 md:p-32 relative overflow-hidden group rounded-[4rem]">
-           <div className="absolute inset-0 bg-primary/5 blur-[120px] group-hover:bg-primary/10 transition-colors animate-pulse" />
-           <div className="relative z-10">
-              <h2 className="text-5xl md:text-7xl font-black mb-12 tracking-tighter uppercase leading-none">Ready to <br /><span className="text-gradient">Ascend?</span></h2>
-              <p className="text-muted-foreground mb-16 max-w-xl mx-auto font-black uppercase tracking-widest text-sm leading-relaxed opacity-80">Join the elite high-performers who have already catalyzed their peak flow state with Focusly.</p>
-              <Button variant="glow" size="xl" asChild className="shadow-3xl hover:scale-105 active:scale-95 transition-all">
-                <Link href="/register">JOIN THE SQUAD</Link>
-              </Button>
-           </div>
+      {/* Final CTA */}
+      <section className="py-32 px-6">
+        <div className="max-w-4xl mx-auto glass-card p-16 md:p-24 text-center border-gradient group">
+           <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">Begin your flow.</h2>
+           <p className="text-muted-foreground mb-12 max-w-md mx-auto font-medium text-lg">Join the high-performers who have already catalyzed their peak flow state with Focusly.</p>
+           <Button size="xl" asChild className="rounded-2xl h-14 px-10 bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
+             <Link href="/register">Start for Free</Link>
+           </Button>
         </div>
       </section>
 
-      <footer className="py-24 border-t border-white/5 px-6 bg-white/2 backdrop-blur-2xl">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16">
-           <div className="flex items-center gap-4 group cursor-pointer">
-              <div className="h-10 w-10 bg-primary rounded-2xl flex items-center justify-center transition-all group-hover:rotate-12 group-hover:scale-110 shadow-lg shadow-primary/20">
-                <Zap className="h-6 w-6 fill-white text-white" />
+      <footer className="py-20 border-t border-white/5 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 text-sm text-muted-foreground">
+           <div className="flex items-center gap-3">
+              <div className="h-8 w-8 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/10">
+                <Zap className="h-4 w-4 fill-white text-white" />
               </div>
-              <span className="font-black text-2xl tracking-tighter italic uppercase">Focusly</span>
+              <span className="font-bold text-white text-xl tracking-tighter">Focusly.</span>
            </div>
-           <div className="flex gap-16 text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">
-              <Link href="/settings" className="hover:text-primary transition-colors">Privacy Protocol</Link>
-              <Link href="/settings" className="hover:text-white transition-colors">Terms of Sync</Link>
-              <Link href="/dashboard" className="hover:text-white transition-colors">Neural Log</Link>
+           <div className="flex gap-10 font-medium tracking-tight">
+              <Link href="/settings" className="hover:text-white transition-colors">Privacy</Link>
+              <Link href="/settings" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/dashboard" className="hover:text-white transition-colors">Docs</Link>
            </div>
-           <div className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground/60">
-             &copy; 2026 Focusly Neural Systems. All units active.
+           <div className="font-medium tracking-tight opacity-50">
+             &copy; 2026 Focusly Systems.
            </div>
         </div>
       </footer>

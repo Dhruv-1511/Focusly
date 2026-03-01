@@ -20,12 +20,12 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
     )}>
       <div className="p-8 pb-10 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group transition-all" onClick={onClose}>
-          <div className="relative h-10 w-10 rounded-xl overflow-hidden bg-primary/20 flex items-center justify-center border border-primary/20 group-hover:scale-110 transition-transform shadow-lg shadow-primary/20">
-            <BrainZapLogo className="h-7 w-7" />
+        <Link href="/" className="flex items-center gap-3 transition-all" onClick={onClose}>
+          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
+            <BrainZapLogo className="h-5 w-5" />
           </div>
-          <span className="text-2xl font-black text-white tracking-tighter italic uppercase">
-            Focusly
+          <span className="text-xl font-bold text-white tracking-tight">
+            Focusly.
           </span>
         </Link>
         <Button variant="ghost" size="icon" className="lg:hidden rounded-xl h-9 w-9 text-muted-foreground hover:text-white" onClick={onClose}>

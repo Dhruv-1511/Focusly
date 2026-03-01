@@ -158,24 +158,24 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/3 backdrop-blur-xl border border-white/10 shadow-2xl;
+    @apply bg-white/3 backdrop-blur-2xl border border-white/10 shadow-2xl;
     box-shadow:
-      0 8px 32px 0 rgba(0, 0, 0, 0.8),
+      0 20px 50px -12px rgba(0, 0, 0, 0.5),
       inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
   .glass-dark {
-    @apply bg-black/40 backdrop-blur-2xl border border-white/5 shadow-2xl;
+    @apply bg-neutral-900/60 backdrop-blur-3xl border border-white/5 shadow-2xl;
     box-shadow:
-      0 12px 40px 0 rgba(0, 0, 0, 0.9),
+      0 25px 60px -15px rgba(0, 0, 0, 0.8),
       inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   }
 
   .glass-card {
-    @apply bg-white/3 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:bg-white/5 transition-all duration-500;
+    @apply bg-white/2 backdrop-blur-2xl border border-white/5 rounded-3xl p-8 hover:bg-white/4 transition-all duration-700;
     box-shadow:
-      0 8px 32px 0 rgba(0, 0, 0, 0.8),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      0 30px 60px -20px rgba(0, 0, 0, 0.6),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   }
 
   .text-gradient {
@@ -221,5 +221,25 @@
 
   .mask-radial {
     mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+
+  .border-gradient {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent, rgba(255, 255, 255, 0.05));
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
   }
 }
