@@ -60,7 +60,7 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
           <Button 
             variant="outline" 
             size="sm" 
-            className="hidden md:flex h-9 px-3 gap-2 bg-white/2 border-white/5 text-muted-foreground hover:bg-white/5 transition-all text-[10px] font-black uppercase tracking-widest rounded-xl"
+            className="hidden md:flex h-9 px-4 gap-2 bg-white/2 border-white/10 text-muted-foreground hover:bg-primary/10 hover:border-primary/20 hover:text-white transition-all text-[11px] font-semibold rounded-xl"
             onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'k', 'metaKey': true}))}
           >
             <CommandIcon className="h-3 w-3" /> FocusLink <span className="opacity-30">⌘K</span>
@@ -73,7 +73,7 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
                 <Link 
                   key={item.name}
                   href={item.href}
-                   className="text-xs font-black uppercase tracking-widest text-muted-foreground hover:text-white transition-colors"
+                   className="text-[11px] font-semibold text-muted-foreground hover:text-white transition-colors"
                 >
                   {item.name}
                 </Link>

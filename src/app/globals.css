@@ -3,7 +3,7 @@
 
 @theme {
   --font-sans:
-    "Inter", "Outfit", var(--font-montserrat), ui-sans-serif, system-ui;
+    "Outfit", "Inter", ui-sans-serif, system-ui;
   --font-mono: "Fira Code", monospace;
 
   --color-background: var(--background);
@@ -76,11 +76,11 @@
 }
 
 :root {
-  --background: #020203;
+  --background: #0f0f11;
   --foreground: #f8fafc;
-  --card: #08080a;
+  --card: #16161a;
   --card-foreground: #f8fafc;
-  --popover: #08080a;
+  --popover: #16161a;
   --popover-foreground: #f8fafc;
   --primary: #6366f1;
   --primary-foreground: #ffffff;
