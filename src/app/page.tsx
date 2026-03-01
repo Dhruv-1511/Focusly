@@ -43,199 +43,167 @@ const FEATURES = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
-      {/* Background Decor */}
+    <div className="relative min-h-screen overflow-hidden bg-background selection:bg-primary selection:text-black">
+      {/* Hyper-Crazy Background Decor */}
       <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full animate-pulse-slow" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary/5 blur-[120px] rounded-full animate-pulse-slow" style={{ animationDelay: '-3s' }} />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
+        <div className="absolute top-[-20%] left-[-20%] w-[100%] h-[100%] bg-primary/20 blur-[150px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-20%] w-[100%] h-[100%] bg-secondary/20 blur-[150px] rounded-full animate-pulse" style={{ animationDelay: '-2s' }} />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1] mix-blend-overlay" />
+        <div className="absolute h-full w-full bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       </div>
 
-      {/* Hero Section */}
-      <section className="relative pt-48 pb-32 px-6">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-xl"
-          >
-            <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span className="text-[11px] font-semibold tracking-wide text-white/80">New era of productivity is here</span>
-          </motion.div>
+      {/* Hero Section - The "Crazy" Part */}
+      <section className="relative pt-64 pb-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="flex-1 text-left lg:rotate-[-2deg]">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="inline-flex items-center gap-2 px-6 py-2 rounded-none bg-primary text-black font-black uppercase tracking-tighter mb-8 skew-x-[-12deg]"
+              >
+                <Sparkles className="h-5 w-5" />
+                <span className="text-sm">WARNING: HIGH CONCENTRATION ZONE</span>
+              </motion.div>
 
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.8 }}
-            className="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-[1.05]"
-          >
-            Master your <br />
-            <span className="text-gradient italic font-serif">Deep Focus.</span>
-          </motion.h1>
+              <motion.h1 
+                initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.5 }}
+                className="text-8xl md:text-[12rem] font-black tracking-[-0.08em] mb-8 leading-[0.8] uppercase flex flex-col"
+              >
+                <span className="text-white">ULTRA</span>
+                <span className="text-acid italic ml-12 drop-shadow-[0_0_30px_rgba(0,255,0,0.4)]">FLOW.</span>
+              </motion.h1>
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 font-medium leading-relaxed"
-          >
-            Focusly is a minimalist neural-sync platform designed to eliminate noise and help you achieve deep work with <span className="text-white">graceful precision.</span>
-          </motion.p>
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-2xl md:text-3xl text-white max-w-xl mb-12 font-black leading-tight uppercase skew-x-[-6deg]"
+              >
+                Break the limits. <span className="bg-primary text-black px-2">Shatter the noise.</span> Reclaim your brain.
+              </motion.p>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-24"
-          >
-            <Button size="lg" asChild className="rounded-2xl h-14 px-8 bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]">
-              <Link href="/dashboard" className="flex items-center gap-2">Get Started <ArrowRight className="h-4 w-4" /></Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="rounded-2xl h-14 px-8 bg-white/5 backdrop-blur-xl hover:bg-white/10 border-white/10 transition-all">
-              <Link href="/tools">Learn More</Link>
-            </Button>
-          </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+                className="flex flex-wrap gap-6"
+              >
+                <Button size="xl" asChild className="rounded-none h-20 px-12 bg-white text-black hover:bg-primary transition-all hover:skew-x-[-12deg] text-2xl font-black italic border-4 border-black group">
+                  <Link href="/dashboard" className="flex items-center gap-3">JACK IN <ArrowRight className="h-8 w-8 group-hover:translate-x-4 transition-transform" /></Link>
+                </Button>
+                <Button size="xl" variant="outline" asChild className="rounded-none h-20 px-12 border-4 border-primary text-primary hover:bg-primary/10 transition-all text-2xl font-black italic">
+                   <Link href="/tools">SYSTEMS</Link>
+                </Button>
+              </motion.div>
+            </div>
 
-          {/* Device Mockup */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative max-w-5xl mx-auto group"
-          >
-            <div className="absolute -inset-2 bg-gradient-to-b from-primary/20 to-transparent blur-3xl rounded-[3rem] -z-10" />
-            <div className="glass-card p-3 overflow-hidden border-white/10 rounded-[2.5rem] bg-neutral-900/50">
-               <div className="relative aspect-video rounded-3xl bg-neutral-950 border border-white/5 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 bg-primary/5 blur-[100px] rounded-full scale-150" />
-                  <div className="z-10 text-center">
-                     <Brain className="h-20 w-20 text-primary/40 mx-auto mb-4" />
-                     <div className="text-[11px] font-medium tracking-[0.3em] text-white/30 uppercase">System Ready</div>
-                  </div>
-                  
-                  {/* Floating elements - refined */}
-                  <div className="absolute top-8 right-8 bg-white/5 backdrop-blur-2xl px-5 py-4 rounded-2xl border border-white/10 shadow-2xl animate-float">
-                     <div className="flex items-center gap-4">
-                        <div className="h-2 w-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                        <div className="text-left">
-                           <div className="text-[10px] font-semibold text-white/50 mb-0.5 uppercase tracking-wider">Flow State</div>
-                           <div className="text-xs font-bold text-white tracking-tight">Active: 99.2%</div>
-                        </div>
-                     </div>
-                  </div>
+            {/* Out-of-the-box UI Elements */}
+            <div className="flex-1 relative">
+               <motion.div 
+                 animate={{ rotateZ: [5, -5, 5], scale: [1, 1.05, 1] }}
+                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                 className="relative z-20"
+               >
+                 <div className="glass-hyper p-2 tilt-3d border-glow rounded-[100px] overflow-hidden">
+                    <div className="bg-neutral-950 aspect-square rounded-[90px] flex items-center justify-center relative overflow-hidden">
+                       <div className="absolute inset-0 bg-gradient-radial from-primary/40 to-transparent animate-pulse" />
+                       <Brain className="h-48 w-48 text-white relative z-10 animate-bounce-slow" />
+                    </div>
+                 </div>
+               </motion.div>
 
-                  <div className="absolute bottom-8 left-8 bg-white/5 backdrop-blur-2xl px-5 py-4 rounded-2xl border border-white/10 shadow-2xl animate-float" style={{ animationDelay: '-1.5s' }}>
-                     <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 bg-primary/20 rounded-lg flex items-center justify-center">
-                           <Zap className="h-4 w-4 text-primary" />
-                        </div>
-                        <div className="text-left">
-                           <div className="text-[10px] font-semibold text-white/50 mb-0.5 uppercase tracking-wider">Focus Boost</div>
-                           <div className="text-xs font-bold text-white tracking-tight">3.5x Multiplier</div>
-                        </div>
-                     </div>
-                  </div>
+               {/* Crazy floating stat blocks */}
+               <div className="absolute -top-12 -left-12 glass-hyper p-8 skew-y-3 border-glow z-30">
+                  <div className="text-[12px] font-black text-primary mb-2 tracking-[0.4em] uppercase">Sync Status</div>
+                  <div className="text-4xl font-black text-white italic tracking-tighter">999.0%</div>
+               </div>
+
+               <div className="absolute -bottom-12 -right-12 glass-hyper p-8 skew-x-12 border-glow z-30">
+                  <div className="text-[12px] font-black text-secondary mb-2 tracking-[0.4em] uppercase">Brain Heat</div>
+                  <div className="text-4xl font-black text-white italic tracking-tighter">OVERFLOW</div>
                </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Features - refined */}
-      <section id="features" className="py-24 px-6 relative">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Elegance in performance.</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-medium">Tools designed to help you reclaim your time and focus on what truly matters.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {FEATURES.map((feature, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="glass-card p-10 group cursor-default border-gradient"
-              >
-                <div className={cn(
-                  "h-14 w-14 rounded-2xl flex items-center justify-center mb-8 border border-white/5 transition-all duration-500 group-hover:scale-105 group-hover:border-primary/20", 
-                  feature.bg
-                )}>
-                  <feature.icon className={cn("h-6 w-6", feature.color)} />
-                </div>
-                <h3 className="text-2xl font-bold mb-4 tracking-tight">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-8 font-medium">
-                  {feature.description}
-                </p>
-                <Link href="/tools" className="text-xs font-bold text-primary flex items-center gap-2 group/link tracking-tight hover:gap-3 transition-all">
-                  Get Started <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing - simplified */}
-      <section id="pricing" className="py-24 px-6 bg-white/[0.01]">
-         <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-20">
-               <h2 className="text-4xl md:text-5xl font-bold mb-5 tracking-tight tracking-tight">Simple Pricing.</h2>
-               <p className="text-muted-foreground text-lg font-medium">Transparent plans for individuals and teams.</p>
+      {/* Features - Radical Shift */}
+      <section className="py-48 bg-primary text-black transform skew-y-[-4deg] relative z-10">
+         <div className="max-w-7xl mx-auto transform skew-y-[4deg]">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-12">
+               <h2 className="text-7xl md:text-[10rem] font-black leading-[0.7] tracking-[-0.05em] uppercase">
+                  RAW <br />POWER.
+               </h2>
+               <p className="text-2xl font-black max-w-sm italic uppercase leading-none">
+                  Forget minimalism. This is maximum performance for the hyper-connected mind.
+               </p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               <PricingCard 
-                 name="Personal" 
-                 price="0" 
-                 desc="Core features for students."
-                 features={["Standard Focus Timer", "Basic Study Plans", "Community Access"]} 
-               />
-               <PricingCard 
-                 name="Pro" 
-                 price="12" 
-                 desc="Advanced tools for deep work."
-                 features={["AI Schedule Architect", "Focus Shield", "Smart Recall", "Priority Support"]}
-                 highlighted={true}
-               />
-               <PricingCard 
-                 name="Teams" 
-                 price="29" 
-                 desc="Collaborative focus for groups."
-                 features={["Everything in Pro", "Team Analytics", "Custom Models", "API Access"]} 
-               />
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+               {FEATURES.map((feature, i) => (
+                 <div key={i} className="border-8 border-black p-10 hover:translate-x-4 hover:translate-y-[-16px] transition-all bg-white shadow-[16px_16px_0_0_#000]">
+                    <div className="h-20 w-20 bg-black flex items-center justify-center mb-8 rotate-[-12deg]">
+                       <feature.icon className="h-10 w-10 text-primary" />
+                    </div>
+                    <h3 className="text-4xl font-black mb-6 uppercase italic">{feature.title}</h3>
+                    <p className="text-lg font-bold leading-tight uppercase">{feature.description}</p>
+                 </div>
+               ))}
             </div>
          </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-32 px-6">
-        <div className="max-w-4xl mx-auto glass-card p-16 md:p-24 text-center border-gradient group">
-           <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">Begin your flow.</h2>
-           <p className="text-muted-foreground mb-12 max-w-md mx-auto font-medium text-lg">Join the high-performers who have already catalyzed their peak flow state with Focusly.</p>
-           <Button size="xl" asChild className="rounded-2xl h-14 px-10 bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95">
-             <Link href="/register">Start for Free</Link>
-           </Button>
-        </div>
+      {/* Pricing - Neon Overload */}
+      <section id="pricing" className="py-64 px-6">
+         <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-40">
+               <h2 className="text-9xl md:text-[15rem] font-black text-white/10 uppercase tracking-tighter leading-none absolute left-0 right-0 -z-10 select-none">SYSTEMS</h2>
+               <h2 className="text-6xl md:text-8xl font-black text-white uppercase italic tracking-tight relative">Choose your poison.</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+               {["PEASANT", "ELITE", "GOD-MODE"].map((name, i) => (
+                 <motion.div 
+                   key={i}
+                   whileHover={{ scale: 1.05, rotate: i === 1 ? 0 : i === 0 ? -5 : 5 }}
+                   className={cn(
+                     "p-12 border-4 flex flex-col items-center text-center",
+                     i === 1 ? "bg-primary border-black text-black shadow-[24px_24px_0_0_#4ade80]" : "bg-black border-primary text-white shadow-[16px_16px_0_0_rgba(240,171,252,0.5)]"
+                   )}
+                 >
+                    <span className="text-[14px] font-black tracking-[0.5em] mb-4">PROTOCOL 00{i+1}</span>
+                    <h3 className="text-5xl font-black italic mb-8 uppercase">{name}</h3>
+                    <div className="text-7xl font-black mb-12 italic">${i * 12}.00</div>
+                    <div className="space-y-6 mb-16 font-black uppercase tracking-tighter text-lg flex-1">
+                       <div>- FULL HUD ACCESS</div>
+                       <div>- BRAIN OVERCLOCK</div>
+                       <div>- NO DELAY SYNC</div>
+                       {i > 0 && <div>- UNLIMITED POWER</div>}
+                       {i === 2 && <div>- REALITY BREAKER</div>}
+                    </div>
+                    <Button className={cn(
+                      "w-full h-16 rounded-none font-black text-xl italic",
+                      i === 1 ? "bg-black text-white" : "bg-primary text-black"
+                    )}>
+                      INITIALIZE
+                    </Button>
+                 </motion.div>
+               ))}
+            </div>
+         </div>
       </section>
 
-      <footer className="py-20 border-t border-white/5 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 text-sm text-muted-foreground">
-           <div className="flex items-center gap-3">
-              <div className="h-8 w-8 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/10">
-                <Zap className="h-4 w-4 fill-white text-white" />
-              </div>
-              <span className="font-bold text-white text-xl tracking-tighter">Focusly.</span>
-           </div>
-           <div className="flex gap-10 font-medium tracking-tight">
-              <Link href="/settings" className="hover:text-white transition-colors">Privacy</Link>
-              <Link href="/settings" className="hover:text-white transition-colors">Terms</Link>
-              <Link href="/dashboard" className="hover:text-white transition-colors">Docs</Link>
-           </div>
-           <div className="font-medium tracking-tight opacity-50">
-             &copy; 2026 Focusly Systems.
-           </div>
+      <footer className="py-32 border-t-[20px] border-primary px-6 bg-black text-white">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
+            <h2 className="text-8xl font-black italic tracking-tighter uppercase">FOCUSLY.</h2>
+            <div className="flex flex-col items-end gap-4 font-black uppercase italic tracking-tighter text-2xl">
+               <Link href="/dashboard" className="text-primary hover:text-white transition-colors">DASHBOARD</Link>
+               <Link href="/tools" className="hover:text-primary transition-colors">ACCESS PROTOCOLS</Link>
+               <Link href="/register" className="hover:text-primary transition-colors">CREATE ACCOUNT</Link>
+            </div>
         </div>
       </footer>
     </div>

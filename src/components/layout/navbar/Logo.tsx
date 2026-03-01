@@ -3,9 +3,8 @@ import { BrainZapLogo } from "@/components/ui/Logo";
 
 export function Logo() {
   return (
-    <Link href="/" className="items-center gap-3 hidden lg:flex group transition-all shrink-0">
-      <BrainZapLogo className="h-10 w-10 drop-shadow-[0_0_10px_rgba(99,102,241,0.5)]" />
-      <span className="text-2xl font-black text-white tracking-tighter italic uppercase">Focusly</span>
+    <Link href="/" className="items-center gap-3 hidden lg:flex group transition-all shrink-0 bg-primary px-6 py-2 skew-x-[-15deg] border-4 border-black shadow-[8px_8px_0_0_#fff]">
+      <span className="text-3xl font-black text-black italic tracking-tighter uppercase skew-x-[15deg] glitch" data-text="Focusly.">Focusly.</span>
     </Link>
   );
 }

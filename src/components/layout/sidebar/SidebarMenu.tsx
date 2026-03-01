@@ -44,26 +44,26 @@ export function SidebarMenu({ onClose }: { onClose?: () => void }) {
             href={item.href}
             onClick={onClose}
             className={cn(
-              "flex items-center gap-3.5 px-5 py-2.5 rounded-xl text-[13px] font-medium transition-all group relative",
+              "flex items-center gap-6 px-6 py-4 transition-all group relative border-4 mb-2 overflow-hidden",
               isActive 
-                ? "text-white bg-white/5 shadow-sm" 
-                : "text-muted-foreground hover:bg-white/2 hover:text-white"
+                ? "text-black bg-primary border-black skew-x-[-12deg] shadow-[8px_8px_0_0_#fff]" 
+                : "text-primary bg-black border-primary/20 hover:border-primary hover:translate-x-4"
             )}
           >
             <div className={cn(
-              "relative z-10 p-1.5 rounded-lg transition-all",
-              isActive ? "bg-primary/20 text-primary" : "text-muted-foreground group-hover:text-primary group-hover:bg-primary/10"
+              "relative z-10 p-2 transition-all",
+              isActive ? "bg-black text-primary rotate-[12deg]" : "bg-primary/5 text-primary"
             )}>
-              <item.icon className="h-4 w-4" />
+              <item.icon className="h-6 w-6" />
             </div>
-            <span className="relative z-10">{item.name}</span>
+            <span className={cn(
+              "relative z-10 text-xl font-black italic uppercase tracking-tighter",
+              isActive ? "text-black" : "text-primary"
+            )}>{item.name}</span>
             {isActive && (
               <motion.div 
                 layoutId="sidebar-active-indicator"
-                className="absolute left-0 w-1 h-4 bg-primary rounded-full"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.2 }}
+                className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.1)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none"
               />
             )}
           </Link>

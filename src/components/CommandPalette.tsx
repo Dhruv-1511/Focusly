@@ -92,93 +92,79 @@ export function CommandPalette() {
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100"
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            className="fixed left-1/2 top-[15%] -translate-x-1/2 w-full max-w-2xl z-101 px-4"
+            initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            exit={{ opacity: 0, scale: 0.5, rotateY: -90 }}
+            transition={{ type: "spring", damping: 15 }}
+            className="fixed left-1/2 top-[10%] -translate-x-1/2 w-full max-w-4xl z-101 px-4"
           >
-            <div className="bg-neutral-900/80 backdrop-blur-2xl border border-white/10 rounded-3xl overflow-hidden shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)]">
-              <div className="p-6 border-b border-white/5 flex items-center gap-4 relative">
-                <Search className="h-5 w-5 text-primary/70" />
+            <div className="bg-black/90 border-4 border-primary shadow-[0_0_80px_rgba(240,171,252,0.4)] relative overflow-hidden group">
+              {/* Glitch Overlay */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(240,171,252,0.1)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none opacity-20" />
+              
+              <div className="p-8 border-b-4 border-primary flex items-center gap-6 relative z-10">
+                <div className="h-12 w-12 bg-primary flex items-center justify-center rotate-45">
+                   <Search className="h-8 w-8 text-black -rotate-45" />
+                </div>
                 <input
                   autoFocus
-                  placeholder="Neural Command... (e.g., 'Go to Focus')"
+                  placeholder="EXECUTE COMMAND..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={onKeyDown}
-                  className="bg-transparent border-none outline-none text-lg w-full font-medium placeholder:text-muted-foreground/30 text-white"
+                  className="bg-transparent border-none outline-none text-4xl md:text-6xl font-black italic placeholder:text-primary/20 text-primary w-full tracking-tighter uppercase"
                 />
-                <div className="flex items-center gap-3">
-                   <div className="hidden md:block px-1.5 py-0.5 rounded border border-white/10 text-[9px] font-medium text-muted-foreground/50 uppercase tracking-tighter">ESC</div>
-                   <button onClick={() => setIsOpen(false)} className="hover:bg-white/5 p-1.5 rounded-full transition-colors group">
-                     <X className="h-5 w-5 text-muted-foreground group-hover:text-white" />
-                   </button>
-                </div>
+                <button onClick={() => setIsOpen(false)} className="bg-primary p-2 text-black hover:bg-white transition-colors">
+                  <X className="h-10 w-10" />
+                </button>
               </div>
 
-              <div className="p-2 max-h-[420px] overflow-y-auto custom-scrollbar">
+              <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto custom-scrollbar relative z-10 bg-black">
                 {filteredActions.length > 0 ? (
-                  <div className="space-y-1">
+                  <>
                     {filteredActions.map((action, index) => (
                       <button
                         key={action.id}
                         onMouseEnter={() => setSelectedIndex(index)}
                         onClick={() => handleSelect(action.href)}
                         className={cn(
-                          "w-full flex items-center gap-4 p-3.5 rounded-2xl transition-all group relative",
-                          selectedIndex === index ? "bg-white/5 text-white" : "text-muted-foreground hover:bg-white/2"
+                          "flex items-center gap-6 p-6 transition-all relative group overflow-hidden border-2",
+                          selectedIndex === index ? "bg-primary text-black border-white translate-x-4 shadow-[12px_12px_0_0_#fff]" : "bg-black text-primary border-primary/20 hover:border-primary"
                         )}
                       >
                         <div className={cn(
-                          "h-10 w-10 rounded-xl flex items-center justify-center transition-all",
-                          selectedIndex === index ? "bg-primary text-white scale-110 shadow-lg shadow-primary/20" : "bg-white/5"
+                          "h-16 w-16 flex items-center justify-center transition-all",
+                          selectedIndex === index ? "bg-black text-primary -rotate-12" : "bg-primary/10"
                         )}>
-                          <action.icon className="h-5 w-5" />
+                          <action.icon className="h-10 w-10" />
                         </div>
                         <div className="flex-1 text-left">
-                          <p className="font-semibold text-sm">{action.title}</p>
-                          <p className={cn(
-                            "text-[11px] font-medium opacity-50",
-                            selectedIndex === index ? "text-primary-foreground/80" : "text-muted-foreground"
-                          )}>Neural Protocol Active</p>
+                          <p className="font-black text-2xl italic uppercase tracking-tighter leading-none mb-2">{action.title}</p>
+                          <div className="flex items-center gap-2">
+                             <div className={cn("h-2 w-2 rounded-full", selectedIndex === index ? "bg-black animate-pulse" : "bg-primary/40")} />
+                             <p className="text-[10px] font-black uppercase tracking-[0.3em]">SYSTEM READY</p>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                           <span className={cn(
-                             "text-[10px] font-medium opacity-0 group-hover:opacity-100 transition-opacity px-2 py-1 rounded border border-white/10 bg-white/5",
-                             selectedIndex === index ? "opacity-100 border-primary/20 bg-primary/10 text-primary" : ""
-                           )}>
-                             {action.shortcut}
-                           </span>
-                           <ArrowRight className={cn(
-                             "h-4 w-4 transition-all",
-                             selectedIndex === index ? "translate-x-0 opacity-100 text-primary" : "-translate-x-2 opacity-0"
-                           )} />
+                        <div className="text-3xl font-black opacity-20 group-hover:opacity-100 italic">
+                          {action.shortcut.replace(" ", "")}
                         </div>
-                        {selectedIndex === index && (
-                          <motion.div 
-                            layoutId="active-pill"
-                            className="absolute inset-0 border border-primary/20 rounded-2xl pointer-events-none"
-                            initial={false}
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                          />
-                        )}
                       </button>
                     ))}
-                  </div>
+                  </>
                 ) : (
-                  <div className="py-20 text-center">
-                    <HelpCircle className="h-10 w-10 text-muted-foreground/20 mx-auto mb-3" />
-                    <p className="text-muted-foreground font-medium text-sm">No results found for "{query}"</p>
+                  <div className="col-span-2 py-32 text-center">
+                    <HelpCircle className="h-24 w-24 text-primary animate-spin-slow mx-auto mb-8" />
+                    <p className="text-primary font-black text-4xl italic uppercase tracking-tighter">DATA CORRUPTION: "{query}" NOT FOUND</p>
                   </div>
                 )}
               </div>
 
-              <div className="px-6 py-4 bg-white/2 border-t border-white/5 flex items-center justify-between">
-                 <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-secondary rounded-full" />
-                    <span className="text-[10px] font-medium text-muted-foreground/60">System Version 04.9.2</span>
+              <div className="px-8 py-4 bg-primary text-black flex items-center justify-between font-black italic text-sm tracking-widest uppercase">
+                 <div className="flex items-center gap-8">
+                    <span>STATUS: OVERLOAD</span>
+                    <span>BUFFER: STRETCHED</span>
                  </div>
-                 <div className="text-[10px] font-semibold text-primary/60 tracking-wider">SECURE LINK ESTABLISHED</div>
+                 <div className="animate-pulse">HUD v6.6.6 ACTIVE</div>
               </div>
             </div>
           </motion.div>
