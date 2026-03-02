@@ -1,8 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 
 export function NeuralGrid() {
+  // Use useMemo with a fixed seed-like approach to ensure hydration consistency
+  const nodes = useMemo(() => {
+    return Array.from({ length: 15 }).map((_, i) => ({
+      id: i,
+      x: `${(i * 7 + 13) % 100}%`,
+      y: `${(i * 11 + 17) % 100}%`,
+      duration: 10 + (i % 5) * 2,
+      delay: i * 0.5,
+      scale: 1 + (i % 3) * 0.2
+    }));
+  }, []);
+
   return (
     <div className="fixed inset-0 -z-20 overflow-hidden pointer-events-none opacity-20">
       <div 
@@ -18,24 +31,25 @@ export function NeuralGrid() {
       />
       
       {/* Animated Neural Nodes */}
-      {Array.from({ length: 15 }).map((_, i) => (
+      {nodes.map((node) => (
         <motion.div
-          key={i}
+          key={node.id}
           initial={{ 
-            x: Math.random() * 100 + "%", 
-            y: Math.random() * 100 + "%",
+            x: node.x, 
+            y: node.y,
             opacity: 0,
             scale: 0
           }}
           animate={{ 
-            y: [null, Math.random() * 100 + "%"],
             opacity: [0, 0.3, 0],
-            scale: [0, 1.5, 0]
+            scale: [0, node.scale, 0],
+            y: [`${parseFloat(node.y) - 5}%`, `${parseFloat(node.y) + 5}%`]
           }}
           transition={{ 
-            duration: Math.random() * 10 + 10, 
+            duration: node.duration, 
             repeat: Infinity,
-            ease: "linear"
+            delay: node.delay,
+            ease: "easeInOut"
           }}
           className="absolute h-1 w-1 bg-primary rounded-full blur-[2px]"
         />
@@ -46,3 +60,4 @@ export function NeuralGrid() {
     </div>
   );
 }
+

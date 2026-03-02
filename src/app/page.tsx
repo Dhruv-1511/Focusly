@@ -23,23 +23,48 @@ const FEATURES = [
     description: "Align your peak performance hours with AI-driven scheduling.",
     icon: Brain,
     color: "text-blue-400",
-    bg: "bg-blue-400/5"
+    bg: "bg-blue-400/5",
   },
   {
     title: "Focus Lock",
     description: "Deep work sessions with zero digital distractions and neural monitoring.",
     icon: Shield,
     color: "text-secondary",
-    bg: "bg-secondary/5"
+    bg: "bg-secondary/5",
   },
   {
     title: "Active Recall",
     description: "Master any subject with scientifically-backed retrieval systems.",
     icon: Zap,
     color: "text-amber-400",
-    bg: "bg-amber-400/5"
-  }
+    bg: "bg-amber-400/5",
+  },
 ];
+
+const PRICING_PLANS = [
+  {
+    name: "PEASANT",
+    price: 0,
+    protocol: "001",
+    features: ["FULL HUD ACCESS", "BRAIN OVERCLOCK", "NO DELAY SYNC"],
+    highlighted: false,
+  },
+  {
+    name: "ELITE",
+    price: 12,
+    protocol: "002",
+    features: ["FULL HUD ACCESS", "BRAIN OVERCLOCK", "NO DELAY SYNC", "UNLIMITED POWER"],
+    highlighted: true,
+  },
+  {
+    name: "GOD-MODE",
+    price: 24,
+    protocol: "003",
+    features: ["FULL HUD ACCESS", "BRAIN OVERCLOCK", "NO DELAY SYNC", "UNLIMITED POWER", "REALITY BREAKER"],
+    highlighted: false,
+  },
+];
+
 
 export default function Home() {
   return (
@@ -165,34 +190,40 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-               {["PEASANT", "ELITE", "GOD-MODE"].map((name, i) => (
+               {PRICING_PLANS.map((plan, i) => (
                  <motion.div 
                    key={i}
-                   whileHover={{ scale: 1.05, rotate: i === 1 ? 0 : i === 0 ? -5 : 5 }}
+                   whileHover={{ scale: 1.05, rotate: plan.highlighted ? 0 : i === 0 ? -2 : 2 }}
                    className={cn(
-                     "p-12 border-4 flex flex-col items-center text-center",
-                     i === 1 ? "bg-primary border-black text-black shadow-[24px_24px_0_0_#4ade80]" : "bg-black border-primary text-white shadow-[16px_16px_0_0_rgba(240,171,252,0.5)]"
+                     "p-12 border-4 flex flex-col items-center text-center transition-all duration-300",
+                     plan.highlighted 
+                      ? "bg-primary border-black text-black shadow-[24px_24px_0_0_#4ade80]" 
+                      : "bg-black border-primary text-white shadow-[16px_16px_0_0_rgba(240,171,252,0.3)]"
                    )}
                  >
-                    <span className="text-[14px] font-black tracking-[0.5em] mb-4">PROTOCOL 00{i+1}</span>
-                    <h3 className="text-5xl font-black italic mb-8 uppercase">{name}</h3>
-                    <div className="text-7xl font-black mb-12 italic">${i * 12}.00</div>
+                    <span className="text-[14px] font-black tracking-[0.5em] mb-4 opacity-70">PROTOCOL {plan.protocol}</span>
+                    <h3 className="text-5xl font-black italic mb-8 uppercase tracking-tighter">{plan.name}</h3>
+                    <div className="text-7xl font-black mb-12 italic tracking-tighter">${plan.price}.00</div>
                     <div className="space-y-6 mb-16 font-black uppercase tracking-tighter text-lg flex-1">
-                       <div>- FULL HUD ACCESS</div>
-                       <div>- BRAIN OVERCLOCK</div>
-                       <div>- NO DELAY SYNC</div>
-                       {i > 0 && <div>- UNLIMITED POWER</div>}
-                       {i === 2 && <div>- REALITY BREAKER</div>}
+                       {plan.features.map((feature, idx) => (
+                         <div key={idx} className="flex items-center justify-center gap-2">
+                            <span className="text-[10px] opacity-50">✦</span> {feature}
+                         </div>
+                       ))}
                     </div>
-                    <Button className={cn(
-                      "w-full h-16 rounded-none font-black text-xl italic",
-                      i === 1 ? "bg-black text-white" : "bg-primary text-black"
-                    )}>
-                      INITIALIZE
+                    <Button 
+                      asChild
+                      className={cn(
+                        "w-full h-16 rounded-none font-black text-xl italic border-4",
+                        plan.highlighted ? "bg-black text-white border-black hover:bg-neutral-900" : "bg-primary text-black border-primary hover:bg-white"
+                      )}
+                    >
+                      <Link href="/register">INITIALIZE</Link>
                     </Button>
                  </motion.div>
                ))}
             </div>
+
          </div>
       </section>
 
@@ -210,46 +241,6 @@ export default function Home() {
   );
 }
 
-function PricingCard({ name, price, desc, features, highlighted = false }: any) {
-  return (
-    <motion.div 
-      whileHover={{ y: -10 }}
-      className={cn(
-        "glass p-10 md:p-12 rounded-[3rem] relative flex flex-col overflow-hidden transition-all",
-        highlighted ? "border-primary/50 ring-4 ring-primary/5 shadow-2xl scale-105 z-10 bg-primary/5" : "border-white/5"
-      )}
-    >
-       {highlighted && (
-         <div className="absolute top-0 right-0 bg-primary text-white text-[9px] font-black px-6 py-2 rounded-bl-3xl uppercase tracking-widest">Recommended</div>
-       )}
-       <div className="mb-10">
-          <h3 className="text-2xl font-black uppercase mb-2">{name}</h3>
-          <p className="text-muted-foreground text-xs font-semibold leading-relaxed">{desc}</p>
-       </div>
-       <div className="flex items-baseline gap-2 mb-10">
-          <span className="text-6xl font-black">${price}</span>
-          <span className="text-muted-foreground font-bold text-xs">/MONTHLY</span>
-       </div>
-       <div className="space-y-4 mb-12 flex-1">
-          {features.map((f: string, i: number) => (
-            <div key={i} className="flex items-center gap-4 text-sm font-semibold text-white/80">
-               <div className="h-5 w-5 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="h-3 w-3 text-primary" />
-               </div>
-               {f}
-            </div>
-          ))}
-       </div>
-       <Button 
-         variant={highlighted ? "glow" : "outline"} 
-         size="lg" 
-         className="w-full rounded-2xl h-14 font-black text-sm uppercase"
-         asChild
-       >
-          <Link href="/register">Initialize Plan</Link>
-       </Button>
-    </motion.div>
-  );
-}
+
 
 

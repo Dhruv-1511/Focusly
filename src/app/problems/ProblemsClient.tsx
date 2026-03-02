@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { PROBLEMS as MOCK_PROBLEMS, Problem } from "@/data/mock";
+import { useState } from "react";
+import { Problem } from "@/data/mock";
 import { Search, ArrowRight, Zap, Target, BookOpen, AlertCircle, Sparkles, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -9,9 +9,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
 import { cn } from "@/lib/utils";
 
-export default function ProblemsPage() {
+interface ProblemsClientProps {
+  initialProblems: Problem[];
+}
+
+export function ProblemsClient({ initialProblems }: ProblemsClientProps) {
   const [search, setSearch] = useState("");
-  const [problems, setProblems] = useState<Problem[]>(MOCK_PROBLEMS);
+  const [problems, setProblems] = useState<Problem[]>(initialProblems);
   const [modal, setModal] = useState<{ open: boolean; title: string; message: string; type: "info" | "success" | "warning" }>({
     open: false,
     title: "",
@@ -19,25 +23,11 @@ export default function ProblemsPage() {
     type: "info"
   });
 
-  useEffect(() => {
-    async function fetchProblems() {
-      try {
-        const res = await fetch("/api/problems");
-        const data = await res.json();
-        if (data.success && data.data.length > 0) {
-          setProblems(data.data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch problems:", error);
-      }
-    }
-    fetchProblems();
-  }, []);
-
   const filtered = problems.filter(p => 
     p.title.toLowerCase().includes(search.toLowerCase()) || 
-    p.searchTerms.some((t: string) => t.includes(search.toLowerCase()))
+    p.searchTerms.some((t: string) => t.toLowerCase().includes(search.toLowerCase()))
   );
+
 
   return (
     <div className="space-y-12">

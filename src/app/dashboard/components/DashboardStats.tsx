@@ -74,7 +74,9 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
 
         <div className="flex flex-wrap gap-2 justify-between">
            {Array.from({ length: 30 }).map((_, i) => {
-             const opacity = Math.random() > 0.3 ? Math.random() * 0.8 + 0.2 : 0.05;
+             // Use a stable calculation based on index to ensure hydration consistency
+             const pseudoRandomOpacity = ((i * 17 + 23) % 100) / 100;
+             const opacity = pseudoRandomOpacity > 0.3 ? pseudoRandomOpacity * 0.8 + 0.2 : 0.05;
              return (
                <motion.div 
                  key={i}
@@ -94,6 +96,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
              );
            })}
         </div>
+
       </motion.div>
     </div>
   );

@@ -2,10 +2,11 @@
 
 import { Bell, Zap, TrendingUp, Brain } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 const INITIAL_NOTIFICATIONS = [
   { id: 1, title: "Neural Link Active", desc: "Your cognitive sync is at 98%", time: "2m ago", icon: Zap, color: "text-primary" },
@@ -17,9 +18,15 @@ export function NotificationSystem() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
   const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useOutsideClick(containerRef, () => {
+    if (showNotifications) setShowNotifications(false);
+  });
 
   return (
-    <div className="relative">
+    <div className="relative" ref={containerRef}>
+
       <Button 
         variant="ghost" 
         size="icon" 
