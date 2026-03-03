@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Calendar, 
   Plus, 
   Trash2, 
   Sparkles, 
@@ -12,22 +11,24 @@ import {
   CalendarDays,
   CheckCircle2,
   RefreshCw,
-  Target,
   ArrowRight,
   TrendingUp,
   Brain,
-  ShieldCheck
+  ShieldCheck,
+  Save,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
-import { Milestone as MilestoneType, PlanItem as PlanItemType } from "@/types";
+import { IStudyTask } from "@/models/StudyPlan";
 
 export default function PlannerPage() {
   const [step, setStep] = useState(1);
   const [subjects, setSubjects] = useState(["Mathematics", "Physics"]);
   const [loading, setLoading] = useState(false);
-  const [showPlan, setShowPlan] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [generatedPlan, setGeneratedPlan] = useState<IStudyTask[]>([]);
   const [modal, setModal] = useState({ open: false, title: "", message: "", type: "info" as "info" | "success" | "warning" });
 
   const showFeedback = (title: string, message: string, type: "info" | "success" | "warning" = "info") => {
@@ -38,10 +39,42 @@ export default function PlannerPage() {
     setLoading(true);
     // Simulate complex AI processing
     setTimeout(() => {
+      const mockPlan: IStudyTask[] = [
+        { time: "08:00 AM", task: `Deep Work: ${subjects[0] || 'Core Subject'} (Review)`, type: "Focus" },
+        { time: "10:00 AM", task: `Active Recall: ${subjects[1] || 'Secondary Subject'} Concepts`, type: "Focus" },
+        { time: "11:30 AM", task: "Neural Cooldown & Hydration", type: "Break" },
+        { time: "02:00 PM", task: "Mock Assessment: Full Battery", type: "Mock" },
+        { time: "04:30 PM", task: "Pattern Recognition & Revision", type: "Revision" },
+      ];
+      setGeneratedPlan(mockPlan);
       setLoading(false);
-      setShowPlan(true);
       setStep(3);
-    }, 2500);
+    }, 2000);
+  };
+
+  const saveToDatabase = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/study-plan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          date: new Date().toISOString().split('T')[0],
+          daily: generatedPlan
+        })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        showFeedback("SYNC COMPLETE", "Your neural optimization protocol has been recorded to the central database.", "success");
+      } else {
+        throw new Error(data.error || "Failed to save protocol");
+      }
+    } catch (error) {
+      showFeedback("SYNC FAILURE", (error as Error).message, "warning");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const steps = [
@@ -172,7 +205,7 @@ export default function PlannerPage() {
                        <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground ml-1">Intensity</label>
                        <select className="w-full h-12 px-4 rounded-xl border border-white/10 bg-white/5 text-white outline-none focus:border-primary/50 font-semibold text-sm transition-all appearance-none cursor-pointer">
                           <option>Standard (2 hrs)</option>
-                          <option selected>Advanced (4 hrs)</option>
+                          <option defaultValue="Advanced (4 hrs)">Advanced (4 hrs)</option>
                           <option>Professional (6 hrs)</option>
                           <option>Elite (8+ hrs)</option>
                        </select>
@@ -211,9 +244,20 @@ export default function PlannerPage() {
                     </div>
                     <h2 className="text-3xl font-bold">Neural Schedule</h2>
                   </div>
-                  <Button variant="ghost" size="sm" onClick={() => setStep(1)} className="h-9 px-4 rounded-lg border border-white/5 hover:bg-white/5 font-bold text-[10px] tracking-wider gap-2">
-                    <RefreshCw className="h-3 w-3" /> Re-Calibrate
-                  </Button>
+                  <div className="flex gap-3">
+                    <Button variant="ghost" size="sm" onClick={() => setStep(1)} className="h-9 px-4 rounded-lg border border-white/5 hover:bg-white/5 font-bold text-[10px] tracking-wider gap-2">
+                      <RefreshCw className="h-3 w-3" /> Re-Calibrate
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      onClick={saveToDatabase} 
+                      disabled={saving}
+                      className="h-9 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[10px] tracking-wider gap-2 shadow-lg shadow-emerald-500/20"
+                    >
+                      {saving ? <Loader2 className="h-3 w-3 animate-spin" /> : <Save className="h-3 w-3" />}
+                      Sync Protocol
+                    </Button>
+                  </div>
                </div>
                
                <div className="space-y-10">
@@ -223,9 +267,16 @@ export default function PlannerPage() {
                        <div className="h-px bg-white/5 flex-1" />
                     </h3>
                     <div className="space-y-2">
-                       <PlanItem time="08:00 AM" task="Deep Work: Calculus (Gaps)" color="bg-blue-500" onClick={() => showFeedback("PROTOCOL INITIATED", "Digital isolation active. Commencing Calculus deep work session.", "success")} />
-                       <PlanItem time="10:00 AM" task="Active Recall: Physics Formulas" color="bg-primary" onClick={() => showFeedback("RECALL ACTIVE", "Neural retrieval pathways open. Master those formulas.", "info")} />
-                       <PlanItem time="11:30 AM" task="Pomodoro Review Cycle" color="bg-secondary" onClick={() => showFeedback("COOLDOWN SYNC", "Strategic break initiated. Brain plasticity recharging.", "info")} />
+                       {generatedPlan.map((item, idx) => (
+                          <PlanItem 
+                            key={idx}
+                            time={item.time} 
+                            task={item.task} 
+                            type={item.type}
+                            color={item.type === 'Focus' ? 'bg-primary' : item.type === 'Break' ? 'bg-secondary' : item.type === 'Revision' ? 'bg-emerald-500' : 'bg-red-500'} 
+                            onClick={() => showFeedback("PROTOCOL INITIATED", `Commencing ${item.task} session. Digital isolation active.`, "success")} 
+                          />
+                       ))}
                     </div>
                   </section>
 
@@ -251,11 +302,11 @@ export default function PlannerPage() {
                         <div className="space-y-4">
                            <div className="flex gap-3">
                               <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                              <p className="text-xs font-semibold text-white/80 leading-relaxed">Prioritize Calculus at 08:00 AM. Brain plasticity is max during this window.</p>
+                              <p className="text-xs font-semibold text-white/80 leading-relaxed">Prioritize the morning focus window. Brain plasticity is max during this cycle.</p>
                            </div>
                            <div className="flex gap-3">
                               <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                              <p className="text-xs font-semibold text-white/80 leading-relaxed">Physics retention will increase 15% if reviewed before 10 PM tonight.</p>
+                              <p className="text-xs font-semibold text-white/80 leading-relaxed">Subject retention will increase 15% if reviewed before 10 PM tonight.</p>
                            </div>
                         </div>
                         <Button 
@@ -282,7 +333,11 @@ export default function PlannerPage() {
   );
 }
 
-interface PlanItemProps extends PlanItemType {
+interface PlanItemProps {
+  time: string;
+  task: string;
+  type: string;
+  color: string;
   onClick: () => void;
 }
 
@@ -301,7 +356,7 @@ function PlanItem({ time, task, color, onClick }: PlanItemProps) {
   );
 }
 
-function Milestone({ label, date, type, highlighted = false }: MilestoneType) {
+function Milestone({ label, date, type, highlighted = false }: { label: string, date: string, type: string, highlighted?: boolean }) {
   return (
     <div className={cn(
       "flex items-center justify-between p-4 px-6 transition-all",
@@ -315,9 +370,3 @@ function Milestone({ label, date, type, highlighted = false }: MilestoneType) {
     </div>
   );
 }
-
-
-
-
-
-

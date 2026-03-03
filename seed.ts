@@ -1,10 +1,7 @@
 import fs from "fs";
 import path from "path";
-import dbConnect from "./src/lib/db";
-import Problem from "./src/models/Problem";
-import { PROBLEMS } from "./src/data/mock";
 
-// Manual .env loader
+// Manual .env loader - Must run BEFORE any imports that use process.env
 const envPath = path.join(process.cwd(), ".env");
 if (fs.existsSync(envPath)) {
   const envFile = fs.readFileSync(envPath, "utf8");
@@ -18,6 +15,11 @@ if (fs.existsSync(envPath)) {
 
 async function seed() {
   try {
+    // Dynamic imports to ensure process.env is ready
+    const { default: dbConnect } = await import("./src/lib/db");
+    const { default: Problem } = await import("./src/models/Problem");
+    const { PROBLEMS } = await import("./src/data/mock");
+
     console.log("Connecting to database...");
     await dbConnect();
 

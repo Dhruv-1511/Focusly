@@ -94,18 +94,31 @@ export default function ToolsPage() {
     setModal({ open: true, title, message, type });
   };
 
+  const handleToolClick = (tool: Tool) => {
+    // If link is for a non-existent page, show feedback instead
+    if (tool.link.startsWith('/tools/') && tool.status === "Beta") {
+      showFeedback(
+        "ENCRYPTED PROTOCOL", 
+        `The ${tool.name} tool is currently undergoing final neural calibration. Your account has been prioritized for the next deployment wave.`, 
+        "info"
+      );
+      return false;
+    }
+    return true;
+  };
+
   return (
     <div className="space-y-12">
       <header>
         <div className="flex items-center gap-2 mb-3">
           <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Performance Arsenal</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider text-primary tracking-[0.3em]">Performance Arsenal</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-          Neural <span className="text-primary italic">Workshop</span>
+        <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+          NEURAL <span className="text-primary italic">WORKSHOP</span>
         </h1>
         <p className="text-muted-foreground font-medium text-sm md:text-base max-w-xl leading-relaxed">
-          Equip yourself with the most advanced neural performance tools ever built for specialized academic focus.
+          Equip yourself with the most advanced neural performance tools ever built for specialized academic focus and deep-work mastery.
         </p>
       </header>
 
@@ -115,52 +128,61 @@ export default function ToolsPage() {
             key={tool.name}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: i * 0.05 }}
-            className="glass group p-8 rounded-3xl border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all cursor-pointer h-full"
+            className="glass group p-8 rounded-[2.5rem] border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all cursor-pointer h-full group/card shadow-2xl"
           >
              <div>
-                <div className="flex justify-between items-start mb-8">
-                   <div className={`h-12 w-12 rounded-xl ${tool.bg} flex items-center justify-center ${tool.color} group-hover:scale-110 transition-transform duration-500 border border-white/5`}>
-                      <tool.icon className="h-6 w-6" />
+                <div className="flex justify-between items-start mb-10">
+                   <div className={`h-14 w-14 rounded-2xl ${tool.bg} flex items-center justify-center ${tool.color} group-hover:scale-110 transition-transform duration-500 border border-white/5 shadow-lg`}>
+                      <tool.icon className="h-7 w-7" />
                    </div>
-                   <div className="text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-white/5 text-muted-foreground group-hover:text-primary transition-colors">
+                   <div className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg bg-white/5 text-muted-foreground group-hover:text-primary transition-colors border border-white/5">
                       {tool.status}
                    </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3 tracking-tight group-hover:text-primary transition-colors">{tool.name}</h3>
-                <p className="text-muted-foreground text-xs font-medium leading-relaxed mb-8">{tool.desc}</p>
+                <h3 className="text-2xl font-bold mb-4 tracking-tight group-hover:text-primary transition-colors">{tool.name}</h3>
+                <p className="text-muted-foreground text-xs font-semibold leading-relaxed mb-10 uppercase tracking-widest opacity-60">{tool.desc}</p>
              </div>
              
-             <div className="flex items-center justify-between pt-6 border-t border-white/5">
-                <div className="flex items-center gap-2">
-                   <Monitor className="h-3.5 w-3.5 text-muted-foreground/60" />
-                   <Smartphone className="h-3.5 w-3.5 text-muted-foreground/60" />
+             <div className="flex items-center justify-between pt-8 border-t border-white/5">
+                <div className="flex items-center gap-3">
+                   <Monitor className="h-4 w-4 text-muted-foreground/40" />
+                   <Smartphone className="h-4 w-4 text-muted-foreground/40" />
                 </div>
-                <Link href={tool.link} className="text-[11px] font-bold text-primary flex items-center gap-2 group-hover:translate-x-1 transition-transform">
-                   INITIALIZE <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
+                <Button 
+                  variant="link"
+                  className="text-[11px] font-black text-primary flex items-center gap-2 group-hover:translate-x-1 transition-transform p-0 h-auto"
+                  onClick={() => handleToolClick(tool)}
+                >
+                   {handleToolClick({ ...tool }) ? (
+                     <Link href={tool.link} className="flex items-center gap-2">INITIALIZE <ArrowRight className="h-3.5 w-3.5" /></Link>
+                   ) : (
+                     <div className="flex items-center gap-2">INITIALIZE <ArrowRight className="h-3.5 w-3.5" /></div>
+                   )}
+                </Button>
              </div>
           </motion.div>
         ))}
       </div>
 
       {/* Featured Section */}
-      <section className="glass rounded-[3rem] p-10 md:p-16 relative overflow-hidden group border-white/5">
-         <div className="absolute top-0 right-0 p-12 text-primary/5 group-hover:scale-110 transition-transform duration-1000">
-            <Monitor className="h-64 w-64" />
+      <section className="glass rounded-[3.5rem] p-12 md:p-20 relative overflow-hidden group border-white/5 shadow-3xl">
+         <div className="absolute top-0 right-0 p-12 text-primary opacity-[0.03] group-hover:scale-110 group-hover:opacity-[0.05] transition-all duration-1000 pointer-events-none">
+            <Monitor className="h-96 w-96 shadow-2xl" />
          </div>
          <div className="relative z-10 max-w-2xl">
-            <div className="flex items-center gap-2 mb-4 text-primary font-bold uppercase text-[10px] tracking-wider">
-               <Sparkles className="h-4 w-4 fill-current" /> Early Access
+            <div className="flex items-center gap-2 mb-6 text-primary font-black uppercase text-[10px] tracking-[0.3em]">
+               <Sparkles className="h-4 w-4 fill-current" /> Early Access Protocol
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">Focusly <span className="text-primary italic">OS Shell</span></h2>
-            <p className="text-sm md:text-base text-muted-foreground font-medium mb-10 leading-relaxed">
-               A complete OS-level distraction blocking layer. No notifications, no alt-tabbing, just pure, unadulterated focus flow.
+            <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter">Focusly <span className="text-primary italic text-gradient">OS Shell</span></h2>
+            <p className="text-base md:text-lg text-muted-foreground font-medium mb-12 leading-relaxed">
+              A military-grade OS distraction blocking layer. Eliminates notifications and OS-level interruptions, creating a sanctuary for pure, unadulterated focus flow.
             </p>
             <Button 
-                size="lg" 
-                className="rounded-xl h-12 px-8 font-bold text-sm bg-white text-black hover:bg-neutral-200 transition-all shadow-xl"
-                onClick={() => showFeedback("WAITLIST ACCESS", "Broadcasting your neural ID to the OS Shell alpha queue. Position: #12,402", "success")}
+                size="xl" 
+                className="rounded-2xl px-12 font-black text-sm bg-white text-black hover:bg-neutral-200 transition-all shadow-2xl hover:scale-[1.05] active:scale-95"
+                onClick={() => showFeedback("WAITLIST BROADCAST", "Broadcasting your neural ID to the OS Shell alpha queue. Access slot reserved at position: #12,402", "success")}
             >
                Join Waitlist
             </Button>
@@ -176,4 +198,3 @@ export default function ToolsPage() {
     </div>
   );
 }
-

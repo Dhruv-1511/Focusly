@@ -14,16 +14,17 @@ import {
   Zap,
   ChevronRight,
   Camera,
-  Check
+  Check,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { FocuslyModal } from "@/components/ui/FocuslyModal";
 
 export default function SettingsPage() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const [activeTab, setActiveTab] = useState("profile");
   const [modal, setModal] = useState({ open: false, title: "", message: "", type: "info" as "info" | "success" | "warning" });
 
@@ -92,7 +93,7 @@ export default function SettingsPage() {
             animate={{ opacity: 1, y: 0 }}
             className="glass rounded-[2.5rem] p-8 md:p-12 border-white/5"
           >
-            {activeTab === "profile" && <ProfileSettings session={session} onFeedback={showFeedback} />}
+            {activeTab === "profile" && <ProfileSettings session={session} onFeedback={showFeedback} onUpdate={update} />}
             {activeTab === "notifications" && <NotificationSettings />}
             {activeTab === "appearance" && <AppearanceSettings onFeedback={showFeedback} />}
             {activeTab === "focus" && <FocusSettings />}
@@ -111,7 +112,41 @@ export default function SettingsPage() {
   );
 }
 
-function ProfileSettings({ session, onFeedback }: any) {
+function ProfileSettings({ session, onFeedback, onUpdate }: any) {
+  const [name, setName] = useState(session?.user?.name || "");
+  const [email, setEmail] = useState(session?.user?.email || "");
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (session?.user) {
+      setName(session.user.name || "");
+      setEmail(session.user.email || "");
+    }
+  }, [session]);
+
+  const handleSync = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/user", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email })
+      });
+      
+      const data = await res.json();
+      if (data.success) {
+        if (onUpdate) await onUpdate(); // Refresh session
+        onFeedback("SYNC SUCCESS", "Your neural identity has been updated across the entire interface.", "success");
+      } else {
+        throw new Error(data.error || "Failed to sync changes");
+      }
+    } catch (error) {
+      onFeedback("SYNC ERROR", (error as Error).message, "warning");
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div className="space-y-12">
       <div className="flex flex-col md:flex-row items-center gap-10">
@@ -120,7 +155,7 @@ function ProfileSettings({ session, onFeedback }: any) {
             {session?.user?.image ? (
               <img src={session.user.image} alt="" className="h-full w-full object-cover" />
             ) : (
-              <span>{session?.user?.name?.[0] || "U"}</span>
+              <span>{name?.[0] || "U"}</span>
             )}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <Camera className="h-8 w-8 text-white" />
@@ -131,7 +166,7 @@ function ProfileSettings({ session, onFeedback }: any) {
           </div>
         </div>
         <div className="flex-1 text-center md:text-left">
-           <h3 className="text-2xl font-bold mb-2">{session?.user?.name || "System Resident"}</h3>
+           <h3 className="text-2xl font-bold mb-2">{name || "System Resident"}</h3>
            <p className="text-muted-foreground text-xs font-medium mb-6">Pro Elite Member • Synchronized 12 days ago</p>
            <div className="flex flex-wrap justify-center md:justify-start gap-4">
               <Button size="sm" className="rounded-xl font-bold text-[10px] tracking-wider px-6 h-10 bg-white text-black hover:bg-neutral-200" onClick={() => onFeedback("IMAGE SYNC", "Searching local neural storage for avatar data...", "info")}>UPDATE AVATAR</Button>
@@ -140,7 +175,6 @@ function ProfileSettings({ session, onFeedback }: any) {
         </div>
       </div>
       
-      {/* ... rest of inputs ... */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/5">
         <div className="space-y-2">
           <label className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/60 ml-1">Display Name</label>
@@ -148,7 +182,8 @@ function ProfileSettings({ session, onFeedback }: any) {
             <UserCircle className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
             <input 
               type="text" 
-              defaultValue={session?.user?.name || ""}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full h-12 bg-white/2 border border-white/5 rounded-2xl pl-12 pr-4 outline-none focus:border-primary/40 focus:bg-white/5 transition-all text-sm font-semibold"
             />
           </div>
@@ -159,8 +194,9 @@ function ProfileSettings({ session, onFeedback }: any) {
             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
             <input 
               type="email" 
-              defaultValue={session?.user?.email || ""}
-              className="w-full h-12 bg-white/2 border border-white/5 rounded-2xl pl-12 pr-4 outline-none focus:border-primary/40 focus:bg-white/5 transition-all text-sm font-semibold selection:bg-primary/20"
+              disabled
+              value={email}
+              className="w-full h-12 bg-white/2 border border-white/5 rounded-2xl pl-12 pr-4 outline-none opacity-50 cursor-not-allowed text-sm font-semibold selection:bg-primary/20"
             />
           </div>
         </div>
@@ -176,9 +212,10 @@ function ProfileSettings({ session, onFeedback }: any) {
       <div className="flex justify-end pt-6">
         <Button 
           className="rounded-2xl h-14 px-10 font-bold text-sm bg-primary text-white hover:bg-primary/90 shadow-xl shadow-primary/20 group"
-          onClick={() => onFeedback("SYNC SUCCESS", "Your neural identity has been updated across the entire interface.", "success")}
+          onClick={handleSync}
+          disabled={saving}
         >
-          SYNC CHANGES <ChevronRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+          {saving ? <Loader2 className="h-5 w-5 animate-spin mr-2" /> : <>SYNC CHANGES <ChevronRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" /></>}
         </Button>
       </div>
     </div>

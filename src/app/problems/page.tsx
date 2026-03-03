@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ProblemsClient } from "./ProblemsClient";
-import { PROBLEMS } from "@/data/mock";
+import dbConnect from "@/lib/db";
+import Problem from "@/models/Problem";
 
 export const metadata: Metadata = {
   title: "Neural Protocols",
@@ -8,13 +9,18 @@ export const metadata: Metadata = {
 };
 
 async function getProblems() {
-  // In a real app, this would be a database call or fetch from a secure API
-  // For now, we'll simulate an async fetch of our mock data
-  return PROBLEMS;
+  try {
+    await dbConnect();
+    const problems = await Problem.find({}).sort({ createdAt: -1 });
+    // Convert Mongoose documents to plain objects for client component
+    return JSON.parse(JSON.stringify(problems));
+  } catch (error) {
+    console.error("Failed to fetch problems from database:", error);
+    return [];
+  }
 }
 
 export default async function Page() {
   const problems = await getProblems();
   return <ProblemsClient initialProblems={problems} />;
 }
-
