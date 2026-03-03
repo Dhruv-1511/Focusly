@@ -3,6 +3,8 @@ import { ProblemsClient } from "./ProblemsClient";
 import dbConnect from "@/lib/db";
 import Problem from "@/models/Problem";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Neural Protocols",
   description: "Explore scientifically-backed protocols for overcoming common study obstacles and mental blocks.",

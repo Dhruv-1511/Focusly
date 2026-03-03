@@ -22,7 +22,16 @@ if (process.env.NODE_ENV === "development") {
   clientPromise = globalWithMongo._mongoClientPromise;
 } else {
   client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+  // During the build phase, we handle connection failures gracefully 
+  // to prevent the entire build from crashing when DB is offline.
+  clientPromise = client.connect().catch((err) => {
+    // Check if we're in the Next.js build phase
+    if (process.env.NEXT_PHASE === 'phase-production-build' || process.env.CI) {
+      console.warn("MongoDB connection failed during build phase. This is expected if DB is restricted.");
+      return client; 
+    }
+    throw err;
+  });
 }
 
 export default clientPromise;
