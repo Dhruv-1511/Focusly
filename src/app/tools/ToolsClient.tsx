@@ -94,9 +94,13 @@ export default function ToolsPage() {
     setModal({ open: true, title, message, type });
   };
 
+  const isToolAvailable = (tool: Tool) => {
+    return !(tool.link.startsWith('/tools/') && tool.status === "Beta");
+  };
+
   const handleToolClick = (tool: Tool) => {
     // If link is for a non-existent page, show feedback instead
-    if (tool.link.startsWith('/tools/') && tool.status === "Beta") {
+    if (!isToolAvailable(tool)) {
       showFeedback(
         "ENCRYPTED PROTOCOL", 
         `The ${tool.name} tool is currently undergoing final neural calibration. Your account has been prioritized for the next deployment wave.`, 
@@ -155,7 +159,7 @@ export default function ToolsPage() {
                   className="text-[11px] font-black text-primary flex items-center gap-2 group-hover:translate-x-1 transition-transform p-0 h-auto"
                   onClick={() => handleToolClick(tool)}
                 >
-                   {handleToolClick({ ...tool }) ? (
+                   {isToolAvailable(tool) ? (
                      <Link href={tool.link} className="flex items-center gap-2">INITIALIZE <ArrowRight className="h-3.5 w-3.5" /></Link>
                    ) : (
                      <div className="flex items-center gap-2">INITIALIZE <ArrowRight className="h-3.5 w-3.5" /></div>
