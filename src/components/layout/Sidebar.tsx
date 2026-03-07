@@ -25,8 +25,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       )}
 
       <aside className={cn(
-        "fixed left-0 top-0 bottom-0 w-[280px] bg-card/80 backdrop-blur-xl border-r border-white/5 flex flex-col z-50 transition-all duration-500 ease-[0.16, 1, 0.3, 1]",
-        isOpen ? "translate-x-0 shadow-[20px_0_50px_rgba(0,0,0,0.5)]" : "-translate-x-full lg:translate-x-0"
+        "fixed left-0 top-0 bottom-0 w-[280px] bg-background border-r border-white/5 flex flex-col z-50 transition-all duration-700 ease-[0.16, 1, 0.3, 1]",
+        isOpen ? "translate-x-0 shadow-3xl shadow-black" : "-translate-x-full lg:translate-x-0"
       )}>
         {/* Sidebar Header */}
         <div className="p-6 h-24 flex items-center justify-between border-b border-white/5">

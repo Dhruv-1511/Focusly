@@ -38,8 +38,8 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300 w-full pt-4",
-        scrolled ? "bg-background/80 backdrop-blur-xl border-b border-white/5 py-3" : "bg-transparent py-4"
+        "sticky top-4 z-50 transition-all duration-500 w-[calc(100%-2rem)] mx-auto rounded-[2rem] border border-white/5",
+        scrolled ? "bg-background/80 backdrop-blur-2xl py-3 shadow-2xl" : "bg-white/[0.02] backdrop-blur-xl py-4"
       )}
     >
       <div className="flex items-center justify-between px-4 sm:px-6">

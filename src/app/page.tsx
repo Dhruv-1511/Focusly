@@ -19,6 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { BrainZapLogo } from "@/components/ui/Logo";
 
 const FEATURES = [
   {
@@ -80,48 +81,48 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-32 px-6">
+      <section className="relative pt-40 pb-32 px-6">
         <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="flex-1 text-left">
+          <div className="flex flex-col lg:flex-row items-center gap-20">
+            <div className="flex-1 text-left relative z-10">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-xs uppercase tracking-[0.2em] mb-8"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/[0.03] border border-white/10 text-primary font-bold text-[10px] uppercase tracking-[0.3em] mb-10 backdrop-blur-md"
               >
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>Next-Gen Cognitive OS</span>
+                <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                <span>Protocol v4.0.2 • Neural Sync Ready</span>
               </motion.div>
 
               <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-[0.9] flex flex-col"
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="text-7xl md:text-9xl font-black tracking-tight mb-10 leading-[0.85] flex flex-col"
               >
-                <span className="text-white">ULTRA</span>
-                <span className="text-gradient drop-shadow-2xl">FLOW.</span>
+                <span className="text-white drop-shadow-2xl">EVOLVE</span>
+                <span className="text-acid drop-shadow-2xl">BEYOND.</span>
               </motion.h1>
 
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-muted-foreground max-w-xl mb-12 font-medium leading-relaxed"
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="text-xl md:text-2xl text-muted-foreground/80 max-w-xl mb-14 font-medium leading-relaxed"
               >
-                Unlock your cognitive potential with the world's first <span className="text-white font-bold underline decoration-primary/40 underline-offset-4">neural-sync platform</span>. Eliminate noise, master focus, and reclaim your brain.
+                The world's most advanced <span className="text-white italic">cognitive operating system</span>. Orchestrate your focus with precision neural feedback.
               </motion.p>
 
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex flex-wrap gap-6"
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="flex flex-wrap gap-8"
               >
-                <Button size="xl" asChild className="rounded-2xl px-10 bg-primary text-white hover:bg-primary/90 transition-all font-bold group shadow-[0_0_30px_rgba(129,140,248,0.3)]">
-                  <Link href="/dashboard" className="flex items-center gap-2">JACK IN <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" /></Link>
+                <Button size="xl" asChild className="h-16 rounded-2xl px-12 bg-primary text-white hover:bg-primary/90 transition-all font-bold group shadow-[0_20px_50px_rgba(99,102,241,0.3)] hover:translate-y-[-4px]">
+                  <Link href="/dashboard" className="flex items-center gap-3 text-base">INITIALIZE <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" /></Link>
                 </Button>
-                <Button size="xl" variant="outline" asChild className="rounded-2xl px-10 border-white/10 hover:bg-white/5 transition-all font-bold">
+                <Button size="xl" variant="outline" asChild className="h-16 rounded-2xl px-12 border-white/10 hover:bg-white/5 transition-all font-bold text-base hover:translate-y-[-4px]">
                    <Link href="/tools">VIEW SYSTEMS</Link>
                 </Button>
               </motion.div>
@@ -129,18 +130,21 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mt-12 flex items-center gap-6 text-muted-foreground"
+                transition={{ delay: 0.8 }}
+                className="mt-16 flex items-center gap-8 text-muted-foreground/40"
               >
-                <div className="flex -space-x-3">
-                  {[1,2,3,4].map(i => (
-                    <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted-foreground/20 flex items-center justify-center text-[8px] font-bold" title={`User ID-${i}0${i}`}>
-                      ID-{i}0{i}
+                <div className="flex -space-x-4">
+                  {[1,2,3,4,5].map(i => (
+                    <div key={i} className="h-10 w-10 rounded-full border-2 border-background bg-slate-800 flex items-center justify-center text-[9px] font-black shadow-xl" title={`User ${i}`}>
+                       U{i}
                     </div>
                   ))}
+                  <div className="h-10 w-10 rounded-full border-2 border-background bg-primary flex items-center justify-center text-[9px] font-black shadow-xl text-white">
+                     +12k
+                  </div>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-widest">
-                  12,000+ ENROLLED SYNCED USERS
+                <div className="text-[10px] font-bold uppercase tracking-[0.3em]">
+                  Join the elite 0.1% performance tier
                 </div>
               </motion.div>
             </div>
@@ -148,60 +152,75 @@ export default function Home() {
             {/* Premium UI Mockup */}
             <div className="flex-1 relative">
                <motion.div 
-                 initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
-                 animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                 initial={{ opacity: 0, scale: 0.8, rotateY: -15, x: 50 }}
+                 animate={{ opacity: 1, scale: 1, rotateY: 0, x: 0 }}
+                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                  className="relative z-20 group"
                >
-                 <div className="glass-hyper p-1 rounded-[2.5rem] border-white/10 shadow-3xl overflow-hidden group-hover:scale-[1.02] transition-transform duration-700">
-                    <div className="bg-neutral-950 aspect-[4/3] rounded-[2.3rem] flex items-center justify-center relative overflow-hidden">
-                       <div className="absolute inset-0 bg-gradient-radial from-primary/20 to-transparent animate-pulse opacity-40" />
-                       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px]" />
+                 <div className="glass-hyper p-2 rounded-[3.5rem] border-white/10 shadow-[0_0_80px_rgba(99,102,241,0.15)] overflow-hidden group-hover:scale-[1.02] transition-all duration-1000">
+                    <div className="bg-neutral-950 aspect-video rounded-[3.2rem] flex items-center justify-center relative overflow-hidden shadow-inner">
+                       <Image 
+                         src="/hero-mockup.png" 
+                         alt="Focusly Neural Dashboard" 
+                         width={1200} 
+                         height={800} 
+                         className="object-cover w-full h-full opacity-60 group-hover:scale-105 transition-transform duration-[2s] drop-shadow-2xl"
+                       />
+                       <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent opacity-80" />
                        
-                       {/* Animated Logo Overlay */}
-                       <div className="relative z-10 flex flex-col items-center">
-                          <Brain className="h-24 w-24 text-primary animate-float mb-6" />
-                          <div className="h-1.5 w-48 bg-white/5 rounded-full overflow-hidden">
-                            <motion.div 
-                              animate={{ x: ["-100%", "100%"] }}
-                              transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-                              className="h-full w-1/2 bg-gradient-to-r from-transparent via-primary to-transparent"
-                            />
+                       {/* Interface Elements Overlay */}
+                       <div className="absolute inset-0 flex flex-col items-center justify-center p-12">
+                          <motion.div 
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ repeat: Infinity, duration: 4 }}
+                            className="relative"
+                          >
+                             <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
+                             <BrainZapLogo className="h-32 w-32 text-primary relative z-10" />
+                          </motion.div>
+                          <div className="mt-8 space-y-2 text-center">
+                             <div className="h-1 w-64 bg-white/5 rounded-full overflow-hidden">
+                               <motion.div 
+                                 animate={{ x: ["-100%", "100%"] }}
+                                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                                 className="h-full w-1/3 bg-linear-to-r from-transparent via-primary to-transparent"
+                               />
+                             </div>
+                             <div className="text-[10px] font-black tracking-[0.5em] text-primary uppercase">Synchronizing Neural Mesh...</div>
                           </div>
-                          <div className="mt-4 text-[10px] font-black tracking-[0.4em] text-primary uppercase">Syncing Neural Pathway...</div>
                        </div>
                     </div>
                  </div>
                  
                  {/* Floating widgets */}
                  <motion.div 
-                   animate={{ y: [0, -10, 0] }}
-                   transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                   className="absolute -top-6 -left-6 glass border-white/10 p-5 rounded-2xl z-30 shadow-2xl"
+                   animate={{ y: [0, -15, 0] }}
+                   transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                   className="absolute -top-10 -left-10 glass border-white/10 p-6 rounded-3xl z-30 shadow-3xl backdrop-blur-3xl"
                  >
-                    <div className="flex items-center gap-3">
-                       <div className="h-8 w-8 rounded-lg bg-green-500/10 flex items-center justify-center">
-                          <Activity className="h-4 w-4 text-green-500" />
+                    <div className="flex items-center gap-4">
+                       <div className="h-10 w-10 rounded-xl bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                          <Activity className="h-5 w-5 text-green-500" />
                        </div>
                        <div>
-                          <p className="text-[10px] font-black text-muted-foreground uppercase leading-none mb-1">Status</p>
-                          <p className="text-sm font-bold text-white">LOCKED IN</p>
+                          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none mb-1.5">Focus State</p>
+                          <p className="text-base font-bold text-white uppercase tracking-tight">Flow Locked</p>
                        </div>
                     </div>
                  </motion.div>
 
                  <motion.div 
-                   animate={{ y: [0, 10, 0] }}
+                   animate={{ y: [0, 15, 0] }}
                    transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-                   className="absolute -bottom-6 -right-6 glass border-white/10 p-5 rounded-2xl z-30 shadow-2xl"
+                   className="absolute -bottom-10 -right-10 glass border-white/10 p-6 rounded-3xl z-30 shadow-3xl backdrop-blur-3xl"
                  >
-                    <div className="flex items-center gap-3">
-                       <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <Zap className="h-4 w-4 text-primary" />
+                    <div className="flex items-center gap-4">
+                       <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20">
+                          <Zap className="h-5 w-5 text-primary" />
                        </div>
                        <div>
-                          <p className="text-[10px] font-black text-muted-foreground uppercase leading-none mb-1">XP Gain</p>
-                          <p className="text-sm font-bold text-white">+1,240 XP</p>
+                          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest leading-none mb-1.5">Throughput</p>
+                          <p className="text-base font-bold text-white uppercase tracking-tight">+12.4% Energy</p>
                        </div>
                     </div>
                  </motion.div>
@@ -212,7 +231,7 @@ export default function Home() {
       </section>
 
       {/* Features - Sleek & Modern */}
-      <section className="py-32 px-6 bg-card/30 relative">
+      <section id="features" className="py-32 px-6 bg-card/30 relative">
          <div className="container mx-auto max-w-7xl">
             <div className="text-center mb-24">
                <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">PRECISION <span className="text-primary italic">PROTOCOLS.</span></h2>

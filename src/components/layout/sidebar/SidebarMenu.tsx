@@ -32,9 +32,9 @@ export function SidebarMenu({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname() || "";
 
   return (
-    <nav className="flex-1 px-4 space-y-1.5 overflow-y-auto custom-scrollbar">
-      <div className="px-5 mb-4 mt-2">
-         <div className="text-[10px] font-semibold text-muted-foreground/40 uppercase tracking-widest">Platform</div>
+    <nav className="flex-1 px-3 space-y-1.5 overflow-y-auto custom-scrollbar">
+      <div className="px-4 mb-6 mt-2">
+         <div className="text-[10px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">Navigation</div>
       </div>
       {menuItems.map((item) => {
         const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href));
@@ -44,27 +44,40 @@ export function SidebarMenu({ onClose }: { onClose?: () => void }) {
             href={item.href}
             onClick={onClose}
             className={cn(
-              "flex items-center gap-6 px-6 py-4 transition-all group relative border-4 mb-2 overflow-hidden",
+              "flex items-center gap-4 px-4 py-3.5 transition-all duration-300 group relative rounded-2xl overflow-hidden",
               isActive 
-                ? "text-black bg-primary border-black skew-x-[-12deg] shadow-[8px_8px_0_0_#fff]" 
-                : "text-primary bg-black border-primary/20 hover:border-primary hover:translate-x-4"
+                ? "text-white bg-white/[0.05] shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]" 
+                : "text-muted-foreground hover:text-white hover:bg-white/[0.02]"
             )}
           >
-            <div className={cn(
-              "relative z-10 p-2 transition-all",
-              isActive ? "bg-black text-primary rotate-[12deg]" : "bg-primary/5 text-primary"
-            )}>
-              <item.icon className="h-6 w-6" />
-            </div>
-            <span className={cn(
-              "relative z-10 text-xl font-black italic uppercase tracking-tighter",
-              isActive ? "text-black" : "text-primary"
-            )}>{item.name}</span>
+            {/* Active Glow */}
             {isActive && (
               <motion.div 
-                layoutId="sidebar-active-indicator"
-                className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.1)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none"
+                layoutId="sidebar-active-pill"
+                className="absolute left-0 w-1.5 h-6 bg-primary rounded-r-full shadow-[0_0_15px_rgba(99,102,241,0.5)]"
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
+            )}
+
+            <div className={cn(
+              "relative z-10 p-2 rounded-xl transition-all duration-300",
+              isActive ? "bg-primary text-white shadow-lg shadow-primary/20 scale-110" : "bg-white/[0.03] text-muted-foreground group-hover:bg-white/5"
+            )}>
+              <item.icon className="h-5 w-5" />
+            </div>
+            
+            <span className={cn(
+              "relative z-10 text-sm font-semibold tracking-tight transition-colors duration-300",
+              isActive ? "text-white" : "text-muted-foreground group-hover:text-white"
+            )}>
+              {item.name}
+            </span>
+
+            {/* Subtle row indicator */}
+            {!isActive && (
+              <div className="absolute right-4 opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0 duration-300">
+                 <div className="h-1 w-1 rounded-full bg-primary/40" />
+              </div>
             )}
           </Link>
         );
