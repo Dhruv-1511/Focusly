@@ -60,30 +60,30 @@ export function FocusCoach() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             className={cn(
-               "glass-dark border border-white/10 rounded-3xl overflow-hidden shadow-3xl shadow-primary/20 flex flex-col transition-all duration-500",
+               "bg-white border border-white flex flex-col transition-all duration-500 shadow-[0_32px_128px_-16px_rgba(0,0,0,0.5)]",
                isMinimized ? "w-72 h-32" : "w-96 h-[500px]"
             )}
           >
             {/* Header */}
-            <div className="p-5 border-b border-white/5 flex items-center justify-between bg-primary/5">
+            <div className="p-5 border-b border-black/5 flex items-center justify-between bg-primary">
               <div className="flex items-center gap-3">
-                 <div className="h-10 w-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 rotate-12 transition-transform hover:rotate-0">
-                    <Brain className="h-6 w-6 text-white" />
+                 <div className="h-10 w-10 bg-white rounded-xl flex items-center justify-center shadow-lg rotate-12 transition-transform hover:rotate-0">
+                    <Brain className="h-6 w-6 text-primary" />
                  </div>
                  <div>
                     <h3 className="text-xs font-black uppercase tracking-widest text-white leading-none mb-1">Neural Coach</h3>
                     <div className="flex items-center gap-2">
-                       <div className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
-                       <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest leading-none">AI Sync Active</span>
+                       <div className="h-1.5 w-1.5 rounded-full bg-white/50 animate-pulse" />
+                       <span className="text-[10px] font-bold text-white/50 uppercase tracking-widest leading-none">AI Sync Active</span>
                     </div>
                  </div>
               </div>
               <div className="flex items-center gap-2">
-                 <button onClick={() => setIsMinimized(!isMinimized)} className="p-1.5 hover:bg-white/5 rounded-lg transition-colors">
-                   {isMinimized ? <Maximize2 className="h-4 w-4 text-muted-foreground" /> : <Minimize2 className="h-4 w-4 text-muted-foreground" />}
+                 <button onClick={() => setIsMinimized(!isMinimized)} className="p-1.5 hover:bg-white/10 rounded-lg transition-colors">
+                   {isMinimized ? <Maximize2 className="h-4 w-4 text-white" /> : <Minimize2 className="h-4 w-4 text-white" />}
                  </button>
-                 <button onClick={() => setIsOpen(false)} className="p-1.5 hover:bg-white/5 rounded-lg transition-colors">
-                   <X className="h-4 w-4 text-muted-foreground" />
+                 <button onClick={() => setIsOpen(false)} className="p-1.5 hover:bg-white/10 rounded-lg transition-colors">
+                   <X className="h-4 w-4 text-white" />
                  </button>
               </div>
             </div>
@@ -91,7 +91,7 @@ export function FocusCoach() {
             {/* Chat Content */}
             {!isMinimized && (
               <>
-                <div ref={scrollRef} className="flex-1 p-6 overflow-y-auto custom-scrollbar space-y-6">
+                <div ref={scrollRef} className="flex-1 p-6 overflow-y-auto custom-scrollbar space-y-6 bg-slate-50">
                   {messages.map((m, i) => (
                     <motion.div
                       key={i}
@@ -103,10 +103,10 @@ export function FocusCoach() {
                       )}
                     >
                       <div className={cn(
-                        "max-w-[75%] p-4 rounded-2xl text-[11px] font-semibold leading-relaxed shadow-lg",
+                        "max-w-[75%] p-4 rounded-2xl text-[12px] font-medium leading-relaxed shadow-sm",
                         m.role === 'user' 
-                          ? "bg-primary text-white rounded-tr-none shadow-primary/10" 
-                          : "bg-white/5 text-muted-foreground rounded-tl-none border border-white/5"
+                          ? "bg-primary text-white rounded-tr-none shadow-primary/20" 
+                          : "bg-white text-slate-700 rounded-tl-none border border-slate-200"
                       )}>
                         {m.text}
                       </div>
@@ -115,14 +115,14 @@ export function FocusCoach() {
                 </div>
 
                 {/* Input Area */}
-                <div className="p-4 border-t border-white/5 bg-white/2">
+                <div className="p-4 border-t border-slate-100 bg-white">
                   <div className="relative group">
                     <input 
                        placeholder="Message Sync..."
                        value={input}
                        onChange={(e) => setInput(e.target.value)}
                        onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                       className="w-full bg-white/5 border border-white/10 rounded-2xl py-3 pl-4 pr-12 text-xs font-bold text-white outline-none focus:border-primary/50 transition-colors uppercase tracking-widest"
+                       className="w-full bg-slate-100 border border-slate-200 rounded-2xl py-3 pl-4 pr-12 text-sm font-medium text-slate-800 outline-none focus:border-primary/50 transition-colors"
                     />
                     <button 
                       onClick={handleSend}

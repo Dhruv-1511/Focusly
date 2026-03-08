@@ -92,79 +92,97 @@ export function CommandPalette() {
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-100"
           />
           <motion.div
-            initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            exit={{ opacity: 0, scale: 0.5, rotateY: -90 }}
-            transition={{ type: "spring", damping: 15 }}
-            className="fixed left-1/2 top-[10%] -translate-x-1/2 w-full max-w-4xl z-101 px-4"
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            className="fixed left-1/2 top-[15%] -translate-x-1/2 w-full max-w-2xl z-101 px-4"
           >
-            <div className="bg-black/90 border-4 border-primary shadow-[0_0_80px_rgba(240,171,252,0.4)] relative overflow-hidden group">
-              {/* Glitch Overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(240,171,252,0.1)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none opacity-20" />
-              
-              <div className="p-8 border-b-4 border-primary flex items-center gap-6 relative z-10">
-                <div className="h-12 w-12 bg-primary flex items-center justify-center rotate-45">
-                   <Search className="h-8 w-8 text-black -rotate-45" />
-                </div>
+            <div className="glass-hyper rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_32px_128px_-16px_rgba(0,0,0,0.5)]">
+              <div className="p-6 flex items-center gap-4 border-b border-white/5 bg-white/[0.02]">
+                <Search className="h-6 w-6 text-primary" />
                 <input
                   autoFocus
-                  placeholder="EXECUTE COMMAND..."
+                  placeholder="Where shall we focus today?"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={onKeyDown}
-                  className="bg-transparent border-none outline-none text-4xl md:text-6xl font-black italic placeholder:text-primary/20 text-primary w-full tracking-tighter uppercase"
+                  className="bg-transparent border-none outline-none text-xl font-medium placeholder:text-muted-foreground/40 text-white w-full tracking-tight"
                 />
-                <button onClick={() => setIsOpen(false)} className="bg-primary p-2 text-black hover:bg-white transition-colors">
-                  <X className="h-10 w-10" />
-                </button>
+                <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-xl border border-white/5">
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">ESC</span>
+                </div>
               </div>
 
-              <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[600px] overflow-y-auto custom-scrollbar relative z-10 bg-black">
+              <div className="p-3 max-h-[450px] overflow-y-auto custom-scrollbar bg-black/20">
                 {filteredActions.length > 0 ? (
-                  <>
+                  <div className="space-y-1">
                     {filteredActions.map((action, index) => (
                       <button
                         key={action.id}
                         onMouseEnter={() => setSelectedIndex(index)}
                         onClick={() => handleSelect(action.href)}
                         className={cn(
-                          "flex items-center gap-6 p-6 transition-all relative group overflow-hidden border-2",
-                          selectedIndex === index ? "bg-primary text-black border-white translate-x-4 shadow-[12px_12px_0_0_#fff]" : "bg-black text-primary border-primary/20 hover:border-primary"
+                          "w-full flex items-center gap-4 p-4 transition-all duration-300 rounded-2xl group relative",
+                          selectedIndex === index ? "bg-primary text-white shadow-xl shadow-primary/20 scale-[1.02]" : "text-muted-foreground hover:bg-white/5 hover:text-white"
                         )}
                       >
                         <div className={cn(
-                          "h-16 w-16 flex items-center justify-center transition-all",
-                          selectedIndex === index ? "bg-black text-primary -rotate-12" : "bg-primary/10"
+                          "h-12 w-12 rounded-xl flex items-center justify-center transition-all duration-500",
+                          selectedIndex === index ? "bg-white/20 rotate-12" : "bg-white/5"
                         )}>
-                          <action.icon className="h-10 w-10" />
+                          <action.icon className="h-6 w-6" />
                         </div>
                         <div className="flex-1 text-left">
-                          <p className="font-black text-2xl italic uppercase tracking-tighter leading-none mb-2">{action.title}</p>
-                          <div className="flex items-center gap-2">
-                             <div className={cn("h-2 w-2 rounded-full", selectedIndex === index ? "bg-black animate-pulse" : "bg-primary/40")} />
-                             <p className="text-[10px] font-black uppercase tracking-[0.3em]">SYSTEM READY</p>
-                          </div>
+                          <p className="font-bold text-base tracking-tight">{action.title}</p>
+                          <p className={cn(
+                            "text-[10px] font-medium uppercase tracking-[0.1em] opacity-60",
+                            selectedIndex === index ? "text-white/80" : "text-muted-foreground"
+                          )}>
+                            Execute Protocol
+                          </p>
                         </div>
-                        <div className="text-3xl font-black opacity-20 group-hover:opacity-100 italic">
-                          {action.shortcut.replace(" ", "")}
+                        <div className={cn(
+                          "flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-black transition-all",
+                          selectedIndex === index ? "bg-white/20 border-white/20 text-white" : "bg-white/5 border-white/5 text-muted-foreground"
+                        )}>
+                          {action.shortcut.split(" ").map((s, i) => (
+                            <span key={i} className="flex items-center gap-1">
+                              {i > 0 && <span className="opacity-30">+</span>}
+                              {s}
+                            </span>
+                          ))}
                         </div>
                       </button>
                     ))}
-                  </>
+                  </div>
                 ) : (
-                  <div className="col-span-2 py-32 text-center">
-                    <HelpCircle className="h-24 w-24 text-primary animate-spin-slow mx-auto mb-8" />
-                    <p className="text-primary font-black text-4xl italic uppercase tracking-tighter">DATA CORRUPTION: "{query}" NOT FOUND</p>
+                  <div className="py-20 text-center">
+                    <div className="h-20 w-20 bg-white/5 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                       <HelpCircle className="h-10 w-10 text-muted-foreground/30 animate-pulse" />
+                    </div>
+                    <p className="text-muted-foreground font-medium text-lg">No matching protocols found for "{query}"</p>
                   </div>
                 )}
               </div>
 
-              <div className="px-8 py-4 bg-primary text-black flex items-center justify-between font-black italic text-sm tracking-widest uppercase">
-                 <div className="flex items-center gap-8">
-                    <span>STATUS: OVERLOAD</span>
-                    <span>BUFFER: STRETCHED</span>
-                 </div>
-                 <div className="animate-pulse">HUD v6.6.6 ACTIVE</div>
+              <div className="px-6 py-4 border-t border-white/5 bg-white/[0.02] flex items-center justify-between">
+                <div className="flex items-center gap-6">
+                   <div className="flex items-center gap-2">
+                      <div className="text-[9px] font-black text-muted-foreground/40 uppercase tracking-widest">Navigation</div>
+                      <div className="flex items-center gap-1">
+                         <div className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[9px] font-bold text-muted-foreground">↑</div>
+                         <div className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[9px] font-bold text-muted-foreground">↓</div>
+                      </div>
+                   </div>
+                   <div className="flex items-center gap-2">
+                      <div className="text-[9px] font-black text-muted-foreground/40 uppercase tracking-widest">Select</div>
+                      <div className="px-1.5 py-0.5 bg-white/5 border border-white/10 rounded text-[9px] font-bold text-muted-foreground">ENTER</div>
+                   </div>
+                </div>
+                <div className="flex items-center gap-2">
+                   <div className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
+                   <span className="text-[9px] font-black text-muted-foreground/40 uppercase tracking-widest">System Synchronized</span>
+                </div>
               </div>
             </div>
           </motion.div>

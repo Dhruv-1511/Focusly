@@ -37,26 +37,40 @@ export default function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [studyPlan, setStudyPlan] = useState<StudyPlan>(MOCK_STUDY_PLAN);
+  const [userStats, setUserStats] = useState(session?.user?.stats || {
+    hoursStudied: 0,
+    focusStreak: 0,
+    xp: 0,
+    level: 1
+  });
 
   useEffect(() => {
-    async function fetchPlan() {
+    async function fetchData() {
       if (session) {
         try {
-          const res = await fetch("/api/study-plan");
-          const data = await res.json();
-          if (data.success && data.data.length > 0) {
-            setStudyPlan(data.data[0]);
+          // Fetch Study Plan
+          const planRes = await fetch("/api/study-plan");
+          const planData = await planRes.json();
+          if (planData.success && planData.data.length > 0) {
+            setStudyPlan(planData.data[0]);
+          }
+
+          // Fetch User Stats
+          const userRes = await fetch("/api/user");
+          const userData = await userRes.json();
+          if (userData.success && userData.data.stats) {
+            setUserStats(userData.data.stats);
           }
         } catch (error) {
-          console.error("Failed to fetch study plan:", error);
+          console.error("Failed to fetch dashboard data:", error);
         }
       }
     }
-    fetchPlan();
+    fetchData();
   }, [session]);
 
   const handleMoodSelect = (emoji: string) => {
-    setModalMessage(`Neural baseline calibrated. We've adjusted your cognitive loads to match your current state.`);
+    setModalMessage(`Neural baseline calibrated for today's focus session. We've adjusted your cognitive loads to match your current state.`);
     setModalOpen(true);
   };
 
@@ -101,7 +115,7 @@ export default function Dashboard() {
       </header>
 
       {/* Stats Grid */}
-      <DashboardStats stats={studyPlan.stats} />
+      <DashboardStats stats={userStats} />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         {/* Main Protocol */}

@@ -43,9 +43,7 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
       )}
     >
       <div className="flex items-center justify-between px-4 sm:px-6">
-        <div className="flex items-center gap-8 flex-1">
-          <Logo />
-
+        <div className="flex items-center gap-4 flex-1">
           <Button 
             variant="ghost" 
             size="icon" 
@@ -60,10 +58,10 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
           <Button 
             variant="outline" 
             size="sm" 
-            className="hidden md:flex h-9 px-4 gap-2 bg-white/2 border-white/10 text-muted-foreground hover:bg-primary/10 hover:border-primary/20 hover:text-white transition-all text-[11px] font-semibold rounded-xl"
+            className="hidden md:flex h-10 px-4 gap-2 bg-white/5 border-white/10 text-muted-foreground hover:bg-primary/10 hover:border-primary/20 hover:text-white transition-all text-xs font-bold rounded-2xl"
             onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', {'key': 'k', 'metaKey': true}))}
           >
-            <CommandIcon className="h-3 w-3" /> FocusLink <span className="opacity-30">⌘K</span>
+            <CommandIcon className="h-3.5 w-3.5" /> <span>FocusLink</span> <span className="opacity-30 ml-auto">⌘K</span>
           </Button>
         </div>
 
