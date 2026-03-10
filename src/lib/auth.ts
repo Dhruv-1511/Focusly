@@ -57,6 +57,8 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;
+        // The stats will be fetched from the database in the client/API
+        // But we can also include them here if they were in the token
       }
       return session;
     },

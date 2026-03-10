@@ -37,11 +37,12 @@ export default function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [studyPlan, setStudyPlan] = useState<StudyPlan>(MOCK_STUDY_PLAN);
-  const [userStats, setUserStats] = useState(session?.user?.stats || {
+  const [userStats, setUserStats] = useState<any>((session?.user as any)?.stats || {
     hoursStudied: 0,
     focusStreak: 0,
     xp: 0,
-    level: 1
+    level: 1,
+    badges: []
   });
 
   useEffect(() => {

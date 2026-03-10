@@ -59,6 +59,8 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
+import { NeuralBackground } from "@/components/ui/NeuralBackground";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -67,6 +69,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${outfit.variable} antialiased min-h-screen bg-background text-foreground flex`}>
+        <NeuralBackground />
         <AuthProvider>
           <ClientLayout>{children}</ClientLayout>
         </AuthProvider>
